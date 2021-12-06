@@ -16,6 +16,7 @@ class OrderDetails implements Contracts\NodeInterface
      * @Serializer\Expose
      * @Serializer\Type("string")
      * @Serializer\SerializedName("ORDER_UNIT")
+     * @Serializer\XmlElement(cdata=false)
      *
      * @var string
      */
@@ -25,6 +26,7 @@ class OrderDetails implements Contracts\NodeInterface
      * @Serializer\Expose
      * @Serializer\Type("string")
      * @Serializer\SerializedName("CONTENT_UNIT")
+     * @Serializer\XmlElement(cdata=false)
      *
      * @var string
      */

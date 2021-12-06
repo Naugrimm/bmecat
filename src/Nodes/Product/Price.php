@@ -37,10 +37,21 @@ class Price implements Contracts\NodeInterface
      * @Serializer\Expose
      * @Serializer\Type("string")
      * @Serializer\SerializedName("PRICE_CURRENCY")
+     * @Serializer\XmlElement(cdata=false)
      *
      * @var string
      */
     protected $currency = 'EUR';
+
+    /**
+     * @Serializer\Expose
+     * @Serializer\Type("float")
+     * @Serializer\SerializedName("TAX")
+     * @Serializer\XmlElement(cdata=false)
+     *
+     * @var string
+     */
+    protected $tax = null;
 
     /**
      * @Serializer\Expose

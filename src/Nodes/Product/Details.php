@@ -78,6 +78,16 @@ class Details implements Contracts\NodeInterface
      *
      * @Serializer\Expose
      * @Serializer\Type("string")
+     * @Serializer\SerializedName("MANUFACTURER_IDREF")
+     *
+     * @var string
+     */
+    protected $manufacturerIDRef;
+
+    /**
+     *
+     * @Serializer\Expose
+     * @Serializer\Type("string")
      * @Serializer\SerializedName("MANUFACTURER_NAME")
      *
      * @var string
@@ -185,6 +195,16 @@ class Details implements Contracts\NodeInterface
      * @var Status[]
      */
     protected $productStatus;
+
+    /**
+     *
+     * @Serializer\Expose
+     * @Serializer\Type("array<string>")
+     * @Serializer\XmlList(inline=true, entry="PRODUCT_TYPE")
+     *
+     * @var string[]
+     */
+    protected $productTypes;
 
     /**
      * @param BuyerPid $buyerAid
