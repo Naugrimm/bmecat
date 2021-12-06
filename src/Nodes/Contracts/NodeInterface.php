@@ -3,8 +3,11 @@
 
 namespace Naugrim\BMEcat\Nodes\Contracts;
 
+use /** @noinspection PhpUnusedAliasInspection */
+    JMS\Serializer\Annotation as Serializer;
+
 /**
- * @ExclusionPolicy("all")
+ * @Serializer\ExclusionPolicy("all")
  */
 interface NodeInterface
 {

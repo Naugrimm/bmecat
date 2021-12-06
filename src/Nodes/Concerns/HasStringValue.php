@@ -2,12 +2,14 @@
 
 namespace Naugrim\BMEcat\Nodes\Concerns;
 
+use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 trait HasStringValue
 {
     /**
      * @Serializer\XmlValue
+     * @Serializer\Type("string")
      * @var string
      */
     protected $value = '';

@@ -30,7 +30,6 @@ class Features implements Contracts\NodeInterface
      * @Serializer\Type("string")
      * @Serializer\SerializedName("REFERENCE_FEATURE_GROUP_ID")
      * @Serializer\SkipWhenEmpty
-     * @Serializer\Exclude(if="!empty(object.getReferenceFeatureGroupName())")
      *
      * @var string
      */
@@ -41,7 +40,6 @@ class Features implements Contracts\NodeInterface
      * @Serializer\Type("string")
      * @Serializer\SerializedName("REFERENCE_FEATURE_GROUP_NAME")
      * @Serializer\SkipWhenEmpty
-     * @Serializer\Exclude(if="!empty(object.getReferenceFeatureGroupId())")
      *
      * @var string
      */

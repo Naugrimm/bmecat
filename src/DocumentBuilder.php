@@ -128,4 +128,8 @@ class DocumentBuilder
 
         return $this->serializer->serialize($document, 'xml', $this->context);
     }
+
+    public function loadString($xml) : Document {
+        return $this->serializer->deserialize($xml, Document::class, 'xml');
+    }
 }
