@@ -99,6 +99,15 @@ class Address implements NodeInterface
      * @var string
      */
     protected $city;
+
+    /**
+     * @Serializer\Expose
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("STATE")
+     *
+     * @var string
+     */
+    protected $state;
     
     /**
      * @Serializer\Expose
@@ -358,6 +367,24 @@ class Address implements NodeInterface
     public function setCity(string $city): Address
     {
         $this->city = $city;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getState(): string
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param string $state
+     * @return Address
+     */
+    public function setState(string $state): void
+    {
+        $this->state = $state;
         return $this;
     }
 
