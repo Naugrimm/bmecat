@@ -51,7 +51,7 @@ class Features implements Contracts\NodeInterface
      * @Serializer\Expose
      * @Serializer\SerializedName("FEATURE")
      * @Serializer\Type("array<Naugrim\BMEcat\Nodes\Product\Feature>")
-     * @Serializer\XmlList( entry="FEATURE")
+     * @Serializer\XmlList( inline = true, entry="FEATURE")
      *
      * @var Feature[]
      */
