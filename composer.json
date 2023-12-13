@@ -1,6 +1,7 @@
 {
     "name": "naugrim/bmecat",
     "type": "library",
+    "varsion": "1.0.0.1",
     "description": "Allows to build BMEcat documents from PHP and converts them to xml",
     "keywords": ["bmecat", "document", "serialization", "xml"],
     "homepage": "https://github.com/naugrimm/bmecat",
@@ -16,7 +17,7 @@
         "ext-dom": "*",
         "ext-libxml": "*",
         "jms/serializer": "^3.4",
-        "symfony/expression-language": "^5.0"
+        "symfony/expression-language": "^5.0|^6.0"
     },
     "autoload": {
         "psr-4": {
