@@ -69,4 +69,12 @@ class DocumentBuilderTest extends TestCase
         $builder = new DocumentBuilder;
         $builder->toString();
     }
+
+    public function testFromStringWorksCorrectly()
+    {
+        $builder = new DocumentBuilder();
+        $doc = $builder->fromString(file_get_contents(__DIR__ . '/Fixtures/2005.1/minimal_valid_document.xml'));
+
+        $this->assertInstanceOf(Document::class, $doc);
+    }
 }

@@ -16,6 +16,7 @@ class Document implements Contracts\NodeInterface
     /**
      * @Serializer\Expose
      * @Serializer\XmlAttribute
+     * @Serializer\Type("string")
      */
     protected $version = '2005.1';
 
