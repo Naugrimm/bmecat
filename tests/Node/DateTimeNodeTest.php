@@ -77,6 +77,9 @@ class DateTimeNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+
+        $doc = $this->serializer->deserialize($actual, DateTime::class, 'xml');
+        $this->assertInstanceOf(DateTime::class, $doc);
     }
 
     /**
@@ -92,5 +95,8 @@ class DateTimeNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+
+        $doc = $this->serializer->deserialize($actual, DateTime::class, 'xml');
+        $this->assertInstanceOf(DateTime::class, $doc);
     }
 }

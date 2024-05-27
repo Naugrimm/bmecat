@@ -92,6 +92,9 @@ class CatalogNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+
+        $doc = $this->serializer->deserialize($actual, Catalog::class, 'xml');
+        $this->assertInstanceOf(Catalog::class, $doc);
     }
 
     /**
@@ -107,5 +110,8 @@ class CatalogNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+
+        $doc = $this->serializer->deserialize($actual, Catalog::class, 'xml');
+        $this->assertInstanceOf(Catalog::class, $doc);
     }
 }

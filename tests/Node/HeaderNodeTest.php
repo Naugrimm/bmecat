@@ -77,6 +77,9 @@ class HeaderNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+
+        $doc = $this->serializer->deserialize($actual, Header::class, 'xml');
+        $this->assertInstanceOf(Header::class, $doc);
     }
 
     /**
@@ -92,5 +95,7 @@ class HeaderNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+        $doc = $this->serializer->deserialize($actual, Header::class, 'xml');
+        $this->assertInstanceOf(Header::class, $doc);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Naugrim\BMEcat\Nodes\Concerns;
 
+use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 trait HasTypeAttribute

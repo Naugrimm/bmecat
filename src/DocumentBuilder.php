@@ -65,6 +65,12 @@ class DocumentBuilder
             return empty($str);
         });
 
+        $expressionLanguage->register('methodResultIsset', function ($object, $method) {
+            return $method;
+        }, function ($arguments, $object, $method) {
+            return is_object($object) && method_exists($object, $method) && $object->$method() !== null;
+        });
+
         return $expressionLanguage;
     }
 

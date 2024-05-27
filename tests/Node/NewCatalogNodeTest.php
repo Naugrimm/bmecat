@@ -75,5 +75,8 @@ class NewCatalogNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+
+        $doc = $this->serializer->deserialize($actual, NewCatalog::class, 'xml');
+        $this->assertInstanceOf(NewCatalog::class, $doc);
     }
 }

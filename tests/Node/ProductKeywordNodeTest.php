@@ -44,6 +44,9 @@ class ProductKeywordNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+
+        $doc = $this->serializer->deserialize($actual, Keyword::class, 'xml');
+        $this->assertInstanceOf(Keyword::class, $doc);
     }
 
     /**
@@ -58,5 +61,8 @@ class ProductKeywordNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+
+        $doc = $this->serializer->deserialize($actual, Keyword::class, 'xml');
+        $this->assertInstanceOf(Keyword::class, $doc);
     }
 }
