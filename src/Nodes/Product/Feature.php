@@ -27,7 +27,7 @@ class Feature implements Contracts\NodeInterface
      * @Serializer\Type("string")
      * @Serializer\SerializedName("VARIANTS")
      * @Serializer\SkipWhenEmpty
-     * @Serializer\Exclude(if="!empty(object.getValue())")
+     * @Serializer\Exclude(if="methodResultIsset(object, 'getValue')")
      *
      * @var string
      */
@@ -37,7 +37,7 @@ class Feature implements Contracts\NodeInterface
      * @Serializer\Expose
      * @Serializer\Type("string")
      * @Serializer\SerializedName("FVALUE")
-     * @Serializer\Exclude(if="!empty(object.getVariants())")
+     * @Serializer\Exclude(if="methodResultIsset(object, 'getVariants')")
      *
      * @var string
      */
