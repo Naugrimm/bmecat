@@ -9,7 +9,7 @@ trait HasStringValue
 {
     /**
      * @Serializer\XmlValue
-     * @Serializer\Type("string)
+     * @Serializer\Type("string")
      * @var string
      */
     protected $value = '';

@@ -62,6 +62,9 @@ class ProductPriceNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+
+        $doc = $this->serializer->deserialize($actual, Price::class, 'xml');
+        $this->assertInstanceOf(Price::class, $doc);
     }
 
     /**
@@ -77,5 +80,8 @@ class ProductPriceNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+
+        $doc = $this->serializer->deserialize($actual, Price::class, 'xml');
+        $this->assertInstanceOf(Price::class, $doc);
     }
 }

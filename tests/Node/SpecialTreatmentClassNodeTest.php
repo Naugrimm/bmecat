@@ -32,6 +32,9 @@ class SpecialTreatmentClassNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+
+        $doc = $this->serializer->deserialize($actual, SpecialTreatmentClass::class, 'xml');
+        $this->assertInstanceOf(SpecialTreatmentClass::class, $doc);
     }
 
     /**
@@ -46,5 +49,8 @@ class SpecialTreatmentClassNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+
+        $doc = $this->serializer->deserialize($actual, SpecialTreatmentClass::class, 'xml');
+        $this->assertInstanceOf(SpecialTreatmentClass::class, $doc);
     }
 }

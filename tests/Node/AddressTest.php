@@ -110,5 +110,8 @@ class AddressTest extends TestCase
         $this->assertEquals(file_get_contents(__DIR__.'/../Fixtures/address_with_all_properties.xml'), $xml);
 
         $this->assertTrue(SchemaValidator::isValid($xml));
+
+        $doc = $builder->fromString($xml);
+        $this->assertInstanceOf(Document::class, $doc);
     }
 }

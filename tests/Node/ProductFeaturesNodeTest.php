@@ -101,6 +101,9 @@ class ProductFeaturesNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+
+        $doc = $this->serializer->deserialize($actual, Features::class, 'xml');
+        $this->assertInstanceOf(Features::class, $doc);
     }
 
     /**
@@ -116,5 +119,8 @@ class ProductFeaturesNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+
+        $doc = $this->serializer->deserialize($actual, Features::class, 'xml');
+        $this->assertInstanceOf(Features::class, $doc);
     }
 }

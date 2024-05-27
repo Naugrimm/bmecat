@@ -73,6 +73,9 @@ class MimeNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+
+        $doc = $this->serializer->deserialize($actual, Mime::class, 'xml');
+        $this->assertInstanceOf(Mime::class, $doc);
     }
 
     /**
@@ -88,5 +91,8 @@ class MimeNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+
+        $doc = $this->serializer->deserialize($actual, Mime::class, 'xml');
+        $this->assertInstanceOf(Mime::class, $doc);
     }
 }

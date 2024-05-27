@@ -71,11 +71,15 @@ class ProductFeatureNodeTest extends TestCase
     public function Serialize_Without_Null_Values()
     {
         $node = new Feature();
+        $node->setName('test');
         $context = SerializationContext::create()->setSerializeNull(false);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_feature_without_null_values.xml');
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+
+        $doc = $this->serializer->deserialize($actual, Feature::class, 'xml');
+        $this->assertInstanceOf(Feature::class, $doc);
     }
 }

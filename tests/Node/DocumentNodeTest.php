@@ -78,6 +78,9 @@ class DocumentNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+
+        $doc = $this->serializer->deserialize($actual, Document::class, 'xml');
+        $this->assertInstanceOf(Document::class, $doc);
     }
 
     /**
@@ -93,5 +96,7 @@ class DocumentNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+        $doc = $this->serializer->deserialize($actual, Document::class, 'xml');
+        $this->assertInstanceOf(Document::class, $doc);
     }
 }

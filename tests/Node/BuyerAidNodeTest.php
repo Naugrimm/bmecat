@@ -4,6 +4,7 @@ namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
 use Naugrim\BMEcat\DocumentBuilder;
+use Naugrim\BMEcat\Nodes\Document;
 use PHPUnit\Framework\TestCase;
 use Naugrim\BMEcat\Nodes\BuyerPid;
 
@@ -34,6 +35,9 @@ class BuyerAidNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+
+        $doc = $this->serializer->deserialize($actual, BuyerPid::class, 'xml');
+        $this->assertInstanceOf(BuyerPid::class, $doc);
     }
 
     /**
@@ -50,5 +54,8 @@ class BuyerAidNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
+
+        $doc = $this->serializer->deserialize($actual, BuyerPid::class, 'xml');
+        $this->assertInstanceOf(BuyerPid::class, $doc);
     }
 }
