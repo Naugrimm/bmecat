@@ -3,6 +3,8 @@
 
 namespace Naugrim\BMEcat\Tests\Node;
 
+use JMS\Serializer\Serializer;
+use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Exception\SchemaValidationException;
@@ -16,9 +18,9 @@ use PHPUnit\Framework\TestCase;
 class AddressTest extends TestCase
 {
     /**
-     * @var \JMS\Serializer\SerializerInterface
+     * @var SerializerInterface
      */
-    private $serializer;
+    private Serializer $serializer;
 
     protected function setUp() : void
     {

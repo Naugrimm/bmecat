@@ -15,26 +15,13 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 class DocumentBuilder
 {
 
-    protected ?Serializer $serializer;
+    protected readonly Serializer $serializer;
 
-    /**
-     *
-     * @var SerializationContext
-     */
-    protected $context;
+    protected readonly SerializationContext $context;
 
-    /**
-     *
-     * @var Document
-     */
-    protected $document;
+    protected NodeInterface $document;
 
-    /**
-     *
-     * @param Serializer $serializer
-     * @param SerializationContext $context
-     */
-    public function __construct(Serializer $serializer = null, $context = null)
+    public function __construct(?Serializer $serializer = null, ?SerializationContext $context = null)
     {
         if (!$serializer instanceof Serializer) {
             $serializer = SerializerBuilder::create()
@@ -42,7 +29,7 @@ class DocumentBuilder
                 ->build();
         }
 
-        if ($context === null) {
+        if (!$context instanceof SerializationContext) {
             $context = SerializationContext::create();
         }
 
@@ -63,30 +50,17 @@ class DocumentBuilder
         return $expressionLanguage;
     }
 
-    /**
-     *
-     * @param Serializer $serializer
-     * @return DocumentBuilder
-     */
-    public static function create(Serializer $serializer = null): self
+    public static function create(?Serializer $serializer = null): self
     {
         return new self($serializer);
     }
 
-    /**
-     *
-     * @return Serializer
-     */
-    public function getSerializer(): ?Serializer
+    public function getSerializer(): Serializer
     {
         return $this->serializer;
     }
 
-    /**
-     *
-     * @return SerializationContext
-     */
-    public function getContext()
+    public function getContext(): SerializationContext
     {
         return $this->context;
     }
@@ -103,11 +77,11 @@ class DocumentBuilder
 
     /**
      *
-     * @return Document
+     * @return ?Document
      */
-    public function getDocument()
+    public function getDocument() : ?NodeInterface
     {
-        return $this->document;
+        return $this->document ?? null;
     }
 
     /**
@@ -117,7 +91,7 @@ class DocumentBuilder
      */
     public function toString(): string
     {
-        if (($document = $this->getDocument()) === null) {
+        if (!($document = $this->getDocument()) instanceof NodeInterface) {
             throw new MissingDocumentException('Please call ::setDocument() first.');
         }
 

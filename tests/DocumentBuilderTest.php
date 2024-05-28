@@ -3,7 +3,9 @@
 
 namespace Naugrim\BMEcat\Tests;
 
+use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializerBuilder;
+use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\Builder\NodeBuilder;
 use PHPUnit\Framework\TestCase;
 use Naugrim\BMEcat\DocumentBuilder;
@@ -14,9 +16,9 @@ use Naugrim\BMEcat\Nodes\Document;
 class DocumentBuilderTest extends TestCase
 {
     /**
-     * @var \JMS\Serializer\SerializerInterface
+     * @var SerializerInterface
      */
-    private \JMS\Serializer\Serializer $serializer;
+    private Serializer $serializer;
 
     protected function setUp() : void
     {
@@ -32,7 +34,7 @@ class DocumentBuilderTest extends TestCase
     public function testSetsUpDefaultDependencies(): void
     {
         $builder = new DocumentBuilder();
-        $this->assertInstanceOf(\JMS\Serializer\Serializer::class, $builder->getSerializer());
+        $this->assertInstanceOf(Serializer::class, $builder->getSerializer());
     }
 
     /**
@@ -42,7 +44,7 @@ class DocumentBuilderTest extends TestCase
     public function Instantiate_Via_Static_Method(): void
     {
         $builder = DocumentBuilder::create($this->serializer);
-        $this->assertInstanceOf(\JMS\Serializer\Serializer::class, $builder->getSerializer());
+        $this->assertInstanceOf(Serializer::class, $builder->getSerializer());
     }
 
     /**

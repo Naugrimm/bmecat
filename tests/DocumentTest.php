@@ -24,7 +24,7 @@ class DocumentTest extends TestCase
     /**
      * @var DocumentBuilder
      */
-    private \Naugrim\BMEcat\DocumentBuilder $builder;
+    private DocumentBuilder $builder;
 
     protected function setUp() : void
     {

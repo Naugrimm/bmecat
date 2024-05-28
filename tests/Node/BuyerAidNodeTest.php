@@ -3,6 +3,8 @@
 namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
+use JMS\Serializer\Serializer;
+use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Nodes\Document;
 use PHPUnit\Framework\TestCase;
@@ -12,9 +14,9 @@ class BuyerAidNodeTest extends TestCase
 {
 
     /**
-     * @var \JMS\Serializer\SerializerInterface
+     * @var SerializerInterface
      */
-    private $serializer;
+    private Serializer $serializer;
 
     protected function setUp() : void
     {

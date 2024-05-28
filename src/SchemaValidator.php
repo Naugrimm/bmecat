@@ -8,7 +8,7 @@ use Naugrim\BMEcat\Exception\UnsupportedVersionException;
 
 class SchemaValidator
 {
-    protected static $SCHEMA_MAP = [
+    protected static array $SCHEMA_MAP = [
         '1.2' => [
             'new_catalog' => __DIR__.'/Assets/bmecat_new_catalog_1_2.xsd',
             'update_products' => __DIR__.'/Assets/bmecat_update_products_1_2.xsd',
@@ -28,7 +28,7 @@ class SchemaValidator
      * @throws SchemaValidationException
      * @throws UnsupportedVersionException
      */
-    public static function isValid(string $xml, string $version = '2005.1', string $type = null)
+    public static function isValid(string $xml, string $version = '2005.1', string $type = null): bool
     {
         libxml_use_internal_errors(true);
 

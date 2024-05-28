@@ -4,6 +4,8 @@
 namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
+use JMS\Serializer\Serializer;
+use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Nodes\Mime;
 use Naugrim\BMEcat\Nodes\Product;
@@ -19,9 +21,9 @@ use PHPUnit\Framework\TestCase;
 class ProductNodeTest extends TestCase
 {
     /**
-     * @var \JMS\Serializer\SerializerInterface
+     * @var SerializerInterface
      */
-    private $serializer;
+    private Serializer $serializer;
 
     protected function setUp() : void
     {
