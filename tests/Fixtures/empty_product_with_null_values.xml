@@ -4,4 +4,6 @@
   <PRODUCT_DETAILS xsi:nil="true"/>
   <PRODUCT_ORDER_DETAILS xsi:nil="true"/>
   <MIME_INFO xsi:nil="true"/>
+  <PRODUCT_LOGISTIC_DETAILS xsi:nil="true"/>
+  <PRODUCT_CONFIG_DETAILS xsi:nil="true"/>
 </PRODUCT>

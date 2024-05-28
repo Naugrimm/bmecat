@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PRODUCT_PRICE price_type="gros_list">
-  <PRICE_CURRENCY><![CDATA[EUR]]></PRICE_CURRENCY>
+  <PRICE_CURRENCY>EUR</PRICE_CURRENCY>
 </PRODUCT_PRICE>
