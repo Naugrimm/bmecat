@@ -4,6 +4,7 @@
 namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
+use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Nodes\Product\Feature;
 use Naugrim\BMEcat\Nodes\Product\Features;
@@ -13,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 class ProductFeaturesNodeTest extends TestCase
 {
     /**
-     * @var \JMS\Serializer\SerializerInterface
+     * @var SerializerInterface
      */
     private $serializer;
 
@@ -101,9 +102,6 @@ class ProductFeaturesNodeTest extends TestCase
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
-
-        $doc = $this->serializer->deserialize($actual, Features::class, 'xml');
-        $this->assertInstanceOf(Features::class, $doc);
     }
 
     /**
@@ -116,6 +114,25 @@ class ProductFeaturesNodeTest extends TestCase
         $context = SerializationContext::create()->setSerializeNull(false);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_features_without_null_values.xml');
+        $actual = $this->serializer->serialize($node, 'xml', $context);
+
+        $this->assertEquals($expected, $actual);
+
+        $doc = $this->serializer->deserialize($actual, Features::class, 'xml');
+        $this->assertInstanceOf(Features::class, $doc);
+    }
+
+    public function testFeaturesAreInlinedCorrectly()
+    {
+        $context = SerializationContext::create()->setSerializeNull(false);
+
+        $node = new Features();
+        $productFeature = new Feature();
+        $productFeature->setName('Feature name');
+        $productFeature->setValue('Feature value');
+        $node->addFeature($productFeature);
+
+        $expected = file_get_contents(__DIR__ . '/../Fixtures/product_features.xml');
         $actual = $this->serializer->serialize($node, 'xml', $context);
 
         $this->assertEquals($expected, $actual);
