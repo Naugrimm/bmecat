@@ -17,8 +17,7 @@
         "ext-libxml": "*",
         "jms/serializer": "^3.30",
         "symfony/expression-language": "^5|^6|^7",
-        "webmozart/assert": "^1.11",
-        "goetas/jms-serializer-phpstan-extension": "^1.0"
+        "webmozart/assert": "^1.11"
     },
     "autoload": {
         "psr-4": {
@@ -58,7 +57,8 @@
         "phpstan/phpstan-strict-rules": "^1.6",
         "phpstan/phpstan-deprecation-rules": "^1.2",
         "symplify/easy-coding-standard": "^12.2",
-        "tomasvotruba/type-coverage": "^0.3.0"
+        "tomasvotruba/type-coverage": "^0.3.0",
+        "goetas/jms-serializer-phpstan-extension": "^1.0"
     },
     "config": {
         "allow-plugins": {
