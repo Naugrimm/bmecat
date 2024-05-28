@@ -41,9 +41,9 @@ class Catalog implements Contracts\NodeInterface
      * @var DateTime
      */
     #[Serializer\Expose]
-    #[Serializer\Type(\Naugrim\BMEcat\Nodes\DateTime::class)]
+    #[Serializer\Type(DateTime::class)]
     #[Serializer\SerializedName('DATETIME')]
-    protected \Naugrim\BMEcat\Nodes\DateTime $dateTime;
+    protected DateTime $dateTime;
 
     /**
      * @param string $language
@@ -117,7 +117,7 @@ class Catalog implements Contracts\NodeInterface
      *
      * @return DateTime
      */
-    public function getDateTime(): \Naugrim\BMEcat\Nodes\DateTime
+    public function getDateTime(): DateTime
     {
         return $this->dateTime;
     }

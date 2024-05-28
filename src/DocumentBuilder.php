@@ -14,8 +14,8 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class DocumentBuilder
 {
-    
-    protected ?\JMS\Serializer\Serializer $serializer;
+
+    protected ?Serializer $serializer;
 
     /**
      *
@@ -36,7 +36,7 @@ class DocumentBuilder
      */
     public function __construct(Serializer $serializer = null, $context = null)
     {
-        if (!$serializer instanceof \JMS\Serializer\Serializer) {
+        if (!$serializer instanceof Serializer) {
             $serializer = SerializerBuilder::create()
                 ->setExpressionEvaluator(new ExpressionEvaluator($this->getExpressionLanguage()))
                 ->build();
@@ -77,7 +77,7 @@ class DocumentBuilder
      *
      * @return Serializer
      */
-    public function getSerializer(): ?\JMS\Serializer\Serializer
+    public function getSerializer(): ?Serializer
     {
         return $this->serializer;
     }

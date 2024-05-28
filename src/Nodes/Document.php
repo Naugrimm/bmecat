@@ -25,18 +25,18 @@ class Document implements Contracts\NodeInterface
      * @var Header
      */
     #[Serializer\Expose]
-    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Header::class)]
+    #[Serializer\Type(Header::class)]
     #[Serializer\SerializedName('HEADER')]
-    protected \Naugrim\BMEcat\Nodes\Header $header;
+    protected Header $header;
 
     /**
      *
      * @var NewCatalog
      */
     #[Serializer\Expose]
-    #[Serializer\Type(\Naugrim\BMEcat\Nodes\NewCatalog::class)]
+    #[Serializer\Type(NewCatalog::class)]
     #[Serializer\SerializedName('T_NEW_CATALOG')]
-    protected \Naugrim\BMEcat\Nodes\NewCatalog $catalog;
+    protected NewCatalog $catalog;
 
     /**
      *
@@ -72,7 +72,7 @@ class Document implements Contracts\NodeInterface
      *
      * @return Header
      */
-    public function getHeader(): \Naugrim\BMEcat\Nodes\Header
+    public function getHeader(): Header
     {
         return $this->header;
     }
@@ -90,7 +90,7 @@ class Document implements Contracts\NodeInterface
     /**
      * @return NewCatalog
      */
-    public function getNewCatalog(): \Naugrim\BMEcat\Nodes\NewCatalog
+    public function getNewCatalog(): NewCatalog
     {
         return $this->catalog;
     }

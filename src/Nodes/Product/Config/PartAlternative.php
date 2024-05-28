@@ -69,7 +69,7 @@ class PartAlternative implements Contracts\NodeInterface
      */
     #[Serializer\Expose]
     #[Serializer\SerializedName('PRODUCT_PRICE_DETAILS')]
-    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Product\PriceDetails::class)]
-    protected \Naugrim\BMEcat\Nodes\Product\PriceDetails $priceDetails = null;
+    #[Serializer\Type(PriceDetails::class)]
+    protected PriceDetails $priceDetails = null;
 
 }

@@ -78,8 +78,8 @@ class Step implements Contracts\NodeInterface
      */
     #[Serializer\Expose]
     #[Serializer\SerializedName('PRODUCT_PRICE_DETAILS')]
-    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Product\PriceDetails::class)]
-    protected \Naugrim\BMEcat\Nodes\Product\PriceDetails $priceDetails = null;
+    #[Serializer\Type(PriceDetails::class)]
+    protected PriceDetails $priceDetails = null;
 
     /**
      *
@@ -88,8 +88,8 @@ class Step implements Contracts\NodeInterface
      */
     #[Serializer\Expose]
     #[Serializer\SerializedName('CONFIG_PARTS')]
-    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Product\Config\Parts::class)]
-    protected \Naugrim\BMEcat\Nodes\Product\Config\Parts $parts;
+    #[Serializer\Type(Parts::class)]
+    protected Parts $parts;
 
     /**
      *

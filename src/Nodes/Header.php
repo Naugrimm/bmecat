@@ -26,27 +26,27 @@ class Header implements Contracts\NodeInterface
      * @var Catalog
      */
     #[Serializer\Expose]
-    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Catalog::class)]
+    #[Serializer\Type(Catalog::class)]
     #[Serializer\SerializedName('CATALOG')]
-    protected \Naugrim\BMEcat\Nodes\Catalog $catalog;
+    protected Catalog $catalog;
 
     /**
      *
      * @var BuyerIdRef
      */
     #[Serializer\Expose]
-    #[Serializer\Type(\Naugrim\BMEcat\Nodes\BuyerIdRef::class)]
+    #[Serializer\Type(BuyerIdRef::class)]
     #[Serializer\SerializedName('BUYER_IDREF')]
-    protected \Naugrim\BMEcat\Nodes\BuyerIdRef $buyerIdRef;
+    protected BuyerIdRef $buyerIdRef;
 
     /**
      *
      * @var SupplierIdRef
      */
     #[Serializer\Expose]
-    #[Serializer\Type(\Naugrim\BMEcat\Nodes\SupplierIdRef::class)]
+    #[Serializer\Type(SupplierIdRef::class)]
     #[Serializer\SerializedName('SUPPLIER_IDREF')]
-    protected \Naugrim\BMEcat\Nodes\SupplierIdRef $supplierIdRef;
+    protected SupplierIdRef $supplierIdRef;
 
     /**
      *
@@ -98,7 +98,7 @@ class Header implements Contracts\NodeInterface
     /**
      * @return BuyerIdRef
      */
-    public function getBuyerIdRef(): \Naugrim\BMEcat\Nodes\BuyerIdRef
+    public function getBuyerIdRef(): BuyerIdRef
     {
         return $this->buyerIdRef;
     }
@@ -116,7 +116,7 @@ class Header implements Contracts\NodeInterface
     /**
      * @return SupplierIdRef
      */
-    public function getSupplierIdRef(): \Naugrim\BMEcat\Nodes\SupplierIdRef
+    public function getSupplierIdRef(): SupplierIdRef
     {
         return $this->supplierIdRef;
     }

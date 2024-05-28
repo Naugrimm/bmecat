@@ -50,9 +50,9 @@ class Address implements NodeInterface
      * @var Details
      */
     #[Serializer\Expose]
-    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Contact\Details::class)]
+    #[Serializer\Type(Details::class)]
     #[Serializer\SerializedName('CONTACT_DETAILS')]
-    protected \Naugrim\BMEcat\Nodes\Contact\Details $contactDetails;
+    protected Details $contactDetails;
 
     /**
      *
@@ -140,18 +140,18 @@ class Address implements NodeInterface
      * @var Phone
      */
     #[Serializer\Expose]
-    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Phone::class)]
+    #[Serializer\Type(Phone::class)]
     #[Serializer\SerializedName('PHONE')]
-    protected \Naugrim\BMEcat\Nodes\Phone $phone;
+    protected Phone $phone;
 
     /**
      *
      * @var Fax
      */
     #[Serializer\Expose]
-    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Fax::class)]
+    #[Serializer\Type(Fax::class)]
     #[Serializer\SerializedName('FAX')]
-    protected \Naugrim\BMEcat\Nodes\Fax $fax;
+    protected Fax $fax;
 
     /**
      *
@@ -167,9 +167,9 @@ class Address implements NodeInterface
      * @var PublicKey
      */
     #[Serializer\Expose]
-    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Crypto\PublicKey::class)]
+    #[Serializer\Type(PublicKey::class)]
     #[Serializer\SerializedName('PUBLIC_KEY')]
-    protected \Naugrim\BMEcat\Nodes\Crypto\PublicKey $publicKey;
+    protected PublicKey $publicKey;
 
     /**
      *

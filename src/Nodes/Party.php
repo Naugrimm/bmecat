@@ -33,9 +33,9 @@ class Party implements NodeInterface
      * @var Address
      */
     #[Serializer\Expose]
-    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Address::class)]
+    #[Serializer\Type(Address::class)]
     #[Serializer\SerializedName('ADDRESS')]
-    protected \Naugrim\BMEcat\Nodes\Address $address;
+    protected Address $address;
 
     /**
      *
@@ -109,7 +109,7 @@ class Party implements NodeInterface
     {
         return $this->mimes;
     }
-    
+
     /**
      * @param Mime[] $mimes
      * @return Party

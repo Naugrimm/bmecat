@@ -34,9 +34,9 @@ class Product implements Contracts\NodeInterface
      * @var SupplierPid
      */
     #[Serializer\Expose]
-    #[Serializer\Type(\Naugrim\BMEcat\Nodes\SupplierPid::class)]
+    #[Serializer\Type(SupplierPid::class)]
     #[Serializer\SerializedName('SUPPLIER_PID')]
-    protected \Naugrim\BMEcat\Nodes\SupplierPid $id;
+    protected SupplierPid $id;
 
     /**
      *
@@ -45,8 +45,8 @@ class Product implements Contracts\NodeInterface
      */
     #[Serializer\Expose]
     #[Serializer\SerializedName('PRODUCT_DETAILS')]
-    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Product\Details::class)]
-    protected \Naugrim\BMEcat\Nodes\Product\Details $details;
+    #[Serializer\Type(Details::class)]
+    protected Details $details;
 
 
     /**
@@ -65,8 +65,8 @@ class Product implements Contracts\NodeInterface
      */
     #[Serializer\Expose]
     #[Serializer\SerializedName('PRODUCT_ORDER_DETAILS')]
-    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Product\OrderDetails::class)]
-    protected \Naugrim\BMEcat\Nodes\Product\OrderDetails $orderDetails;
+    #[Serializer\Type(OrderDetails::class)]
+    protected OrderDetails $orderDetails;
 
     /**
      *
@@ -96,8 +96,8 @@ class Product implements Contracts\NodeInterface
      */
     #[Serializer\Expose]
     #[Serializer\SerializedName('PRODUCT_LOGISTIC_DETAILS')]
-    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Product\LogisticDetails::class)]
-    protected \Naugrim\BMEcat\Nodes\Product\LogisticDetails $logisticDetails;
+    #[Serializer\Type(LogisticDetails::class)]
+    protected LogisticDetails $logisticDetails;
 
     /**
      *
@@ -105,8 +105,8 @@ class Product implements Contracts\NodeInterface
      */
     #[Serializer\Expose]
     #[Serializer\SerializedName('PRODUCT_CONFIG_DETAILS')]
-    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Product\ConfigDetails::class)]
-    protected \Naugrim\BMEcat\Nodes\Product\ConfigDetails $configDetails;
+    #[Serializer\Type(ConfigDetails::class)]
+    protected ConfigDetails $configDetails;
 
     /**
      * @return string
@@ -140,7 +140,7 @@ class Product implements Contracts\NodeInterface
      *
      * @return Details
      */
-    public function getDetails(): \Naugrim\BMEcat\Nodes\Product\Details
+    public function getDetails(): Details
     {
         return $this->details;
     }
@@ -259,7 +259,7 @@ class Product implements Contracts\NodeInterface
     /**
      * @return OrderDetails|null
      */
-    public function getOrderDetails(): \Naugrim\BMEcat\Nodes\Product\OrderDetails
+    public function getOrderDetails(): OrderDetails
     {
         return $this->orderDetails;
     }
@@ -278,7 +278,7 @@ class Product implements Contracts\NodeInterface
      *
      * @return SupplierPid
      */
-    public function getId(): \Naugrim\BMEcat\Nodes\SupplierPid
+    public function getId(): SupplierPid
     {
         return $this->id;
     }

@@ -51,8 +51,8 @@ class LogisticDetails implements Contracts\NodeInterface
      */
     #[Serializer\Expose]
     #[Serializer\SerializedName('PRODUCT_DIMENSIONS')]
-    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Product\Logistic\Dimensions::class)]
-    protected \Naugrim\BMEcat\Nodes\Product\Logistic\Dimensions $dimensions = null;
+    #[Serializer\Type(Dimensions::class)]
+    protected Dimensions $dimensions = null;
 
     /**
      *
