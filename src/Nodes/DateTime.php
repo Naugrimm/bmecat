@@ -5,8 +5,11 @@ namespace Naugrim\BMEcat\Nodes;
 
 use DateTimeImmutable;
 use JMS\Serializer\Annotation as Serializer;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
-
+/**
+ * @implements NodeInterface<self>
+ */
 #[Serializer\XmlRoot('DATETIME')]
 class DateTime implements Contracts\NodeInterface
 {

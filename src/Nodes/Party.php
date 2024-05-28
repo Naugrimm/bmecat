@@ -8,6 +8,9 @@ use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
 use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
+/**
+ * @implements NodeInterface<self>
+ */
 class Party implements NodeInterface
 {
     /**
@@ -111,7 +114,7 @@ class Party implements NodeInterface
     }
 
     /**
-     * @param Mime[] $mimes
+     * @param Mime[]|array<string, mixed>[] $mimes
      * @return Party
      * @throws InvalidSetterException
      * @throws UnknownKeyException
@@ -120,7 +123,7 @@ class Party implements NodeInterface
     {
         $this->mimes = [];
         foreach ($mimes as $mime) {
-            if (is_array($mime)) {
+            if (!$mime instanceof Mime) {
                 $mime = NodeBuilder::fromArray($mime, new Mime());
             }
 
@@ -136,10 +139,6 @@ class Party implements NodeInterface
      */
     public function addMime(Mime $mime) : Party
     {
-        if ($this->mimes === null) {
-            $this->mimes = [];
-        }
-
         $this->mimes[] = $mime;
         return $this;
     }

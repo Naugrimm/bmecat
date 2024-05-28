@@ -8,41 +8,38 @@ use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
 use Naugrim\BMEcat\Nodes\Contracts;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
-
+/**
+ * @implements NodeInterface<self>
+ */
 #[Serializer\XmlRoot('PRODUCT_FEATURES')]
 class Features implements Contracts\NodeInterface
 {
-    /**
-     *
-     * @var string
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('REFERENCE_FEATURE_SYSTEM_NAME')]
-    protected string $referenceFeatureSystemName;
+    protected ?string $referenceFeatureSystemName = null;
 
     /**
-     *
-     * @var string
+     * @var string[]
      */
     #[Serializer\Expose]
-    #[Serializer\Type('string')]
-    #[Serializer\SerializedName('REFERENCE_FEATURE_GROUP_ID')]
+    #[Serializer\Type('array<string>')]
+    #[Serializer\XmlList(entry: 'REFERENCE_FEATURE_GROUP_ID', inline: true)]
     #[Serializer\SkipWhenEmpty]
     #[Serializer\Exclude(if: "methodResultIsset(object, 'getReferenceFeatureGroupName')")]
-    protected string $referenceFeatureGroupId;
+    protected ?array $referenceFeatureGroupId = null;
 
     /**
-     *
-     * @var string
+     * @var string[]
      */
     #[Serializer\Expose]
-    #[Serializer\Type('string')]
-    #[Serializer\SerializedName('REFERENCE_FEATURE_GROUP_NAME')]
+    #[Serializer\Type('array<string>')]
+    #[Serializer\XmlList(entry: 'REFERENCE_FEATURE_GROUP_NAME', inline: true)]
     #[Serializer\SkipWhenEmpty]
     #[Serializer\Exclude(if: "methodResultIsset(object, 'getReferenceFeatureGroupId')")]
-    protected string $referenceFeatureGroupName;
+    protected ?array $referenceFeatureGroupName = null;
 
     /**
      *
@@ -50,11 +47,11 @@ class Features implements Contracts\NodeInterface
      */
     #[Serializer\Expose]
     #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Product\Feature>')]
-    #[Serializer\XmlList(inline: true, entry: 'FEATURE')]
-    protected array $features;
+    #[Serializer\XmlList(entry: 'FEATURE', inline: true)]
+    protected array $features = [];
 
     /**
-     * @param Feature[] $features
+     * @param Feature[]|array<string, mixed>[] $features
      * @return Features
      * @throws InvalidSetterException
      * @throws UnknownKeyException
@@ -63,7 +60,7 @@ class Features implements Contracts\NodeInterface
     {
         $this->features = [];
         foreach ($features as $feature) {
-            if (is_array($feature)) {
+            if (! $feature instanceof Feature) {
                 $feature = NodeBuilder::fromArray($feature, new Feature());
             }
 
@@ -79,26 +76,7 @@ class Features implements Contracts\NodeInterface
      */
     public function addFeature(Feature $feature) : Features
     {
-        if ($this->features === null) {
-            $this->features = [];
-        }
-
         $this->features[] = $feature;
-        return $this;
-    }
-
-    /**
-     *
-     * @return Features
-     */
-    #[Serializer\PreSerialize]
-    #[Serializer\PostSerialize]
-    public function nullFeatures() : Features
-    {
-        if ($this->features === []) {
-            $this->features = null;
-        }
-
         return $this;
     }
 
@@ -113,47 +91,44 @@ class Features implements Contracts\NodeInterface
     }
 
     /**
-     * @param string $referenceFeatureGroupName
+     * @param string[] $referenceFeatureGroupName
      * @return Features
      */
-    public function setReferenceFeatureGroupName(string $referenceFeatureGroupName) : Features
+    public function setReferenceFeatureGroupName(array $referenceFeatureGroupName) : Features
     {
-        $this->referenceFeatureGroupId = null;
+        $this->referenceFeatureGroupId = [];
         $this->referenceFeatureGroupName = $referenceFeatureGroupName;
         return $this;
     }
 
     /**
-     * @param string $referenceFeatureGroupId
+     * @param string[] $referenceFeatureGroupId
      * @return Features
      */
-    public function setReferenceFeatureGroupId(string $referenceFeatureGroupId) : Features
+    public function setReferenceFeatureGroupId(array $referenceFeatureGroupId) : Features
     {
-        $this->referenceFeatureGroupName = null;
+        $this->referenceFeatureGroupName = [];
         $this->referenceFeatureGroupId = $referenceFeatureGroupId;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getReferenceFeatureSystemName(): string
+    public function getReferenceFeatureSystemName(): ?string
     {
         return $this->referenceFeatureSystemName;
     }
 
     /**
-     * @return string
+     * @return ?string[]
      */
-    public function getReferenceFeatureGroupName(): string
+    public function getReferenceFeatureGroupName(): ?array
     {
         return $this->referenceFeatureGroupName;
     }
 
     /**
-     * @return string
+     * @return ?string[]
      */
-    public function getReferenceFeatureGroupId(): string
+    public function getReferenceFeatureGroupId(): ?array
     {
         return $this->referenceFeatureGroupId;
     }
@@ -161,12 +136,8 @@ class Features implements Contracts\NodeInterface
     /**
      * @return Feature[]
      */
-    public function getFeatures()
+    public function getFeatures() : array
     {
-        if ($this->features === null) {
-            return [];
-        }
-
         return $this->features;
     }
 }

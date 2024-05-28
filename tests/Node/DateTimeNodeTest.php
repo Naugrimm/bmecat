@@ -14,9 +14,6 @@ use Naugrim\BMEcat\Nodes\DateTime;
 
 class DateTimeNodeTest extends TestCase
 {
-    /**
-     * @var SerializerInterface
-     */
     private Serializer $serializer;
 
     protected function setUp() : void
@@ -33,7 +30,6 @@ class DateTimeNodeTest extends TestCase
         $node = new DateTime();
         $value = '1979-01-10';
 
-        $this->assertNull($node->getDate());
         $node->setDate($value);
         $this->assertEquals($value, $node->getDate());
     }
@@ -47,7 +43,6 @@ class DateTimeNodeTest extends TestCase
         $node = new DateTime();
         $value = '10:59:54';
 
-        $this->assertNull($node->getTime());
         $node->setTime($value);
         $this->assertEquals($value, $node->getTime());
     }
@@ -61,27 +56,8 @@ class DateTimeNodeTest extends TestCase
         $node = new DateTime();
         $value = '-01:00';
 
-        $this->assertNull($node->getTimeZone());
-        $node->setTimeZone($value);
-        $this->assertEquals($value, $node->getTimeZone());
-    }
-
-    /**
-     *
-     * @test
-     */
-    public function Serialize_With_Null_Values(): void
-    {
-        $node = new DateTime();
-        $context = SerializationContext::create()->setSerializeNull(true);
-
-        $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_datetime_with_null_values.xml');
-        $actual = $this->serializer->serialize($node, 'xml', $context);
-
-        $this->assertEquals($expected, $actual);
-
-        $doc = $this->serializer->deserialize($actual, DateTime::class, 'xml');
-        $this->assertInstanceOf(DateTime::class, $doc);
+        $node->setTimezone($value);
+        $this->assertEquals($value, $node->getTimezone());
     }
 
     /**

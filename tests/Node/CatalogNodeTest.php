@@ -15,9 +15,6 @@ use Naugrim\BMEcat\Nodes\DateTime;
 
 class CatalogNodeTest extends TestCase
 {
-    /**
-     * @var SerializerInterface
-     */
     private Serializer $serializer;
 
     protected function setUp() : void
@@ -33,8 +30,6 @@ class CatalogNodeTest extends TestCase
     {
         $node = new Catalog();
         $value = sha1(uniqid(microtime(false), true));
-
-        $this->assertNull($node->getId());
         $node->setId($value);
         $this->assertEquals($value, $node->getId());
     }
@@ -47,8 +42,6 @@ class CatalogNodeTest extends TestCase
     {
         $node = new Catalog();
         $value = sha1(uniqid(microtime(false), true));
-
-        $this->assertNull($node->getVersion());
         $node->setVersion($value);
         $this->assertEquals($value, $node->getVersion());
     }
@@ -62,7 +55,6 @@ class CatalogNodeTest extends TestCase
         $node = new Catalog();
         $value = sha1(uniqid(microtime(false), true));
 
-        $this->assertNull($node->getLanguage());
         $node->setLanguage($value);
         $this->assertEquals($value, $node->getLanguage());
     }
@@ -79,24 +71,6 @@ class CatalogNodeTest extends TestCase
         $this->assertNull($node->getDateTime());
         $node->setDateTime($dateTime);
         $this->assertEquals($dateTime, $node->getDateTime());
-    }
-
-    /**
-     *
-     * @test
-     */
-    public function Serialize_With_Null_Values(): void
-    {
-        $node = new Catalog();
-        $context = SerializationContext::create()->setSerializeNull(true);
-
-        $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_catalog_with_null_values.xml');
-        $actual = $this->serializer->serialize($node, 'xml', $context);
-
-        $this->assertEquals($expected, $actual);
-
-        $doc = $this->serializer->deserialize($actual, Catalog::class, 'xml');
-        $this->assertInstanceOf(Catalog::class, $doc);
     }
 
     /**

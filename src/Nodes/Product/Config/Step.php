@@ -4,9 +4,12 @@ namespace Naugrim\BMEcat\Nodes\Product\Config;
 
 use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 use Naugrim\BMEcat\Nodes\Product\PriceDetails;
 
-
+/**
+ * @implements NodeInterface<self>
+ */
 #[Serializer\XmlRoot('CONFIG_STEP')]
 class Step implements Contracts\NodeInterface
 {
@@ -61,25 +64,15 @@ class Step implements Contracts\NodeInterface
     #[Serializer\XmlElement(cdata: false)]
     protected int $order;
 
-    /**
-     *
-     *
-     * @var string
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('CONFIG_CODE')]
-    protected string $code = null;
+    protected ?string $code = null;
 
-    /**
-     *
-     *
-     * @var PriceDetails
-     */
     #[Serializer\Expose]
     #[Serializer\SerializedName('PRODUCT_PRICE_DETAILS')]
     #[Serializer\Type(PriceDetails::class)]
-    protected PriceDetails $priceDetails = null;
+    protected ?PriceDetails $priceDetails = null;
 
     /**
      *

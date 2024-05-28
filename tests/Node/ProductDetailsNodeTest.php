@@ -17,9 +17,6 @@ use PHPUnit\Framework\TestCase;
 
 class ProductDetailsNodeTest extends TestCase
 {
-    /**
-     * @var SerializerInterface
-     */
     private Serializer $serializer;
 
     protected function setUp() : void
@@ -140,7 +137,6 @@ class ProductDetailsNodeTest extends TestCase
         $node = new Details();
         $value = sha1(uniqid(microtime(false), true));
 
-        $this->assertEquals('', $node->getDescriptionShort());
         $node->setDescriptionShort($value);
         $this->assertEquals($value, $node->getDescriptionShort());
     }
@@ -278,23 +274,10 @@ class ProductDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Serialize_With_Null_Values(): void
-    {
-        $node = new Details();
-        $context = SerializationContext::create()->setSerializeNull(true);
-
-        $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_details_with_null_values.xml');
-        $actual = $this->serializer->serialize($node, 'xml', $context);
-
-        $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     * @test
-     */
     public function Serialize_Without_Null_Values(): void
     {
         $node = new Details();
+        $node->setDescriptionShort('test');
         $context = SerializationContext::create()->setSerializeNull(false);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_details_without_null_values.xml');

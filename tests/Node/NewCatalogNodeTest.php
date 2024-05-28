@@ -15,9 +15,6 @@ use Naugrim\BMEcat\Nodes\Product;
 
 class NewCatalogNodeTest extends TestCase
 {
-    /**
-     * @var SerializerInterface
-     */
     private Serializer $serializer;
 
     protected function setUp() : void

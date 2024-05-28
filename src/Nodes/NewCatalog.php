@@ -8,8 +8,12 @@ use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
+use Webmozart\Assert\Assert;
 
-
+/**
+ * @implements NodeInterface<self>
+ */
 #[Serializer\XmlRoot('T_NEW_CATALOG')]
 class NewCatalog implements Contracts\NodeInterface
 {
@@ -20,11 +24,11 @@ class NewCatalog implements Contracts\NodeInterface
     #[Serializer\Expose]
     #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Product>')]
     #[Serializer\XmlList(inline: true, entry: 'PRODUCT')]
-    protected array $products = [];
+    protected ?array $products = [];
 
     /**
      *
-     * @param Product[] $products
+     * @param Product[]|mixed[] $products
      * @return NewCatalog
      * @throws InvalidSetterException
      * @throws UnknownKeyException
@@ -37,6 +41,7 @@ class NewCatalog implements Contracts\NodeInterface
             if (is_array($product)) {
                 $product = NodeBuilder::fromArray($product, new Product());
             }
+            Assert::isInstanceOf($product, Product::class);
 
             $this->addProduct($product);
         }
@@ -59,7 +64,7 @@ class NewCatalog implements Contracts\NodeInterface
         return $this;
     }
 
-    
+
     #[Serializer\PreSerialize]
     #[Serializer\PostSerialize]
     public function nullProducts(): void
@@ -73,7 +78,7 @@ class NewCatalog implements Contracts\NodeInterface
      *
      * @return Product[]
      */
-    public function getProducts()
+    public function getProducts(): array
     {
         if ($this->products === null) {
             return [];

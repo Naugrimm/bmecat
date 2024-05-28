@@ -8,8 +8,11 @@ use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
 use Naugrim\BMEcat\Nodes\Contracts;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
-
+/**
+ * @implements NodeInterface<self>
+ */
 #[Serializer\XmlRoot('PRODUCT_PRICE_DETAILS')]
 class PriceDetails implements Contracts\NodeInterface
 {
@@ -110,7 +113,7 @@ class PriceDetails implements Contracts\NodeInterface
     }
 
     /**
-     * @param Price[] $prices
+     * @param Price[]|array<string, mixed>[] $prices
      * @return PriceDetails
      * @throws InvalidSetterException
      * @throws UnknownKeyException
@@ -119,7 +122,7 @@ class PriceDetails implements Contracts\NodeInterface
     {
         $this->prices = [];
         foreach ($prices as $price) {
-            if (is_array($price)) {
+            if (!$price instanceof Price) {
                 $price = NodeBuilder::fromArray($price, new Price());
             }
 
@@ -129,12 +132,8 @@ class PriceDetails implements Contracts\NodeInterface
         return $this;
     }
 
-    public function addPrice(Price $price): static
+    public function addPrice(Price $price): self
     {
-        if ($this->prices === null) {
-            $this->prices = [];
-        }
-
         $this->prices[] = $price;
         return $this;
     }

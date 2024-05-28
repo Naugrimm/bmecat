@@ -4,8 +4,10 @@
 namespace Naugrim\BMEcat\Nodes;
 
 use JMS\Serializer\Annotation as Serializer;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
+ * @implements NodeInterface<self>
  * @deprecated
  */
 #[Serializer\XmlRoot('SUPPLIER')]

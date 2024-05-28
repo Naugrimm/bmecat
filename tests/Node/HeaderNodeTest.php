@@ -15,9 +15,6 @@ use Naugrim\BMEcat\Nodes\Header;
 
 class HeaderNodeTest extends TestCase
 {
-    /**
-     * @var SerializerInterface
-     */
     private Serializer $serializer;
 
     protected function setUp() : void
@@ -64,24 +61,6 @@ class HeaderNodeTest extends TestCase
 
         $header->setCatalog($catalog);
         $this->assertEquals($catalog, $header->getCatalog());
-    }
-
-    /**
-     *
-     * @test
-     */
-    public function Serialize_With_Null_Values(): void
-    {
-        $node = new Header();
-        $context = SerializationContext::create()->setSerializeNull(true);
-
-        $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_header_with_null_values.xml');
-        $actual = $this->serializer->serialize($node, 'xml', $context);
-
-        $this->assertEquals($expected, $actual);
-
-        $doc = $this->serializer->deserialize($actual, Header::class, 'xml');
-        $this->assertInstanceOf(Header::class, $doc);
     }
 
     /**

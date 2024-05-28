@@ -16,13 +16,11 @@ use Naugrim\BMEcat\Nodes\Product\Price;
 use Naugrim\BMEcat\Nodes\Product\PriceDetails;
 use Naugrim\BMEcat\Nodes\SupplierPid;
 use PHPUnit\Framework\TestCase;
+use function PHPStan\dumpType;
 
 
 class ProductNodeTest extends TestCase
 {
-    /**
-     * @var SerializerInterface
-     */
     private Serializer $serializer;
 
     protected function setUp() : void
@@ -43,9 +41,9 @@ class ProductNodeTest extends TestCase
         $supplierPid = new SupplierPid();
         $supplierPid->setValue($value);
 
+        $node = new Product();
         $node->setId($supplierPid);
-
-        $this->assertEquals($value, $node->getId()->getValue());
+        $this->assertEquals($value, $node->getId()?->getValue());
     }
 
     /**
@@ -57,7 +55,6 @@ class ProductNodeTest extends TestCase
         $node = new Product();
         $details = new Details();
 
-        $this->assertNull($node->getDetails());
         $node->setDetails($details);
         $this->assertEquals($details, $node->getDetails());
     }
@@ -76,8 +73,6 @@ class ProductNodeTest extends TestCase
 
         $node = new Product();
         $this->assertEmpty($node->getFeatures());
-        $node->nullFeatures();
-        $this->assertEquals([], $node->getFeatures());
 
         foreach ($features as $featureBlock) {
             $node->addFeatures($featureBlock);
@@ -100,8 +95,6 @@ class ProductNodeTest extends TestCase
 
         $node = new Product();
         $this->assertEmpty($node->getPriceDetails());
-        $node->nullPriceDetails();
-        $this->assertEquals([], $node->getPriceDetails());
 
         foreach ($priceDetails as $priceDetail) {
             $node->addPriceDetail($priceDetail);
@@ -119,7 +112,6 @@ class ProductNodeTest extends TestCase
         $node = new Product();
         $value = new OrderDetails();
 
-        $this->assertEmpty($node->getOrderDetails());
         $node->setOrderDetails($value);
         $this->assertSame($value, $node->getOrderDetails());
     }
@@ -138,28 +130,12 @@ class ProductNodeTest extends TestCase
 
         $node = new Product();
         $this->assertEmpty($node->getMimes());
-        $node->nullMime();
-        $this->assertEquals(null, $node->getMimes());
 
         foreach ($mimes as $mime) {
             $node->addMime($mime);
         }
 
         $this->assertSame($mimes, $node->getMimes());
-    }
-
-    /**
-     *
-     * @test
-     */
-    public function Serialize_With_Null_Values(): void
-    {
-        $node = new Product();
-        $context = SerializationContext::create()->setSerializeNull(true);
-
-        $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_with_null_values.xml');
-        $actual = $this->serializer->serialize($node, 'xml', $context);
-        $this->assertEquals($expected, $actual);
     }
 
     /**

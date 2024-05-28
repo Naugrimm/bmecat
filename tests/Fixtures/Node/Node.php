@@ -4,22 +4,28 @@ namespace Naugrim\BMEcat\Tests\Fixtures\Node;
 
 use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
+/**
+ * @implements NodeInterface<self>
+ */
 class Node implements NodeInterface
 {
-    public $someString;
+    public string $someString;
 
-    public $someArray;
+    /**
+     * @var string[]
+     */
+    public array $someArray;
 
-    public $anotherNode;
+    public Node $anotherNode;
 
-    public $someFloat;
+    public float $someFloat;
 
     public function setNoArguments(): static
     {
         return $this;
     }
 
-    public function setNoTypeHint($something): static
+    public function setNoTypeHint($something): static //@phpstan-ignore missingType.parameter
     {
         return $this;
     }
@@ -36,6 +42,9 @@ class Node implements NodeInterface
         return $this;
     }
 
+    /**
+     * @param string[] $someArray
+     */
     public function setMatchingTypeHintArray(array $someArray): static
     {
         $this->someArray = $someArray;

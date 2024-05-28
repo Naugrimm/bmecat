@@ -9,6 +9,9 @@ use Naugrim\BMEcat\Nodes\Emails;
 use Naugrim\BMEcat\Nodes\Fax;
 use Naugrim\BMEcat\Nodes\Phone;
 
+/**
+ * @implements NodeInterface<self>
+ */
 class Details implements NodeInterface
 {
     /**

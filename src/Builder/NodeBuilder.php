@@ -5,15 +5,18 @@ namespace Naugrim\BMEcat\Builder;
 use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
 use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
+use ReflectionClass;
 use ReflectionException;
 use ReflectionMethod;
+use ReflectionNamedType;
 
 class NodeBuilder
 {
     /**
-     * @param array $data
-     * @param NodeInterface $instance
-     * @return NodeInterface
+     * @template TNode of NodeInterface
+     * @param array<string, mixed> $data
+     * @param TNode $instance
+     * @return TNode
      * @throws InvalidSetterException
      * @throws UnknownKeyException
      */
@@ -26,7 +29,7 @@ class NodeBuilder
             }
 
             if (is_scalar($value) || is_object($value)) {
-                $instance->$setterName($value);
+                $instance->$setterName($value); //@phpstan-ignore method.dynamicName
                 continue;
             }
 
@@ -43,22 +46,39 @@ class NodeBuilder
 
             // @codeCoverageIgnoreEnd
             $firstSetterParam = array_shift($setterParams);
-            if (!$firstSetterParam) {
+            if ($firstSetterParam === null) {
                 throw new InvalidSetterException('The setter for the property '.$name.' in the class '.$instance::class.' must have exactly one argument.');
             }
 
-            if (!$firstSetterParam->getType()) {
+            if ($firstSetterParam->getType() === null) {
                 throw new InvalidSetterException('The setter for the property '.$name.' in the class '.$instance::class.' must have exactly one argument and this argument must have a type hint.');
             }
 
-            $paramType = $firstSetterParam->getType()->getName();
-            $valueType = gettype($value);
-
-            if ($paramType !== $valueType && class_exists($paramType)) {
-                $value = self::fromArray($value, new $paramType);
+            if (! $firstSetterParam->getType() instanceof ReflectionNamedType) {
+                throw new InvalidSetterException('The type hint for the setter for the property '.$name.' in the class '.$instance::class.' cannot be parsed.');
             }
 
-            $instance->$setterName($value);
+            $paramType = $firstSetterParam->getType()->getName();
+            if ($firstSetterParam->getType()->isBuiltin() || ! class_exists($paramType)) {
+                $instance->$setterName($value); //@phpstan-ignore method.dynamicName
+                continue;
+            }
+
+            $paramClassReflection = new ReflectionClass($paramType);
+
+            /**
+             * when we type hint another NodeInterface here we MUST pass an array with the child nodes properties
+             */
+            $paramClass = $paramClassReflection->newInstance();
+            if ($paramClass instanceof NodeInterface && is_array($value)) {
+                $value = self::fromArray($value, $paramClass);
+                $instance->$setterName($value); //@phpstan-ignore method.dynamicName
+            }
+
+            /**
+             * in all other cases we try to set the value directly and let the type system fail if there are any errors
+             */
+            $instance->$setterName($value); //@phpstan-ignore method.dynamicName
         }
 
         return $instance;

@@ -15,9 +15,6 @@ use Naugrim\BMEcat\Nodes\Document;
 
 class DocumentBuilderTest extends TestCase
 {
-    /**
-     * @var SerializerInterface
-     */
     private Serializer $serializer;
 
     protected function setUp() : void
@@ -75,7 +72,7 @@ class DocumentBuilderTest extends TestCase
     public function testFromStringWorksCorrectly(): void
     {
         $builder = new DocumentBuilder();
-        $doc = $builder->fromString(file_get_contents(__DIR__ . '/Fixtures/2005.1/minimal_valid_document.xml'));
+        $doc = $builder->fromString((string) file_get_contents(__DIR__ . '/Fixtures/2005.1/minimal_valid_document.xml'));
 
         $this->assertInstanceOf(Document::class, $doc);
     }

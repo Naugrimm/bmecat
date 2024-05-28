@@ -7,19 +7,20 @@ use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
+use Webmozart\Assert\Assert;
+use function PHPStan\dumpType;
 
-
+/**
+ * @implements NodeInterface<self>
+ */
 #[Serializer\XmlRoot('HEADER')]
 class Header implements Contracts\NodeInterface
 {
-    /**
-     *
-     * @var string
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('GENERATOR_INFO')]
-    protected string $generatorInfo;
+    protected ?string $generatorInfo = null;
 
     /**
      *
@@ -37,7 +38,7 @@ class Header implements Contracts\NodeInterface
     #[Serializer\Expose]
     #[Serializer\Type(BuyerIdRef::class)]
     #[Serializer\SerializedName('BUYER_IDREF')]
-    protected BuyerIdRef $buyerIdRef;
+    protected ?BuyerIdRef $buyerIdRef = null;
 
     /**
      *
@@ -46,7 +47,7 @@ class Header implements Contracts\NodeInterface
     #[Serializer\Expose]
     #[Serializer\Type(SupplierIdRef::class)]
     #[Serializer\SerializedName('SUPPLIER_IDREF')]
-    protected SupplierIdRef $supplierIdRef;
+    protected ?SupplierIdRef $supplierIdRef = null;
 
     /**
      *
@@ -59,19 +60,16 @@ class Header implements Contracts\NodeInterface
     #[Serializer\XmlList(entry: 'PARTY')]
     protected array $parties = [];
 
-    /**
-     * @return string|null
-     */
-    public function getGeneratorInfo(): string
+    public function getGeneratorInfo(): ?string
     {
         return $this->generatorInfo;
     }
 
     /**
      * @param string $generatorInfo
-     * @return Header
+     * @return self
      */
-    public function setGeneratorInfo(string $generatorInfo): Header
+    public function setGeneratorInfo(string $generatorInfo): self
     {
         $this->generatorInfo = $generatorInfo;
         return $this;
@@ -95,10 +93,7 @@ class Header implements Contracts\NodeInterface
         return $this;
     }
 
-    /**
-     * @return BuyerIdRef
-     */
-    public function getBuyerIdRef(): BuyerIdRef
+    public function getBuyerIdRef(): ?BuyerIdRef
     {
         return $this->buyerIdRef;
     }
@@ -113,10 +108,7 @@ class Header implements Contracts\NodeInterface
         return $this;
     }
 
-    /**
-     * @return SupplierIdRef
-     */
-    public function getSupplierIdRef(): SupplierIdRef
+    public function getSupplierIdRef(): ?SupplierIdRef
     {
         return $this->supplierIdRef;
     }
@@ -140,7 +132,7 @@ class Header implements Contracts\NodeInterface
     }
 
     /**
-     * @param Party[] $parties
+     * @param Party[]|array<string, mixed>[] $parties
      * @return Header
      * @throws InvalidSetterException
      * @throws UnknownKeyException

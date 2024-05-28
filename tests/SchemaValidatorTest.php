@@ -10,17 +10,13 @@ use Naugrim\BMEcat\SchemaValidator;
 
 class SchemaValidatorTest extends TestCase
 {
-
-    /**
-     * @var
-     */
-    protected $minimalValidDocument;
+    protected string $minimalValidDocument;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->minimalValidDocument = file_get_contents(__DIR__ . '/Fixtures/2005.1/minimal_valid_document.xml');
+        $this->minimalValidDocument = (string) file_get_contents(__DIR__ . '/Fixtures/2005.1/minimal_valid_document.xml');
 
     }
 

@@ -6,6 +6,9 @@ use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts;
 
 
+/**
+ * @implements Contracts\NodeInterface<self>
+ */
 #[Serializer\XmlRoot('PRODUCT_DIMENSIONS')]
 class Dimensions implements Contracts\NodeInterface
 {

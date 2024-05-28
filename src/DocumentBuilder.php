@@ -12,13 +12,16 @@ use Naugrim\BMEcat\Nodes\Document;
 use Naugrim\BMEcat\Exception\MissingDocumentException;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
-class DocumentBuilder
+final class DocumentBuilder
 {
 
     protected readonly Serializer $serializer;
 
     protected readonly SerializationContext $context;
 
+    /**
+     * @var NodeInterface<Document>
+     */
     protected NodeInterface $document;
 
     public function __construct(?Serializer $serializer = null, ?SerializationContext $context = null)
@@ -43,9 +46,29 @@ class DocumentBuilder
     private function getExpressionLanguage() : ExpressionLanguage
     {
         $expressionLanguage = new ExpressionLanguage();
-        $expressionLanguage->register('empty', static fn($str) => $str, static fn($arguments, $str): bool => empty($str));
+        $expressionLanguage->register('empty', static fn(mixed $str): mixed => $str, static function (mixed $arguments, mixed $str): bool {
+            return empty($str); //@phpstan-ignore empty.notAllowed
+        });
 
-        $expressionLanguage->register('methodResultIsset', static fn($object, $method) => $method, static fn($arguments, $object, $method): bool => is_object($object) && method_exists($object, $method) && $object->$method() !== null);
+        $expressionLanguage->register('methodResultIsset', static fn(mixed $object, string $method) => $method, static function (mixed $arguments, mixed $object, string $method): bool {
+            if (! is_object($object) || ! method_exists($object, $method)) {
+                return false;
+            }
+            $result = $object->$method(); // @phpstan-ignore method.dynamicName
+            if ($result === null) {
+                return false;
+            }
+
+            if (is_scalar($result)) {
+                return true;
+            }
+
+            if (is_countable($result) && count($result) > 0) {
+                return true;
+            }
+
+            return false;
+        });
 
         return $expressionLanguage;
     }
@@ -66,10 +89,10 @@ class DocumentBuilder
     }
 
     /**
-     * @param NodeInterface $document
+     * @param NodeInterface<Document> $document
      * @return DocumentBuilder
      */
-    public function setDocument(NodeInterface $document): static
+    public function setDocument(NodeInterface $document): self
     {
         $this->document = $document;
         return $this;
@@ -77,7 +100,7 @@ class DocumentBuilder
 
     /**
      *
-     * @return ?Document
+     * @return ?NodeInterface<Document>
      */
     public function getDocument() : ?NodeInterface
     {

@@ -5,101 +5,66 @@ namespace Naugrim\BMEcat\Nodes\Product;
 
 use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
-
+/**
+ * @implements NodeInterface<self>
+ */
 #[Serializer\XmlRoot('FEATURE')]
 class Feature implements Contracts\NodeInterface
 {
-    /**
-     *
-     * @var string
-     */
+
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('FNAME')]
     protected string $name;
 
     /**
-     *
-     * @var string
+     * @var string[]
      */
     #[Serializer\Expose]
-    #[Serializer\Type('string')]
-    #[Serializer\SerializedName('VARIANTS')]
-    #[Serializer\SkipWhenEmpty]
-    #[Serializer\Exclude(if: "methodResultIsset(object, 'getValue')")]
-    protected string $variants;
+    #[Serializer\Type('array<string>')]
+    #[Serializer\XmlList(entry: 'FVALUE', inline: true)]
+    protected array $value = [];
 
-    /**
-     *
-     * @var string
-     */
-    #[Serializer\Expose]
-    #[Serializer\Type('string')]
-    #[Serializer\SerializedName('FVALUE')]
-    #[Serializer\Exclude(if: "methodResultIsset(object, 'getVariants')")]
-    protected string $value;
 
-    /**
-     *
-     * @var string
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('FUNIT')]
-    protected string $unit;
+    protected ?string $unit = null;
 
-    /**
-     *
-     * @var string
-     */
+
     #[Serializer\Expose]
-    #[Serializer\Type('string')]
+    #[Serializer\Type('int')]
     #[Serializer\SerializedName('FORDER')]
-    protected string $order;
+    protected ?int $order = null;
 
-    /**
-     *
-     * @var string
-     */
+
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('FDESCR')]
-    protected string $description;
+    protected ?string $description = null;
 
-    /**
-     *
-     * @var string
-     */
+
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('FVALUE_DETAILS')]
-    protected string $valueDetails;
+    protected ?string $valueDetails = null;
 
     /**
      * @return Feature
      */
-    public function setName(mixed $name) : Feature
+    public function setName(string $name) : Feature
     {
         $this->name = $name;
         return $this;
     }
 
     /**
-     * @param string $variants
+     * @param string[] $value
      * @return Feature
      */
-    public function setVariants(string $variants) : Feature
-    {
-        $this->variants = $variants;
-        return $this;
-    }
-
-    /**
-     * @param string $value
-     * @return Feature
-     */
-    public function setValue(string $value) : Feature
+    public function setValue(array $value) : Feature
     {
         $this->value = $value;
         return $this;
@@ -116,10 +81,10 @@ class Feature implements Contracts\NodeInterface
     }
 
     /**
-     * @param string $order
+     * @param int $order
      * @return Feature
      */
-    public function setOrder(string $order) : Feature
+    public function setOrder(int $order) : Feature
     {
         $this->order = $order;
         return $this;
@@ -145,58 +110,41 @@ class Feature implements Contracts\NodeInterface
         return $this;
     }
 
-    /**
-     * @return string
-     */
+
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
-    public function getVariants(): string
-    {
-        return $this->variants;
-    }
 
     /**
-     * @return string
+     * @return ?string[]
      */
-    public function getValue(): string
+    public function getValue(): ?array
     {
         return $this->value;
     }
 
-    /**
-     * @return string
-     */
-    public function getUnit(): string
+
+    public function getUnit(): ?string
     {
         return $this->unit;
     }
 
-    /**
-     * @return string
-     */
-    public function getOrder(): string
+
+    public function getOrder(): ?int
     {
         return $this->order;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription(): string
+
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @return string
-     */
-    public function getValueDetails(): string
+
+    public function getValueDetails(): ?string
     {
         return $this->valueDetails;
     }

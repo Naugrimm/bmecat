@@ -5,14 +5,14 @@ namespace Naugrim\BMEcat\Nodes\Concerns;
 use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
+/**
+ * @template TNode of NodeInterface
+ */
 trait HasStringValue
 {
-    /**
-     * @var string
-     */
     #[Serializer\XmlValue]
     #[Serializer\Type('string')]
-    protected $value = '';
+    protected string $value = '';
 
     /**
      * @return string
@@ -24,12 +24,11 @@ trait HasStringValue
 
     /**
      * @param string $value
-     * @return NodeInterface
+     * @return NodeInterface<TNode>
      */
     public function setValue(string $value): NodeInterface
     {
         $this->value = $value;
-        /** @var NodeInterface $this */
         return $this;
     }
 }

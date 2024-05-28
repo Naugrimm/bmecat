@@ -13,16 +13,6 @@ use PHPUnit\Framework\TestCase;
 class SupplierNodeTest extends TestCase
 {
     /**
-     * @var SerializerInterface
-     */
-    private Serializer $serializer;
-
-    protected function setUp() : void
-    {
-        $this->serializer = (new DocumentBuilder())->getSerializer();
-    }
-
-    /**
      *
      * @test
      */

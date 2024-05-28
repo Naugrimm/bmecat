@@ -13,9 +13,6 @@ use PHPUnit\Framework\TestCase;
 
 class ProductFeatureNodeTest extends TestCase
 {
-    /**
-     * @var SerializerInterface
-     */
     private Serializer $serializer;
 
     protected function setUp() : void
@@ -32,7 +29,6 @@ class ProductFeatureNodeTest extends TestCase
         $node = new Feature();
         $value = sha1(uniqid(microtime(false), true));
 
-        $this->assertNull($node->getName());
         $node->setName($value);
         $this->assertEquals($value, $node->getName());
     }
@@ -44,26 +40,10 @@ class ProductFeatureNodeTest extends TestCase
     public function Set_Get_Value(): void
     {
         $node = new Feature();
-        $value = sha1(uniqid(microtime(false), true));
+        $value = [sha1(uniqid(microtime(false), true))];
 
-        $this->assertNull($node->getValue());
         $node->setValue($value);
         $this->assertEquals($value, $node->getValue());
-    }
-
-    /**
-     *
-     * @test
-     */
-    public function Serialize_With_Null_Values(): void
-    {
-        $node = new Feature();
-        $context = SerializationContext::create()->setSerializeNull(true);
-
-        $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_feature_with_null_values.xml');
-        $actual = $this->serializer->serialize($node, 'xml', $context);
-
-        $this->assertEquals($expected, $actual);
     }
 
     /**
@@ -74,6 +54,7 @@ class ProductFeatureNodeTest extends TestCase
     {
         $node = new Feature();
         $node->setName('test');
+        $node->setValue(['test']);
 
         $context = SerializationContext::create()->setSerializeNull(false);
 

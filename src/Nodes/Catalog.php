@@ -4,8 +4,11 @@
 namespace Naugrim\BMEcat\Nodes;
 
 use JMS\Serializer\Annotation as Serializer;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
-
+/**
+ * @implements NodeInterface<self>
+ */
 #[Serializer\XmlRoot('CATALOG')]
 class Catalog implements Contracts\NodeInterface
 {
@@ -18,10 +21,6 @@ class Catalog implements Contracts\NodeInterface
     #[Serializer\SerializedName('LANGUAGE')]
     protected string $language;
 
-    /**
-     *
-     * @var string
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('CATALOG_ID')]
@@ -36,14 +35,10 @@ class Catalog implements Contracts\NodeInterface
     #[Serializer\SerializedName('CATALOG_VERSION')]
     protected string $version;
 
-    /**
-     *
-     * @var DateTime
-     */
     #[Serializer\Expose]
     #[Serializer\Type(DateTime::class)]
     #[Serializer\SerializedName('DATETIME')]
-    protected DateTime $dateTime;
+    protected ?DateTime $dateTime = null;
 
     /**
      * @param string $language
@@ -113,11 +108,7 @@ class Catalog implements Contracts\NodeInterface
         return $this;
     }
 
-    /**
-     *
-     * @return DateTime
-     */
-    public function getDateTime(): DateTime
+    public function getDateTime(): ?DateTime
     {
         return $this->dateTime;
     }

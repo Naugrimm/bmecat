@@ -53,7 +53,7 @@ class DocumentTest extends TestCase
         $catalog = new NewCatalog;
         $document->setNewCatalog($catalog);
 
-        foreach ([1,2,3] as $index) {
+        foreach (['1','2','3'] as $index) {
             $product = new Product;
             $supplierPid = new SupplierPid();
             $supplierPid->setValue($index);
@@ -82,7 +82,7 @@ class DocumentTest extends TestCase
                 $features = new Features;
 
                 $features->setReferenceFeatureSystemName($systemName);
-                $features->setReferenceFeatureGroupName($groupName);
+                $features->setReferenceFeatureGroupName([$groupName]);
                 $product->addFeatures($features);
             }
 

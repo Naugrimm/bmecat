@@ -12,9 +12,6 @@ use Naugrim\BMEcat\Nodes\SpecialTreatmentClass;
 
 class SpecialTreatmentClassNodeTest extends TestCase
 {
-    /**
-     * @var SerializerInterface
-     */
     private Serializer $serializer;
 
     protected function setUp() : void

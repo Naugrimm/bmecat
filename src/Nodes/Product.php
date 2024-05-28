@@ -7,6 +7,7 @@ use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 use Naugrim\BMEcat\Nodes\Product\ConfigDetails;
 use Naugrim\BMEcat\Nodes\Product\Details;
 use Naugrim\BMEcat\Nodes\Product\Features;
@@ -14,7 +15,9 @@ use Naugrim\BMEcat\Nodes\Product\LogisticDetails;
 use Naugrim\BMEcat\Nodes\Product\OrderDetails;
 use Naugrim\BMEcat\Nodes\Product\PriceDetails;
 
-
+/**
+ * @implements NodeInterface<self>
+ */
 #[Serializer\XmlRoot('PRODUCT')]
 class Product implements Contracts\NodeInterface
 {
@@ -28,15 +31,10 @@ class Product implements Contracts\NodeInterface
     #[Serializer\XmlAttribute]
     protected string $mode = 'new';
 
-    /**
-     *
-     *
-     * @var SupplierPid
-     */
     #[Serializer\Expose]
     #[Serializer\Type(SupplierPid::class)]
     #[Serializer\SerializedName('SUPPLIER_PID')]
-    protected SupplierPid $id;
+    protected ?SupplierPid $id = null;
 
     /**
      *
@@ -56,7 +54,7 @@ class Product implements Contracts\NodeInterface
      */
     #[Serializer\Expose]
     #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Product\Features>')]
-    #[Serializer\XmlList(inline: true, entry: 'PRODUCT_FEATURES')]
+    #[Serializer\XmlList(entry: 'PRODUCT_FEATURES', inline: true)]
     protected array $features = [];
 
     /**
@@ -147,7 +145,7 @@ class Product implements Contracts\NodeInterface
 
     /**
      *
-     * @param PriceDetails[] $priceDetails
+     * @param PriceDetails[]|array<string, mixed>[] $priceDetails
      * @return Product
      * @throws InvalidSetterException
      * @throws UnknownKeyException
@@ -156,7 +154,7 @@ class Product implements Contracts\NodeInterface
     {
         $this->priceDetails = [];
         foreach ($priceDetails as $priceDetail) {
-            if (is_array($priceDetail)) {
+            if (!$priceDetail instanceof PriceDetails) {
                 $priceDetail = NodeBuilder::fromArray($priceDetail, new PriceDetails());
             }
 
@@ -173,16 +171,12 @@ class Product implements Contracts\NodeInterface
      */
     public function addPriceDetail(PriceDetails $price) : Product
     {
-        if ($this->priceDetails === null) {
-            $this->priceDetails = [];
-        }
-
         $this->priceDetails[] = $price;
         return $this;
     }
 
     /**
-     * @param Mime[] $mimes
+     * @param Mime[]|array<string, mixed>[] $mimes
      * @return Product
      * @throws InvalidSetterException
      * @throws UnknownKeyException
@@ -191,7 +185,7 @@ class Product implements Contracts\NodeInterface
     {
         $this->mimes = [];
         foreach ($mimes as $mime) {
-            if (is_array($mime)) {
+            if (!$mime instanceof Mime) {
                 $mime = NodeBuilder::fromArray($mime, new Mime());
             }
 
@@ -207,41 +201,7 @@ class Product implements Contracts\NodeInterface
      */
     public function addMime(Mime $mime) : Product
     {
-        if ($this->mimes === null) {
-            $this->mimes = [];
-        }
-
         $this->mimes[] = $mime;
-        return $this;
-    }
-
-    /**
-     *
-     * @return Product
-     */
-    #[Serializer\PreSerialize]
-    #[Serializer\PostSerialize]
-    public function nullPriceDetails() : Product
-    {
-        if ($this->priceDetails === []) {
-            $this->priceDetails = null;
-        }
-
-        return $this;
-    }
-
-    /**
-     *
-     * @return Product
-     */
-    #[Serializer\PreSerialize]
-    #[Serializer\PostSerialize]
-    public function nullMime() : Product
-    {
-        if ($this->mimes === []) {
-            $this->mimes = null;
-        }
-
         return $this;
     }
 
@@ -256,50 +216,24 @@ class Product implements Contracts\NodeInterface
         return $this;
     }
 
-    /**
-     * @return OrderDetails|null
-     */
     public function getOrderDetails(): OrderDetails
     {
         return $this->orderDetails;
     }
 
-    /**
-     * @param OrderDetails $orderDetails
-     * @return Product
-     */
-    public function setOrderDetails(OrderDetails $orderDetails) : Product
+    public function setOrderDetails(OrderDetails $orderDetails) : self
     {
         $this->orderDetails = $orderDetails;
         return $this;
     }
 
-    /**
-     *
-     * @return SupplierPid
-     */
-    public function getId(): SupplierPid
+    public function getId(): ?SupplierPid
     {
         return $this->id;
     }
 
     /**
-     *
-     * @return Product
-     */
-    #[Serializer\PreSerialize]
-    #[Serializer\PostSerialize]
-    public function nullFeatures() : Product
-    {
-        if ($this->features === []) {
-            $this->features = null;
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Features[] $features
+     * @param Features[]|array<string, mixed>[] $features
      * @return Product
      * @throws InvalidSetterException
      * @throws UnknownKeyException
@@ -308,7 +242,7 @@ class Product implements Contracts\NodeInterface
     {
         $this->features = [];
         foreach ($features as $feature) {
-            if (is_array($feature)) {
+            if (! $feature instanceof Features) {
                 $feature = NodeBuilder::fromArray($feature, new Features());
             }
 
@@ -325,11 +259,7 @@ class Product implements Contracts\NodeInterface
      */
     public function addFeatures(Features $features) : Product
     {
-        if ($this->features === null) {
-            $this->features = [];
-        }
-
-        $this->features [] = $features;
+        $this->features[] = $features;
         return $this;
     }
 
@@ -337,12 +267,8 @@ class Product implements Contracts\NodeInterface
      *
      * @return Features[]
      */
-    public function getFeatures()
+    public function getFeatures(): array
     {
-        if ($this->features === null) {
-            return [];
-        }
-
         return $this->features;
     }
 
@@ -350,17 +276,13 @@ class Product implements Contracts\NodeInterface
      *
      * @return PriceDetails[]
      */
-    public function getPriceDetails()
+    public function getPriceDetails(): array
     {
-        if ($this->priceDetails === null) {
-            return [];
-        }
-
         return $this->priceDetails;
     }
 
     /**
-     * @return Mime[]|null
+     * @return Mime[]
      */
     public function getMimes(): array
     {

@@ -7,7 +7,9 @@ use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\DocumentBuilder;
+use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\SchemaValidationException;
+use Naugrim\BMEcat\Exception\UnknownKeyException;
 use Naugrim\BMEcat\Nodes\Address;
 use Naugrim\BMEcat\Nodes\Document;
 use Naugrim\BMEcat\Nodes\NewCatalog;
@@ -18,15 +20,11 @@ use PHPUnit\Framework\TestCase;
 class AddressTest extends TestCase
 {
     /**
-     * @var SerializerInterface
+     * @param array<string, mixed> $data
+     * @return Document
+     * @throws InvalidSetterException
+     * @throws UnknownKeyException
      */
-    private Serializer $serializer;
-
-    protected function setUp() : void
-    {
-        $this->serializer = (new DocumentBuilder())->getSerializer();
-    }
-
     private function getDemoDocument(array $data) : Document
     {
         $docData = [

@@ -4,8 +4,11 @@
 namespace Naugrim\BMEcat\Nodes;
 
 use JMS\Serializer\Annotation as Serializer;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
-
+/**
+ * @implements NodeInterface<self>
+ */
 #[Serializer\XmlRoot('BMECAT')]
 #[Serializer\ExclusionPolicy('all')]
 class Document implements Contracts\NodeInterface
@@ -18,7 +21,7 @@ class Document implements Contracts\NodeInterface
     #[Serializer\Expose]
     #[Serializer\SerializedName('xmlns')]
     #[Serializer\XmlAttribute]
-    protected $namespace = 'http://www.bmecat.org/bmecat/2005.1';
+    protected string $namespace = 'http://www.bmecat.org/bmecat/2005.1';
 
     /**
      *

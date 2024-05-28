@@ -7,14 +7,23 @@ use LibXMLError;
 
 class SchemaValidationException extends Exception
 {
-    protected $context = 3;
+    protected int $context = 3;
 
-    protected $xml;
+    protected string $xml;
 
-    protected $schemaFile;
+    protected string $schemaFile;
 
-    protected $errors;
+    /**
+     * @var LibXMLError[]
+     */
+    protected array $errors;
 
+    /**
+     * @param string $xml
+     * @param string $schemaFile
+     * @param LibXMLError[] $errors
+     * @return self
+     */
     public static function withErrors(string $xml, string $schemaFile, array $errors = []): self
     {
         $instance = new self('The xml could not be validated against the given schema.');
@@ -32,7 +41,7 @@ class SchemaValidationException extends Exception
         $msg = static::class.': '.$this->getMessage()."\n";
         $msg .= $this->getTraceAsString()."\n\n";
 
-        $lines = explode("\n", (string) $this->xml);
+        $lines = explode("\n", $this->xml);
 
         $xmlErrors = [];
 

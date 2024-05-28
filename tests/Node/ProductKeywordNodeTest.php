@@ -11,9 +11,6 @@ use PHPUnit\Framework\TestCase;
 
 class ProductKeywordNodeTest extends TestCase
 {
-    /**
-     * @var SerializerInterface
-     */
     private Serializer $serializer;
 
     protected function setUp() : void

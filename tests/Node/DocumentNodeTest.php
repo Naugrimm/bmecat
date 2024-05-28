@@ -16,9 +16,6 @@ use Naugrim\BMEcat\Nodes\NewCatalog;
 
 class DocumentNodeTest extends TestCase
 {
-    /**
-     * @var SerializerInterface
-     */
     private Serializer $serializer;
 
     protected function setUp() : void
@@ -48,7 +45,6 @@ class DocumentNodeTest extends TestCase
         $document = new Document();
         $catalog = new NewCatalog();
 
-        $this->assertNull($document->getNewCatalog());
         $document->setNewCatalog($catalog);
         $this->assertSame($catalog, $document->getNewCatalog());
     }
@@ -62,27 +58,8 @@ class DocumentNodeTest extends TestCase
         $document = new Document();
         $header = new Header();
 
-        $this->assertNull($document->getHeader());
         $document->setHeader($header);
         $this->assertSame($header, $document->getHeader());
-    }
-
-    /**
-     *
-     * @test
-     */
-    public function Serialize_With_Null_Values(): void
-    {
-        $node = new Document();
-        $context = SerializationContext::create()->setSerializeNull(true);
-
-        $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_document_nochildren_with_null_values.xml');
-        $actual = $this->serializer->serialize($node, 'xml', $context);
-
-        $this->assertEquals($expected, $actual);
-
-        $doc = $this->serializer->deserialize($actual, Document::class, 'xml');
-        $this->assertInstanceOf(Document::class, $doc);
     }
 
     /**

@@ -5,8 +5,11 @@ namespace Naugrim\BMEcat\Nodes\Product;
 
 use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
-
+/**
+ * @implements NodeInterface<self>
+ */
 #[Serializer\XmlRoot('PRODUCT_PRICE')]
 class Price implements Contracts\NodeInterface
 {
@@ -20,10 +23,6 @@ class Price implements Contracts\NodeInterface
     #[Serializer\XmlAttribute]
     protected string $type = 'gros_list';
 
-    /**
-     *
-     * @var float
-     */
     #[Serializer\Expose]
     #[Serializer\Type('float')]
     #[Serializer\SerializedName('PRICE_AMOUNT')]
@@ -40,33 +39,21 @@ class Price implements Contracts\NodeInterface
     #[Serializer\XmlElement(cdata: false)]
     protected string $currency = 'EUR';
 
-    /**
-     *
-     * @var string
-     */
     #[Serializer\Expose]
     #[Serializer\Type('float')]
     #[Serializer\SerializedName('TAX')]
     #[Serializer\XmlElement(cdata: false)]
-    protected float $tax;
+    protected ?float $tax = null;
 
-    /**
-     *
-     * @var float
-     */
     #[Serializer\Expose]
     #[Serializer\Type('float')]
     #[Serializer\SerializedName('PRICE_FACTOR')]
-    protected float $priceFactor;
+    protected ?float $priceFactor = null;
 
-    /**
-     *
-     * @var float
-     */
     #[Serializer\Expose]
     #[Serializer\Type('float')]
     #[Serializer\SerializedName('LOWER_BOUND')]
-    protected float $lowerBound;
+    protected ?float $lowerBound = null;
 
     /**
      *
@@ -136,10 +123,7 @@ class Price implements Contracts\NodeInterface
         return $this;
     }
 
-    /**
-     * @return float
-     */
-    public function getPriceFactor(): float
+    public function getPriceFactor(): ?float
     {
         return $this->priceFactor;
     }
@@ -154,10 +138,7 @@ class Price implements Contracts\NodeInterface
         return $this;
     }
 
-    /**
-     * @return float
-     */
-    public function getLowerBound(): float
+    public function getLowerBound(): ?float
     {
         return $this->lowerBound;
     }

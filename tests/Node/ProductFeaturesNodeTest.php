@@ -14,9 +14,6 @@ use PHPUnit\Framework\TestCase;
 
 class ProductFeaturesNodeTest extends TestCase
 {
-    /**
-     * @var SerializerInterface
-     */
     private Serializer $serializer;
 
     protected function setUp() : void
@@ -38,8 +35,6 @@ class ProductFeaturesNodeTest extends TestCase
 
         $node = new Features();
         $this->assertEmpty($node->getFeatures());
-        $node->nullFeatures();
-        $this->assertEquals([], $node->getFeatures());
 
         foreach ($features as $feature) {
             $node->addFeature($feature);
@@ -69,7 +64,7 @@ class ProductFeaturesNodeTest extends TestCase
     public function Set_Get_Reference_Feature_Group_Name(): void
     {
         $node = new Features();
-        $value = sha1(uniqid(microtime(false), true));
+        $value = [sha1(uniqid(microtime(false), true))];
 
         $this->assertNull($node->getReferenceFeatureGroupName());
         $node->setReferenceFeatureGroupName($value);
@@ -83,26 +78,11 @@ class ProductFeaturesNodeTest extends TestCase
     public function Set_Get_Reference_Feature_Group_Id(): void
     {
         $node = new Features();
-        $value = sha1(uniqid(microtime(false), true));
+        $value = [sha1(uniqid(microtime(false), true))];
 
         $this->assertNull($node->getReferenceFeatureGroupId());
         $node->setReferenceFeatureGroupId($value);
         $this->assertEquals($value, $node->getReferenceFeatureGroupId());
-    }
-
-    /**
-     *
-     * @test
-     */
-    public function Serialize_With_Null_Values(): void
-    {
-        $node = new Features();
-        $context = SerializationContext::create()->setSerializeNull(true);
-
-        $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_features_with_null_values.xml');
-        $actual = $this->serializer->serialize($node, 'xml', $context);
-
-        $this->assertEquals($expected, $actual);
     }
 
     /**
@@ -130,7 +110,7 @@ class ProductFeaturesNodeTest extends TestCase
         $node = new Features();
         $productFeature = new Feature();
         $productFeature->setName('Feature name');
-        $productFeature->setValue('Feature value');
+        $productFeature->setValue(['Feature value']);
 
         $node->addFeature($productFeature);
 

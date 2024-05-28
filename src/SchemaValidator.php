@@ -8,6 +8,9 @@ use Naugrim\BMEcat\Exception\UnsupportedVersionException;
 
 class SchemaValidator
 {
+    /**
+     * @var array<string, string|array<string, string>>
+     */
     protected static array $SCHEMA_MAP = [
         '1.2' => [
             'new_catalog' => __DIR__.'/Assets/bmecat_new_catalog_1_2.xsd',
@@ -60,7 +63,7 @@ class SchemaValidator
             $schema = $schema[$type] ?? null;
         }
 
-        if ($schema) {
+        if ($schema !== null) {
             return $schema;
         }
 

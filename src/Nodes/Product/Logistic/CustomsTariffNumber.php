@@ -6,6 +6,9 @@ use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts;
 
 
+/**
+ * @implements Contracts\NodeInterface<self>
+ */
 #[Serializer\XmlRoot('CUSTOMS_TARIFF_NUMBER')]
 class CustomsTariffNumber implements Contracts\NodeInterface
 {
@@ -26,6 +29,35 @@ class CustomsTariffNumber implements Contracts\NodeInterface
      */
     #[Serializer\Expose]
     #[Serializer\Type('array<string>')]
-    #[Serializer\XmlList(inline: true, entry: 'TERRITORY')]
-    protected array $territories;
+    #[Serializer\XmlList(entry: 'TERRITORY', inline: true)]
+    protected array $territories = [];
+
+    public function setNumber(string $number): CustomsTariffNumber
+    {
+        $this->number = $number;
+        return $this;
+    }
+
+    public function getNumber(): string
+    {
+        return $this->number;
+    }
+
+    /**
+     * @param string[] $territories
+     * @return $this
+     */
+    public function setTerritories(array $territories): CustomsTariffNumber
+    {
+        $this->territories = $territories;
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getTerritories(): array
+    {
+        return $this->territories;
+    }
 }

@@ -12,10 +12,6 @@ use Naugrim\BMEcat\Nodes\BuyerPid;
 
 class BuyerAidNodeTest extends TestCase
 {
-
-    /**
-     * @var SerializerInterface
-     */
     private Serializer $serializer;
 
     protected function setUp() : void

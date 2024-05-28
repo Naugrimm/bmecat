@@ -3,8 +3,11 @@
 namespace Naugrim\BMEcat\Nodes;
 
 use JMS\Serializer\Annotation as Serializer;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
-
+/**
+ * @implements NodeInterface<self>
+ */
 #[Serializer\XmlRoot('TimeSpan')]
 class TimeSpan implements Contracts\NodeInterface
 {
@@ -18,46 +21,29 @@ class TimeSpan implements Contracts\NodeInterface
     #[Serializer\XmlElement(cdata: false)]
     protected string $base;
 
-    /**
-     *
-     * @var string|null
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('TIME_VALUE_DURATION')]
     #[Serializer\SkipWhenEmpty]
-    protected string $value_duration;
+    protected ?string $value_duration = null;
 
-    /**
-     *
-     * @var string|null
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('TIME_VALUE_INTERVAL')]
     #[Serializer\SkipWhenEmpty]
-    protected string $value_interval;
+    protected ?string $value_interval = null;
 
-    /**
-     *
-     * @var string|null
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('TIME_VALUE_START')]
     #[Serializer\SkipWhenEmpty]
-    protected string $value_start;
+    protected ?string $value_start = null;
 
-    /**
-     *
-     * @var string|null
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('TIME_VALUE_END')]
     #[Serializer\SkipWhenEmpty]
-    protected string $value_end;
-
+    protected ?string $value_end = null;
 
     /**
      *
@@ -65,7 +51,7 @@ class TimeSpan implements Contracts\NodeInterface
      */
     #[Serializer\Expose]
     #[Serializer\Type('array<Naugrim\BMEcat\Nodes\TimeSpan>')]
-    #[Serializer\XmlList(inline: true, entry: 'SUB_TIME_SPANS')]
+    #[Serializer\XmlList(entry: 'SUB_TIME_SPANS', inline: true)]
     protected array $subTimeSpans;
 
 }

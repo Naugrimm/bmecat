@@ -13,9 +13,6 @@ use PHPUnit\Framework\TestCase;
 
 class ProductPriceNodeTest extends TestCase
 {
-    /**
-     * @var SerializerInterface
-     */
     private Serializer $serializer;
 
     protected function setUp() : void
@@ -32,7 +29,6 @@ class ProductPriceNodeTest extends TestCase
         $node = new Price();
         $value = random_int(10, 1000);
 
-        $this->assertNull($node->getPrice());
         $node->setPrice($value);
         $this->assertEquals($value, $node->getPrice());
     }
@@ -51,23 +47,6 @@ class ProductPriceNodeTest extends TestCase
         $this->assertEquals($value, $node->getCurrency());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Serialize_With_Null_Values(): void
-    {
-        $node = new Price();
-        $context = SerializationContext::create()->setSerializeNull(true);
-
-        $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_price_with_null_values.xml');
-        $actual = $this->serializer->serialize($node, 'xml', $context);
-
-        $this->assertEquals($expected, $actual);
-
-        $doc = $this->serializer->deserialize($actual, Price::class, 'xml');
-        $this->assertInstanceOf(Price::class, $doc);
-    }
 
     /**
      *

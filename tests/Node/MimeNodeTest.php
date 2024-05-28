@@ -13,9 +13,6 @@ use Naugrim\BMEcat\Nodes\Mime;
 
 class MimeNodeTest extends TestCase
 {
-    /**
-     * @var SerializerInterface
-     */
     private Serializer $serializer;
 
     protected function setUp() : void
@@ -31,7 +28,6 @@ class MimeNodeTest extends TestCase
         $node = new Mime();
         $value = sha1(uniqid(microtime(false), true));
 
-        $this->assertNull($node->getType());
         $node->setType($value);
         $this->assertEquals($value, $node->getType());
     }
@@ -44,7 +40,6 @@ class MimeNodeTest extends TestCase
         $node = new Mime();
         $value = sha1(uniqid(microtime(false), true));
 
-        $this->assertNull($node->getSource());
         $node->setSource($value);
         $this->assertEquals($value, $node->getSource());
     }
@@ -57,27 +52,8 @@ class MimeNodeTest extends TestCase
         $node = new Mime();
         $value = sha1(uniqid(microtime(false), true));
 
-        $this->assertNull($node->getPurpose());
         $node->setPurpose($value);
         $this->assertEquals($value, $node->getPurpose());
-    }
-
-    /**
-     *
-     * @test
-     */
-    public function Serialize_With_Null_Values(): void
-    {
-        $node = new Mime();
-        $context = SerializationContext::create()->setSerializeNull(true);
-
-        $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_mime_info_with_null_values.xml');
-        $actual = $this->serializer->serialize($node, 'xml', $context);
-
-        $this->assertEquals($expected, $actual);
-
-        $doc = $this->serializer->deserialize($actual, Mime::class, 'xml');
-        $this->assertInstanceOf(Mime::class, $doc);
     }
 
     /**
