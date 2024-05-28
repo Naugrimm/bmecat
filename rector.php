@@ -1,24 +1,26 @@
 <?php
 
-use Rector\Core\Configuration\Option;
-use Rector\Core\ValueObject\PhpVersion;
-use Rector\PHPUnit\Set\PHPUnitSetList;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+declare(strict_types=1);
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $parameters = $containerConfigurator->parameters();
+use Rector\Config\RectorConfig;
+use Rector\Set\ValueObject\SetList;
+use Rector\Symfony\Set\JMSSetList;
+use Utils\Rector\Rector\NodeInterfaceDocBlocKTypeHintsToTypedPropertyRector;
 
-    $parameters->set(Option::SKIP, [
-        'vendor/*',
-        'storage/*',
-        'tools/*',
-        "_ide_helper.php",
-        "_ide_helper_models.php",
-    ]);
-    $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_74);
-    $parameters->set(Option::ENABLE_CACHE, true);
-    //$parameters->set(Option::AUTO_IMPORT_NAMES, true);
-    $services = $containerConfigurator->services();
-
-    $containerConfigurator->import(PHPUnitSetList::PHPUNIT_90);
-};
+return RectorConfig::configure()
+    ->withPaths([
+        __DIR__ . '/src',
+        __DIR__ . '/tests',
+    ])
+    // uncomment to reach your current PHP version
+    ->withSets([
+        JMSSetList::ANNOTATIONS_TO_ATTRIBUTES,
+        SetList::TYPE_DECLARATION,
+        SetList::CODE_QUALITY,
+        SetList::CODING_STYLE,
+    ])
+    ->withPhpSets()
+    ->withRules([
+        NodeInterfaceDocBlocKTypeHintsToTypedPropertyRector::class,
+    ])
+    ;
