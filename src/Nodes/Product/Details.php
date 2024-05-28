@@ -3,8 +3,7 @@
 
 namespace Naugrim\BMEcat\Nodes\Product;
 
-use /** @noinspection PhpUnusedAliasInspection */
-    JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\BuyerPid;
 use Naugrim\BMEcat\Nodes\Contracts;
 use Naugrim\BMEcat\Nodes\SpecialTreatmentClass;

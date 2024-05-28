@@ -2,8 +2,7 @@
 
 namespace Naugrim\BMEcat\Nodes\Product\Config;
 
-use /** @noinspection PhpUnusedAliasInspection */
-    JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts;
 use Naugrim\BMEcat\Nodes\Product\PriceDetails;
 
