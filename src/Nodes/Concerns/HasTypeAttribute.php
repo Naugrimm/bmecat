@@ -27,12 +27,12 @@ trait HasTypeAttribute
 
     /**
      * @param string $type
-     * @return \Naugrim\BMEcat\Nodes\Contracts\NodeInterface
+     * @return NodeInterface
      */
     public function setType(string $type): NodeInterface
     {
         $this->type = $type;
-        /** @var \Naugrim\BMEcat\Nodes\Contracts\NodeInterface $this */
+        /** @var NodeInterface $this */
         return $this;
     }
 }

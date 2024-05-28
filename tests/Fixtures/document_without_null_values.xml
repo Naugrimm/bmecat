@@ -29,8 +29,8 @@
         <REFERENCE_FEATURE_GROUP_NAME><![CDATA[G]]></REFERENCE_FEATURE_GROUP_NAME>
       </PRODUCT_FEATURES>
       <PRODUCT_ORDER_DETAILS>
-        <ORDER_UNIT><![CDATA[C62]]></ORDER_UNIT>
-        <CONTENT_UNIT><![CDATA[C62]]></CONTENT_UNIT>
+        <ORDER_UNIT>C62</ORDER_UNIT>
+        <CONTENT_UNIT>C62</CONTENT_UNIT>
         <NO_CU_PER_OU>1</NO_CU_PER_OU>
         <PRICE_QUANTITY>1</PRICE_QUANTITY>
         <QUANTITY_MIN>1</QUANTITY_MIN>
@@ -39,25 +39,25 @@
       <PRODUCT_PRICE_DETAILS>
         <PRODUCT_PRICE price_type="gros_list">
           <PRICE_AMOUNT>10.5</PRICE_AMOUNT>
-          <PRICE_CURRENCY><![CDATA[EUR]]></PRICE_CURRENCY>
+          <PRICE_CURRENCY>EUR</PRICE_CURRENCY>
         </PRODUCT_PRICE>
       </PRODUCT_PRICE_DETAILS>
       <PRODUCT_PRICE_DETAILS>
         <PRODUCT_PRICE price_type="gros_list">
           <PRICE_AMOUNT>7.3</PRICE_AMOUNT>
-          <PRICE_CURRENCY><![CDATA[GBP]]></PRICE_CURRENCY>
+          <PRICE_CURRENCY>GBP</PRICE_CURRENCY>
         </PRODUCT_PRICE>
       </PRODUCT_PRICE_DETAILS>
       <MIME_INFO>
         <MIME>
           <MIME_TYPE><![CDATA[image/jpeg]]></MIME_TYPE>
           <MIME_SOURCE><![CDATA[http://a.b/c/d.jpg]]></MIME_SOURCE>
-          <MIME_PURPOSE><![CDATA[normal]]></MIME_PURPOSE>
+          <MIME_PURPOSE>normal</MIME_PURPOSE>
         </MIME>
         <MIME>
           <MIME_TYPE><![CDATA[image/gif]]></MIME_TYPE>
           <MIME_SOURCE><![CDATA[http://w.x/y/z.bmp]]></MIME_SOURCE>
-          <MIME_PURPOSE><![CDATA[thumbnail]]></MIME_PURPOSE>
+          <MIME_PURPOSE>thumbnail</MIME_PURPOSE>
         </MIME>
       </MIME_INFO>
     </PRODUCT>
@@ -75,8 +75,8 @@
         <REFERENCE_FEATURE_GROUP_NAME><![CDATA[G]]></REFERENCE_FEATURE_GROUP_NAME>
       </PRODUCT_FEATURES>
       <PRODUCT_ORDER_DETAILS>
-        <ORDER_UNIT><![CDATA[C62]]></ORDER_UNIT>
-        <CONTENT_UNIT><![CDATA[C62]]></CONTENT_UNIT>
+        <ORDER_UNIT>C62</ORDER_UNIT>
+        <CONTENT_UNIT>C62</CONTENT_UNIT>
         <NO_CU_PER_OU>1</NO_CU_PER_OU>
         <PRICE_QUANTITY>1</PRICE_QUANTITY>
         <QUANTITY_MIN>1</QUANTITY_MIN>
@@ -85,25 +85,25 @@
       <PRODUCT_PRICE_DETAILS>
         <PRODUCT_PRICE price_type="gros_list">
           <PRICE_AMOUNT>10.5</PRICE_AMOUNT>
-          <PRICE_CURRENCY><![CDATA[EUR]]></PRICE_CURRENCY>
+          <PRICE_CURRENCY>EUR</PRICE_CURRENCY>
         </PRODUCT_PRICE>
       </PRODUCT_PRICE_DETAILS>
       <PRODUCT_PRICE_DETAILS>
         <PRODUCT_PRICE price_type="gros_list">
           <PRICE_AMOUNT>7.3</PRICE_AMOUNT>
-          <PRICE_CURRENCY><![CDATA[GBP]]></PRICE_CURRENCY>
+          <PRICE_CURRENCY>GBP</PRICE_CURRENCY>
         </PRODUCT_PRICE>
       </PRODUCT_PRICE_DETAILS>
       <MIME_INFO>
         <MIME>
           <MIME_TYPE><![CDATA[image/jpeg]]></MIME_TYPE>
           <MIME_SOURCE><![CDATA[http://a.b/c/d.jpg]]></MIME_SOURCE>
-          <MIME_PURPOSE><![CDATA[normal]]></MIME_PURPOSE>
+          <MIME_PURPOSE>normal</MIME_PURPOSE>
         </MIME>
         <MIME>
           <MIME_TYPE><![CDATA[image/gif]]></MIME_TYPE>
           <MIME_SOURCE><![CDATA[http://w.x/y/z.bmp]]></MIME_SOURCE>
-          <MIME_PURPOSE><![CDATA[thumbnail]]></MIME_PURPOSE>
+          <MIME_PURPOSE>thumbnail</MIME_PURPOSE>
         </MIME>
       </MIME_INFO>
     </PRODUCT>
@@ -121,8 +121,8 @@
         <REFERENCE_FEATURE_GROUP_NAME><![CDATA[G]]></REFERENCE_FEATURE_GROUP_NAME>
       </PRODUCT_FEATURES>
       <PRODUCT_ORDER_DETAILS>
-        <ORDER_UNIT><![CDATA[C62]]></ORDER_UNIT>
-        <CONTENT_UNIT><![CDATA[C62]]></CONTENT_UNIT>
+        <ORDER_UNIT>C62</ORDER_UNIT>
+        <CONTENT_UNIT>C62</CONTENT_UNIT>
         <NO_CU_PER_OU>1</NO_CU_PER_OU>
         <PRICE_QUANTITY>1</PRICE_QUANTITY>
         <QUANTITY_MIN>1</QUANTITY_MIN>
@@ -131,25 +131,25 @@
       <PRODUCT_PRICE_DETAILS>
         <PRODUCT_PRICE price_type="gros_list">
           <PRICE_AMOUNT>10.5</PRICE_AMOUNT>
-          <PRICE_CURRENCY><![CDATA[EUR]]></PRICE_CURRENCY>
+          <PRICE_CURRENCY>EUR</PRICE_CURRENCY>
         </PRODUCT_PRICE>
       </PRODUCT_PRICE_DETAILS>
       <PRODUCT_PRICE_DETAILS>
         <PRODUCT_PRICE price_type="gros_list">
           <PRICE_AMOUNT>7.3</PRICE_AMOUNT>
-          <PRICE_CURRENCY><![CDATA[GBP]]></PRICE_CURRENCY>
+          <PRICE_CURRENCY>GBP</PRICE_CURRENCY>
         </PRODUCT_PRICE>
       </PRODUCT_PRICE_DETAILS>
       <MIME_INFO>
         <MIME>
           <MIME_TYPE><![CDATA[image/jpeg]]></MIME_TYPE>
           <MIME_SOURCE><![CDATA[http://a.b/c/d.jpg]]></MIME_SOURCE>
-          <MIME_PURPOSE><![CDATA[normal]]></MIME_PURPOSE>
+          <MIME_PURPOSE>normal</MIME_PURPOSE>
         </MIME>
         <MIME>
           <MIME_TYPE><![CDATA[image/gif]]></MIME_TYPE>
           <MIME_SOURCE><![CDATA[http://w.x/y/z.bmp]]></MIME_SOURCE>
-          <MIME_PURPOSE><![CDATA[thumbnail]]></MIME_PURPOSE>
+          <MIME_PURPOSE>thumbnail</MIME_PURPOSE>
         </MIME>
       </MIME_INFO>
     </PRODUCT>

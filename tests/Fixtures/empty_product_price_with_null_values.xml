@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PRODUCT_PRICE xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" price_type="gros_list">
   <PRICE_AMOUNT xsi:nil="true"/>
-  <PRICE_CURRENCY><![CDATA[EUR]]></PRICE_CURRENCY>
+  <PRICE_CURRENCY>EUR</PRICE_CURRENCY>
+  <TAX xsi:nil="true"/>
   <PRICE_FACTOR xsi:nil="true"/>
   <LOWER_BOUND xsi:nil="true"/>
 </PRODUCT_PRICE>

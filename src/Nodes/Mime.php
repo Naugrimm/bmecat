@@ -2,8 +2,7 @@
 
 namespace Naugrim\BMEcat\Nodes;
 
-use /** @noinspection PhpUnusedAliasInspection */
-    \JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  *
@@ -51,11 +50,23 @@ class Mime implements Contracts\NodeInterface
      * @Serializer\Expose
      * @Serializer\Type("string")
      * @Serializer\SerializedName("MIME_PURPOSE")
+     * @Serializer\XmlElement(cdata=false)
      *
      * @var string
      */
     protected $purpose;
 
+
+    /**
+     *
+     * @Serializer\Expose
+     * @Serializer\Type("int")
+     * @Serializer\SerializedName("MIME_ORDER")
+     * @Serializer\XmlElement(cdata=false)
+     *
+     * @var int
+     */
+    protected $order;
     /**
      * @return string
      */

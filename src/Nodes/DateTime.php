@@ -4,8 +4,7 @@
 namespace Naugrim\BMEcat\Nodes;
 
 use DateTimeImmutable;
-use /** @noinspection PhpUnusedAliasInspection */
-    JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  *
