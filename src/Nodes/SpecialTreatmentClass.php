@@ -2,7 +2,7 @@
 
 namespace Naugrim\BMEcat\Nodes;
 
-use \JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  *
