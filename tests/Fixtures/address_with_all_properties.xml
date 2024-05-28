@@ -26,6 +26,7 @@
           <BOXNO><![CDATA[boxno]]></BOXNO>
           <ZIPBOX><![CDATA[zipbox]]></ZIPBOX>
           <CITY><![CDATA[city]]></CITY>
+          <STATE><![CDATA[state]]></STATE>
           <COUNTRY><![CDATA[country]]></COUNTRY>
           <COUNTRY_CODED><![CDATA[DE]]></COUNTRY_CODED>
           <VAT_ID><![CDATA[vatId]]></VAT_ID>

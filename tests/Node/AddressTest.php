@@ -69,6 +69,7 @@ class AddressTest extends TestCase
             'boxno' => 'boxno',
             'zipbox' => 'zipbox',
             'city' => 'city',
+            'state' => 'state',
             'country' => 'country',
             'countryCoded' => 'DE',
             'vatId' => 'vatId',
