@@ -9,3 +9,5 @@ composer.phar
 /tools/phpcompatibility/vendor
 /tools/rector/vendor
 /composer.lock
+/.phpstan
+/phpstan.neon
