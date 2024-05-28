@@ -3,8 +3,7 @@
 
 namespace Naugrim\BMEcat\Nodes\Product;
 
-use /** @noinspection PhpUnusedAliasInspection */
-    JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\BuyerPid;
 use Naugrim\BMEcat\Nodes\Contracts;
 use Naugrim\BMEcat\Nodes\SpecialTreatmentClass;
@@ -73,6 +72,16 @@ class Details implements Contracts\NodeInterface
      * @var string
      */
     protected $manufacturerPid;
+
+    /**
+     *
+     * @Serializer\Expose
+     * @Serializer\Type("string")
+     * @Serializer\SerializedName("MANUFACTURER_IDREF")
+     *
+     * @var string
+     */
+    protected $manufacturerIDRef;
 
     /**
      *
@@ -185,6 +194,16 @@ class Details implements Contracts\NodeInterface
      * @var Status[]
      */
     protected $productStatus;
+
+    /**
+     *
+     * @Serializer\Expose
+     * @Serializer\Type("array<string>")
+     * @Serializer\XmlList(inline=true, entry="PRODUCT_TYPE")
+     *
+     * @var string[]
+     */
+    protected $productTypes;
 
     /**
      * @param BuyerPid $buyerAid

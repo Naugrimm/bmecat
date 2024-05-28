@@ -3,15 +3,15 @@
 
 namespace Naugrim\BMEcat\Nodes;
 
-use /** @noinspection PhpUnusedAliasInspection */
-    JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
+use Naugrim\BMEcat\Nodes\Product\ConfigDetails;
 use Naugrim\BMEcat\Nodes\Product\Details;
 use Naugrim\BMEcat\Nodes\Product\Features;
+use Naugrim\BMEcat\Nodes\Product\LogisticDetails;
 use Naugrim\BMEcat\Nodes\Product\OrderDetails;
-use Naugrim\BMEcat\Nodes\Product\Price;
 use Naugrim\BMEcat\Nodes\Product\PriceDetails;
 
 /**
@@ -77,7 +77,7 @@ class Product implements Contracts\NodeInterface
      * @Serializer\Type("array<Naugrim\BMEcat\Nodes\Product\PriceDetails>")
      * @Serializer\XmlList(inline = true, entry = "PRODUCT_PRICE_DETAILS")
      *
-     * @var Price[]
+     * @var PriceDetails[]
      */
     protected $priceDetails = [];
 
@@ -91,6 +91,24 @@ class Product implements Contracts\NodeInterface
      * @var Mime[]
      */
     protected $mimes = [];
+
+    /**
+     * @Serializer\Expose
+     * @Serializer\SerializedName("PRODUCT_LOGISTIC_DETAILS")
+     * @Serializer\Type("Naugrim\BMEcat\Nodes\Product\LogisticDetails")
+     *
+     * @var LogisticDetails
+     */
+    protected $logisticDetails = null;
+
+    /**
+     * @Serializer\Expose
+     * @Serializer\SerializedName("PRODUCT_CONFIG_DETAILS")
+     * @Serializer\Type("Naugrim\BMEcat\Nodes\Product\ConfigDetails")
+     *
+     * @var ConfigDetails
+     */
+    protected $configDetails = null;
 
     /**
      * @return string
@@ -131,7 +149,7 @@ class Product implements Contracts\NodeInterface
 
     /**
      *
-     * @param Price[] $priceDetails
+     * @param PriceDetails[] $priceDetails
      * @return Product
      * @throws InvalidSetterException
      * @throws UnknownKeyException
@@ -321,7 +339,7 @@ class Product implements Contracts\NodeInterface
 
     /**
      *
-     * @return Price[]
+     * @return PriceDetails[]
      */
     public function getPriceDetails()
     {

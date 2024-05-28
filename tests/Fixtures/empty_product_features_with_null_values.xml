@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<PRODUCT_FEATURES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<PRODUCT_FEATURES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true">
   <REFERENCE_FEATURE_SYSTEM_NAME xsi:nil="true"/>
   <REFERENCE_FEATURE_GROUP_ID xsi:nil="true"/>
   <REFERENCE_FEATURE_GROUP_NAME xsi:nil="true"/>
-  <FEATURE xsi:nil="true"/>
 </PRODUCT_FEATURES>

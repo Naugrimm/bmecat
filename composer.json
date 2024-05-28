@@ -16,7 +16,7 @@
         "ext-dom": "*",
         "ext-libxml": "*",
         "jms/serializer": "^3.4",
-        "symfony/expression-language": "^5.0"
+        "symfony/expression-language": "^5|^6|^7"
     },
     "autoload": {
         "psr-4": {

@@ -5,6 +5,7 @@
   <EAN xsi:nil="true"/>
   <SUPPLIER_ALT_PID xsi:nil="true"/>
   <MANUFACTURER_PID xsi:nil="true"/>
+  <MANUFACTURER_IDREF xsi:nil="true"/>
   <MANUFACTURER_NAME xsi:nil="true"/>
   <MANUFACTURER_TYPE_DESCR xsi:nil="true"/>
   <ERP_GROUP_BUYER xsi:nil="true"/>

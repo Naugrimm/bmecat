@@ -2,8 +2,7 @@
 
 namespace Naugrim\BMEcat\Nodes\Product;
 
-use /** @noinspection PhpUnusedAliasInspection */
-    JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts;
 
 /**
@@ -16,6 +15,7 @@ class OrderDetails implements Contracts\NodeInterface
      * @Serializer\Expose
      * @Serializer\Type("string")
      * @Serializer\SerializedName("ORDER_UNIT")
+     * @Serializer\XmlElement(cdata=false)
      *
      * @var string
      */
@@ -25,6 +25,7 @@ class OrderDetails implements Contracts\NodeInterface
      * @Serializer\Expose
      * @Serializer\Type("string")
      * @Serializer\SerializedName("CONTENT_UNIT")
+     * @Serializer\XmlElement(cdata=false)
      *
      * @var string
      */
