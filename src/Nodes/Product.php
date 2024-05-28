@@ -14,101 +14,99 @@ use Naugrim\BMEcat\Nodes\Product\LogisticDetails;
 use Naugrim\BMEcat\Nodes\Product\OrderDetails;
 use Naugrim\BMEcat\Nodes\Product\PriceDetails;
 
-/**
- *
- * @Serializer\XmlRoot("PRODUCT")
- */
+
+#[Serializer\XmlRoot('PRODUCT')]
 class Product implements Contracts\NodeInterface
 {
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("mode")
-     * @Serializer\XmlAttribute
      *
      * @var string
      */
-    protected $mode = 'new';
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('mode')]
+    #[Serializer\XmlAttribute]
+    protected string $mode = 'new';
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\SupplierPid")
-     * @Serializer\SerializedName("SUPPLIER_PID")
      *
      * @var SupplierPid
      */
-    protected $id;
+    #[Serializer\Expose]
+    #[Serializer\Type(\Naugrim\BMEcat\Nodes\SupplierPid::class)]
+    #[Serializer\SerializedName('SUPPLIER_PID')]
+    protected \Naugrim\BMEcat\Nodes\SupplierPid $id;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\SerializedName("PRODUCT_DETAILS")
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Product\Details")
      *
      * @var Details
      */
-    protected $details;
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('PRODUCT_DETAILS')]
+    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Product\Details::class)]
+    protected \Naugrim\BMEcat\Nodes\Product\Details $details;
 
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\Product\Features>")
-     * @Serializer\XmlList( inline=true, entry="PRODUCT_FEATURES")
      *
      * @var Features[]
      */
-    protected $features = [];
+    #[Serializer\Expose]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Product\Features>')]
+    #[Serializer\XmlList(inline: true, entry: 'PRODUCT_FEATURES')]
+    protected array $features = [];
 
     /**
-     * @Serializer\Expose
-     * @Serializer\SerializedName("PRODUCT_ORDER_DETAILS")
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Product\OrderDetails")
      *
      * @var OrderDetails
      */
-    protected $orderDetails;
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('PRODUCT_ORDER_DETAILS')]
+    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Product\OrderDetails::class)]
+    protected \Naugrim\BMEcat\Nodes\Product\OrderDetails $orderDetails;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\SerializedName("PRODUCT_PRICE_DETAILS")
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\Product\PriceDetails>")
-     * @Serializer\XmlList(inline = true, entry = "PRODUCT_PRICE_DETAILS")
      *
      * @var PriceDetails[]
      */
-    protected $priceDetails = [];
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('PRODUCT_PRICE_DETAILS')]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Product\PriceDetails>')]
+    #[Serializer\XmlList(inline: true, entry: 'PRODUCT_PRICE_DETAILS')]
+    protected array $priceDetails = [];
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\SerializedName("MIME_INFO")
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\Mime>")
-     * @Serializer\XmlList( entry="MIME")
      *
      * @var Mime[]
      */
-    protected $mimes = [];
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('MIME_INFO')]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Mime>')]
+    #[Serializer\XmlList(entry: 'MIME')]
+    protected array $mimes = [];
 
     /**
-     * @Serializer\Expose
-     * @Serializer\SerializedName("PRODUCT_LOGISTIC_DETAILS")
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Product\LogisticDetails")
      *
      * @var LogisticDetails
      */
-    protected $logisticDetails = null;
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('PRODUCT_LOGISTIC_DETAILS')]
+    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Product\LogisticDetails::class)]
+    protected \Naugrim\BMEcat\Nodes\Product\LogisticDetails $logisticDetails;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\SerializedName("PRODUCT_CONFIG_DETAILS")
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Product\ConfigDetails")
      *
      * @var ConfigDetails
      */
-    protected $configDetails = null;
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('PRODUCT_CONFIG_DETAILS')]
+    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Product\ConfigDetails::class)]
+    protected \Naugrim\BMEcat\Nodes\Product\ConfigDetails $configDetails;
 
     /**
      * @return string
@@ -142,7 +140,7 @@ class Product implements Contracts\NodeInterface
      *
      * @return Details
      */
-    public function getDetails()
+    public function getDetails(): \Naugrim\BMEcat\Nodes\Product\Details
     {
         return $this->details;
     }
@@ -161,8 +159,10 @@ class Product implements Contracts\NodeInterface
             if (is_array($priceDetail)) {
                 $priceDetail = NodeBuilder::fromArray($priceDetail, new PriceDetails());
             }
+
             $this->addPriceDetail($priceDetail);
         }
+
         return $this;
     }
 
@@ -176,6 +176,7 @@ class Product implements Contracts\NodeInterface
         if ($this->priceDetails === null) {
             $this->priceDetails = [];
         }
+
         $this->priceDetails[] = $price;
         return $this;
     }
@@ -193,8 +194,10 @@ class Product implements Contracts\NodeInterface
             if (is_array($mime)) {
                 $mime = NodeBuilder::fromArray($mime, new Mime());
             }
+
             $this->addMime($mime);
         }
+
         return $this;
     }
 
@@ -207,35 +210,38 @@ class Product implements Contracts\NodeInterface
         if ($this->mimes === null) {
             $this->mimes = [];
         }
+
         $this->mimes[] = $mime;
         return $this;
     }
 
     /**
      *
-     * @Serializer\PreSerialize
-     * @Serializer\PostSerialize
      * @return Product
      */
+    #[Serializer\PreSerialize]
+    #[Serializer\PostSerialize]
     public function nullPriceDetails() : Product
     {
-        if (empty($this->priceDetails) === true) {
+        if ($this->priceDetails === []) {
             $this->priceDetails = null;
         }
+
         return $this;
     }
 
     /**
      *
-     * @Serializer\PreSerialize
-     * @Serializer\PostSerialize
      * @return Product
      */
+    #[Serializer\PreSerialize]
+    #[Serializer\PostSerialize]
     public function nullMime() : Product
     {
-        if (empty($this->mimes) === true) {
+        if ($this->mimes === []) {
             $this->mimes = null;
         }
+
         return $this;
     }
 
@@ -253,7 +259,7 @@ class Product implements Contracts\NodeInterface
     /**
      * @return OrderDetails|null
      */
-    public function getOrderDetails()
+    public function getOrderDetails(): \Naugrim\BMEcat\Nodes\Product\OrderDetails
     {
         return $this->orderDetails;
     }
@@ -272,20 +278,20 @@ class Product implements Contracts\NodeInterface
      *
      * @return SupplierPid
      */
-    public function getId()
+    public function getId(): \Naugrim\BMEcat\Nodes\SupplierPid
     {
         return $this->id;
     }
 
     /**
      *
-     * @Serializer\PreSerialize
-     * @Serializer\PostSerialize
      * @return Product
      */
+    #[Serializer\PreSerialize]
+    #[Serializer\PostSerialize]
     public function nullFeatures() : Product
     {
-        if (empty($this->features) === true) {
+        if ($this->features === []) {
             $this->features = null;
         }
 
@@ -305,8 +311,10 @@ class Product implements Contracts\NodeInterface
             if (is_array($feature)) {
                 $feature = NodeBuilder::fromArray($feature, new Features());
             }
+
             $this->addFeatures($feature);
         }
+
         return $this;
     }
 
@@ -320,6 +328,7 @@ class Product implements Contracts\NodeInterface
         if ($this->features === null) {
             $this->features = [];
         }
+
         $this->features [] = $features;
         return $this;
     }
@@ -353,7 +362,7 @@ class Product implements Contracts\NodeInterface
     /**
      * @return Mime[]|null
      */
-    public function getMimes()
+    public function getMimes(): array
     {
         return $this->mimes;
     }

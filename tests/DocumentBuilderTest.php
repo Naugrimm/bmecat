@@ -16,40 +16,40 @@ class DocumentBuilderTest extends TestCase
     /**
      * @var \JMS\Serializer\SerializerInterface
      */
-    private $serializer;
+    private \JMS\Serializer\Serializer $serializer;
 
-    public function setUp() : void
+    protected function setUp() : void
     {
         $this->serializer = SerializerBuilder::create()->build();
     }
 
-    public function testCanBeInstantiated()
+    public function testCanBeInstantiated(): void
     {
         $builder = new DocumentBuilder($this->serializer);
         $this->assertInstanceOf(DocumentBuilder::class, $builder);
     }
 
-    public function testSetsUpDefaultDependencies()
+    public function testSetsUpDefaultDependencies(): void
     {
         $builder = new DocumentBuilder();
-        $this->assertInstanceOf('\JMS\Serializer\Serializer', $builder->getSerializer());
+        $this->assertInstanceOf(\JMS\Serializer\Serializer::class, $builder->getSerializer());
     }
 
     /**
      *
      * @test
      */
-    public function Instantiate_Via_Static_Method()
+    public function Instantiate_Via_Static_Method(): void
     {
         $builder = DocumentBuilder::create($this->serializer);
-        $this->assertInstanceOf('\JMS\Serializer\Serializer', $builder->getSerializer());
+        $this->assertInstanceOf(\JMS\Serializer\Serializer::class, $builder->getSerializer());
     }
 
     /**
      *
      * @test
      */
-    public function To_String_Returns_Default_Document_Without_Null_Values()
+    public function To_String_Returns_Default_Document_Without_Null_Values(): void
     {
         $builder = new DocumentBuilder;
         $document = NodeBuilder::fromArray([], new Document());
@@ -63,14 +63,14 @@ class DocumentBuilderTest extends TestCase
      *
      * @test
      */
-    public function To_String_Throws_Exception()
+    public function To_String_Throws_Exception(): void
     {
         $this->expectException(MissingDocumentException::class);
         $builder = new DocumentBuilder;
         $builder->toString();
     }
 
-    public function testFromStringWorksCorrectly()
+    public function testFromStringWorksCorrectly(): void
     {
         $builder = new DocumentBuilder();
         $doc = $builder->fromString(file_get_contents(__DIR__ . '/Fixtures/2005.1/minimal_valid_document.xml'));

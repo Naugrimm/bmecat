@@ -5,47 +5,45 @@ namespace Naugrim\BMEcat\Nodes;
 
 use JMS\Serializer\Annotation as Serializer;
 
-/**
- *
- * @Serializer\XmlRoot("CATALOG")
- */
+
+#[Serializer\XmlRoot('CATALOG')]
 class Catalog implements Contracts\NodeInterface
 {
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("LANGUAGE")
      *
      * @var string
      */
-    protected $language;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('LANGUAGE')]
+    protected string $language;
 
     /**
-      * @Serializer\Expose
-      * @Serializer\Type("string")
-      * @Serializer\SerializedName("CATALOG_ID")
-      *
-      * @var string
-      */
-    protected $id;
+     *
+     * @var string
+     */
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('CATALOG_ID')]
+    protected string $id;
 
     /**
-      * @Serializer\Expose
-      * @Serializer\Type("string")
-      * @Serializer\SerializedName("CATALOG_VERSION")
-      *
-      * @var string
-      */
-    protected $version;
+     *
+     * @var string
+     */
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('CATALOG_VERSION')]
+    protected string $version;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\DateTime")
-     * @Serializer\SerializedName("DATETIME")
      *
      * @var DateTime
      */
-    protected $dateTime;
+    #[Serializer\Expose]
+    #[Serializer\Type(\Naugrim\BMEcat\Nodes\DateTime::class)]
+    #[Serializer\SerializedName('DATETIME')]
+    protected \Naugrim\BMEcat\Nodes\DateTime $dateTime;
 
     /**
      * @param string $language
@@ -81,7 +79,7 @@ class Catalog implements Contracts\NodeInterface
      *
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -90,7 +88,7 @@ class Catalog implements Contracts\NodeInterface
      *
      * @return string
      */
-    public function getLanguage()
+    public function getLanguage(): string
     {
         return $this->language;
     }
@@ -99,7 +97,7 @@ class Catalog implements Contracts\NodeInterface
      *
      * @return string
      */
-    public function getVersion()
+    public function getVersion(): string
     {
         return $this->version;
     }
@@ -119,7 +117,7 @@ class Catalog implements Contracts\NodeInterface
      *
      * @return DateTime
      */
-    public function getDateTime()
+    public function getDateTime(): \Naugrim\BMEcat\Nodes\DateTime
     {
         return $this->dateTime;
     }

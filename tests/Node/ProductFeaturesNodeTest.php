@@ -18,7 +18,7 @@ class ProductFeaturesNodeTest extends TestCase
      */
     private $serializer;
 
-    public function setUp() : void
+    protected function setUp() : void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
@@ -27,7 +27,7 @@ class ProductFeaturesNodeTest extends TestCase
      *
      * @test
      */
-    public function Add_Get_Feature()
+    public function Add_Get_Feature(): void
     {
         $features = [
             new Feature(),
@@ -51,7 +51,7 @@ class ProductFeaturesNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_Reference_Feature_System_Name()
+    public function Set_Get_Reference_Feature_System_Name(): void
     {
         $node = new Features();
         $value = sha1(uniqid(microtime(false), true));
@@ -65,7 +65,7 @@ class ProductFeaturesNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_Reference_Feature_Group_Name()
+    public function Set_Get_Reference_Feature_Group_Name(): void
     {
         $node = new Features();
         $value = sha1(uniqid(microtime(false), true));
@@ -79,7 +79,7 @@ class ProductFeaturesNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_Reference_Feature_Group_Id()
+    public function Set_Get_Reference_Feature_Group_Id(): void
     {
         $node = new Features();
         $value = sha1(uniqid(microtime(false), true));
@@ -93,7 +93,7 @@ class ProductFeaturesNodeTest extends TestCase
      *
      * @test
      */
-    public function Serialize_With_Null_Values()
+    public function Serialize_With_Null_Values(): void
     {
         $node = new Features();
         $context = SerializationContext::create()->setSerializeNull(true);
@@ -108,7 +108,7 @@ class ProductFeaturesNodeTest extends TestCase
      *
      * @test
      */
-    public function Serialize_Without_Null_Values()
+    public function Serialize_Without_Null_Values(): void
     {
         $node = new Features();
         $context = SerializationContext::create()->setSerializeNull(false);
@@ -122,7 +122,7 @@ class ProductFeaturesNodeTest extends TestCase
         $this->assertInstanceOf(Features::class, $doc);
     }
 
-    public function testFeaturesAreInlinedCorrectly()
+    public function testFeaturesAreInlinedCorrectly(): void
     {
         $context = SerializationContext::create()->setSerializeNull(false);
 
@@ -130,6 +130,7 @@ class ProductFeaturesNodeTest extends TestCase
         $productFeature = new Feature();
         $productFeature->setName('Feature name');
         $productFeature->setValue('Feature value');
+
         $node->addFeature($productFeature);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/product_features.xml');

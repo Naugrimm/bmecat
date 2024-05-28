@@ -12,103 +12,103 @@ use Naugrim\BMEcat\Nodes\Phone;
 class Details implements NodeInterface
 {
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("CONTACT_ID")
      *
      * @var string
      */
-    protected $id;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('CONTACT_ID')]
+    protected string $id;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("CONTACT_NAME")
      *
      * @var string
      */
-    protected $name;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('CONTACT_NAME')]
+    protected string $name;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("FIRST_NAME")
      *
      * @var string
      */
-    protected $firstName;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('FIRST_NAME')]
+    protected string $firstName;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("TITLE")
      *
      * @var string
      */
-    protected $title;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('TITLE')]
+    protected string $title;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("ACADEMIC_TITLE")
      *
      * @var string
      */
-    protected $academicTitle;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('ACADEMIC_TITLE')]
+    protected string $academicTitle;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Contact\Role")
-     * @Serializer\SerializedName("CONTACT_ROLE")
      *
      * @var Role
      */
-    protected $role;
+    #[Serializer\Expose]
+    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Contact\Role::class)]
+    #[Serializer\SerializedName('CONTACT_ROLE')]
+    protected \Naugrim\BMEcat\Nodes\Contact\Role $role;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("CONTACT_DESCRIPTION")
      *
      * @var string
      */
-    protected $description;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('CONTACT_DESCRIPTION')]
+    protected string $description;
     
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Phone")
-     * @Serializer\SerializedName("PHONE")
      *
      * @var Phone
      */
-    protected $phone;
+    #[Serializer\Expose]
+    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Phone::class)]
+    #[Serializer\SerializedName('PHONE')]
+    protected \Naugrim\BMEcat\Nodes\Phone $phone;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Fax")
-     * @Serializer\SerializedName("FAX")
      *
      * @var Fax
      */
-    protected $fax;
+    #[Serializer\Expose]
+    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Fax::class)]
+    #[Serializer\SerializedName('FAX')]
+    protected \Naugrim\BMEcat\Nodes\Fax $fax;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("URL")
      *
      * @var string
      */
-    protected $url;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('URL')]
+    protected string $url;
     
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Emails")
-     * @Serializer\SerializedName("EMAILS")
      *
      * @var Emails
      */
-    protected $emails;
+    #[Serializer\Expose]
+    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Emails::class)]
+    #[Serializer\SerializedName('EMAILS')]
+    protected \Naugrim\BMEcat\Nodes\Emails $emails;
 
     /**
      * @return string

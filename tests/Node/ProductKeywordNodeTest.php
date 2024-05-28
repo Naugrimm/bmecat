@@ -14,7 +14,7 @@ class ProductKeywordNodeTest extends TestCase
      */
     private $serializer;
 
-    public function setUp() : void
+    protected function setUp() : void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
@@ -22,7 +22,7 @@ class ProductKeywordNodeTest extends TestCase
     /**
      * @test
      */
-    public function Set_Get_Description_Value()
+    public function Set_Get_Description_Value(): void
     {
         $node = new Keyword();
         $value = '';
@@ -35,7 +35,7 @@ class ProductKeywordNodeTest extends TestCase
     /**
      * @test
      */
-    public function Serialize_With_Null_Values()
+    public function Serialize_With_Null_Values(): void
     {
         $node = new Keyword();
         $context = SerializationContext::create()->setSerializeNull(true);
@@ -52,7 +52,7 @@ class ProductKeywordNodeTest extends TestCase
     /**
      * @test
      */
-    public function Serialize_Without_Null_Values()
+    public function Serialize_Without_Null_Values(): void
     {
         $node = new Keyword();
         $context = SerializationContext::create()->setSerializeNull(false);

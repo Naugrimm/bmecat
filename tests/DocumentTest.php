@@ -24,9 +24,9 @@ class DocumentTest extends TestCase
     /**
      * @var DocumentBuilder
      */
-    private $builder;
+    private \Naugrim\BMEcat\DocumentBuilder $builder;
 
-    public function setUp() : void
+    protected function setUp() : void
     {
         $document = NodeBuilder::fromArray([
             'header' =>[
@@ -63,7 +63,7 @@ class DocumentTest extends TestCase
             $product->setDetails($productDetails);
 
             foreach ([['EUR', 10.50], ['GBP', 7.30]] as $value) {
-                list($currency, $amount) = $value;
+                [$currency, $amount] = $value;
 
                 $price = new Price;
 
@@ -77,7 +77,7 @@ class DocumentTest extends TestCase
             }
 
             foreach ([['A', 'B', 'C', 1, 2, 'D', 'E'],['F', 'G', 'H', 3, 4, 'I', 'J']] as $value) {
-                list($systemName, $groupName, $groupId, $serialNumber, $tarifNumber, $countryOfOrigin, $tariftext) = $value;
+                [$systemName, $groupName, $groupId, $serialNumber, $tarifNumber, $countryOfOrigin, $tariftext] = $value;
 
                 $features = new Features;
 
@@ -90,7 +90,7 @@ class DocumentTest extends TestCase
                 ['image/jpeg', 'http://a.b/c/d.jpg', 'normal'],
                 ['image/gif', 'http://w.x/y/z.bmp', 'thumbnail']
                     ] as $value) {
-                list($type, $source, $purpose) = $value;
+                [$type, $source, $purpose] = $value;
 
                 $mime = new Mime();
 
@@ -121,7 +121,7 @@ class DocumentTest extends TestCase
      *
      * @test
      */
-    public function Compare_Document_Without_Null_Values()
+    public function Compare_Document_Without_Null_Values(): void
     {
         $expected = file_get_contents(__DIR__ . '/Fixtures/document_without_null_values.xml');
         $actual = $this->builder->toString();

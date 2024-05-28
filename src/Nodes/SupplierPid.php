@@ -8,5 +8,6 @@ use Naugrim\BMEcat\Nodes\Concerns\HasTypeAttribute;
 
 class SupplierPid implements Contracts\NodeInterface
 {
-    use HasTypeAttribute, HasStringValue;
+    use HasTypeAttribute;
+    use HasStringValue;
 }

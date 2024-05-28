@@ -8,202 +8,200 @@ use Naugrim\BMEcat\Nodes\BuyerPid;
 use Naugrim\BMEcat\Nodes\Contracts;
 use Naugrim\BMEcat\Nodes\SpecialTreatmentClass;
 
-/**
- *
- * @Serializer\XmlRoot("PRODUCT_DETAILS")
- */
+
+#[Serializer\XmlRoot('PRODUCT_DETAILS')]
 class Details implements Contracts\NodeInterface
 {
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("DESCRIPTION_SHORT")
      *
      * @var string
      */
-    protected $descriptionShort = '';
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('DESCRIPTION_SHORT')]
+    protected string $descriptionShort = '';
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("DESCRIPTION_LONG")
      *
      * @var string
      */
-    protected $descriptionLong;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('DESCRIPTION_LONG')]
+    protected string $descriptionLong;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("EAN")
      *
      * @var string
      */
-    protected $ean;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('EAN')]
+    protected string $ean;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("SUPPLIER_ALT_PID")
      *
      * @var string
      */
-    protected $supplierAltPid;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('SUPPLIER_ALT_PID')]
+    protected string $supplierAltPid;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\BuyerPidNode>")
-     * @Serializer\XmlList(inline=true, entry="BUYER_PID")
      *
      * @var BuyerPid[]
      */
-    protected $buyerPids;
+    #[Serializer\Expose]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\BuyerPidNode>')]
+    #[Serializer\XmlList(inline: true, entry: 'BUYER_PID')]
+    protected array $buyerPids;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("MANUFACTURER_PID")
      *
      * @var string
      */
-    protected $manufacturerPid;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('MANUFACTURER_PID')]
+    protected string $manufacturerPid;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("MANUFACTURER_IDREF")
      *
      * @var string
      */
-    protected $manufacturerIDRef;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('MANUFACTURER_IDREF')]
+    protected string $manufacturerIDRef;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("MANUFACTURER_NAME")
      *
      * @var string
      */
-    protected $manufacturerName;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('MANUFACTURER_NAME')]
+    protected string $manufacturerName;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("MANUFACTURER_TYPE_DESCR")
      *
      * @var string
      */
-    protected $manufacturerTypeDescription;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('MANUFACTURER_TYPE_DESCR')]
+    protected string $manufacturerTypeDescription;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("ERP_GROUP_BUYER")
      *
      * @var string
      */
-    protected $erpGroupBuyer;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('ERP_GROUP_BUYER')]
+    protected string $erpGroupBuyer;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("ERP_GROUP_SUPPLIER")
      *
      * @var string
      */
-    protected $erpGroupSupplier;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('ERP_GROUP_SUPPLIER')]
+    protected string $erpGroupSupplier;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("float")
-     * @Serializer\SerializedName("DELIVERY_TIME")
-     * @Serializer\XmlElement(cdata=false)
      *
      * @var float
      */
-    protected $deliveryTime;
+    #[Serializer\Expose]
+    #[Serializer\Type('float')]
+    #[Serializer\SerializedName('DELIVERY_TIME')]
+    #[Serializer\XmlElement(cdata: false)]
+    protected float $deliveryTime;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\SpecialTreatmentClass>")
-     * @Serializer\XmlList(inline=true, entry="SPECIAL_TREATMENT_CLASS")
      *
      * @var SpecialTreatmentClass[]
      */
-    protected $specialTreatmentClasses;
+    #[Serializer\Expose]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\SpecialTreatmentClass>')]
+    #[Serializer\XmlList(inline: true, entry: 'SPECIAL_TREATMENT_CLASS')]
+    protected array $specialTreatmentClasses;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\Product\Keyword>")
-     * @Serializer\XmlList(inline=true, entry="KEYWORD")
      *
      * @var Keyword[]
      */
-    protected $keywords;
+    #[Serializer\Expose]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Product\Keyword>')]
+    #[Serializer\XmlList(inline: true, entry: 'KEYWORD')]
+    protected array $keywords;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("REMARKS")
      *
      * @var string
      */
-    protected $remarks;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('REMARKS')]
+    protected string $remarks;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("SEGMENT")
      *
      * @var string
      */
-    protected $segment;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('SEGMENT')]
+    protected string $segment;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("int")
-     * @Serializer\SerializedName("PRODUCT_ORDER")
-     * @Serializer\XmlElement(cdata=false)
      *
      * @var int
      */
-    protected $productOrder;
+    #[Serializer\Expose]
+    #[Serializer\Type('int')]
+    #[Serializer\SerializedName('PRODUCT_ORDER')]
+    #[Serializer\XmlElement(cdata: false)]
+    protected int $productOrder;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\Product\Status>")
-     * @Serializer\XmlList(inline=true, entry="PRODUCT_STATUS")
      *
      * @var Status[]
      */
-    protected $productStatus;
+    #[Serializer\Expose]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Product\Status>')]
+    #[Serializer\XmlList(inline: true, entry: 'PRODUCT_STATUS')]
+    protected array $productStatus;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("array<string>")
-     * @Serializer\XmlList(inline=true, entry="PRODUCT_TYPE")
      *
      * @var string[]
      */
-    protected $productTypes;
+    #[Serializer\Expose]
+    #[Serializer\Type('array<string>')]
+    #[Serializer\XmlList(inline: true, entry: 'PRODUCT_TYPE')]
+    protected array $productTypes;
 
     /**
      * @param BuyerPid $buyerAid
@@ -214,6 +212,7 @@ class Details implements Contracts\NodeInterface
         if ($this->buyerPids === null) {
             $this->buyerPids = [];
         }
+
         $this->buyerPids[] = $buyerAid;
         return $this;
     }
@@ -227,6 +226,7 @@ class Details implements Contracts\NodeInterface
         if ($this->specialTreatmentClasses === null) {
             $this->specialTreatmentClasses = [];
         }
+
         $this->specialTreatmentClasses[] = $specialTreatmentClass;
         return $this;
     }
@@ -240,6 +240,7 @@ class Details implements Contracts\NodeInterface
         if ($this->keywords === null) {
             $this->keywords = [];
         }
+
         $this->keywords[] = $keyword;
         return $this;
     }
@@ -253,19 +254,20 @@ class Details implements Contracts\NodeInterface
         if ($this->productStatus === null) {
             $this->productStatus = [];
         }
+
         $this->productStatus[] = $productStatus;
         return $this;
     }
 
     /**
      *
-     * @Serializer\PreSerialize
-     * @Serializer\PostSerialize
      * @return Details
      */
+    #[Serializer\PreSerialize]
+    #[Serializer\PostSerialize]
     public function nullBuyerPids() : Details
     {
-        if (empty($this->buyerPids) === true) {
+        if ($this->buyerPids === []) {
             $this->buyerPids = null;
         }
 
@@ -274,43 +276,46 @@ class Details implements Contracts\NodeInterface
 
     /**
      *
-     * @Serializer\PreSerialize
-     * @Serializer\PostSerialize
      * @return Details
      */
+    #[Serializer\PreSerialize]
+    #[Serializer\PostSerialize]
     public function nullSpecialTreatmentClasses() : Details
     {
-        if (empty($this->specialTreatmentClasses) === true) {
+        if ($this->specialTreatmentClasses === []) {
             $this->specialTreatmentClasses = null;
         }
+
         return $this;
     }
 
     /**
      *
-     * @Serializer\PreSerialize
-     * @Serializer\PostSerialize
      * @return Details
      */
+    #[Serializer\PreSerialize]
+    #[Serializer\PostSerialize]
     public function nullKeywords() : Details
     {
-        if (empty($this->keywords) === true) {
+        if ($this->keywords === []) {
             $this->keywords = null;
         }
+
         return $this;
     }
 
     /**
      *
-     * @Serializer\PreSerialize
-     * @Serializer\PostSerialize
      * @return Details
      */
+    #[Serializer\PreSerialize]
+    #[Serializer\PostSerialize]
     public function nullProductStatus() : Details
     {
-        if (empty($this->productStatus) === true) {
+        if ($this->productStatus === []) {
             $this->productStatus = null;
         }
+
         return $this;
     }
 
@@ -318,7 +323,7 @@ class Details implements Contracts\NodeInterface
      * @param string $descriptionShort
      * @return Details
      */
-    public function setDescriptionShort($descriptionShort) : Details
+    public function setDescriptionShort(string $descriptionShort) : Details
     {
         $this->descriptionShort = $descriptionShort;
         return $this;
@@ -328,7 +333,7 @@ class Details implements Contracts\NodeInterface
      * @param string $descriptionLong
      * @return Details
      */
-    public function setDescriptionLong($descriptionLong) : Details
+    public function setDescriptionLong(string $descriptionLong) : Details
     {
         $this->descriptionLong = $descriptionLong;
         return $this;
@@ -338,7 +343,7 @@ class Details implements Contracts\NodeInterface
      * @param string $ean
      * @return Details
      */
-    public function setEan($ean) : Details
+    public function setEan(string $ean) : Details
     {
         $this->ean = $ean;
         return $this;
@@ -348,7 +353,7 @@ class Details implements Contracts\NodeInterface
      * @param string $supplierAltPid
      * @return Details
      */
-    public function setSupplierAltPid($supplierAltPid) : Details
+    public function setSupplierAltPid(string $supplierAltPid) : Details
     {
         $this->supplierAltPid = $supplierAltPid;
         return $this;
@@ -358,7 +363,7 @@ class Details implements Contracts\NodeInterface
      * @param string $manufacturerPid
      * @return Details
      */
-    public function setManufacturerPid($manufacturerPid) : Details
+    public function setManufacturerPid(string $manufacturerPid) : Details
     {
         $this->manufacturerPid = $manufacturerPid;
         return $this;
@@ -368,7 +373,7 @@ class Details implements Contracts\NodeInterface
      * @param string $manufacturerName
      * @return Details
      */
-    public function setManufacturerName($manufacturerName) : Details
+    public function setManufacturerName(string $manufacturerName) : Details
     {
         $this->manufacturerName = $manufacturerName;
         return $this;
@@ -378,7 +383,7 @@ class Details implements Contracts\NodeInterface
      * @param string $manufacturerTypeDescription
      * @return Details
      */
-    public function setManufacturerTypeDescription($manufacturerTypeDescription) : Details
+    public function setManufacturerTypeDescription(string $manufacturerTypeDescription) : Details
     {
         $this->manufacturerTypeDescription = $manufacturerTypeDescription;
         return $this;
@@ -388,7 +393,7 @@ class Details implements Contracts\NodeInterface
      * @param string $erpGroupBuyer
      * @return Details
      */
-    public function setErpGroupBuyer($erpGroupBuyer) : Details
+    public function setErpGroupBuyer(string $erpGroupBuyer) : Details
     {
         $this->erpGroupBuyer = $erpGroupBuyer;
         return $this;
@@ -398,7 +403,7 @@ class Details implements Contracts\NodeInterface
      * @param string $erpGroupSupplier
      * @return Details
      */
-    public function setErpGroupSupplier($erpGroupSupplier) : Details
+    public function setErpGroupSupplier(string $erpGroupSupplier) : Details
     {
         $this->erpGroupSupplier = $erpGroupSupplier;
         return $this;
@@ -408,7 +413,7 @@ class Details implements Contracts\NodeInterface
      * @param float $deliveryTime
      * @return Details
      */
-    public function setDeliveryTime($deliveryTime) : Details
+    public function setDeliveryTime(float $deliveryTime) : Details
     {
         $this->deliveryTime = $deliveryTime;
         return $this;
@@ -418,7 +423,7 @@ class Details implements Contracts\NodeInterface
      * @param string $remarks
      * @return Details
      */
-    public function setRemarks($remarks) : Details
+    public function setRemarks(string $remarks) : Details
     {
         $this->remarks = $remarks;
         return $this;
@@ -428,7 +433,7 @@ class Details implements Contracts\NodeInterface
      * @param int $productOrder
      * @return Details
      */
-    public function setProductOrder($productOrder) : Details
+    public function setProductOrder(int $productOrder) : Details
     {
         $this->productOrder = $productOrder;
         return $this;
@@ -438,7 +443,7 @@ class Details implements Contracts\NodeInterface
      * @param string $segment
      * @return Details
      */
-    public function setSegment($segment) : Details
+    public function setSegment(string $segment) : Details
     {
         $this->segment = $segment;
         return $this;
@@ -447,7 +452,7 @@ class Details implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getDescriptionLong()
+    public function getDescriptionLong(): string
     {
         return $this->descriptionLong;
     }
@@ -455,7 +460,7 @@ class Details implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getDescriptionShort()
+    public function getDescriptionShort(): string
     {
         return $this->descriptionShort;
     }
@@ -463,7 +468,7 @@ class Details implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getEan()
+    public function getEan(): string
     {
         return $this->ean;
     }
@@ -471,7 +476,7 @@ class Details implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getManufacturerName()
+    public function getManufacturerName(): string
     {
         return $this->manufacturerName;
     }
@@ -479,7 +484,7 @@ class Details implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getSegment()
+    public function getSegment(): string
     {
         return $this->segment;
     }
@@ -487,7 +492,7 @@ class Details implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getSupplierAltPid()
+    public function getSupplierAltPid(): string
     {
         return $this->supplierAltPid;
     }
@@ -507,7 +512,7 @@ class Details implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getManufacturerPid()
+    public function getManufacturerPid(): string
     {
         return $this->manufacturerPid;
     }
@@ -515,7 +520,7 @@ class Details implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getManufacturerTypeDescription()
+    public function getManufacturerTypeDescription(): string
     {
         return $this->manufacturerTypeDescription;
     }
@@ -523,7 +528,7 @@ class Details implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getErpGroupBuyer()
+    public function getErpGroupBuyer(): string
     {
         return $this->erpGroupBuyer;
     }
@@ -531,7 +536,7 @@ class Details implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getErpGroupSupplier()
+    public function getErpGroupSupplier(): string
     {
         return $this->erpGroupSupplier;
     }
@@ -539,7 +544,7 @@ class Details implements Contracts\NodeInterface
     /**
      * @return float
      */
-    public function getDeliveryTime()
+    public function getDeliveryTime(): float
     {
         return $this->deliveryTime;
     }
@@ -571,7 +576,7 @@ class Details implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getRemarks()
+    public function getRemarks(): string
     {
         return $this->remarks;
     }
@@ -579,7 +584,7 @@ class Details implements Contracts\NodeInterface
     /**
      * @return int
      */
-    public function getProductOrder()
+    public function getProductOrder(): int
     {
         return $this->productOrder;
     }

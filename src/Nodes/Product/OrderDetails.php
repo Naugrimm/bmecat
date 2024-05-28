@@ -5,76 +5,74 @@ namespace Naugrim\BMEcat\Nodes\Product;
 use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts;
 
-/**
- *
- * @Serializer\XmlRoot("PRODUCT_ORDER_DETAILS")
- */
+
+#[Serializer\XmlRoot('PRODUCT_ORDER_DETAILS')]
 class OrderDetails implements Contracts\NodeInterface
 {
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("ORDER_UNIT")
-     * @Serializer\XmlElement(cdata=false)
      *
      * @var string
      */
-    protected $orderUnit;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('ORDER_UNIT')]
+    #[Serializer\XmlElement(cdata: false)]
+    protected string $orderUnit;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("CONTENT_UNIT")
-     * @Serializer\XmlElement(cdata=false)
      *
      * @var string
      */
-    protected $contentUnit;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('CONTENT_UNIT')]
+    #[Serializer\XmlElement(cdata: false)]
+    protected string $contentUnit;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("NO_CU_PER_OU")
-     * @Serializer\XmlElement(cdata=false)
      *
      * @var float
      */
-    protected $noCuPerOu = 1;
+    #[Serializer\Expose]
+    #[Serializer\Type('float')]
+    #[Serializer\SerializedName('NO_CU_PER_OU')]
+    #[Serializer\XmlElement(cdata: false)]
+    protected float $noCuPerOu = 1.0;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("PRICE_QUANTITY")
-     * @Serializer\XmlElement(cdata=false)
      *
      * @var float
      */
-    protected $priceQuantity = 1;
+    #[Serializer\Expose]
+    #[Serializer\Type('float')]
+    #[Serializer\SerializedName('PRICE_QUANTITY')]
+    #[Serializer\XmlElement(cdata: false)]
+    protected float $priceQuantity = 1.0;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("QUANTITY_MIN")
-     * @Serializer\XmlElement(cdata=false)
      *
      * @var int
      */
-    protected $quantityMin = 1;
+    #[Serializer\Expose]
+    #[Serializer\Type('float')]
+    #[Serializer\SerializedName('QUANTITY_MIN')]
+    #[Serializer\XmlElement(cdata: false)]
+    protected float $quantityMin = 1.0;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("QUANTITY_INTERVAL")
-     * @Serializer\XmlElement(cdata=false)
      *
      * @var int
      */
-    protected $quantityInterval = 1;
+    #[Serializer\Expose]
+    #[Serializer\Type('float')]
+    #[Serializer\SerializedName('QUANTITY_INTERVAL')]
+    #[Serializer\XmlElement(cdata: false)]
+    protected float $quantityInterval = 1.0;
 
     /**
      * @return string
      */
-    public function getOrderUnit()
+    public function getOrderUnit(): string
     {
         return $this->orderUnit;
     }
@@ -83,7 +81,7 @@ class OrderDetails implements Contracts\NodeInterface
      * @param string $orderUnit
      * @return OrderDetails
      */
-    public function setOrderUnit($orderUnit) : OrderDetails
+    public function setOrderUnit(string $orderUnit) : OrderDetails
     {
         $this->orderUnit = $orderUnit;
         return $this;
@@ -92,7 +90,7 @@ class OrderDetails implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getContentUnit()
+    public function getContentUnit(): string
     {
         return $this->contentUnit;
     }
@@ -101,7 +99,7 @@ class OrderDetails implements Contracts\NodeInterface
      * @param string $contentUnit
      * @return OrderDetails
      */
-    public function setContentUnit($contentUnit) : OrderDetails
+    public function setContentUnit(string $contentUnit) : OrderDetails
     {
         $this->contentUnit = $contentUnit;
         return $this;
@@ -110,11 +108,12 @@ class OrderDetails implements Contracts\NodeInterface
     /**
      * @return float
      */
-    public function getNoCuPerOu()
+    public function getNoCuPerOu(): int|string
     {
         if ($this->noCuPerOu === null) {
             return 1;
         }
+
         return $this->noCuPerOu;
     }
 
@@ -122,7 +121,7 @@ class OrderDetails implements Contracts\NodeInterface
      * @param float $noCuPerOu
      * @return OrderDetails
      */
-    public function setNoCuPerOu($noCuPerOu) : OrderDetails
+    public function setNoCuPerOu(string $noCuPerOu) : OrderDetails
     {
         $this->noCuPerOu = $noCuPerOu;
         return $this;
@@ -131,11 +130,12 @@ class OrderDetails implements Contracts\NodeInterface
     /**
      * @return float
      */
-    public function getPriceQuantity()
+    public function getPriceQuantity(): int|string
     {
         if ($this->priceQuantity === null) {
             return 1;
         }
+
         return $this->priceQuantity;
     }
 
@@ -143,7 +143,7 @@ class OrderDetails implements Contracts\NodeInterface
      * @param float $priceQuantity
      * @return OrderDetails
      */
-    public function setPriceQuantity($priceQuantity) : OrderDetails
+    public function setPriceQuantity(string $priceQuantity) : OrderDetails
     {
         $this->priceQuantity = $priceQuantity;
         return $this;
@@ -152,11 +152,12 @@ class OrderDetails implements Contracts\NodeInterface
     /**
      * @return int
      */
-    public function getQuantityMin()
+    public function getQuantityMin(): int|string
     {
         if ($this->quantityMin === null) {
             return 1;
         }
+
         return $this->quantityMin;
     }
 
@@ -164,7 +165,7 @@ class OrderDetails implements Contracts\NodeInterface
      * @param int $quantityMin
      * @return OrderDetails
      */
-    public function setQuantityMin($quantityMin) : OrderDetails
+    public function setQuantityMin(string $quantityMin) : OrderDetails
     {
         $this->quantityMin = $quantityMin;
         return $this;
@@ -173,11 +174,12 @@ class OrderDetails implements Contracts\NodeInterface
     /**
      * @return int
      */
-    public function getQuantityInterval()
+    public function getQuantityInterval(): int|string
     {
         if ($this->quantityInterval === null) {
             return 1;
         }
+
         return $this->quantityInterval;
     }
 
@@ -185,7 +187,7 @@ class OrderDetails implements Contracts\NodeInterface
      * @param int $quantityInterval
      * @return OrderDetails
      */
-    public function setQuantityInterval($quantityInterval) : OrderDetails
+    public function setQuantityInterval(string $quantityInterval) : OrderDetails
     {
         $this->quantityInterval = $quantityInterval;
         return $this;

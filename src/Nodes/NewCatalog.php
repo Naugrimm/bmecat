@@ -9,20 +9,18 @@ use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
 
-/**
- *
- * @Serializer\XmlRoot("T_NEW_CATALOG")
- */
+
+#[Serializer\XmlRoot('T_NEW_CATALOG')]
 class NewCatalog implements Contracts\NodeInterface
 {
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\Product>")
-     * @Serializer\XmlList(inline = true, entry = "PRODUCT")
      *
      * @var Product[]
      */
-    protected $products = [];
+    #[Serializer\Expose]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Product>')]
+    #[Serializer\XmlList(inline: true, entry: 'PRODUCT')]
+    protected array $products = [];
 
     /**
      *
@@ -39,8 +37,10 @@ class NewCatalog implements Contracts\NodeInterface
             if (is_array($product)) {
                 $product = NodeBuilder::fromArray($product, new Product());
             }
+
             $this->addProduct($product);
         }
+
         return $this;
     }
 
@@ -54,18 +54,17 @@ class NewCatalog implements Contracts\NodeInterface
         if ($this->products === null) {
             $this->products = [];
         }
+
         $this->products []= $product;
         return $this;
     }
 
-    /**
-     *
-     * @Serializer\PreSerialize
-     * @Serializer\PostSerialize
-     */
-    public function nullProducts()
+    
+    #[Serializer\PreSerialize]
+    #[Serializer\PostSerialize]
+    public function nullProducts(): void
     {
-        if (empty($this->products) === true) {
+        if ($this->products === []) {
             $this->products = null;
         }
     }

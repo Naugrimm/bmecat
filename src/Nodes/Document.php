@@ -5,52 +5,45 @@ namespace Naugrim\BMEcat\Nodes;
 
 use JMS\Serializer\Annotation as Serializer;
 
-/**
- *
- * @Serializer\XmlRoot("BMECAT")
- * @Serializer\ExclusionPolicy("all")
- */
+
+#[Serializer\XmlRoot('BMECAT')]
+#[Serializer\ExclusionPolicy('all')]
 class Document implements Contracts\NodeInterface
 {
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\XmlAttribute
-     * @Serializer\Type("string")
-     */
-    protected $version = '2005.1';
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\XmlAttribute]
+    protected string $version = '2005.1';
 
-    /**
-     * @Serializer\Expose
-     * @Serializer\SerializedName("xmlns")
-     * @Serializer\XmlAttribute
-     */
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('xmlns')]
+    #[Serializer\XmlAttribute]
     protected $namespace = 'http://www.bmecat.org/bmecat/2005.1';
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Header")
-     * @Serializer\SerializedName("HEADER")
      *
      * @var Header
      */
-    protected $header;
+    #[Serializer\Expose]
+    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Header::class)]
+    #[Serializer\SerializedName('HEADER')]
+    protected \Naugrim\BMEcat\Nodes\Header $header;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\NewCatalog")
-     * @Serializer\SerializedName("T_NEW_CATALOG")
      *
      * @var NewCatalog
      */
-    protected $catalog;
+    #[Serializer\Expose]
+    #[Serializer\Type(\Naugrim\BMEcat\Nodes\NewCatalog::class)]
+    #[Serializer\SerializedName('T_NEW_CATALOG')]
+    protected \Naugrim\BMEcat\Nodes\NewCatalog $catalog;
 
     /**
      *
      * @param string $version
      * @return Document
      */
-    public function setVersion($version) : Document
+    public function setVersion(string $version) : Document
     {
         $this->version = $version;
         return $this;
@@ -60,7 +53,7 @@ class Document implements Contracts\NodeInterface
      *
      * @return string
      */
-    public function getVersion()
+    public function getVersion(): string
     {
         return $this->version;
     }
@@ -79,7 +72,7 @@ class Document implements Contracts\NodeInterface
      *
      * @return Header
      */
-    public function getHeader()
+    public function getHeader(): \Naugrim\BMEcat\Nodes\Header
     {
         return $this->header;
     }
@@ -97,7 +90,7 @@ class Document implements Contracts\NodeInterface
     /**
      * @return NewCatalog
      */
-    public function getNewCatalog()
+    public function getNewCatalog(): \Naugrim\BMEcat\Nodes\NewCatalog
     {
         return $this->catalog;
     }

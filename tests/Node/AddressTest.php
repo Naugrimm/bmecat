@@ -20,7 +20,7 @@ class AddressTest extends TestCase
      */
     private $serializer;
 
-    public function setUp() : void
+    protected function setUp() : void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
@@ -57,7 +57,7 @@ class AddressTest extends TestCase
         return $document;
     }
 
-    public function testWithCompleteAddress()
+    public function testWithCompleteAddress(): void
     {
         $addressData = [
             'name' => 'name',

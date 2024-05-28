@@ -16,7 +16,7 @@ class ProductPriceNodeTest extends TestCase
      */
     private $serializer;
 
-    public function setUp() : void
+    protected function setUp() : void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
@@ -25,10 +25,10 @@ class ProductPriceNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_Price()
+    public function Set_Get_Price(): void
     {
         $node = new Price();
-        $value = rand(10, 1000);
+        $value = random_int(10, 1000);
 
         $this->assertNull($node->getPrice());
         $node->setPrice($value);
@@ -39,7 +39,7 @@ class ProductPriceNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_Currency()
+    public function Set_Get_Currency(): void
     {
         $node = new Price();
         $value = substr(sha1(uniqid(microtime(false), true)), 0, 3);
@@ -53,7 +53,7 @@ class ProductPriceNodeTest extends TestCase
      *
      * @test
      */
-    public function Serialize_With_Null_Values()
+    public function Serialize_With_Null_Values(): void
     {
         $node = new Price();
         $context = SerializationContext::create()->setSerializeNull(true);
@@ -71,7 +71,7 @@ class ProductPriceNodeTest extends TestCase
      *
      * @test
      */
-    public function Serialize_Without_Null_Values()
+    public function Serialize_Without_Null_Values(): void
     {
         $node = new Price();
         $context = SerializationContext::create()->setSerializeNull(false);

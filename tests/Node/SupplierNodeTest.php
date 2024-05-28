@@ -15,7 +15,7 @@ class SupplierNodeTest extends TestCase
      */
     private $serializer;
 
-    public function setUp() : void
+    protected function setUp() : void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
@@ -24,7 +24,7 @@ class SupplierNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_Value()
+    public function Set_Get_Value(): void
     {
         $node = new SupplierIdRef();
         $value = sha1(uniqid(microtime(false), true));

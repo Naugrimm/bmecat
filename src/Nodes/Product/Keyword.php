@@ -5,24 +5,22 @@ namespace Naugrim\BMEcat\Nodes\Product;
 use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts;
 
-/**
- *
- * @Serializer\XmlRoot("KEYWORD")
- */
+
+#[Serializer\XmlRoot('KEYWORD')]
 class Keyword implements Contracts\NodeInterface
 {
     /**
-     * @Serializer\Type("string")
-     * @Serializer\XmlValue
      *
      * @var string
      */
-    protected $value = '';
+    #[Serializer\Type('string')]
+    #[Serializer\XmlValue]
+    protected string $value = '';
 
     /**
      * @return string
      */
-    public function getValue()
+    public function getValue(): string
     {
         return $this->value;
     }
@@ -31,7 +29,7 @@ class Keyword implements Contracts\NodeInterface
      * @param string $value
      * @return Keyword
      */
-    public function setValue($value) : Keyword
+    public function setValue(string $value) : Keyword
     {
         $this->value = $value;
         return $this;

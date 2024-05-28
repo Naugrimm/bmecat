@@ -17,7 +17,7 @@ class DateTimeNodeTest extends TestCase
      */
     private $serializer;
 
-    public function setUp() : void
+    protected function setUp() : void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
@@ -26,7 +26,7 @@ class DateTimeNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_Date()
+    public function Set_Get_Date(): void
     {
         $node = new DateTime();
         $value = '1979-01-10';
@@ -40,7 +40,7 @@ class DateTimeNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_Time()
+    public function Set_Get_Time(): void
     {
         $node = new DateTime();
         $value = '10:59:54';
@@ -54,7 +54,7 @@ class DateTimeNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_TimeZone()
+    public function Set_Get_TimeZone(): void
     {
         $node = new DateTime();
         $value = '-01:00';
@@ -68,7 +68,7 @@ class DateTimeNodeTest extends TestCase
      *
      * @test
      */
-    public function Serialize_With_Null_Values()
+    public function Serialize_With_Null_Values(): void
     {
         $node = new DateTime();
         $context = SerializationContext::create()->setSerializeNull(true);
@@ -86,7 +86,7 @@ class DateTimeNodeTest extends TestCase
      *
      * @test
      */
-    public function Serialize_Without_Null_Values()
+    public function Serialize_Without_Null_Values(): void
     {
         $node = new DateTime();
         $context = SerializationContext::create()->setSerializeNull(false);

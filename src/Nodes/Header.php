@@ -8,63 +8,61 @@ use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
 
-/**
- *
- * @Serializer\XmlRoot("HEADER")
- */
+
+#[Serializer\XmlRoot('HEADER')]
 class Header implements Contracts\NodeInterface
 {
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("GENERATOR_INFO")
      *
      * @var string
      */
-    protected $generatorInfo;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('GENERATOR_INFO')]
+    protected string $generatorInfo;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Catalog")
-     * @Serializer\SerializedName("CATALOG")
      *
      * @var Catalog
      */
-    protected $catalog;
+    #[Serializer\Expose]
+    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Catalog::class)]
+    #[Serializer\SerializedName('CATALOG')]
+    protected \Naugrim\BMEcat\Nodes\Catalog $catalog;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\BuyerIdRef")
-     * @Serializer\SerializedName("BUYER_IDREF")
      *
      * @var BuyerIdRef
      */
-    protected $buyerIdRef;
+    #[Serializer\Expose]
+    #[Serializer\Type(\Naugrim\BMEcat\Nodes\BuyerIdRef::class)]
+    #[Serializer\SerializedName('BUYER_IDREF')]
+    protected \Naugrim\BMEcat\Nodes\BuyerIdRef $buyerIdRef;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\SupplierIdRef")
-     * @Serializer\SerializedName("SUPPLIER_IDREF")
      *
      * @var SupplierIdRef
      */
-    protected $supplierIdRef;
+    #[Serializer\Expose]
+    #[Serializer\Type(\Naugrim\BMEcat\Nodes\SupplierIdRef::class)]
+    #[Serializer\SerializedName('SUPPLIER_IDREF')]
+    protected \Naugrim\BMEcat\Nodes\SupplierIdRef $supplierIdRef;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\SerializedName("PARTIES")
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\Party>")
-     * @Serializer\XmlList(entry = "PARTY")
      *
      * @var Party[]
      */
-    protected $parties = [];
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('PARTIES')]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Party>')]
+    #[Serializer\XmlList(entry: 'PARTY')]
+    protected array $parties = [];
 
     /**
      * @return string|null
      */
-    public function getGeneratorInfo()
+    public function getGeneratorInfo(): string
     {
         return $this->generatorInfo;
     }
@@ -100,7 +98,7 @@ class Header implements Contracts\NodeInterface
     /**
      * @return BuyerIdRef
      */
-    public function getBuyerIdRef()
+    public function getBuyerIdRef(): \Naugrim\BMEcat\Nodes\BuyerIdRef
     {
         return $this->buyerIdRef;
     }
@@ -118,7 +116,7 @@ class Header implements Contracts\NodeInterface
     /**
      * @return SupplierIdRef
      */
-    public function getSupplierIdRef()
+    public function getSupplierIdRef(): \Naugrim\BMEcat\Nodes\SupplierIdRef
     {
         return $this->supplierIdRef;
     }
@@ -153,8 +151,10 @@ class Header implements Contracts\NodeInterface
             if (!$party instanceof Party) {
                 $party = NodeBuilder::fromArray($party, new Party());
             }
+
             $this->addParty($party);
         }
+
         return $this;
     }
 
@@ -162,7 +162,7 @@ class Header implements Contracts\NodeInterface
      * @param Party $party
      * @return $this
      */
-    public function addParty(Party $party)
+    public function addParty(Party $party): static
     {
         $this->parties[] = $party;
         return $this;

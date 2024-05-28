@@ -16,7 +16,7 @@ class BuyerAidNodeTest extends TestCase
      */
     private $serializer;
 
-    public function setUp() : void
+    protected function setUp() : void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
@@ -24,11 +24,12 @@ class BuyerAidNodeTest extends TestCase
     /**
      * @test
      */
-    public function Serialize_With_Null_Values()
+    public function Serialize_With_Null_Values(): void
     {
         $node = new BuyerPid();
         $node->setType('');
         $node->setValue('');
+
         $context = SerializationContext::create()->setSerializeNull(true);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_buyer_pid_with_null_values.xml');
@@ -43,11 +44,12 @@ class BuyerAidNodeTest extends TestCase
     /**
      * @test
      */
-    public function Serialize_Without_Null_Values()
+    public function Serialize_Without_Null_Values(): void
     {
         $node = new BuyerPid();
         $node->setType('');
         $node->setValue('');
+
         $context = SerializationContext::create()->setSerializeNull(false);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_buyer_pid_without_null_values.xml');

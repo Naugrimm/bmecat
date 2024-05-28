@@ -14,11 +14,8 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class DocumentBuilder
 {
-    /**
-     *
-     * @var Serializer
-     */
-    protected $serializer;
+    
+    protected ?\JMS\Serializer\Serializer $serializer;
 
     /**
      *
@@ -39,7 +36,7 @@ class DocumentBuilder
      */
     public function __construct(Serializer $serializer = null, $context = null)
     {
-        if ($serializer === null) {
+        if (!$serializer instanceof \JMS\Serializer\Serializer) {
             $serializer = SerializerBuilder::create()
                 ->setExpressionEvaluator(new ExpressionEvaluator($this->getExpressionLanguage()))
                 ->build();
@@ -59,17 +56,9 @@ class DocumentBuilder
     private function getExpressionLanguage() : ExpressionLanguage
     {
         $expressionLanguage = new ExpressionLanguage();
-        $expressionLanguage->register('empty', function ($str) {
-            return $str;
-        }, function ($arguments, $str) {
-            return empty($str);
-        });
+        $expressionLanguage->register('empty', static fn($str) => $str, static fn($arguments, $str): bool => empty($str));
 
-        $expressionLanguage->register('methodResultIsset', function ($object, $method) {
-            return $method;
-        }, function ($arguments, $object, $method) {
-            return is_object($object) && method_exists($object, $method) && $object->$method() !== null;
-        });
+        $expressionLanguage->register('methodResultIsset', static fn($object, $method) => $method, static fn($arguments, $object, $method): bool => is_object($object) && method_exists($object, $method) && $object->$method() !== null);
 
         return $expressionLanguage;
     }
@@ -79,7 +68,7 @@ class DocumentBuilder
      * @param Serializer $serializer
      * @return DocumentBuilder
      */
-    public static function create(Serializer $serializer = null)
+    public static function create(Serializer $serializer = null): self
     {
         return new self($serializer);
     }
@@ -88,7 +77,7 @@ class DocumentBuilder
      *
      * @return Serializer
      */
-    public function getSerializer()
+    public function getSerializer(): ?\JMS\Serializer\Serializer
     {
         return $this->serializer;
     }
@@ -106,7 +95,7 @@ class DocumentBuilder
      * @param NodeInterface $document
      * @return DocumentBuilder
      */
-    public function setDocument(NodeInterface $document)
+    public function setDocument(NodeInterface $document): static
     {
         $this->document = $document;
         return $this;
@@ -126,7 +115,7 @@ class DocumentBuilder
      * @throws MissingDocumentException
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         if (($document = $this->getDocument()) === null) {
             throw new MissingDocumentException('Please call ::setDocument() first.');
@@ -135,7 +124,7 @@ class DocumentBuilder
         return $this->serializer->serialize($document, 'xml', $this->context);
     }
 
-    public function fromString($xml) : Document {
+    public function fromString(string $xml) : Document {
         return $this->serializer->deserialize($xml, Document::class, 'xml');
     }
 }

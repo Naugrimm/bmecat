@@ -6,83 +6,80 @@ namespace Naugrim\BMEcat\Nodes\Product;
 use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts;
 
-/**
- *
- * @Serializer\XmlRoot("FEATURE")
- */
+
+#[Serializer\XmlRoot('FEATURE')]
 class Feature implements Contracts\NodeInterface
 {
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("FNAME")
      *
      * @var string
      */
-    protected $name;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('FNAME')]
+    protected string $name;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("VARIANTS")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\Exclude(if="methodResultIsset(object, 'getValue')")
      *
      * @var string
      */
-    protected $variants;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('VARIANTS')]
+    #[Serializer\SkipWhenEmpty]
+    #[Serializer\Exclude(if: "methodResultIsset(object, 'getValue')")]
+    protected string $variants;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("FVALUE")
-     * @Serializer\Exclude(if="methodResultIsset(object, 'getVariants')")
      *
      * @var string
      */
-    protected $value;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('FVALUE')]
+    #[Serializer\Exclude(if: "methodResultIsset(object, 'getVariants')")]
+    protected string $value;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("FUNIT")
      *
      * @var string
      */
-    protected $unit;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('FUNIT')]
+    protected string $unit;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("FORDER")
      *
      * @var string
      */
-    protected $order;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('FORDER')]
+    protected string $order;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("FDESCR")
      *
      * @var string
      */
-    protected $description;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('FDESCR')]
+    protected string $description;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("FVALUE_DETAILS")
      *
      * @var string
      */
-    protected $valueDetails;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('FVALUE_DETAILS')]
+    protected string $valueDetails;
 
     /**
-     * @param mixed $name
      * @return Feature
      */
-    public function setName($name) : Feature
+    public function setName(mixed $name) : Feature
     {
         $this->name = $name;
         return $this;
@@ -92,7 +89,7 @@ class Feature implements Contracts\NodeInterface
      * @param string $variants
      * @return Feature
      */
-    public function setVariants($variants) : Feature
+    public function setVariants(string $variants) : Feature
     {
         $this->variants = $variants;
         return $this;
@@ -102,7 +99,7 @@ class Feature implements Contracts\NodeInterface
      * @param string $value
      * @return Feature
      */
-    public function setValue($value) : Feature
+    public function setValue(string $value) : Feature
     {
         $this->value = $value;
         return $this;
@@ -112,7 +109,7 @@ class Feature implements Contracts\NodeInterface
      * @param string $unit
      * @return Feature
      */
-    public function setUnit($unit) : Feature
+    public function setUnit(string $unit) : Feature
     {
         $this->unit = $unit;
         return $this;
@@ -122,7 +119,7 @@ class Feature implements Contracts\NodeInterface
      * @param string $order
      * @return Feature
      */
-    public function setOrder($order) : Feature
+    public function setOrder(string $order) : Feature
     {
         $this->order = $order;
         return $this;
@@ -132,7 +129,7 @@ class Feature implements Contracts\NodeInterface
      * @param string $description
      * @return Feature
      */
-    public function setDescription($description) : Feature
+    public function setDescription(string $description) : Feature
     {
         $this->description = $description;
         return $this;
@@ -142,7 +139,7 @@ class Feature implements Contracts\NodeInterface
      * @param string $valueDetails
      * @return Feature
      */
-    public function setValueDetails($valueDetails) : Feature
+    public function setValueDetails(string $valueDetails) : Feature
     {
         $this->valueDetails = $valueDetails;
         return $this;
@@ -151,7 +148,7 @@ class Feature implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -159,7 +156,7 @@ class Feature implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getVariants()
+    public function getVariants(): string
     {
         return $this->variants;
     }
@@ -167,7 +164,7 @@ class Feature implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getValue()
+    public function getValue(): string
     {
         return $this->value;
     }
@@ -175,7 +172,7 @@ class Feature implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getUnit()
+    public function getUnit(): string
     {
         return $this->unit;
     }
@@ -183,7 +180,7 @@ class Feature implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getOrder()
+    public function getOrder(): string
     {
         return $this->order;
     }
@@ -191,7 +188,7 @@ class Feature implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -199,7 +196,7 @@ class Feature implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getValueDetails()
+    public function getValueDetails(): string
     {
         return $this->valueDetails;
     }

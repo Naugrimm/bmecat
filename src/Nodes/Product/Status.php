@@ -5,33 +5,31 @@ namespace Naugrim\BMEcat\Nodes\Product;
 use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts;
 
-/**
- *
- * @Serializer\XmlRoot("PRODUCT_STATUS")
- */
+
+#[Serializer\XmlRoot('PRODUCT_STATUS')]
 class Status implements Contracts\NodeInterface
 {
     /**
-     * @Serializer\Type("string")
-     * @Serializer\XmlAttribute
      *
      * @var string
      */
-    protected $type = '';
+    #[Serializer\Type('string')]
+    #[Serializer\XmlAttribute]
+    protected string $type = '';
 
     /**
-     * @Serializer\XmlValue
-     * @Serializer\Type("string")
      *
      * @var string
      */
-    protected $value = '';
+    #[Serializer\XmlValue]
+    #[Serializer\Type('string')]
+    protected string $value = '';
 
     /**
      * @param string $type
      * @return Status
      */
-    public function setType($type) : Status
+    public function setType(string $type) : Status
     {
         $this->type = $type;
         return $this;
@@ -40,7 +38,7 @@ class Status implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }

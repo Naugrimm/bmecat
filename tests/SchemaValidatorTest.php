@@ -24,25 +24,25 @@ class SchemaValidatorTest extends TestCase
 
     }
 
-    public function testInvalidVersion()
+    public function testInvalidVersion(): void
     {
         $this->expectException(UnsupportedVersionException::class);
         SchemaValidator::isValid('<xml/>', 'invalid');
     }
 
-    public function testInvalidType()
+    public function testInvalidType(): void
     {
         $this->expectException(UnsupportedVersionException::class);
         SchemaValidator::isValid('<xml/>', '1.2', 'invalid');
     }
 
-    public function testInvalidXml()
+    public function testInvalidXml(): void
     {
         $this->expectException(SchemaValidationException::class);
         SchemaValidator::isValid('<xml/>', '2005.1');
     }
 
-    public function testVersionThatHasNoType()
+    public function testVersionThatHasNoType(): void
     {
         $this->assertTrue(
             SchemaValidator::isValid($this->minimalValidDocument, '2005.1', 'invalid')

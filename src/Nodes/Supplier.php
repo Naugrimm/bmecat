@@ -7,34 +7,34 @@ use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @deprecated
- * @Serializer\XmlRoot("SUPPLIER")
  */
+#[Serializer\XmlRoot('SUPPLIER')]
 class Supplier implements Contracts\NodeInterface
 {
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("SUPPLIER_ID")
      *
      * @var string
      */
-    protected $id;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('SUPPLIER_ID')]
+    protected string $id;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("SUPPLIER_NAME")
      *
      * @var string
      */
-    protected $name;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('SUPPLIER_NAME')]
+    protected string $name;
 
     /**
      *
      * @param string $id
      * @return Supplier
      */
-    public function setId($id) : Supplier
+    public function setId(string $id) : Supplier
     {
         $this->id = $id;
         return $this;
@@ -44,7 +44,7 @@ class Supplier implements Contracts\NodeInterface
      *
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -53,7 +53,7 @@ class Supplier implements Contracts\NodeInterface
      * @param string $name
      * @return Supplier
      */
-    public function setName($name) : Supplier
+    public function setName(string $name) : Supplier
     {
         $this->name = $name;
         return $this;
@@ -63,7 +63,7 @@ class Supplier implements Contracts\NodeInterface
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

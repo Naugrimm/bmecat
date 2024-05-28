@@ -10,10 +10,12 @@ class SchemaValidationException extends Exception
     protected $context = 3;
 
     protected $xml;
+
     protected $schemaFile;
+
     protected $errors;
 
-    public static function withErrors(string $xml, string $schemaFile, array $errors = [])
+    public static function withErrors(string $xml, string $schemaFile, array $errors = []): self
     {
         $instance = new self('The xml could not be validated against the given schema.');
         $instance->xml = $xml;
@@ -25,12 +27,12 @@ class SchemaValidationException extends Exception
     /**
      * @codeCoverageIgnore
      */
-    public function __toString()
+    public function __toString(): string
     {
-        $msg = get_class($this).': '.$this->getMessage()."\n";
+        $msg = static::class.': '.$this->getMessage()."\n";
         $msg .= $this->getTraceAsString()."\n\n";
 
-        $lines = explode("\n", $this->xml);
+        $lines = explode("\n", (string) $this->xml);
 
         $xmlErrors = [];
 
@@ -48,8 +50,6 @@ class SchemaValidationException extends Exception
             ]);
         }
 
-        $msg .= implode("\n", $xmlErrors);
-
-        return $msg;
+        return $msg . implode("\n", $xmlErrors);
     }
 }

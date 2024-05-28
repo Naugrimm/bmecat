@@ -19,7 +19,7 @@ class DocumentNodeTest extends TestCase
      */
     private $serializer;
 
-    public function setUp() : void
+    protected function setUp() : void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
@@ -28,7 +28,7 @@ class DocumentNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_Version()
+    public function Set_Get_Version(): void
     {
         $document = new Document();
 
@@ -41,7 +41,7 @@ class DocumentNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_New_Catalog()
+    public function Set_Get_New_Catalog(): void
     {
         $document = new Document();
         $catalog = new NewCatalog();
@@ -55,7 +55,7 @@ class DocumentNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_New_Header()
+    public function Set_Get_New_Header(): void
     {
         $document = new Document();
         $header = new Header();
@@ -69,7 +69,7 @@ class DocumentNodeTest extends TestCase
      *
      * @test
      */
-    public function Serialize_With_Null_Values()
+    public function Serialize_With_Null_Values(): void
     {
         $node = new Document();
         $context = SerializationContext::create()->setSerializeNull(true);
@@ -87,7 +87,7 @@ class DocumentNodeTest extends TestCase
      *
      * @test
      */
-    public function Serialize_Without_Null_Values()
+    public function Serialize_Without_Null_Values(): void
     {
         $node = new Document();
         $context = SerializationContext::create()->setSerializeNull(false);

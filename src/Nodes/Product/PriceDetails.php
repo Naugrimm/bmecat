@@ -9,52 +9,50 @@ use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
 use Naugrim\BMEcat\Nodes\Contracts;
 
-/**
- *
- * @Serializer\XmlRoot("PRODUCT_PRICE_DETAILS")
- */
+
+#[Serializer\XmlRoot('PRODUCT_PRICE_DETAILS')]
 class PriceDetails implements Contracts\NodeInterface
 {
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("VALID_START_DATE")
      *
      * @var string
      */
-    protected $validStartDate;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('VALID_START_DATE')]
+    protected string $validStartDate;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("VALID_END_DATE")
      *
      * @var string
      */
-    protected $validEndDate;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('VALID_END_DATE')]
+    protected string $validEndDate;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("DAILY_PRICE")
      *
      * @var bool
      */
-    protected $dailyPrice;
+    #[Serializer\Expose]
+    #[Serializer\Type('bool')]
+    #[Serializer\SerializedName('DAILY_PRICE')]
+    protected bool $dailyPrice;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\SerializedName("PRODUCT_PRICE")
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\Product\Price>")
-     * @Serializer\XmlList(inline = true, entry = "PRODUCT_PRICE")
      *
      * @var Price[]
      */
-    protected $prices = [];
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('PRODUCT_PRICE')]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Product\Price>')]
+    #[Serializer\XmlList(inline: true, entry: 'PRODUCT_PRICE')]
+    protected array $prices = [];
 
 
     /**
@@ -124,16 +122,19 @@ class PriceDetails implements Contracts\NodeInterface
             if (is_array($price)) {
                 $price = NodeBuilder::fromArray($price, new Price());
             }
+
             $this->addPrice($price);
         }
+
         return $this;
     }
 
-    public function addPrice(Price $price)
+    public function addPrice(Price $price): static
     {
         if ($this->prices === null) {
             $this->prices = [];
         }
+
         $this->prices[] = $price;
         return $this;
     }

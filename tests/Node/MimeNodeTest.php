@@ -16,7 +16,7 @@ class MimeNodeTest extends TestCase
      */
     private $serializer;
 
-    public function setUp() : void
+    protected function setUp() : void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
@@ -24,7 +24,7 @@ class MimeNodeTest extends TestCase
     /**
  * @test
  */
-    public function Set_Get_Type()
+    public function Set_Get_Type(): void
     {
         $node = new Mime();
         $value = sha1(uniqid(microtime(false), true));
@@ -37,7 +37,7 @@ class MimeNodeTest extends TestCase
     /**
      * @test
      */
-    public function Set_Get_Source()
+    public function Set_Get_Source(): void
     {
         $node = new Mime();
         $value = sha1(uniqid(microtime(false), true));
@@ -50,7 +50,7 @@ class MimeNodeTest extends TestCase
     /**
      * @test
      */
-    public function Set_Get_Purpose()
+    public function Set_Get_Purpose(): void
     {
         $node = new Mime();
         $value = sha1(uniqid(microtime(false), true));
@@ -64,7 +64,7 @@ class MimeNodeTest extends TestCase
      *
      * @test
      */
-    public function Serialize_With_Null_Values()
+    public function Serialize_With_Null_Values(): void
     {
         $node = new Mime();
         $context = SerializationContext::create()->setSerializeNull(true);
@@ -82,7 +82,7 @@ class MimeNodeTest extends TestCase
      *
      * @test
      */
-    public function Serialize_Without_Null_Values()
+    public function Serialize_Without_Null_Values(): void
     {
         $node = new Mime();
         $context = SerializationContext::create()->setSerializeNull(false);

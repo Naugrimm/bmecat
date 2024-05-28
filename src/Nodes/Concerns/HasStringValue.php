@@ -8,10 +8,10 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 trait HasStringValue
 {
     /**
-     * @Serializer\XmlValue
-     * @Serializer\Type("string")
      * @var string
      */
+    #[Serializer\XmlValue]
+    #[Serializer\Type('string')]
     protected $value = '';
 
     /**

@@ -7,70 +7,69 @@ use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts;
 use Naugrim\BMEcat\Nodes\Product\PriceDetails;
 
-/**
- *
- * @Serializer\XmlRoot("PART_ALTERNATIVE")
- */
+
+#[Serializer\XmlRoot('PART_ALTERNATIVE')]
 class PartAlternative implements Contracts\NodeInterface
 {
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("SUPPLIER_PIDREF")
      *
      * @var string
      */
-    protected $supplier_pid_ref;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('SUPPLIER_PIDREF')]
+    protected string $supplier_pid_ref;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("SUPPLIER_IDREF")
      *
      * @var string
      */
-    protected $supplier_id_ref = null;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('SUPPLIER_IDREF')]
+    protected string $supplier_id_ref = null;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("int")
-     * @Serializer\SerializedName("PRODUCT_ORDER")
-     * @Serializer\XmlElement(cdata=false)
      *
      * @var int
      */
-    protected $order;
+    #[Serializer\Expose]
+    #[Serializer\Type('int')]
+    #[Serializer\SerializedName('PRODUCT_ORDER')]
+    #[Serializer\XmlElement(cdata: false)]
+    protected int $order;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\Type("boolean")
-     * @Serializer\SerializedName("DEFAULT_FLAG")
      *
      * @var bool
      */
-    protected $default_flag = null;
-    /**
-     *
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("CONFIG_CODE")
-     *
-     * @var string
-     */
-    protected $code = null;
+    #[Serializer\Expose]
+    #[Serializer\Type('boolean')]
+    #[Serializer\SerializedName('DEFAULT_FLAG')]
+    protected boolean $default_flag = null;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\SerializedName("PRODUCT_PRICE_DETAILS")
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Product\PriceDetails")
+     *
+     * @var string
+     */
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('CONFIG_CODE')]
+    protected string $code = null;
+
+    /**
+     *
      *
      * @var PriceDetails
      */
-    protected $priceDetails = null;
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('PRODUCT_PRICE_DETAILS')]
+    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Product\PriceDetails::class)]
+    protected \Naugrim\BMEcat\Nodes\Product\PriceDetails $priceDetails = null;
 
 }

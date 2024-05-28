@@ -12,8 +12,6 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 require __DIR__.'/../vendor/autoload.php';
 
-AnnotationRegistry::registerLoader('class_exists');
-
 $builder = new DocumentBuilder();
 
 $document = NodeBuilder::fromArray([

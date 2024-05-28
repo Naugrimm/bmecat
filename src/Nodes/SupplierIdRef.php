@@ -9,5 +9,6 @@ use Naugrim\BMEcat\Nodes\Concerns\HasTypeAttribute;
 
 class SupplierIdRef implements NodeInterface
 {
-    use HasTypeAttribute, HasStringValue;
+    use HasTypeAttribute;
+    use HasStringValue;
 }

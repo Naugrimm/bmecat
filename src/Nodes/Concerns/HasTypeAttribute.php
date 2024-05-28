@@ -8,13 +8,13 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 trait HasTypeAttribute
 {
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("type")
-     * @Serializer\XmlAttribute
      *
      * @var string
      */
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('type')]
+    #[Serializer\XmlAttribute]
     protected $type;
 
     /**

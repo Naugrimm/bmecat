@@ -23,7 +23,7 @@ class ProductNodeTest extends TestCase
      */
     private $serializer;
 
-    public function setUp() : void
+    protected function setUp() : void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
@@ -32,7 +32,7 @@ class ProductNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_Id()
+    public function Set_Get_Id(): void
     {
         $node = new Product();
         $value = sha1(uniqid(microtime(false), true));
@@ -40,6 +40,7 @@ class ProductNodeTest extends TestCase
         $this->assertNull($node->getId());
         $supplierPid = new SupplierPid();
         $supplierPid->setValue($value);
+
         $node->setId($supplierPid);
 
         $this->assertEquals($value, $node->getId()->getValue());
@@ -49,7 +50,7 @@ class ProductNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_Details()
+    public function Set_Get_Details(): void
     {
         $node = new Product();
         $details = new Details();
@@ -63,7 +64,7 @@ class ProductNodeTest extends TestCase
      *
      * @test
      */
-    public function Add_Get_Features()
+    public function Add_Get_Features(): void
     {
         $features = [
             new Features(),
@@ -87,7 +88,7 @@ class ProductNodeTest extends TestCase
      *
      * @test
      */
-    public function Add_Get_Prices()
+    public function Add_Get_Prices(): void
     {
         $priceDetails = [
             (new PriceDetails)->addPrice(new Price()),
@@ -111,7 +112,7 @@ class ProductNodeTest extends TestCase
      *
      * @test
      */
-    public function Add_Get_Product_Order_Details()
+    public function Add_Get_Product_Order_Details(): void
     {
         $node = new Product();
         $value = new OrderDetails();
@@ -125,7 +126,7 @@ class ProductNodeTest extends TestCase
      *
      * @test
      */
-    public function Add_Get_Mime_Info()
+    public function Add_Get_Mime_Info(): void
     {
         $mimes = [
             new Mime(),
@@ -149,7 +150,7 @@ class ProductNodeTest extends TestCase
      *
      * @test
      */
-    public function Serialize_With_Null_Values()
+    public function Serialize_With_Null_Values(): void
     {
         $node = new Product();
         $context = SerializationContext::create()->setSerializeNull(true);
@@ -163,7 +164,7 @@ class ProductNodeTest extends TestCase
      *
      * @test
      */
-    public function Serialize_Without_Null_Values()
+    public function Serialize_Without_Null_Values(): void
     {
         $node = new Product();
         $context = SerializationContext::create()->setSerializeNull(false);

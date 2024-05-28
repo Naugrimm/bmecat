@@ -14,7 +14,7 @@ class ProductOrderDetailsNodeTest extends TestCase
      */
     private $serializer;
 
-    public function setUp() : void
+    protected function setUp() : void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
@@ -22,7 +22,7 @@ class ProductOrderDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Set_Get_Order_Unit()
+    public function Set_Get_Order_Unit(): void
     {
         $node = new OrderDetails();
         $value = 'C62';
@@ -33,13 +33,14 @@ class ProductOrderDetailsNodeTest extends TestCase
         $this->assertEquals($value, $node->getOrderUnit());
         $this->assertEquals($value, $node->getContentUnit());
     }
+
     /**
      * @test
      */
-    public function Set_Get_No_Cu_Per_Ou()
+    public function Set_Get_No_Cu_Per_Ou(): void
     {
         $node = new OrderDetails();
-        $value = rand(10, 1000);
+        $value = random_int(10, 1000);
 
         $this->assertEquals(1, $node->getNoCuPerOu());
         $node->setNoCuPerOu($value);
@@ -49,10 +50,10 @@ class ProductOrderDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Set_Get_Price_Quantity()
+    public function Set_Get_Price_Quantity(): void
     {
         $node = new OrderDetails();
-        $value = rand(10, 1000);
+        $value = random_int(10, 1000);
 
         $this->assertEquals(1, $node->getPriceQuantity());
         $node->setPriceQuantity($value);
@@ -62,10 +63,10 @@ class ProductOrderDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Set_Get_Quantity_Min()
+    public function Set_Get_Quantity_Min(): void
     {
         $node = new OrderDetails();
-        $value = rand(10, 1000);
+        $value = random_int(10, 1000);
 
         $this->assertEquals(1, $node->getQuantityMin());
         $node->setQuantityMin($value);
@@ -75,10 +76,10 @@ class ProductOrderDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Set_Get_Quantity_Interval()
+    public function Set_Get_Quantity_Interval(): void
     {
         $node = new OrderDetails();
-        $value = rand(10, 1000);
+        $value = random_int(10, 1000);
 
         $this->assertEquals(1, $node->getQuantityInterval());
         $node->setQuantityInterval($value);
@@ -88,7 +89,7 @@ class ProductOrderDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Serialize_With_Null_Values()
+    public function Serialize_With_Null_Values(): void
     {
         $node = new OrderDetails();
         $context = SerializationContext::create()->setSerializeNull(true);
@@ -105,7 +106,7 @@ class ProductOrderDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Serialize_Without_Null_Values()
+    public function Serialize_Without_Null_Values(): void
     {
         $node = new OrderDetails();
         $context = SerializationContext::create()->setSerializeNull(false);

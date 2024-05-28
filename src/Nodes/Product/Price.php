@@ -6,76 +6,74 @@ namespace Naugrim\BMEcat\Nodes\Product;
 use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts;
 
-/**
- *
- * @Serializer\XmlRoot("PRODUCT_PRICE")
- */
+
+#[Serializer\XmlRoot('PRODUCT_PRICE')]
 class Price implements Contracts\NodeInterface
 {
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("price_type")
-     * @Serializer\XmlAttribute
      *
      * @var string
      */
-    protected $type = 'gros_list';
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('price_type')]
+    #[Serializer\XmlAttribute]
+    protected string $type = 'gros_list';
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("float")
-     * @Serializer\SerializedName("PRICE_AMOUNT")
-     * @Serializer\XmlElement(cdata=false)
      *
      * @var float
      */
-    protected $price;
+    #[Serializer\Expose]
+    #[Serializer\Type('float')]
+    #[Serializer\SerializedName('PRICE_AMOUNT')]
+    #[Serializer\XmlElement(cdata: false)]
+    protected float $price;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("PRICE_CURRENCY")
-     * @Serializer\XmlElement(cdata=false)
      *
      * @var string
      */
-    protected $currency = 'EUR';
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('PRICE_CURRENCY')]
+    #[Serializer\XmlElement(cdata: false)]
+    protected string $currency = 'EUR';
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("float")
-     * @Serializer\SerializedName("TAX")
-     * @Serializer\XmlElement(cdata=false)
      *
      * @var string
      */
-    protected $tax = null;
+    #[Serializer\Expose]
+    #[Serializer\Type('float')]
+    #[Serializer\SerializedName('TAX')]
+    #[Serializer\XmlElement(cdata: false)]
+    protected float $tax;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("float")
-     * @Serializer\SerializedName("PRICE_FACTOR")
      *
      * @var float
      */
-    protected $priceFactor;
+    #[Serializer\Expose]
+    #[Serializer\Type('float')]
+    #[Serializer\SerializedName('PRICE_FACTOR')]
+    protected float $priceFactor;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("float")
-     * @Serializer\SerializedName("LOWER_BOUND")
      *
      * @var float
      */
-    protected $lowerBound;
+    #[Serializer\Expose]
+    #[Serializer\Type('float')]
+    #[Serializer\SerializedName('LOWER_BOUND')]
+    protected float $lowerBound;
 
     /**
      *
      * @param string $currency
      * @return Price
      */
-    public function setCurrency($currency) : Price
+    public function setCurrency(string $currency) : Price
     {
         $this->currency = $currency;
         return $this;
@@ -85,7 +83,7 @@ class Price implements Contracts\NodeInterface
      *
      * @return string
      */
-    public function getCurrency()
+    public function getCurrency(): string
     {
         return $this->currency;
     }
@@ -95,7 +93,7 @@ class Price implements Contracts\NodeInterface
      * @param float $price
      * @return Price
      */
-    public function setPrice($price) : Price
+    public function setPrice(float $price) : Price
     {
         $this->price = $price;
         return $this;
@@ -105,7 +103,7 @@ class Price implements Contracts\NodeInterface
      *
      * @return float
      */
-    public function getPrice()
+    public function getPrice(): float
     {
         return $this->price;
     }

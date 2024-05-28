@@ -16,7 +16,7 @@ class ProductFeatureNodeTest extends TestCase
      */
     private $serializer;
 
-    public function setUp() : void
+    protected function setUp() : void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
@@ -25,7 +25,7 @@ class ProductFeatureNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_Name()
+    public function Set_Get_Name(): void
     {
         $node = new Feature();
         $value = sha1(uniqid(microtime(false), true));
@@ -39,7 +39,7 @@ class ProductFeatureNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_Value()
+    public function Set_Get_Value(): void
     {
         $node = new Feature();
         $value = sha1(uniqid(microtime(false), true));
@@ -53,7 +53,7 @@ class ProductFeatureNodeTest extends TestCase
      *
      * @test
      */
-    public function Serialize_With_Null_Values()
+    public function Serialize_With_Null_Values(): void
     {
         $node = new Feature();
         $context = SerializationContext::create()->setSerializeNull(true);
@@ -68,10 +68,11 @@ class ProductFeatureNodeTest extends TestCase
      *
      * @test
      */
-    public function Serialize_Without_Null_Values()
+    public function Serialize_Without_Null_Values(): void
     {
         $node = new Feature();
         $node->setName('test');
+
         $context = SerializationContext::create()->setSerializeNull(false);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_feature_without_null_values.xml');

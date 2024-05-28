@@ -9,5 +9,6 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 class PublicKey implements NodeInterface
 {
-    use HasTypeAttribute, HasStringValue;
+    use HasTypeAttribute;
+    use HasStringValue;
 }

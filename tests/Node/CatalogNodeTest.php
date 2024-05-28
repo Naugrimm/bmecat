@@ -18,7 +18,7 @@ class CatalogNodeTest extends TestCase
      */
     private $serializer;
 
-    public function setUp() : void
+    protected function setUp() : void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
@@ -27,7 +27,7 @@ class CatalogNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_Id()
+    public function Set_Get_Id(): void
     {
         $node = new Catalog();
         $value = sha1(uniqid(microtime(false), true));
@@ -41,7 +41,7 @@ class CatalogNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_Version()
+    public function Set_Get_Version(): void
     {
         $node = new Catalog();
         $value = sha1(uniqid(microtime(false), true));
@@ -55,7 +55,7 @@ class CatalogNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_Language()
+    public function Set_Get_Language(): void
     {
         $node = new Catalog();
         $value = sha1(uniqid(microtime(false), true));
@@ -69,7 +69,7 @@ class CatalogNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_Date_Time()
+    public function Set_Get_Date_Time(): void
     {
         $node = new Catalog();
         $dateTime = new DateTime();
@@ -83,7 +83,7 @@ class CatalogNodeTest extends TestCase
      *
      * @test
      */
-    public function Serialize_With_Null_Values()
+    public function Serialize_With_Null_Values(): void
     {
         $node = new Catalog();
         $context = SerializationContext::create()->setSerializeNull(true);
@@ -101,7 +101,7 @@ class CatalogNodeTest extends TestCase
      *
      * @test
      */
-    public function Serialize_Without_Null_Values()
+    public function Serialize_Without_Null_Values(): void
     {
         $node = new Catalog();
         $context = SerializationContext::create()->setSerializeNull(false);

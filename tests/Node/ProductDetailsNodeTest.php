@@ -20,7 +20,7 @@ class ProductDetailsNodeTest extends TestCase
      */
     private $serializer;
 
-    public function setUp() : void
+    protected function setUp() : void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
@@ -28,7 +28,7 @@ class ProductDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Add_Get_Buyer_Pides()
+    public function Add_Get_Buyer_Pides(): void
     {
         $buyerPids = [
             new BuyerPid(),
@@ -51,7 +51,7 @@ class ProductDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Add_Get_Special_Treatment_Classes()
+    public function Add_Get_Special_Treatment_Classes(): void
     {
         $specialTreatmentClasses = [
             new SpecialTreatmentClass(),
@@ -74,7 +74,7 @@ class ProductDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Add_Get_Keywords()
+    public function Add_Get_Keywords(): void
     {
         $keywords = [
             new Keyword(),
@@ -97,7 +97,7 @@ class ProductDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Add_Get_Product_Status()
+    public function Add_Get_Product_Status(): void
     {
         $productStatus = [
             new Status(),
@@ -120,7 +120,7 @@ class ProductDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Set_Get_Description_Long()
+    public function Set_Get_Description_Long(): void
     {
         $node = new Details();
         $value = sha1(uniqid(microtime(false), true));
@@ -133,7 +133,7 @@ class ProductDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Set_Get_Description_Short()
+    public function Set_Get_Description_Short(): void
     {
         $node = new Details();
         $value = sha1(uniqid(microtime(false), true));
@@ -146,7 +146,7 @@ class ProductDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Set_Get_Ean()
+    public function Set_Get_Ean(): void
     {
         $node = new Details();
         $value = sha1(uniqid(microtime(false), true));
@@ -159,7 +159,7 @@ class ProductDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Set_Get_Supplier_Alt_Pid()
+    public function Set_Get_Supplier_Alt_Pid(): void
     {
         $node = new Details();
         $value = sha1(uniqid(microtime(false), true));
@@ -172,7 +172,7 @@ class ProductDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Set_Get_Manufacturer_Name()
+    public function Set_Get_Manufacturer_Name(): void
     {
         $node = new Details();
         $value = sha1(uniqid(microtime(false), true));
@@ -185,7 +185,7 @@ class ProductDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Set_Get_Manufacturer_Type_Description()
+    public function Set_Get_Manufacturer_Type_Description(): void
     {
         $node = new Details();
         $value = sha1(uniqid(microtime(false), true));
@@ -198,7 +198,7 @@ class ProductDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Set_Get_Erp_Group_Buyer()
+    public function Set_Get_Erp_Group_Buyer(): void
     {
         $node = new Details();
         $value = sha1(uniqid(microtime(false), true));
@@ -211,7 +211,7 @@ class ProductDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Set_Get_Erp_Group_Supplier()
+    public function Set_Get_Erp_Group_Supplier(): void
     {
         $node = new Details();
         $value = sha1(uniqid(microtime(false), true));
@@ -224,10 +224,10 @@ class ProductDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Set_Get_Delivery_Time()
+    public function Set_Get_Delivery_Time(): void
     {
         $node = new Details();
-        $value = rand(10, 1000);
+        $value = random_int(10, 1000);
 
         $this->assertNull($node->getDeliveryTime());
         $node->setDeliveryTime($value);
@@ -237,7 +237,7 @@ class ProductDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Set_Get_Remarks()
+    public function Set_Get_Remarks(): void
     {
         $node = new Details();
         $value = sha1(uniqid(microtime(false), true));
@@ -250,10 +250,10 @@ class ProductDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Set_Get_Product_Order()
+    public function Set_Get_Product_Order(): void
     {
         $node = new Details();
-        $value = rand(10, 1000);
+        $value = random_int(10, 1000);
 
         $this->assertNull($node->getProductOrder());
         $node->setProductOrder($value);
@@ -263,7 +263,7 @@ class ProductDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Set_Get_Description_Segment()
+    public function Set_Get_Description_Segment(): void
     {
         $node = new Details();
         $value = sha1(uniqid(microtime(false), true));
@@ -276,7 +276,7 @@ class ProductDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Serialize_With_Null_Values()
+    public function Serialize_With_Null_Values(): void
     {
         $node = new Details();
         $context = SerializationContext::create()->setSerializeNull(true);
@@ -290,7 +290,7 @@ class ProductDetailsNodeTest extends TestCase
     /**
      * @test
      */
-    public function Serialize_Without_Null_Values()
+    public function Serialize_Without_Null_Values(): void
     {
         $node = new Details();
         $context = SerializationContext::create()->setSerializeNull(false);

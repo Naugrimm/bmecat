@@ -18,7 +18,7 @@ class HeaderNodeTest extends TestCase
      */
     private $serializer;
 
-    public function setUp() : void
+    protected function setUp() : void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
@@ -27,7 +27,7 @@ class HeaderNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_Generator_Info()
+    public function Set_Get_Generator_Info(): void
     {
         $node = new Header();
         $value = sha1(uniqid(microtime(false), true));
@@ -41,7 +41,7 @@ class HeaderNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_Supplier()
+    public function Set_Get_Supplier(): void
     {
         $header = new Header();
         $supplier = new SupplierIdRef();
@@ -55,7 +55,7 @@ class HeaderNodeTest extends TestCase
      *
      * @test
      */
-    public function Set_Get_Catalog()
+    public function Set_Get_Catalog(): void
     {
         $header = new Header();
         $catalog = new Catalog();
@@ -68,7 +68,7 @@ class HeaderNodeTest extends TestCase
      *
      * @test
      */
-    public function Serialize_With_Null_Values()
+    public function Serialize_With_Null_Values(): void
     {
         $node = new Header();
         $context = SerializationContext::create()->setSerializeNull(true);
@@ -86,7 +86,7 @@ class HeaderNodeTest extends TestCase
      *
      * @test
      */
-    public function Serialize_Without_Null_Values()
+    public function Serialize_Without_Null_Values(): void
     {
         $node = new Header();
         $context = SerializationContext::create()->setSerializeNull(false);

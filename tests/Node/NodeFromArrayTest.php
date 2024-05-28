@@ -29,25 +29,25 @@ class NodeFromArrayTest extends TestCase
 
     }
 
-    public function testEmptyArray()
+    public function testEmptyArray(): void
     {
         $document = NodeBuilder::fromArray([], new Document());
         $this->assertInstanceOf(Document::class, $document);
     }
 
-    public function testInvalidSetter()
+    public function testInvalidSetter(): void
     {
         $this->expectException(UnknownKeyException::class);
         NodeBuilder::fromArray(['thereisnosetterforthis' => 1], new Document());
     }
 
-    public function testScalarValue()
+    public function testScalarValue(): void
     {
         $document = NodeBuilder::fromArray(['version' => "1234567"], new Document());
         $this->assertEquals("1234567", $document->getVersion());
     }
 
-    public function testObjectValue()
+    public function testObjectValue(): void
     {
         $catalog = new NewCatalog();
         $document = NodeBuilder::fromArray([
@@ -56,7 +56,7 @@ class NodeFromArrayTest extends TestCase
         $this->assertSame($catalog, $document->getNewCatalog());
     }
 
-    public function testInvalidSetterNoArguments()
+    public function testInvalidSetterNoArguments(): void
     {
         $this->expectException(InvalidSetterException::class);
         NodeBuilder::fromArray([
@@ -64,7 +64,7 @@ class NodeFromArrayTest extends TestCase
         ], new Node());
     }
 
-    public function testInvalidSetterNoTypeHint()
+    public function testInvalidSetterNoTypeHint(): void
     {
         $this->expectException(InvalidSetterException::class);
         NodeBuilder::fromArray([
@@ -72,7 +72,7 @@ class NodeFromArrayTest extends TestCase
         ], new Node());
     }
 
-    public function testInvalidSetterScalarTypeHint()
+    public function testInvalidSetterScalarTypeHint(): void
     {
         $this->expectException(TypeError::class);
         NodeBuilder::fromArray([
@@ -80,7 +80,7 @@ class NodeFromArrayTest extends TestCase
         ], new Node());
     }
 
-    public function testSetterMatchingTypeHintFloat()
+    public function testSetterMatchingTypeHintFloat(): void
     {
         $float = 1.23456;
         $node = NodeBuilder::fromArray([
@@ -89,7 +89,7 @@ class NodeFromArrayTest extends TestCase
         $this->assertEquals($float, $node->someFloat);
     }
 
-    public function testSetterMatchingTypeHintArray()
+    public function testSetterMatchingTypeHintArray(): void
     {
         $array = [];
         $node = NodeBuilder::fromArray([
@@ -98,7 +98,7 @@ class NodeFromArrayTest extends TestCase
         $this->assertSame($array, $node->someArray);
     }
 
-    public function testSetterMatchingTypeHintNode()
+    public function testSetterMatchingTypeHintNode(): void
     {
         $anotherNode = new Node();
         $node = NodeBuilder::fromArray([
@@ -107,7 +107,7 @@ class NodeFromArrayTest extends TestCase
         $this->assertSame($anotherNode, $node->anotherNode);
     }
 
-    public function testRecursiveFromArrayWithArrays()
+    public function testRecursiveFromArrayWithArrays(): void
     {
         $array = [
             'test' => '123'

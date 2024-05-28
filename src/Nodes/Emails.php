@@ -13,23 +13,23 @@ use Naugrim\BMEcat\nodes\Crypto\PublicKey;
 class Emails implements NodeInterface
 {
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("EMAIL")
      *
      * @var string
      */
-    protected $email;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('EMAIL')]
+    protected string $email;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\SerializedName("PUBLIC_KEY")
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\Crypto\PublicKey>")
-     * @Serializer\XmlList(inline = "true")
      *
      * @var PublicKey[]
      */
-    protected $publicKeys = [];
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('PUBLIC_KEY')]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Crypto\PublicKey>')]
+    #[Serializer\XmlList(inline: 'true')]
+    protected array $publicKeys = [];
 
     /**
      * @return string
@@ -70,8 +70,10 @@ class Emails implements NodeInterface
             if (!$publicKey instanceof PublicKey) {
                 $publicKey = NodeBuilder::fromArray($publicKey, new PublicKey());
             }
+
             $this->addPublicKey($publicKey);
         }
+
         return $this;
     }
 

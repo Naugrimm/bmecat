@@ -11,42 +11,42 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 class Party implements NodeInterface
 {
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("PARTY_ID")
      *
      * @var string
      */
-    protected $id;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('PARTY_ID')]
+    protected string $id;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("PARTY_ROLE")
      *
      * @var string
      */
-    protected $role;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('PARTY_ROLE')]
+    protected string $role;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Address")
-     * @Serializer\SerializedName("ADDRESS")
      *
      * @var Address
      */
-    protected $address;
+    #[Serializer\Expose]
+    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Address::class)]
+    #[Serializer\SerializedName('ADDRESS')]
+    protected \Naugrim\BMEcat\Nodes\Address $address;
 
     /**
      *
-     * @Serializer\Expose
-     * @Serializer\SerializedName("MIME_INFO")
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\Mime>")
-     * @Serializer\XmlList( entry="MIME")
      *
      * @var Mime[]
      */
-    protected $mimes = [];
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('MIME_INFO')]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Mime>')]
+    #[Serializer\XmlList(entry: 'MIME')]
+    protected array $mimes = [];
 
     /**
      * @return string
@@ -123,8 +123,10 @@ class Party implements NodeInterface
             if (is_array($mime)) {
                 $mime = NodeBuilder::fromArray($mime, new Mime());
             }
+
             $this->addMime($mime);
         }
+
         return $this;
     }
 
@@ -137,6 +139,7 @@ class Party implements NodeInterface
         if ($this->mimes === null) {
             $this->mimes = [];
         }
+
         $this->mimes[] = $mime;
         return $this;
     }

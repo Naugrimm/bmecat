@@ -15,7 +15,7 @@ class SpecialTreatmentClassNodeTest extends TestCase
      */
     private $serializer;
 
-    public function setUp() : void
+    protected function setUp() : void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
@@ -23,7 +23,7 @@ class SpecialTreatmentClassNodeTest extends TestCase
     /**
      * @test
      */
-    public function Serialize_With_Null_Values()
+    public function Serialize_With_Null_Values(): void
     {
         $node = new SpecialTreatmentClass();
         $context = SerializationContext::create()->setSerializeNull(true);
@@ -40,7 +40,7 @@ class SpecialTreatmentClassNodeTest extends TestCase
     /**
      * @test
      */
-    public function Serialize_Without_Null_Values()
+    public function Serialize_Without_Null_Values(): void
     {
         $node = new SpecialTreatmentClass();
         $context = SerializationContext::create()->setSerializeNull(false);

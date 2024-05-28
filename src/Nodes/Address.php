@@ -10,184 +10,184 @@ use Naugrim\BMEcat\Nodes\Crypto\PublicKey;
 class Address implements NodeInterface
 {
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("NAME")
      *
      * @var string
      */
-    protected $name;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('NAME')]
+    protected string $name;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("NAME2")
      *
      * @var string
      */
-    protected $name2;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('NAME2')]
+    protected string $name2;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("NAME3")
      *
      * @var string
      */
-    protected $name3;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('NAME3')]
+    protected string $name3;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("DEPARTMENT")
      *
      * @var string
      */
-    protected $department;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('DEPARTMENT')]
+    protected string $department;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Contact\Details")
-     * @Serializer\SerializedName("CONTACT_DETAILS")
      *
      * @var Details
      */
-    protected $contactDetails;
+    #[Serializer\Expose]
+    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Contact\Details::class)]
+    #[Serializer\SerializedName('CONTACT_DETAILS')]
+    protected \Naugrim\BMEcat\Nodes\Contact\Details $contactDetails;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("STREET")
      *
      * @var string
      */
-    protected $street;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('STREET')]
+    protected string $street;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("ZIP")
      *
      * @var string
      */
-    protected $zip;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('ZIP')]
+    protected string $zip;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("BOXNO")
      *
      * @var string
      */
-    protected $boxno;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('BOXNO')]
+    protected string $boxno;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("ZIPBOX")
      *
      * @var string
      */
-    protected $zipbox;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('ZIPBOX')]
+    protected string $zipbox;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("CITY")
      *
      * @var string
      */
-    protected $city;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('CITY')]
+    protected string $city;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("STATE")
      *
      * @var string
      */
-    protected $state;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('STATE')]
+    protected string $state;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("COUNTRY")
      *
      * @var string
      */
-    protected $country;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('COUNTRY')]
+    protected string $country;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("COUNTRY_CODED")
      *
      * @var string
      */
-    protected $countryCoded;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('COUNTRY_CODED')]
+    protected string $countryCoded;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("VAT_ID")
      *
      * @var string
      */
-    protected $vatId;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('VAT_ID')]
+    protected string $vatId;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Phone")
-     * @Serializer\SerializedName("PHONE")
      *
      * @var Phone
      */
-    protected $phone;
+    #[Serializer\Expose]
+    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Phone::class)]
+    #[Serializer\SerializedName('PHONE')]
+    protected \Naugrim\BMEcat\Nodes\Phone $phone;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Fax")
-     * @Serializer\SerializedName("FAX")
      *
      * @var Fax
      */
-    protected $fax;
+    #[Serializer\Expose]
+    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Fax::class)]
+    #[Serializer\SerializedName('FAX')]
+    protected \Naugrim\BMEcat\Nodes\Fax $fax;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("EMAIL")
      *
      * @var string
      */
-    protected $email;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('EMAIL')]
+    protected string $email;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Crypto\PublicKey")
-     * @Serializer\SerializedName("PUBLIC_KEY")
      *
      * @var PublicKey
      */
-    protected $publicKey;
+    #[Serializer\Expose]
+    #[Serializer\Type(\Naugrim\BMEcat\Nodes\Crypto\PublicKey::class)]
+    #[Serializer\SerializedName('PUBLIC_KEY')]
+    protected \Naugrim\BMEcat\Nodes\Crypto\PublicKey $publicKey;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("URL")
      *
      * @var string
      */
-    protected $url;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('URL')]
+    protected string $url;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("ADDRESS_REMARKS")
      *
      * @var string
      */
-    protected $addressRemarks;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('ADDRESS_REMARKS')]
+    protected string $addressRemarks;
 
     /**
      * @return string

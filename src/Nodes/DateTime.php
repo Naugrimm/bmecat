@@ -6,48 +6,46 @@ namespace Naugrim\BMEcat\Nodes;
 use DateTimeImmutable;
 use JMS\Serializer\Annotation as Serializer;
 
-/**
- *
- * @Serializer\XmlRoot("DATETIME")
- */
+
+#[Serializer\XmlRoot('DATETIME')]
 class DateTime implements Contracts\NodeInterface
 {
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("type")
-     * @Serializer\XmlAttribute
      *
      * @var string
      */
-    protected $type = "generation_date";
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('type')]
+    #[Serializer\XmlAttribute]
+    protected string $type = "generation_date";
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("DATE")
      *
      * @var string
      */
-    protected $date;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('DATE')]
+    protected string $date;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("TIME")
      *
      * @var string
      */
-    protected $time;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('TIME')]
+    protected string $time;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("TIMEZONE")
      *
      * @var string
      */
-    protected $timezone;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('TIMEZONE')]
+    protected string $timezone;
 
     /**
      * @param DateTimeImmutable $dateTime
@@ -65,7 +63,7 @@ class DateTime implements Contracts\NodeInterface
      * @param string $date
      * @return DateTime
      */
-    public function setDate($date) : DateTime
+    public function setDate(string $date) : DateTime
     {
         $this->date = $date;
         return $this;
@@ -74,7 +72,7 @@ class DateTime implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getDate()
+    public function getDate(): string
     {
         return $this->date;
     }
@@ -83,7 +81,7 @@ class DateTime implements Contracts\NodeInterface
      * @param string $time
      * @return DateTime
      */
-    public function setTime($time) : DateTime
+    public function setTime(string $time) : DateTime
     {
         $this->time = $time;
         return $this;
@@ -92,7 +90,7 @@ class DateTime implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getTime()
+    public function getTime(): string
     {
         return $this->time;
     }
@@ -101,7 +99,7 @@ class DateTime implements Contracts\NodeInterface
      * @param string $timezone
      * @return DateTime
      */
-    public function setTimezone($timezone) : DateTime
+    public function setTimezone(string $timezone) : DateTime
     {
         $this->timezone = $timezone;
         return $this;
@@ -110,7 +108,7 @@ class DateTime implements Contracts\NodeInterface
     /**
      * @return string
      */
-    public function getTimezone()
+    public function getTimezone(): string
     {
         return $this->timezone;
     }
