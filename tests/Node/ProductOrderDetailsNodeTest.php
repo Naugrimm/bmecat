@@ -4,7 +4,6 @@ namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Nodes\Product\OrderDetails;
 use PHPUnit\Framework\TestCase;
@@ -13,15 +12,12 @@ class ProductOrderDetailsNodeTest extends TestCase
 {
     private Serializer $serializer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Order_Unit(): void
+    public function testSetGetOrderUnit(): void
     {
         $node = new OrderDetails();
         $value = 'C62';
@@ -32,10 +28,7 @@ class ProductOrderDetailsNodeTest extends TestCase
         $this->assertEquals($value, $node->getContentUnit());
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_No_Cu_Per_Ou(): void
+    public function testSetGetNoCuPerOu(): void
     {
         $node = new OrderDetails();
         $value = random_int(10, 1000);
@@ -44,10 +37,7 @@ class ProductOrderDetailsNodeTest extends TestCase
         $this->assertEquals($value, $node->getNoCuPerOu());
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Price_Quantity(): void
+    public function testSetGetPriceQuantity(): void
     {
         $node = new OrderDetails();
         $value = random_int(10, 1000);
@@ -56,10 +46,7 @@ class ProductOrderDetailsNodeTest extends TestCase
         $this->assertEquals($value, $node->getPriceQuantity());
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Quantity_Min(): void
+    public function testSetGetQuantityMin(): void
     {
         $node = new OrderDetails();
         $value = random_int(10, 1000);
@@ -68,10 +55,7 @@ class ProductOrderDetailsNodeTest extends TestCase
         $this->assertEquals($value, $node->getQuantityMin());
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Quantity_Interval(): void
+    public function testSetGetQuantityInterval(): void
     {
         $node = new OrderDetails();
         $value = random_int(10, 1000);
@@ -80,10 +64,7 @@ class ProductOrderDetailsNodeTest extends TestCase
         $this->assertEquals($value, $node->getQuantityInterval());
     }
 
-    /**
-     * @test
-     */
-    public function Serialize_Without_Null_Values(): void
+    public function testSerializeWithoutNullValues(): void
     {
         $node = new OrderDetails();
         $node->setOrderUnit('C62');

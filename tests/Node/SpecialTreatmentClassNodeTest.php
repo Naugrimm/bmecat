@@ -4,25 +4,20 @@ namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializerBuilder;
-use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\DocumentBuilder;
-use PHPUnit\Framework\TestCase;
 use Naugrim\BMEcat\Nodes\SpecialTreatmentClass;
+use PHPUnit\Framework\TestCase;
 
 class SpecialTreatmentClassNodeTest extends TestCase
 {
     private Serializer $serializer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
 
-    /**
-     * @test
-     */
-    public function Serialize_With_Null_Values(): void
+    public function testSerializeWithNullValues(): void
     {
         $node = new SpecialTreatmentClass();
         $context = SerializationContext::create()->setSerializeNull(true);
@@ -36,10 +31,7 @@ class SpecialTreatmentClassNodeTest extends TestCase
         $this->assertInstanceOf(SpecialTreatmentClass::class, $doc);
     }
 
-    /**
-     * @test
-     */
-    public function Serialize_Without_Null_Values(): void
+    public function testSerializeWithoutNullValues(): void
     {
         $node = new SpecialTreatmentClass();
         $context = SerializationContext::create()->setSerializeNull(false);

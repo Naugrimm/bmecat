@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Nodes;
 
 use DateTimeImmutable;
@@ -13,48 +12,28 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 #[Serializer\XmlRoot('DATETIME')]
 class DateTime implements Contracts\NodeInterface
 {
-    /**
-     *
-     * @var string
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('type')]
     #[Serializer\XmlAttribute]
-    protected string $type = "generation_date";
+    protected string $type = 'generation_date';
 
-    /**
-     *
-     * @var string
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('DATE')]
     protected string $date;
 
-    /**
-     *
-     * @var string
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('TIME')]
     protected string $time;
 
-    /**
-     *
-     * @var string
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('TIMEZONE')]
     protected string $timezone;
 
-    /**
-     * @param DateTimeImmutable $dateTime
-     * @return DateTime
-     */
-    public function setDateTime(DateTimeImmutable $dateTime) : DateTime
+    public function setDateTime(DateTimeImmutable $dateTime): self
     {
         $this->setDate($dateTime->format('Y-m-d'));
         $this->setTime($dateTime->format('H:i:s'));
@@ -62,55 +41,34 @@ class DateTime implements Contracts\NodeInterface
         return $this;
     }
 
-    /**
-     * @param string $date
-     * @return DateTime
-     */
-    public function setDate(string $date) : DateTime
+    public function setDate(string $date): self
     {
         $this->date = $date;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getDate(): string
     {
         return $this->date;
     }
 
-    /**
-     * @param string $time
-     * @return DateTime
-     */
-    public function setTime(string $time) : DateTime
+    public function setTime(string $time): self
     {
         $this->time = $time;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getTime(): string
     {
         return $this->time;
     }
 
-    /**
-     * @param string $timezone
-     * @return DateTime
-     */
-    public function setTimezone(string $timezone) : DateTime
+    public function setTimezone(string $timezone): self
     {
         $this->timezone = $timezone;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getTimezone(): string
     {
         return $this->timezone;

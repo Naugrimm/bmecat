@@ -2,11 +2,10 @@
 
 namespace Naugrim\BMEcat\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Naugrim\BMEcat\Exception\SchemaValidationException;
 use Naugrim\BMEcat\Exception\UnsupportedVersionException;
 use Naugrim\BMEcat\SchemaValidator;
-
+use PHPUnit\Framework\TestCase;
 
 class SchemaValidatorTest extends TestCase
 {
@@ -16,8 +15,9 @@ class SchemaValidatorTest extends TestCase
     {
         parent::setUp();
 
-        $this->minimalValidDocument = (string) file_get_contents(__DIR__ . '/Fixtures/2005.1/minimal_valid_document.xml');
-
+        $this->minimalValidDocument = (string) file_get_contents(
+            __DIR__ . '/Fixtures/2005.1/minimal_valid_document.xml'
+        );
     }
 
     public function testInvalidVersion(): void
@@ -40,10 +40,6 @@ class SchemaValidatorTest extends TestCase
 
     public function testVersionThatHasNoType(): void
     {
-        $this->assertTrue(
-            SchemaValidator::isValid($this->minimalValidDocument, '2005.1', 'invalid')
-        );
+        $this->assertTrue(SchemaValidator::isValid($this->minimalValidDocument, '2005.1', 'invalid'));
     }
-
-
 }

@@ -8,7 +8,6 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 use Naugrim\BMEcat\Nodes\DeliveryTimes;
 use Naugrim\BMEcat\Nodes\Product\Logistic\CustomsTariffNumber;
 use Naugrim\BMEcat\Nodes\Product\Logistic\Dimensions;
-use Naugrim\BMEcat\Nodes\TimeSpan;
 
 /**
  * @implements NodeInterface<self>
@@ -17,8 +16,6 @@ use Naugrim\BMEcat\Nodes\TimeSpan;
 class LogisticDetails implements Contracts\NodeInterface
 {
     /**
-     *
-     *
      * @var CustomsTariffNumber[]
      */
     #[Serializer\Expose]
@@ -33,8 +30,6 @@ class LogisticDetails implements Contracts\NodeInterface
     protected ?float $statistics_factor = null;
 
     /**
-     *
-     *
      * @var string[]
      */
     #[Serializer\Expose]
@@ -48,8 +43,6 @@ class LogisticDetails implements Contracts\NodeInterface
     protected ?Dimensions $dimensions = null;
 
     /**
-     *
-     *
      * @var DeliveryTimes[]
      */
     #[Serializer\Expose]

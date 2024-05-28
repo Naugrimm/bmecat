@@ -5,13 +5,11 @@ namespace Naugrim\BMEcat\Tests\Node;
 use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
-use Naugrim\BMEcat\Nodes\Catalog;
 use Naugrim\BMEcat\Nodes\Document;
 use Naugrim\BMEcat\Nodes\NewCatalog;
 use Naugrim\BMEcat\Tests\Fixtures\Node\Node;
 use PHPUnit\Framework\TestCase;
 use TypeError;
-
 
 class NodeFromArrayTest extends TestCase
 {
@@ -21,8 +19,9 @@ class NodeFromArrayTest extends TestCase
     {
         parent::setUp();
 
-        $this->minimalValidDocument = (string) file_get_contents(__DIR__ . '/../Fixtures/2005.1/minimal_valid_document.xml');
-
+        $this->minimalValidDocument = (string) file_get_contents(
+            __DIR__ . '/../Fixtures/2005.1/minimal_valid_document.xml'
+        );
     }
 
     public function testEmptyArray(): void
@@ -34,20 +33,24 @@ class NodeFromArrayTest extends TestCase
     public function testInvalidSetter(): void
     {
         $this->expectException(UnknownKeyException::class);
-        NodeBuilder::fromArray(['thereisnosetterforthis' => 1], new Document());
+        NodeBuilder::fromArray([
+            'thereisnosetterforthis' => 1,
+        ], new Document());
     }
 
     public function testScalarValue(): void
     {
-        $document = NodeBuilder::fromArray(['version' => "1234567"], new Document());
-        $this->assertEquals("1234567", $document->getVersion());
+        $document = NodeBuilder::fromArray([
+            'version' => '1234567',
+        ], new Document());
+        $this->assertEquals('1234567', $document->getVersion());
     }
 
     public function testObjectValue(): void
     {
         $catalog = new NewCatalog();
         $document = NodeBuilder::fromArray([
-            'newCatalog' => $catalog
+            'newCatalog' => $catalog,
         ], new Document());
         $this->assertSame($catalog, $document->getNewCatalog());
     }
@@ -56,7 +59,7 @@ class NodeFromArrayTest extends TestCase
     {
         $this->expectException(InvalidSetterException::class);
         NodeBuilder::fromArray([
-            'noArguments' => []
+            'noArguments' => [],
         ], new Node());
     }
 
@@ -64,7 +67,7 @@ class NodeFromArrayTest extends TestCase
     {
         $this->expectException(InvalidSetterException::class);
         NodeBuilder::fromArray([
-            'noTypeHint' => []
+            'noTypeHint' => [],
         ], new Node());
     }
 
@@ -72,7 +75,7 @@ class NodeFromArrayTest extends TestCase
     {
         $this->expectException(TypeError::class);
         NodeBuilder::fromArray([
-            'scalarTypeHint' => []
+            'scalarTypeHint' => [],
         ], new Node());
     }
 
@@ -80,7 +83,7 @@ class NodeFromArrayTest extends TestCase
     {
         $float = 1.23456;
         $node = NodeBuilder::fromArray([
-            'matchingTypeHintFloat' => $float
+            'matchingTypeHintFloat' => $float,
         ], new Node());
         $this->assertEquals($float, $node->someFloat);
     }
@@ -89,7 +92,7 @@ class NodeFromArrayTest extends TestCase
     {
         $array = [];
         $node = NodeBuilder::fromArray([
-            'matchingTypeHintArray' => $array
+            'matchingTypeHintArray' => $array,
         ], new Node());
         $this->assertSame($array, $node->someArray);
     }
@@ -98,7 +101,7 @@ class NodeFromArrayTest extends TestCase
     {
         $anotherNode = new Node();
         $node = NodeBuilder::fromArray([
-            'matchingTypeHintNode' => $anotherNode
+            'matchingTypeHintNode' => $anotherNode,
         ], new Node());
         $this->assertSame($anotherNode, $node->anotherNode);
     }
@@ -106,13 +109,13 @@ class NodeFromArrayTest extends TestCase
     public function testRecursiveFromArrayWithArrays(): void
     {
         $array = [
-            'test' => '123'
+            'test' => '123',
         ];
 
         $node = NodeBuilder::fromArray([
             'matchingTypeHintNode' => [
-                'matchingTypeHintArray' => $array
-            ]
+                'matchingTypeHintArray' => $array,
+            ],
         ], new Node());
 
         $this->assertInstanceOf(Node::class, $node);

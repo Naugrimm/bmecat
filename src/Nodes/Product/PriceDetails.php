@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Nodes\Product;
 
 use JMS\Serializer\Annotation as Serializer;
@@ -16,39 +15,22 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 #[Serializer\XmlRoot('PRODUCT_PRICE_DETAILS')]
 class PriceDetails implements Contracts\NodeInterface
 {
-    /**
-     *
-     *
-     * @var string
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('VALID_START_DATE')]
     protected string $validStartDate;
 
-    /**
-     *
-     *
-     * @var string
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('VALID_END_DATE')]
     protected string $validEndDate;
 
-    /**
-     *
-     *
-     * @var bool
-     */
     #[Serializer\Expose]
     #[Serializer\Type('bool')]
     #[Serializer\SerializedName('DAILY_PRICE')]
     protected bool $dailyPrice;
 
     /**
-     *
-     *
      * @var Price[]
      */
     #[Serializer\Expose]
@@ -57,56 +39,34 @@ class PriceDetails implements Contracts\NodeInterface
     #[Serializer\XmlList(inline: true, entry: 'PRODUCT_PRICE')]
     protected array $prices = [];
 
-
-    /**
-     * @param string $validStartDate
-     * @return PriceDetails
-     */
-    public function setValidStartDate(string $validStartDate): PriceDetails
+    public function setValidStartDate(string $validStartDate): self
     {
         $this->validStartDate = $validStartDate;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getValidStartDate(): string
     {
         return $this->validStartDate;
     }
 
-    /**
-     * @param string $validEndDate
-     * @return PriceDetails
-     */
-    public function setValidEndDate(string $validEndDate): PriceDetails
+    public function setValidEndDate(string $validEndDate): self
     {
         $this->validEndDate = $validEndDate;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getValidEndDate(): string
     {
         return $this->validEndDate;
     }
 
-    /**
-     * @param bool $dailyPrice
-     * @return PriceDetails
-     */
-    public function setDailyPrice(bool $dailyPrice): PriceDetails
+    public function setDailyPrice(bool $dailyPrice): self
     {
         $this->dailyPrice = $dailyPrice;
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isDailyPrice(): bool
     {
         return $this->dailyPrice;
@@ -114,15 +74,14 @@ class PriceDetails implements Contracts\NodeInterface
 
     /**
      * @param Price[]|array<string, mixed>[] $prices
-     * @return PriceDetails
      * @throws InvalidSetterException
      * @throws UnknownKeyException
      */
-    public function setPrices(array $prices): PriceDetails
+    public function setPrices(array $prices): self
     {
         $this->prices = [];
         foreach ($prices as $price) {
-            if (!$price instanceof Price) {
+            if (! $price instanceof Price) {
                 $price = NodeBuilder::fromArray($price, new Price());
             }
 

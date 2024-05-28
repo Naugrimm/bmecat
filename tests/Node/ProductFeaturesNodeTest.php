@@ -1,37 +1,26 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Nodes\Product\Feature;
 use Naugrim\BMEcat\Nodes\Product\Features;
 use PHPUnit\Framework\TestCase;
 
-
 class ProductFeaturesNodeTest extends TestCase
 {
     private Serializer $serializer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Add_Get_Feature(): void
+    public function testAddGetFeature(): void
     {
-        $features = [
-            new Feature(),
-            new Feature(),
-            new Feature(),
-        ];
+        $features = [new Feature(), new Feature(), new Feature()];
 
         $node = new Features();
         $this->assertEmpty($node->getFeatures());
@@ -43,11 +32,7 @@ class ProductFeaturesNodeTest extends TestCase
         $this->assertSame($features, $node->getFeatures());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Reference_Feature_System_Name(): void
+    public function testSetGetReferenceFeatureSystemName(): void
     {
         $node = new Features();
         $value = sha1(uniqid(microtime(false), true));
@@ -57,11 +42,7 @@ class ProductFeaturesNodeTest extends TestCase
         $this->assertEquals($value, $node->getReferenceFeatureSystemName());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Reference_Feature_Group_Name(): void
+    public function testSetGetReferenceFeatureGroupName(): void
     {
         $node = new Features();
         $value = [sha1(uniqid(microtime(false), true))];
@@ -71,11 +52,7 @@ class ProductFeaturesNodeTest extends TestCase
         $this->assertEquals($value, $node->getReferenceFeatureGroupName());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Reference_Feature_Group_Id(): void
+    public function testSetGetReferenceFeatureGroupId(): void
     {
         $node = new Features();
         $value = [sha1(uniqid(microtime(false), true))];
@@ -85,11 +62,7 @@ class ProductFeaturesNodeTest extends TestCase
         $this->assertEquals($value, $node->getReferenceFeatureGroupId());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Serialize_Without_Null_Values(): void
+    public function testSerializeWithoutNullValues(): void
     {
         $node = new Features();
         $context = SerializationContext::create()->setSerializeNull(false);

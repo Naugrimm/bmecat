@@ -23,16 +23,17 @@ class NodeBuilder
     public static function fromArray(array $data, NodeInterface $instance): NodeInterface
     {
         foreach ($data as $name => $value) {
-            $setterName = 'set'.ucfirst($name);
-            if (!method_exists($instance, $setterName)) {
-                throw new UnknownKeyException('There is no setter for the property '.$name.' in the class '.$instance::class);
+            $setterName = 'set' . ucfirst($name);
+            if (! method_exists($instance, $setterName)) {
+                throw new UnknownKeyException(
+                    'There is no setter for the property ' . $name . ' in the class ' . $instance::class
+                );
             }
 
             if (is_scalar($value) || is_object($value)) {
-                $instance->$setterName($value); //@phpstan-ignore method.dynamicName
+                $instance->{$setterName}($value); //@phpstan-ignore method.dynamicName
                 continue;
             }
-
 
             // if the value is an array, try to recursively construct the object
 
@@ -41,26 +42,35 @@ class NodeBuilder
                 $setterParams = $reflectionMethod->getParameters();
                 // @codeCoverageIgnoreStart
             } catch (ReflectionException) {
-                throw new InvalidSetterException('Reflecting the setter method '.$instance::class.'::'.$setterName.' failed.');
+                throw new InvalidSetterException(
+                    'Reflecting the setter method ' . $instance::class . '::' . $setterName . ' failed.'
+                );
             }
 
             // @codeCoverageIgnoreEnd
             $firstSetterParam = array_shift($setterParams);
             if ($firstSetterParam === null) {
-                throw new InvalidSetterException('The setter for the property '.$name.' in the class '.$instance::class.' must have exactly one argument.');
+                throw new InvalidSetterException(
+                    'The setter for the property ' . $name . ' in the class ' . $instance::class . ' must have exactly one argument.'
+                );
             }
 
             if ($firstSetterParam->getType() === null) {
-                throw new InvalidSetterException('The setter for the property '.$name.' in the class '.$instance::class.' must have exactly one argument and this argument must have a type hint.');
+                throw new InvalidSetterException(
+                    'The setter for the property ' . $name . ' in the class ' . $instance::class . ' must have exactly one argument and this argument must have a type hint.'
+                );
             }
 
             if (! $firstSetterParam->getType() instanceof ReflectionNamedType) {
-                throw new InvalidSetterException('The type hint for the setter for the property '.$name.' in the class '.$instance::class.' cannot be parsed.');
+                throw new InvalidSetterException(
+                    'The type hint for the setter for the property ' . $name . ' in the class ' . $instance::class . ' cannot be parsed.'
+                );
             }
 
-            $paramType = $firstSetterParam->getType()->getName();
+            $paramType = $firstSetterParam->getType()
+                ->getName();
             if ($firstSetterParam->getType()->isBuiltin() || ! class_exists($paramType)) {
-                $instance->$setterName($value); //@phpstan-ignore method.dynamicName
+                $instance->{$setterName}($value); //@phpstan-ignore method.dynamicName
                 continue;
             }
 
@@ -72,13 +82,13 @@ class NodeBuilder
             $paramClass = $paramClassReflection->newInstance();
             if ($paramClass instanceof NodeInterface && is_array($value)) {
                 $value = self::fromArray($value, $paramClass);
-                $instance->$setterName($value); //@phpstan-ignore method.dynamicName
+                $instance->{$setterName}($value); //@phpstan-ignore method.dynamicName
             }
 
             /**
              * in all other cases we try to set the value directly and let the type system fail if there are any errors
              */
-            $instance->$setterName($value); //@phpstan-ignore method.dynamicName
+            $instance->{$setterName}($value); //@phpstan-ignore method.dynamicName
         }
 
         return $instance;

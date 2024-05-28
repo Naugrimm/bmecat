@@ -12,53 +12,31 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 #[Serializer\XmlRoot('PRODUCT_STATUS')]
 class Status implements Contracts\NodeInterface
 {
-    /**
-     *
-     * @var string
-     */
     #[Serializer\Type('string')]
     #[Serializer\XmlAttribute]
     protected string $type = '';
 
-    /**
-     *
-     * @var string
-     */
     #[Serializer\XmlValue]
     #[Serializer\Type('string')]
     protected string $value = '';
 
-    /**
-     * @param string $type
-     * @return Status
-     */
-    public function setType(string $type) : Status
+    public function setType(string $type): self
     {
         $this->type = $type;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @return string
-     */
     public function getValue(): string
     {
         return $this->value;
     }
 
-    /**
-     * @param string $value
-     * @return Status
-     */
-    public function setValue(string $value): Status
+    public function setValue(string $value): self
     {
         $this->value = $value;
         return $this;

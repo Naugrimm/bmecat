@@ -1,33 +1,25 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializerBuilder;
-use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\DocumentBuilder;
-use PHPUnit\Framework\TestCase;
 use Naugrim\BMEcat\Nodes\Document;
 use Naugrim\BMEcat\Nodes\Header;
 use Naugrim\BMEcat\Nodes\NewCatalog;
-
+use PHPUnit\Framework\TestCase;
 
 class DocumentNodeTest extends TestCase
 {
     private Serializer $serializer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Version(): void
+    public function testSetGetVersion(): void
     {
         $document = new Document();
 
@@ -36,11 +28,7 @@ class DocumentNodeTest extends TestCase
         $this->assertEquals('1.9', $document->getVersion());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_New_Catalog(): void
+    public function testSetGetNewCatalog(): void
     {
         $document = new Document();
         $catalog = new NewCatalog();
@@ -49,11 +37,7 @@ class DocumentNodeTest extends TestCase
         $this->assertSame($catalog, $document->getNewCatalog());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_New_Header(): void
+    public function testSetGetNewHeader(): void
     {
         $document = new Document();
         $header = new Header();
@@ -62,11 +46,7 @@ class DocumentNodeTest extends TestCase
         $this->assertSame($header, $document->getHeader());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Serialize_Without_Null_Values(): void
+    public function testSerializeWithoutNullValues(): void
     {
         $node = new Document();
         $context = SerializationContext::create()->setSerializeNull(false);

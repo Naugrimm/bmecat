@@ -1,57 +1,49 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Tests\Node;
 
-use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Exception\InvalidSetterException;
-use Naugrim\BMEcat\Exception\SchemaValidationException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
-use Naugrim\BMEcat\Nodes\Address;
 use Naugrim\BMEcat\Nodes\Document;
 use Naugrim\BMEcat\Nodes\NewCatalog;
 use Naugrim\BMEcat\SchemaValidator;
 use PHPUnit\Framework\TestCase;
 
-
 class AddressTest extends TestCase
 {
     /**
      * @param array<string, mixed> $data
-     * @return Document
      * @throws InvalidSetterException
      * @throws UnknownKeyException
      */
-    private function getDemoDocument(array $data) : Document
+    private function getDemoDocument(array $data): Document
     {
         $docData = [
-            'header' =>[
+            'header' => [
                 'generatorInfo' => 'DocumentTest Document',
                 'catalog' => [
-                    'language'  => 'eng',
-                    'id'        => 'MY_CATALOG',
-                    'version'   => '0.99',
-                    'datetime'  => [
+                    'language' => 'eng',
+                    'id' => 'MY_CATALOG',
+                    'version' => '0.99',
+                    'datetime' => [
                         'date' => '1979-01-01',
                         'time' => '10:59:54',
                         'timezone' => '-01:00',
-                    ]
+                    ],
                 ],
                 'supplierIdRef' => [
-                    'value'    => 'BMECAT_TEST',
-                ]
-            ]
+                    'value' => 'BMECAT_TEST',
+                ],
+            ],
         ];
 
         $data = array_merge_recursive($docData, $data);
 
-
         $document = NodeBuilder::fromArray($data, new Document());
 
-        $catalog = new NewCatalog;
+        $catalog = new NewCatalog();
         $document->setNewCatalog($catalog);
 
         return $document;
@@ -96,9 +88,9 @@ class AddressTest extends TestCase
                     [
                         'id' => 'party-id',
                         'address' => $addressData,
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
 
         $document = $this->getDemoDocument($data);
@@ -108,7 +100,7 @@ class AddressTest extends TestCase
         $builder->setDocument($document);
 
         $xml = $builder->toString();
-        $this->assertEquals(file_get_contents(__DIR__.'/../Fixtures/address_with_all_properties.xml'), $xml);
+        $this->assertEquals(file_get_contents(__DIR__ . '/../Fixtures/address_with_all_properties.xml'), $xml);
 
         $this->assertTrue(SchemaValidator::isValid($xml));
 

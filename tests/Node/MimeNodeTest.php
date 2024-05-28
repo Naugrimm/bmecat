@@ -1,29 +1,23 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializerBuilder;
-use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\DocumentBuilder;
-use PHPUnit\Framework\TestCase;
 use Naugrim\BMEcat\Nodes\Mime;
+use PHPUnit\Framework\TestCase;
 
 class MimeNodeTest extends TestCase
 {
     private Serializer $serializer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
 
-    /**
- * @test
- */
-    public function Set_Get_Type(): void
+    public function testSetGetType(): void
     {
         $node = new Mime();
         $value = sha1(uniqid(microtime(false), true));
@@ -32,10 +26,7 @@ class MimeNodeTest extends TestCase
         $this->assertEquals($value, $node->getType());
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Source(): void
+    public function testSetGetSource(): void
     {
         $node = new Mime();
         $value = sha1(uniqid(microtime(false), true));
@@ -44,10 +35,7 @@ class MimeNodeTest extends TestCase
         $this->assertEquals($value, $node->getSource());
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Purpose(): void
+    public function testSetGetPurpose(): void
     {
         $node = new Mime();
         $value = sha1(uniqid(microtime(false), true));
@@ -56,11 +44,7 @@ class MimeNodeTest extends TestCase
         $this->assertEquals($value, $node->getPurpose());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Serialize_Without_Null_Values(): void
+    public function testSerializeWithoutNullValues(): void
     {
         $node = new Mime();
         $context = SerializationContext::create()->setSerializeNull(false);

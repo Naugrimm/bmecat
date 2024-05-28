@@ -1,30 +1,23 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Nodes\Product\Feature;
 use PHPUnit\Framework\TestCase;
-
 
 class ProductFeatureNodeTest extends TestCase
 {
     private Serializer $serializer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Name(): void
+    public function testSetGetName(): void
     {
         $node = new Feature();
         $value = sha1(uniqid(microtime(false), true));
@@ -33,11 +26,7 @@ class ProductFeatureNodeTest extends TestCase
         $this->assertEquals($value, $node->getName());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Value(): void
+    public function testSetGetValue(): void
     {
         $node = new Feature();
         $value = [sha1(uniqid(microtime(false), true))];
@@ -46,11 +35,7 @@ class ProductFeatureNodeTest extends TestCase
         $this->assertEquals($value, $node->getValue());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Serialize_Without_Null_Values(): void
+    public function testSerializeWithoutNullValues(): void
     {
         $node = new Feature();
         $node->setName('test');

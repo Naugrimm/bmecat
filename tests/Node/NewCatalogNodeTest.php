@@ -1,38 +1,26 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializerBuilder;
-use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\DocumentBuilder;
-use PHPUnit\Framework\TestCase;
 use Naugrim\BMEcat\Nodes\NewCatalog;
 use Naugrim\BMEcat\Nodes\Product;
-
+use PHPUnit\Framework\TestCase;
 
 class NewCatalogNodeTest extends TestCase
 {
     private Serializer $serializer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Add_Get_Product_Node(): void
+    public function testAddGetProductNode(): void
     {
-        $products = [
-            new Product(),
-            new Product(),
-            new Product(),
-        ];
+        $products = [new Product(), new Product(), new Product()];
 
         $node = new NewCatalog();
         $this->assertEmpty($node->getProducts());
@@ -46,11 +34,7 @@ class NewCatalogNodeTest extends TestCase
         $this->assertSame($products, $node->getProducts());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Serialize_With_Null_Values(): void
+    public function testSerializeWithNullValues(): void
     {
         $node = new NewCatalog();
         $context = SerializationContext::create()->setSerializeNull(true);
@@ -61,11 +45,7 @@ class NewCatalogNodeTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Serialize_Without_Null_Values(): void
+    public function testSerializeWithoutNullValues(): void
     {
         $node = new NewCatalog();
         $context = SerializationContext::create()->setSerializeNull(false);

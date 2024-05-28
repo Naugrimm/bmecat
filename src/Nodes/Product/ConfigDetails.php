@@ -5,8 +5,6 @@ namespace Naugrim\BMEcat\Nodes\Product;
 use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts;
 use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
-use Naugrim\BMEcat\Nodes\Product\Config\PartAlternative;
-use Naugrim\BMEcat\Nodes\Product\Config\Parts;
 use Naugrim\BMEcat\Nodes\Product\Config\Step;
 
 /**
@@ -15,10 +13,7 @@ use Naugrim\BMEcat\Nodes\Product\Config\Step;
 #[Serializer\XmlRoot('PRODUCT_CONFIG_DETAILS')]
 class ConfigDetails implements Contracts\NodeInterface
 {
-
     /**
-     *
-     *
      * @var Step[]
      */
     #[Serializer\Expose]

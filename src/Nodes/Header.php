@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Nodes;
 
 use JMS\Serializer\Annotation as Serializer;
@@ -8,8 +7,6 @@ use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
 use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
-use Webmozart\Assert\Assert;
-use function PHPStan\dumpType;
 
 /**
  * @implements NodeInterface<self>
@@ -22,36 +19,22 @@ class Header implements Contracts\NodeInterface
     #[Serializer\SerializedName('GENERATOR_INFO')]
     protected ?string $generatorInfo = null;
 
-    /**
-     *
-     * @var Catalog
-     */
     #[Serializer\Expose]
     #[Serializer\Type(Catalog::class)]
     #[Serializer\SerializedName('CATALOG')]
     protected Catalog $catalog;
 
-    /**
-     *
-     * @var BuyerIdRef
-     */
     #[Serializer\Expose]
     #[Serializer\Type(BuyerIdRef::class)]
     #[Serializer\SerializedName('BUYER_IDREF')]
     protected ?BuyerIdRef $buyerIdRef = null;
 
-    /**
-     *
-     * @var SupplierIdRef
-     */
     #[Serializer\Expose]
     #[Serializer\Type(SupplierIdRef::class)]
     #[Serializer\SerializedName('SUPPLIER_IDREF')]
     protected ?SupplierIdRef $supplierIdRef = null;
 
     /**
-     *
-     *
      * @var Party[]
      */
     #[Serializer\Expose]
@@ -65,29 +48,18 @@ class Header implements Contracts\NodeInterface
         return $this->generatorInfo;
     }
 
-    /**
-     * @param string $generatorInfo
-     * @return self
-     */
     public function setGeneratorInfo(string $generatorInfo): self
     {
         $this->generatorInfo = $generatorInfo;
         return $this;
     }
 
-    /**
-     * @return Catalog
-     */
     public function getCatalog(): Catalog
     {
         return $this->catalog;
     }
 
-    /**
-     * @param Catalog $catalog
-     * @return Header
-     */
-    public function setCatalog(Catalog $catalog): Header
+    public function setCatalog(Catalog $catalog): self
     {
         $this->catalog = $catalog;
         return $this;
@@ -98,11 +70,7 @@ class Header implements Contracts\NodeInterface
         return $this->buyerIdRef;
     }
 
-    /**
-     * @param BuyerIdRef $buyerIdRef
-     * @return Header
-     */
-    public function setBuyerIdRef(BuyerIdRef $buyerIdRef): Header
+    public function setBuyerIdRef(BuyerIdRef $buyerIdRef): self
     {
         $this->buyerIdRef = $buyerIdRef;
         return $this;
@@ -113,11 +81,7 @@ class Header implements Contracts\NodeInterface
         return $this->supplierIdRef;
     }
 
-    /**
-     * @param SupplierIdRef $supplierIdRef
-     * @return Header
-     */
-    public function setSupplierIdRef(SupplierIdRef $supplierIdRef): Header
+    public function setSupplierIdRef(SupplierIdRef $supplierIdRef): self
     {
         $this->supplierIdRef = $supplierIdRef;
         return $this;
@@ -133,14 +97,13 @@ class Header implements Contracts\NodeInterface
 
     /**
      * @param Party[]|array<string, mixed>[] $parties
-     * @return Header
      * @throws InvalidSetterException
      * @throws UnknownKeyException
      */
-    public function setParties(array $parties): Header
+    public function setParties(array $parties): self
     {
         foreach ($parties as $party) {
-            if (!$party instanceof Party) {
+            if (! $party instanceof Party) {
                 $party = NodeBuilder::fromArray($party, new Party());
             }
 
@@ -151,7 +114,6 @@ class Header implements Contracts\NodeInterface
     }
 
     /**
-     * @param Party $party
      * @return $this
      */
     public function addParty(Party $party): static

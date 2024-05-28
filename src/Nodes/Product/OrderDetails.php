@@ -30,10 +30,6 @@ class OrderDetails implements Contracts\NodeInterface
     #[Serializer\XmlElement(cdata: false)]
     protected ?float $noCuPerOu = null;
 
-    /**
-     *
-     * @var float
-     */
     #[Serializer\Expose]
     #[Serializer\Type('float')]
     #[Serializer\SerializedName('PRICE_QUANTITY')]
@@ -52,47 +48,34 @@ class OrderDetails implements Contracts\NodeInterface
     #[Serializer\XmlElement(cdata: false)]
     protected ?float $quantityInterval = null;
 
-    /**
-     * @return string
-     */
     public function getOrderUnit(): string
     {
         return $this->orderUnit;
     }
 
-    /**
-     * @param string $orderUnit
-     * @return OrderDetails
-     */
-    public function setOrderUnit(string $orderUnit) : OrderDetails
+    public function setOrderUnit(string $orderUnit): self
     {
         $this->orderUnit = $orderUnit;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getContentUnit(): string
     {
         return $this->contentUnit;
     }
 
-    /**
-     * @param string $contentUnit
-     * @return OrderDetails
-     */
-    public function setContentUnit(string $contentUnit) : OrderDetails
+    public function setContentUnit(string $contentUnit): self
     {
         $this->contentUnit = $contentUnit;
         return $this;
     }
+
     public function getNoCuPerOu(): ?float
     {
         return $this->noCuPerOu;
     }
 
-    public function setNoCuPerOu(float $noCuPerOu) : OrderDetails
+    public function setNoCuPerOu(float $noCuPerOu): self
     {
         $this->noCuPerOu = $noCuPerOu;
         return $this;
@@ -103,7 +86,7 @@ class OrderDetails implements Contracts\NodeInterface
         return $this->priceQuantity;
     }
 
-    public function setPriceQuantity(float $priceQuantity) : OrderDetails
+    public function setPriceQuantity(float $priceQuantity): self
     {
         $this->priceQuantity = $priceQuantity;
         return $this;
@@ -114,7 +97,7 @@ class OrderDetails implements Contracts\NodeInterface
         return $this->quantityMin;
     }
 
-    public function setQuantityMin(float $quantityMin) : OrderDetails
+    public function setQuantityMin(float $quantityMin): self
     {
         $this->quantityMin = $quantityMin;
         return $this;
@@ -125,7 +108,7 @@ class OrderDetails implements Contracts\NodeInterface
         return $this->quantityInterval;
     }
 
-    public function setQuantityInterval(float $quantityInterval) : OrderDetails
+    public function setQuantityInterval(float $quantityInterval): self
     {
         $this->quantityInterval = $quantityInterval;
         return $this;

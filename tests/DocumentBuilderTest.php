@@ -1,23 +1,20 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Tests;
 
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializerBuilder;
-use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\Builder\NodeBuilder;
-use PHPUnit\Framework\TestCase;
 use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Exception\MissingDocumentException;
 use Naugrim\BMEcat\Nodes\Document;
-
+use PHPUnit\Framework\TestCase;
 
 class DocumentBuilderTest extends TestCase
 {
     private Serializer $serializer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = SerializerBuilder::create()->build();
     }
@@ -34,23 +31,15 @@ class DocumentBuilderTest extends TestCase
         $this->assertInstanceOf(Serializer::class, $builder->getSerializer());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Instantiate_Via_Static_Method(): void
+    public function testInstantiateViaStaticMethod(): void
     {
         $builder = DocumentBuilder::create($this->serializer);
         $this->assertInstanceOf(Serializer::class, $builder->getSerializer());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function To_String_Returns_Default_Document_Without_Null_Values(): void
+    public function testToStringReturnsDefaultDocumentWithoutNullValues(): void
     {
-        $builder = new DocumentBuilder;
+        $builder = new DocumentBuilder();
         $document = NodeBuilder::fromArray([], new Document());
         $builder->setDocument($document);
 
@@ -58,21 +47,19 @@ class DocumentBuilderTest extends TestCase
         $this->assertEquals($expected, $builder->toString());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function To_String_Throws_Exception(): void
+    public function testToStringThrowsException(): void
     {
         $this->expectException(MissingDocumentException::class);
-        $builder = new DocumentBuilder;
+        $builder = new DocumentBuilder();
         $builder->toString();
     }
 
     public function testFromStringWorksCorrectly(): void
     {
         $builder = new DocumentBuilder();
-        $doc = $builder->fromString((string) file_get_contents(__DIR__ . '/Fixtures/2005.1/minimal_valid_document.xml'));
+        $doc = $builder->fromString(
+            (string) file_get_contents(__DIR__ . '/Fixtures/2005.1/minimal_valid_document.xml')
+        );
 
         $this->assertInstanceOf(Document::class, $doc);
     }

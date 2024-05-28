@@ -14,17 +14,12 @@ use Naugrim\BMEcat\Nodes\Crypto\PublicKey;
  */
 class Emails implements NodeInterface
 {
-    /**
-     *
-     * @var string
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('EMAIL')]
     protected string $email;
 
     /**
-     *
      * @var PublicKey[]
      */
     #[Serializer\Expose]
@@ -33,19 +28,12 @@ class Emails implements NodeInterface
     #[Serializer\XmlList(inline: true)]
     protected array $publicKeys = [];
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @param string $email
-     * @return Emails
-     */
-    public function setEmail(string $email): Emails
+    public function setEmail(string $email): self
     {
         $this->email = $email;
         return $this;
@@ -61,15 +49,14 @@ class Emails implements NodeInterface
 
     /**
      * @param PublicKey[]|array{type: string, value: string}[] $publicKeys
-     * @return Emails
      * @throws InvalidSetterException
      * @throws UnknownKeyException
      */
-    public function setPublicKeys(array $publicKeys): Emails
+    public function setPublicKeys(array $publicKeys): self
     {
         $this->publicKeys = [];
         foreach ($publicKeys as $publicKey) {
-            if (!$publicKey instanceof PublicKey) {
+            if (! $publicKey instanceof PublicKey) {
                 $publicKey = NodeBuilder::fromArray($publicKey, new PublicKey());
             }
 
@@ -79,11 +66,7 @@ class Emails implements NodeInterface
         return $this;
     }
 
-    /**
-     * @param PublicKey $publicKey
-     * @return Emails
-     */
-    public function addPublicKey(PublicKey $publicKey): Emails
+    public function addPublicKey(PublicKey $publicKey): self
     {
         $this->publicKeys[] = $publicKey;
         return $this;

@@ -16,16 +16,12 @@ trait HasTypeAttribute
     #[Serializer\XmlAttribute]
     protected string $type;
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
     /**
-     * @param string $type
      * @return NodeInterface<TNode>
      */
     public function setType(string $type): NodeInterface

@@ -1,30 +1,23 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Nodes\Product\Price;
 use PHPUnit\Framework\TestCase;
-
 
 class ProductPriceNodeTest extends TestCase
 {
     private Serializer $serializer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Price(): void
+    public function testSetGetPrice(): void
     {
         $node = new Price();
         $value = random_int(10, 1000);
@@ -33,11 +26,7 @@ class ProductPriceNodeTest extends TestCase
         $this->assertEquals($value, $node->getPrice());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Currency(): void
+    public function testSetGetCurrency(): void
     {
         $node = new Price();
         $value = substr(sha1(uniqid(microtime(false), true)), 0, 3);
@@ -47,12 +36,7 @@ class ProductPriceNodeTest extends TestCase
         $this->assertEquals($value, $node->getCurrency());
     }
 
-
-    /**
-     *
-     * @test
-     */
-    public function Serialize_Without_Null_Values(): void
+    public function testSerializeWithoutNullValues(): void
     {
         $node = new Price();
         $context = SerializationContext::create()->setSerializeNull(false);

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Nodes;
 
 use JMS\Serializer\Annotation as Serializer;
@@ -21,10 +20,6 @@ use Naugrim\BMEcat\Nodes\Product\PriceDetails;
 #[Serializer\XmlRoot('PRODUCT')]
 class Product implements Contracts\NodeInterface
 {
-    /**
-     *
-     * @var string
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('mode')]
@@ -36,20 +31,12 @@ class Product implements Contracts\NodeInterface
     #[Serializer\SerializedName('SUPPLIER_PID')]
     protected ?SupplierPid $id = null;
 
-    /**
-     *
-     *
-     * @var Details
-     */
     #[Serializer\Expose]
     #[Serializer\SerializedName('PRODUCT_DETAILS')]
     #[Serializer\Type(Details::class)]
     protected Details $details;
 
-
     /**
-     *
-     *
      * @var Features[]
      */
     #[Serializer\Expose]
@@ -57,18 +44,12 @@ class Product implements Contracts\NodeInterface
     #[Serializer\XmlList(entry: 'PRODUCT_FEATURES', inline: true)]
     protected array $features = [];
 
-    /**
-     *
-     * @var OrderDetails
-     */
     #[Serializer\Expose]
     #[Serializer\SerializedName('PRODUCT_ORDER_DETAILS')]
     #[Serializer\Type(OrderDetails::class)]
     protected OrderDetails $orderDetails;
 
     /**
-     *
-     *
      * @var PriceDetails[]
      */
     #[Serializer\Expose]
@@ -78,8 +59,6 @@ class Product implements Contracts\NodeInterface
     protected array $priceDetails = [];
 
     /**
-     *
-     *
      * @var Mime[]
      */
     #[Serializer\Expose]
@@ -88,73 +67,47 @@ class Product implements Contracts\NodeInterface
     #[Serializer\XmlList(entry: 'MIME')]
     protected array $mimes = [];
 
-    /**
-     *
-     * @var LogisticDetails
-     */
     #[Serializer\Expose]
     #[Serializer\SerializedName('PRODUCT_LOGISTIC_DETAILS')]
     #[Serializer\Type(LogisticDetails::class)]
     protected LogisticDetails $logisticDetails;
 
-    /**
-     *
-     * @var ConfigDetails
-     */
     #[Serializer\Expose]
     #[Serializer\SerializedName('PRODUCT_CONFIG_DETAILS')]
     #[Serializer\Type(ConfigDetails::class)]
     protected ConfigDetails $configDetails;
 
-    /**
-     * @return string
-     */
     public function getMode(): string
     {
         return $this->mode;
     }
 
-    /**
-     * @param string $mode
-     */
     public function setMode(string $mode): void
     {
         $this->mode = $mode;
     }
 
-
-    /**
-     *
-     * @param Details $details
-     * @return Product
-     */
-    public function setDetails(Details $details) : Product
+    public function setDetails(Details $details): self
     {
         $this->details = $details;
         return $this;
     }
 
-    /**
-     *
-     * @return Details
-     */
     public function getDetails(): Details
     {
         return $this->details;
     }
 
     /**
-     *
      * @param PriceDetails[]|array<string, mixed>[] $priceDetails
-     * @return Product
      * @throws InvalidSetterException
      * @throws UnknownKeyException
      */
-    public function setPriceDetails(array $priceDetails) : Product
+    public function setPriceDetails(array $priceDetails): self
     {
         $this->priceDetails = [];
         foreach ($priceDetails as $priceDetail) {
-            if (!$priceDetail instanceof PriceDetails) {
+            if (! $priceDetail instanceof PriceDetails) {
                 $priceDetail = NodeBuilder::fromArray($priceDetail, new PriceDetails());
             }
 
@@ -164,12 +117,7 @@ class Product implements Contracts\NodeInterface
         return $this;
     }
 
-    /**
-     *
-     * @param PriceDetails $price
-     * @return Product
-     */
-    public function addPriceDetail(PriceDetails $price) : Product
+    public function addPriceDetail(PriceDetails $price): self
     {
         $this->priceDetails[] = $price;
         return $this;
@@ -177,15 +125,14 @@ class Product implements Contracts\NodeInterface
 
     /**
      * @param Mime[]|array<string, mixed>[] $mimes
-     * @return Product
      * @throws InvalidSetterException
      * @throws UnknownKeyException
      */
-    public function setMimes(array $mimes): Product
+    public function setMimes(array $mimes): self
     {
         $this->mimes = [];
         foreach ($mimes as $mime) {
-            if (!$mime instanceof Mime) {
+            if (! $mime instanceof Mime) {
                 $mime = NodeBuilder::fromArray($mime, new Mime());
             }
 
@@ -195,22 +142,13 @@ class Product implements Contracts\NodeInterface
         return $this;
     }
 
-    /**
-     * @param Mime $mime
-     * @return Product
-     */
-    public function addMime(Mime $mime) : Product
+    public function addMime(Mime $mime): self
     {
         $this->mimes[] = $mime;
         return $this;
     }
 
-    /**
-     *
-     * @param SupplierPid $id
-     * @return Product
-     */
-    public function setId(SupplierPid $id) : Product
+    public function setId(SupplierPid $id): self
     {
         $this->id = $id;
         return $this;
@@ -221,7 +159,7 @@ class Product implements Contracts\NodeInterface
         return $this->orderDetails;
     }
 
-    public function setOrderDetails(OrderDetails $orderDetails) : self
+    public function setOrderDetails(OrderDetails $orderDetails): self
     {
         $this->orderDetails = $orderDetails;
         return $this;
@@ -234,11 +172,10 @@ class Product implements Contracts\NodeInterface
 
     /**
      * @param Features[]|array<string, mixed>[] $features
-     * @return Product
      * @throws InvalidSetterException
      * @throws UnknownKeyException
      */
-    public function setFeatures(array $features): Product
+    public function setFeatures(array $features): self
     {
         $this->features = [];
         foreach ($features as $feature) {
@@ -252,19 +189,13 @@ class Product implements Contracts\NodeInterface
         return $this;
     }
 
-    /**
-     *
-     * @param Features $features
-     * @return Product
-     */
-    public function addFeatures(Features $features) : Product
+    public function addFeatures(Features $features): self
     {
         $this->features[] = $features;
         return $this;
     }
 
     /**
-     *
      * @return Features[]
      */
     public function getFeatures(): array
@@ -273,7 +204,6 @@ class Product implements Contracts\NodeInterface
     }
 
     /**
-     *
      * @return PriceDetails[]
      */
     public function getPriceDetails(): array

@@ -4,7 +4,6 @@ namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Nodes\Product\Keyword;
 use PHPUnit\Framework\TestCase;
@@ -13,15 +12,12 @@ class ProductKeywordNodeTest extends TestCase
 {
     private Serializer $serializer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Description_Value(): void
+    public function testSetGetDescriptionValue(): void
     {
         $node = new Keyword();
         $value = '';
@@ -31,10 +27,7 @@ class ProductKeywordNodeTest extends TestCase
         $this->assertEquals($value, $node->getValue());
     }
 
-    /**
-     * @test
-     */
-    public function Serialize_With_Null_Values(): void
+    public function testSerializeWithNullValues(): void
     {
         $node = new Keyword();
         $context = SerializationContext::create()->setSerializeNull(true);
@@ -48,10 +41,7 @@ class ProductKeywordNodeTest extends TestCase
         $this->assertInstanceOf(Keyword::class, $doc);
     }
 
-    /**
-     * @test
-     */
-    public function Serialize_Without_Null_Values(): void
+    public function testSerializeWithoutNullValues(): void
     {
         $node = new Keyword();
         $context = SerializationContext::create()->setSerializeNull(false);

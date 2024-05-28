@@ -1,32 +1,25 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\DocumentBuilder;
-use Naugrim\BMEcat\Nodes\SupplierIdRef;
-use PHPUnit\Framework\TestCase;
 use Naugrim\BMEcat\Nodes\Catalog;
 use Naugrim\BMEcat\Nodes\Header;
-
+use Naugrim\BMEcat\Nodes\SupplierIdRef;
+use PHPUnit\Framework\TestCase;
 
 class HeaderNodeTest extends TestCase
 {
     private Serializer $serializer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Generator_Info(): void
+    public function testSetGetGeneratorInfo(): void
     {
         $node = new Header();
         $value = sha1(uniqid(microtime(false), true));
@@ -36,11 +29,7 @@ class HeaderNodeTest extends TestCase
         $this->assertEquals($value, $node->getGeneratorInfo());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Supplier(): void
+    public function testSetGetSupplier(): void
     {
         $header = new Header();
         $supplier = new SupplierIdRef();
@@ -50,11 +39,7 @@ class HeaderNodeTest extends TestCase
         $this->assertEquals($supplier, $header->getSupplierIdRef());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Catalog(): void
+    public function testSetGetCatalog(): void
     {
         $header = new Header();
         $catalog = new Catalog();
@@ -63,11 +48,7 @@ class HeaderNodeTest extends TestCase
         $this->assertEquals($catalog, $header->getCatalog());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Serialize_Without_Null_Values(): void
+    public function testSerializeWithoutNullValues(): void
     {
         $node = new Header();
         $context = SerializationContext::create()->setSerializeNull(false);

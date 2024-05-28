@@ -11,10 +11,6 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 #[Serializer\XmlRoot('TimeSpan')]
 class TimeSpan implements Contracts\NodeInterface
 {
-    /**
-     *
-     * @var string
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('TIME_BASE')]
@@ -46,12 +42,10 @@ class TimeSpan implements Contracts\NodeInterface
     protected ?string $value_end = null;
 
     /**
-     *
      * @var TimeSpan[]
      */
     #[Serializer\Expose]
     #[Serializer\Type('array<Naugrim\BMEcat\Nodes\TimeSpan>')]
     #[Serializer\XmlList(entry: 'SUB_TIME_SPANS', inline: true)]
     protected array $subTimeSpans;
-
 }

@@ -4,7 +4,6 @@ namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Nodes\Product\Status;
 use PHPUnit\Framework\TestCase;
@@ -13,15 +12,12 @@ class ProductStatusNodeTest extends TestCase
 {
     private Serializer $serializer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
 
-    /**
-     * @test
-     */
-    public function Serialize_With_Null_Values(): void
+    public function testSerializeWithNullValues(): void
     {
         $node = new Status();
         $context = SerializationContext::create()->setSerializeNull(true);
@@ -35,10 +31,7 @@ class ProductStatusNodeTest extends TestCase
         $this->assertInstanceOf(Status::class, $doc);
     }
 
-    /**
-     * @test
-     */
-    public function Serialize_Without_Null_Values(): void
+    public function testSerializeWithoutNullValues(): void
     {
         $node = new Status();
         $context = SerializationContext::create()->setSerializeNull(false);

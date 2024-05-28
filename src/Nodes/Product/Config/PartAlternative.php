@@ -2,12 +2,10 @@
 
 namespace Naugrim\BMEcat\Nodes\Product\Config;
 
-
 use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts;
 use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 use Naugrim\BMEcat\Nodes\Product\PriceDetails;
-
 
 /**
  * @implements NodeInterface<self>
@@ -46,7 +44,7 @@ class PartAlternative implements Contracts\NodeInterface
     #[Serializer\Type(PriceDetails::class)]
     protected ?PriceDetails $priceDetails = null;
 
-    public function setSupplierPidRef(string $supplier_pid_ref): PartAlternative
+    public function setSupplierPidRef(string $supplier_pid_ref): self
     {
         $this->supplier_pid_ref = $supplier_pid_ref;
         return $this;
@@ -57,7 +55,7 @@ class PartAlternative implements Contracts\NodeInterface
         return $this->supplier_pid_ref;
     }
 
-    public function setSupplierIdRef(?string $supplier_id_ref): PartAlternative
+    public function setSupplierIdRef(?string $supplier_id_ref): self
     {
         $this->supplier_id_ref = $supplier_id_ref;
         return $this;
@@ -68,7 +66,7 @@ class PartAlternative implements Contracts\NodeInterface
         return $this->supplier_id_ref;
     }
 
-    public function setOrder(int $order): PartAlternative
+    public function setOrder(int $order): self
     {
         $this->order = $order;
         return $this;
@@ -79,7 +77,7 @@ class PartAlternative implements Contracts\NodeInterface
         return $this->order;
     }
 
-    public function setDefaultFlag(?bool $default_flag): PartAlternative
+    public function setDefaultFlag(?bool $default_flag): self
     {
         $this->default_flag = $default_flag;
         return $this;
@@ -90,7 +88,7 @@ class PartAlternative implements Contracts\NodeInterface
         return $this->default_flag;
     }
 
-    public function setCode(?string $code): PartAlternative
+    public function setCode(?string $code): self
     {
         $this->code = $code;
         return $this;
@@ -101,7 +99,7 @@ class PartAlternative implements Contracts\NodeInterface
         return $this->code;
     }
 
-    public function setPriceDetails(?PriceDetails $priceDetails): PartAlternative
+    public function setPriceDetails(?PriceDetails $priceDetails): self
     {
         $this->priceDetails = $priceDetails;
         return $this;
@@ -111,5 +109,4 @@ class PartAlternative implements Contracts\NodeInterface
     {
         return $this->priceDetails;
     }
-
 }

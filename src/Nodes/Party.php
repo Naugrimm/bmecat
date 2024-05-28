@@ -13,36 +13,22 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
  */
 class Party implements NodeInterface
 {
-    /**
-     *
-     * @var string
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('PARTY_ID')]
     protected string $id;
 
-    /**
-     *
-     * @var string
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('PARTY_ROLE')]
     protected string $role;
 
-    /**
-     *
-     * @var Address
-     */
     #[Serializer\Expose]
     #[Serializer\Type(Address::class)]
     #[Serializer\SerializedName('ADDRESS')]
     protected Address $address;
 
     /**
-     *
-     *
      * @var Mime[]
      */
     #[Serializer\Expose]
@@ -51,55 +37,34 @@ class Party implements NodeInterface
     #[Serializer\XmlList(entry: 'MIME')]
     protected array $mimes = [];
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @param string $id
-     * @return Party
-     */
-    public function setId(string $id): Party
+    public function setId(string $id): self
     {
         $this->id = $id;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getRole(): string
     {
         return $this->role;
     }
 
-    /**
-     * @param string $role
-     * @return Party
-     */
-    public function setRole(string $role): Party
+    public function setRole(string $role): self
     {
         $this->role = $role;
         return $this;
     }
 
-    /**
-     * @return Address
-     */
     public function getAddress(): Address
     {
         return $this->address;
     }
 
-    /**
-     * @param Address $address
-     * @return Party
-     */
-    public function setAddress(Address $address): Party
+    public function setAddress(Address $address): self
     {
         $this->address = $address;
         return $this;
@@ -115,15 +80,14 @@ class Party implements NodeInterface
 
     /**
      * @param Mime[]|array<string, mixed>[] $mimes
-     * @return Party
      * @throws InvalidSetterException
      * @throws UnknownKeyException
      */
-    public function setMimes(array $mimes): Party
+    public function setMimes(array $mimes): self
     {
         $this->mimes = [];
         foreach ($mimes as $mime) {
-            if (!$mime instanceof Mime) {
+            if (! $mime instanceof Mime) {
                 $mime = NodeBuilder::fromArray($mime, new Mime());
             }
 
@@ -133,11 +97,7 @@ class Party implements NodeInterface
         return $this;
     }
 
-    /**
-     * @param Mime $mime
-     * @return Party
-     */
-    public function addMime(Mime $mime) : Party
+    public function addMime(Mime $mime): self
     {
         $this->mimes[] = $mime;
         return $this;

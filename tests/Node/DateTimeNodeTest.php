@@ -1,31 +1,23 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializerBuilder;
-use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\DocumentBuilder;
-use PHPUnit\Framework\TestCase;
 use Naugrim\BMEcat\Nodes\DateTime;
-
+use PHPUnit\Framework\TestCase;
 
 class DateTimeNodeTest extends TestCase
 {
     private Serializer $serializer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Date(): void
+    public function testSetGetDate(): void
     {
         $node = new DateTime();
         $value = '1979-01-10';
@@ -34,11 +26,7 @@ class DateTimeNodeTest extends TestCase
         $this->assertEquals($value, $node->getDate());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Time(): void
+    public function testSetGetTime(): void
     {
         $node = new DateTime();
         $value = '10:59:54';
@@ -47,11 +35,7 @@ class DateTimeNodeTest extends TestCase
         $this->assertEquals($value, $node->getTime());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_TimeZone(): void
+    public function testSetGetTimeZone(): void
     {
         $node = new DateTime();
         $value = '-01:00';
@@ -60,11 +44,7 @@ class DateTimeNodeTest extends TestCase
         $this->assertEquals($value, $node->getTimezone());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Serialize_Without_Null_Values(): void
+    public function testSerializeWithoutNullValues(): void
     {
         $node = new DateTime();
         $context = SerializationContext::create()->setSerializeNull(false);

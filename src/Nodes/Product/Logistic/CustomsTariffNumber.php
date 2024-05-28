@@ -5,17 +5,12 @@ namespace Naugrim\BMEcat\Nodes\Product\Logistic;
 use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts;
 
-
 /**
  * @implements Contracts\NodeInterface<self>
  */
 #[Serializer\XmlRoot('CUSTOMS_TARIFF_NUMBER')]
 class CustomsTariffNumber implements Contracts\NodeInterface
 {
-    /**
-     *
-     * @var string
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('CUSTOMS_NUMBER')]
@@ -23,8 +18,6 @@ class CustomsTariffNumber implements Contracts\NodeInterface
     protected string $number;
 
     /**
-     *
-     *
      * @var string[]
      */
     #[Serializer\Expose]
@@ -32,7 +25,7 @@ class CustomsTariffNumber implements Contracts\NodeInterface
     #[Serializer\XmlList(entry: 'TERRITORY', inline: true)]
     protected array $territories = [];
 
-    public function setNumber(string $number): CustomsTariffNumber
+    public function setNumber(string $number): self
     {
         $this->number = $number;
         return $this;
@@ -47,7 +40,7 @@ class CustomsTariffNumber implements Contracts\NodeInterface
      * @param string[] $territories
      * @return $this
      */
-    public function setTerritories(array $territories): CustomsTariffNumber
+    public function setTerritories(array $territories): self
     {
         $this->territories = $territories;
         return $this;

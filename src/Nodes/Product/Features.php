@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Nodes\Product;
 
 use JMS\Serializer\Annotation as Serializer;
@@ -42,7 +41,6 @@ class Features implements Contracts\NodeInterface
     protected ?array $referenceFeatureGroupName = null;
 
     /**
-     *
      * @var Feature[]
      */
     #[Serializer\Expose]
@@ -52,11 +50,10 @@ class Features implements Contracts\NodeInterface
 
     /**
      * @param Feature[]|array<string, mixed>[] $features
-     * @return Features
      * @throws InvalidSetterException
      * @throws UnknownKeyException
      */
-    public function setFeatures(array $features): Features
+    public function setFeatures(array $features): self
     {
         $this->features = [];
         foreach ($features as $feature) {
@@ -70,21 +67,13 @@ class Features implements Contracts\NodeInterface
         return $this;
     }
 
-    /**
-     * @param Feature $feature
-     * @return Features
-     */
-    public function addFeature(Feature $feature) : Features
+    public function addFeature(Feature $feature): self
     {
         $this->features[] = $feature;
         return $this;
     }
 
-    /**
-     * @param string $referenceFeatureSystemName
-     * @return Features
-     */
-    public function setReferenceFeatureSystemName(string $referenceFeatureSystemName) : Features
+    public function setReferenceFeatureSystemName(string $referenceFeatureSystemName): self
     {
         $this->referenceFeatureSystemName = $referenceFeatureSystemName;
         return $this;
@@ -92,9 +81,8 @@ class Features implements Contracts\NodeInterface
 
     /**
      * @param string[] $referenceFeatureGroupName
-     * @return Features
      */
-    public function setReferenceFeatureGroupName(array $referenceFeatureGroupName) : Features
+    public function setReferenceFeatureGroupName(array $referenceFeatureGroupName): self
     {
         $this->referenceFeatureGroupId = [];
         $this->referenceFeatureGroupName = $referenceFeatureGroupName;
@@ -103,9 +91,8 @@ class Features implements Contracts\NodeInterface
 
     /**
      * @param string[] $referenceFeatureGroupId
-     * @return Features
      */
-    public function setReferenceFeatureGroupId(array $referenceFeatureGroupId) : Features
+    public function setReferenceFeatureGroupId(array $referenceFeatureGroupId): self
     {
         $this->referenceFeatureGroupName = [];
         $this->referenceFeatureGroupId = $referenceFeatureGroupId;
@@ -136,7 +123,7 @@ class Features implements Contracts\NodeInterface
     /**
      * @return Feature[]
      */
-    public function getFeatures() : array
+    public function getFeatures(): array
     {
         return $this->features;
     }

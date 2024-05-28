@@ -1,22 +1,13 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Tests\Node;
 
-use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializerInterface;
-use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Nodes\SupplierIdRef;
 use PHPUnit\Framework\TestCase;
 
-
 class SupplierNodeTest extends TestCase
 {
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Value(): void
+    public function testSetGetValue(): void
     {
         $node = new SupplierIdRef();
         $value = sha1(uniqid(microtime(false), true));

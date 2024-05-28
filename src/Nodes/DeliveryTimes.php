@@ -11,10 +11,7 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 #[Serializer\XmlRoot('DELIVERY_TIMES')]
 class DeliveryTimes implements Contracts\NodeInterface
 {
-
     /**
-     *
-     *
      * @var string[]
      */
     #[Serializer\Expose]
@@ -23,8 +20,6 @@ class DeliveryTimes implements Contracts\NodeInterface
     protected array $territories;
 
     /**
-     *
-     *
      * @var TimeSpan[]
      */
     #[Serializer\Expose]

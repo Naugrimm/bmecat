@@ -19,10 +19,7 @@ class SchemaValidationException extends Exception
     protected array $errors;
 
     /**
-     * @param string $xml
-     * @param string $schemaFile
      * @param LibXMLError[] $errors
-     * @return self
      */
     public static function withErrors(string $xml, string $schemaFile, array $errors = []): self
     {
@@ -38,8 +35,8 @@ class SchemaValidationException extends Exception
      */
     public function __toString(): string
     {
-        $msg = static::class.': '.$this->getMessage()."\n";
-        $msg .= $this->getTraceAsString()."\n\n";
+        $msg = static::class . ': ' . $this->getMessage() . "\n";
+        $msg .= $this->getTraceAsString() . "\n\n";
 
         $lines = explode("\n", $this->xml);
 
@@ -53,10 +50,10 @@ class SchemaValidationException extends Exception
                 min(count($lines) - $error->line, 2 * $this->context)
             );
 
-            $xmlErrors[] = implode("\n", [
-                'Error #'.($idx+1).': '.$error->message,
-                implode("\n", $context)."\n",
-            ]);
+            $xmlErrors[] = implode(
+                "\n",
+                ['Error #' . ($idx + 1) . ': ' . $error->message, implode("\n", $context) . "\n"]
+            );
         }
 
         return $msg . implode("\n", $xmlErrors);

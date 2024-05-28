@@ -51,7 +51,7 @@ class Node implements NodeInterface
         return $this;
     }
 
-    public function setMatchingTypeHintNode(Node $anotherNode): static
+    public function setMatchingTypeHintNode(self $anotherNode): static
     {
         $this->anotherNode = $anotherNode;
         return $this;

@@ -1,11 +1,9 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Nodes\BuyerPid;
 use Naugrim\BMEcat\Nodes\Product\Details;
@@ -14,26 +12,18 @@ use Naugrim\BMEcat\Nodes\Product\Status;
 use Naugrim\BMEcat\Nodes\SpecialTreatmentClass;
 use PHPUnit\Framework\TestCase;
 
-
 class ProductDetailsNodeTest extends TestCase
 {
     private Serializer $serializer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
 
-    /**
-     * @test
-     */
-    public function Add_Get_Buyer_Pides(): void
+    public function testAddGetBuyerPides(): void
     {
-        $buyerPids = [
-            new BuyerPid(),
-            new BuyerPid(),
-            new BuyerPid(),
-        ];
+        $buyerPids = [new BuyerPid(), new BuyerPid(), new BuyerPid()];
 
         $node = new Details();
         $this->assertEmpty($node->getBuyerPids());
@@ -47,10 +37,7 @@ class ProductDetailsNodeTest extends TestCase
         $this->assertEquals($buyerPids, $node->getBuyerPids());
     }
 
-    /**
-     * @test
-     */
-    public function Add_Get_Special_Treatment_Classes(): void
+    public function testAddGetSpecialTreatmentClasses(): void
     {
         $specialTreatmentClasses = [
             new SpecialTreatmentClass(),
@@ -70,16 +57,9 @@ class ProductDetailsNodeTest extends TestCase
         $this->assertEquals($specialTreatmentClasses, $node->getSpecialTreatmentClasses());
     }
 
-    /**
-     * @test
-     */
-    public function Add_Get_Keywords(): void
+    public function testAddGetKeywords(): void
     {
-        $keywords = [
-            new Keyword(),
-            new Keyword(),
-            new Keyword(),
-        ];
+        $keywords = [new Keyword(), new Keyword(), new Keyword()];
 
         $node = new Details();
         $this->assertEmpty($node->getKeywords());
@@ -93,16 +73,9 @@ class ProductDetailsNodeTest extends TestCase
         $this->assertEquals($keywords, $node->getKeywords());
     }
 
-    /**
-     * @test
-     */
-    public function Add_Get_Product_Status(): void
+    public function testAddGetProductStatus(): void
     {
-        $productStatus = [
-            new Status(),
-            new Status(),
-            new Status(),
-        ];
+        $productStatus = [new Status(), new Status(), new Status()];
 
         $node = new Details();
         $this->assertEmpty($node->getProductStatus());
@@ -116,10 +89,7 @@ class ProductDetailsNodeTest extends TestCase
         $this->assertEquals($productStatus, $node->getProductStatus());
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Description_Long(): void
+    public function testSetGetDescriptionLong(): void
     {
         $node = new Details();
         $value = sha1(uniqid(microtime(false), true));
@@ -129,10 +99,7 @@ class ProductDetailsNodeTest extends TestCase
         $this->assertEquals($value, $node->getDescriptionLong());
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Description_Short(): void
+    public function testSetGetDescriptionShort(): void
     {
         $node = new Details();
         $value = sha1(uniqid(microtime(false), true));
@@ -141,10 +108,7 @@ class ProductDetailsNodeTest extends TestCase
         $this->assertEquals($value, $node->getDescriptionShort());
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Ean(): void
+    public function testSetGetEan(): void
     {
         $node = new Details();
         $value = sha1(uniqid(microtime(false), true));
@@ -154,10 +118,7 @@ class ProductDetailsNodeTest extends TestCase
         $this->assertEquals($value, $node->getEan());
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Supplier_Alt_Pid(): void
+    public function testSetGetSupplierAltPid(): void
     {
         $node = new Details();
         $value = sha1(uniqid(microtime(false), true));
@@ -167,10 +128,7 @@ class ProductDetailsNodeTest extends TestCase
         $this->assertEquals($value, $node->getSupplierAltPid());
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Manufacturer_Name(): void
+    public function testSetGetManufacturerName(): void
     {
         $node = new Details();
         $value = sha1(uniqid(microtime(false), true));
@@ -180,10 +138,7 @@ class ProductDetailsNodeTest extends TestCase
         $this->assertEquals($value, $node->getManufacturerName());
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Manufacturer_Type_Description(): void
+    public function testSetGetManufacturerTypeDescription(): void
     {
         $node = new Details();
         $value = sha1(uniqid(microtime(false), true));
@@ -193,10 +148,7 @@ class ProductDetailsNodeTest extends TestCase
         $this->assertEquals($value, $node->getManufacturerTypeDescription());
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Erp_Group_Buyer(): void
+    public function testSetGetErpGroupBuyer(): void
     {
         $node = new Details();
         $value = sha1(uniqid(microtime(false), true));
@@ -206,10 +158,7 @@ class ProductDetailsNodeTest extends TestCase
         $this->assertEquals($value, $node->getErpGroupBuyer());
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Erp_Group_Supplier(): void
+    public function testSetGetErpGroupSupplier(): void
     {
         $node = new Details();
         $value = sha1(uniqid(microtime(false), true));
@@ -219,10 +168,7 @@ class ProductDetailsNodeTest extends TestCase
         $this->assertEquals($value, $node->getErpGroupSupplier());
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Delivery_Time(): void
+    public function testSetGetDeliveryTime(): void
     {
         $node = new Details();
         $value = random_int(10, 1000);
@@ -232,10 +178,7 @@ class ProductDetailsNodeTest extends TestCase
         $this->assertEquals($value, $node->getDeliveryTime());
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Remarks(): void
+    public function testSetGetRemarks(): void
     {
         $node = new Details();
         $value = sha1(uniqid(microtime(false), true));
@@ -245,10 +188,7 @@ class ProductDetailsNodeTest extends TestCase
         $this->assertEquals($value, $node->getRemarks());
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Product_Order(): void
+    public function testSetGetProductOrder(): void
     {
         $node = new Details();
         $value = random_int(10, 1000);
@@ -258,10 +198,7 @@ class ProductDetailsNodeTest extends TestCase
         $this->assertEquals($value, $node->getProductOrder());
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Description_Segment(): void
+    public function testSetGetDescriptionSegment(): void
     {
         $node = new Details();
         $value = sha1(uniqid(microtime(false), true));
@@ -271,13 +208,11 @@ class ProductDetailsNodeTest extends TestCase
         $this->assertEquals($value, $node->getSegment());
     }
 
-    /**
-     * @test
-     */
-    public function Serialize_Without_Null_Values(): void
+    public function testSerializeWithoutNullValues(): void
     {
         $node = new Details();
         $node->setDescriptionShort('test');
+
         $context = SerializationContext::create()->setSerializeNull(false);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_details_without_null_values.xml');

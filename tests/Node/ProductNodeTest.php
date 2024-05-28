@@ -1,11 +1,9 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Nodes\Mime;
 use Naugrim\BMEcat\Nodes\Product;
@@ -16,23 +14,17 @@ use Naugrim\BMEcat\Nodes\Product\Price;
 use Naugrim\BMEcat\Nodes\Product\PriceDetails;
 use Naugrim\BMEcat\Nodes\SupplierPid;
 use PHPUnit\Framework\TestCase;
-use function PHPStan\dumpType;
-
 
 class ProductNodeTest extends TestCase
 {
     private Serializer $serializer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Id(): void
+    public function testSetGetId(): void
     {
         $node = new Product();
         $value = sha1(uniqid(microtime(false), true));
@@ -46,11 +38,7 @@ class ProductNodeTest extends TestCase
         $this->assertEquals($value, $node->getId()?->getValue());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Details(): void
+    public function testSetGetDetails(): void
     {
         $node = new Product();
         $details = new Details();
@@ -59,17 +47,9 @@ class ProductNodeTest extends TestCase
         $this->assertEquals($details, $node->getDetails());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Add_Get_Features(): void
+    public function testAddGetFeatures(): void
     {
-        $features = [
-            new Features(),
-            new Features(),
-            new Features(),
-        ];
+        $features = [new Features(), new Features(), new Features()];
 
         $node = new Product();
         $this->assertEmpty($node->getFeatures());
@@ -81,16 +61,12 @@ class ProductNodeTest extends TestCase
         $this->assertSame($features, $node->getFeatures());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Add_Get_Prices(): void
+    public function testAddGetPrices(): void
     {
         $priceDetails = [
-            (new PriceDetails)->addPrice(new Price()),
-            (new PriceDetails)->addPrice(new Price()),
-            (new PriceDetails)->addPrice(new Price()),
+            (new PriceDetails())->addPrice(new Price()),
+            (new PriceDetails())->addPrice(new Price()),
+            (new PriceDetails())->addPrice(new Price()),
         ];
 
         $node = new Product();
@@ -103,11 +79,7 @@ class ProductNodeTest extends TestCase
         $this->assertSame($priceDetails, $node->getPriceDetails());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Add_Get_Product_Order_Details(): void
+    public function testAddGetProductOrderDetails(): void
     {
         $node = new Product();
         $value = new OrderDetails();
@@ -116,17 +88,9 @@ class ProductNodeTest extends TestCase
         $this->assertSame($value, $node->getOrderDetails());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Add_Get_Mime_Info(): void
+    public function testAddGetMimeInfo(): void
     {
-        $mimes = [
-            new Mime(),
-            new Mime(),
-            new Mime(),
-        ];
+        $mimes = [new Mime(), new Mime(), new Mime()];
 
         $node = new Product();
         $this->assertEmpty($node->getMimes());
@@ -138,11 +102,7 @@ class ProductNodeTest extends TestCase
         $this->assertSame($mimes, $node->getMimes());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Serialize_Without_Null_Values(): void
+    public function testSerializeWithoutNullValues(): void
     {
         $node = new Product();
         $context = SerializationContext::create()->setSerializeNull(false);

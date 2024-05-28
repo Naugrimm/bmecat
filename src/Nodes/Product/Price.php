@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Nodes\Product;
 
 use JMS\Serializer\Annotation as Serializer;
@@ -13,10 +12,6 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 #[Serializer\XmlRoot('PRODUCT_PRICE')]
 class Price implements Contracts\NodeInterface
 {
-    /**
-     *
-     * @var string
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('price_type')]
@@ -29,10 +24,6 @@ class Price implements Contracts\NodeInterface
     #[Serializer\XmlElement(cdata: false)]
     protected float $price;
 
-    /**
-     *
-     * @var string
-     */
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('PRICE_CURRENCY')]
@@ -55,69 +46,40 @@ class Price implements Contracts\NodeInterface
     #[Serializer\SerializedName('LOWER_BOUND')]
     protected ?float $lowerBound = null;
 
-    /**
-     *
-     * @param string $currency
-     * @return Price
-     */
-    public function setCurrency(string $currency) : Price
+    public function setCurrency(string $currency): self
     {
         $this->currency = $currency;
         return $this;
     }
 
-    /**
-     *
-     * @return string
-     */
     public function getCurrency(): string
     {
         return $this->currency;
     }
 
-    /**
-     *
-     * @param float $price
-     * @return Price
-     */
-    public function setPrice(float $price) : Price
+    public function setPrice(float $price): self
     {
         $this->price = $price;
         return $this;
     }
 
-    /**
-     *
-     * @return float
-     */
     public function getPrice(): float
     {
         return $this->price;
     }
 
-    /**
-     * @param string $type
-     * @return Price
-     */
-    public function setType(string $type): Price
+    public function setType(string $type): self
     {
         $this->type = $type;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @param float $priceFactor
-     * @return Price
-     */
-    public function setPriceFactor(float $priceFactor): Price
+    public function setPriceFactor(float $priceFactor): self
     {
         $this->priceFactor = $priceFactor;
         return $this;
@@ -128,11 +90,7 @@ class Price implements Contracts\NodeInterface
         return $this->priceFactor;
     }
 
-    /**
-     * @param float $lowerBound
-     * @return Price
-     */
-    public function setLowerBound(float $lowerBound): Price
+    public function setLowerBound(float $lowerBound): self
     {
         $this->lowerBound = $lowerBound;
         return $this;

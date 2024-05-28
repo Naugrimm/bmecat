@@ -1,32 +1,24 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
-use JMS\Serializer\SerializerBuilder;
-use JMS\Serializer\SerializerInterface;
 use Naugrim\BMEcat\DocumentBuilder;
-use PHPUnit\Framework\TestCase;
 use Naugrim\BMEcat\Nodes\Catalog;
 use Naugrim\BMEcat\Nodes\DateTime;
-
+use PHPUnit\Framework\TestCase;
 
 class CatalogNodeTest extends TestCase
 {
     private Serializer $serializer;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Id(): void
+    public function testSetGetId(): void
     {
         $node = new Catalog();
         $value = sha1(uniqid(microtime(false), true));
@@ -34,11 +26,7 @@ class CatalogNodeTest extends TestCase
         $this->assertEquals($value, $node->getId());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Version(): void
+    public function testSetGetVersion(): void
     {
         $node = new Catalog();
         $value = sha1(uniqid(microtime(false), true));
@@ -46,11 +34,7 @@ class CatalogNodeTest extends TestCase
         $this->assertEquals($value, $node->getVersion());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Language(): void
+    public function testSetGetLanguage(): void
     {
         $node = new Catalog();
         $value = sha1(uniqid(microtime(false), true));
@@ -59,11 +43,7 @@ class CatalogNodeTest extends TestCase
         $this->assertEquals($value, $node->getLanguage());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Date_Time(): void
+    public function testSetGetDateTime(): void
     {
         $node = new Catalog();
         $dateTime = new DateTime();
@@ -73,11 +53,7 @@ class CatalogNodeTest extends TestCase
         $this->assertEquals($dateTime, $node->getDateTime());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Serialize_Without_Null_Values(): void
+    public function testSerializeWithoutNullValues(): void
     {
         $node = new Catalog();
         $context = SerializationContext::create()->setSerializeNull(false);

@@ -6,10 +6,8 @@ use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
-use Naugrim\BMEcat\Nodes\BuyerPid;
 use Naugrim\BMEcat\Nodes\Contracts;
 use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
-use Naugrim\BMEcat\Nodes\Product\PriceDetails;
 
 /**
  * @implements NodeInterface<self>
@@ -17,7 +15,6 @@ use Naugrim\BMEcat\Nodes\Product\PriceDetails;
 #[Serializer\XmlRoot('CONFIG_PARTS')]
 class Parts implements Contracts\NodeInterface
 {
-
     /**
      * @var PartAlternative[]
      */
@@ -37,7 +34,7 @@ class Parts implements Contracts\NodeInterface
      * @throws InvalidSetterException
      * @throws UnknownKeyException
      */
-    public function setAlternatives(array $alternatives): Parts
+    public function setAlternatives(array $alternatives): self
     {
         $this->alternatives = [];
         foreach ($alternatives as $alternative) {
@@ -47,6 +44,7 @@ class Parts implements Contracts\NodeInterface
 
             $this->addAlternative($alternative);
         }
+
         return $this;
     }
 
@@ -58,7 +56,7 @@ class Parts implements Contracts\NodeInterface
         return $this->alternatives;
     }
 
-    public function setSelectionType(?string $selection_type): Parts
+    public function setSelectionType(?string $selection_type): self
     {
         $this->selection_type = $selection_type;
         return $this;
@@ -74,5 +72,4 @@ class Parts implements Contracts\NodeInterface
         $this->alternatives[] = $alternative;
         return $this;
     }
-
 }

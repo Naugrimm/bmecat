@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Nodes;
 
 use JMS\Serializer\Annotation as Serializer;
@@ -23,76 +22,44 @@ class Document implements Contracts\NodeInterface
     #[Serializer\XmlAttribute]
     protected string $namespace = 'http://www.bmecat.org/bmecat/2005.1';
 
-    /**
-     *
-     * @var Header
-     */
     #[Serializer\Expose]
     #[Serializer\Type(Header::class)]
     #[Serializer\SerializedName('HEADER')]
     protected Header $header;
 
-    /**
-     *
-     * @var NewCatalog
-     */
     #[Serializer\Expose]
     #[Serializer\Type(NewCatalog::class)]
     #[Serializer\SerializedName('T_NEW_CATALOG')]
     protected NewCatalog $catalog;
 
-    /**
-     *
-     * @param string $version
-     * @return Document
-     */
-    public function setVersion(string $version) : Document
+    public function setVersion(string $version): self
     {
         $this->version = $version;
         return $this;
     }
 
-    /**
-     *
-     * @return string
-     */
     public function getVersion(): string
     {
         return $this->version;
     }
 
-    /**
-     * @param Header $header
-     * @return Document
-     */
-    public function setHeader(Header $header) : Document
+    public function setHeader(Header $header): self
     {
         $this->header = $header;
         return $this;
     }
 
-    /**
-     *
-     * @return Header
-     */
     public function getHeader(): Header
     {
         return $this->header;
     }
 
-    /**
-     * @param NewCatalog $catalog
-     * @return Document
-     */
-    public function setNewCatalog(NewCatalog $catalog) : Document
+    public function setNewCatalog(NewCatalog $catalog): self
     {
         $this->catalog = $catalog;
         return $this;
     }
 
-    /**
-     * @return NewCatalog
-     */
     public function getNewCatalog(): NewCatalog
     {
         return $this->catalog;
