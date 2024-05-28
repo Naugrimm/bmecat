@@ -43,6 +43,9 @@
         ],
         "phpunit": [
             "@php -dxdebug.mode=coverage vendor/bin/phpunit"
+        ],
+        "post-autoload-dump": [
+            "git config gitflow.path.hooks .githooks && git config core.hooksPath .githooks"
         ]
     },
     "require-dev": {
