@@ -6,44 +6,34 @@ use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
-use Naugrim\BMEcat\Nodes\Concerns\HasStringValue;
 use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
-use Naugrim\BMEcat\nodes\Crypto\PublicKey;
+use Naugrim\BMEcat\Nodes\Crypto\PublicKey;
 
+/**
+ * @implements NodeInterface<self>
+ */
 class Emails implements NodeInterface
 {
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("EMAIL")
-     *
-     * @var string
-     */
-    protected $email;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('EMAIL')]
+    protected string $email;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\SerializedName("PUBLIC_KEY")
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\Crypto\PublicKey>")
-     * @Serializer\XmlList(inline = "true")
-     *
      * @var PublicKey[]
      */
-    protected $publicKeys = [];
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('PUBLIC_KEY')]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Crypto\PublicKey>')]
+    #[Serializer\XmlList(inline: true)]
+    protected array $publicKeys = [];
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @param string $email
-     * @return Emails
-     */
-    public function setEmail(string $email): Emails
+    public function setEmail(string $email): self
     {
         $this->email = $email;
         return $this;
@@ -58,28 +48,25 @@ class Emails implements NodeInterface
     }
 
     /**
-     * @param PublicKey[] $publicKeys
-     * @return Emails
+     * @param PublicKey[]|array{type: string, value: string}[] $publicKeys
      * @throws InvalidSetterException
      * @throws UnknownKeyException
      */
-    public function setPublicKeys(array $publicKeys): Emails
+    public function setPublicKeys(array $publicKeys): self
     {
         $this->publicKeys = [];
         foreach ($publicKeys as $publicKey) {
-            if (!$publicKey instanceof PublicKey) {
-                $publicKey = NodeBuilder::fromArray($publicKey, new PublicKey());
+            if (! $publicKey instanceof PublicKey) {
+                $publicKey = NodeBuilder::fromArray($publicKey, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], PublicKey::class));
             }
+
             $this->addPublicKey($publicKey);
         }
+
         return $this;
     }
 
-    /**
-     * @param PublicKey $publicKey
-     * @return Emails
-     */
-    public function addPublicKey(PublicKey $publicKey): Emails
+    public function addPublicKey(PublicKey $publicKey): self
     {
         $this->publicKeys[] = $publicKey;
         return $this;

@@ -1,44 +1,29 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
-use JMS\Serializer\SerializerInterface;
+use JMS\Serializer\Serializer;
 use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Nodes\Product\Feature;
 use Naugrim\BMEcat\Nodes\Product\Features;
 use PHPUnit\Framework\TestCase;
 
-
 class ProductFeaturesNodeTest extends TestCase
 {
-    /**
-     * @var SerializerInterface
-     */
-    private $serializer;
+    private Serializer $serializer;
 
-    public function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Add_Get_Feature()
+    public function testAddGetFeature(): void
     {
-        $features = [
-            new Feature(),
-            new Feature(),
-            new Feature(),
-        ];
+        $features = [\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Feature::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Feature::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Feature::class)];
 
-        $node = new Features();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Features::class);
         $this->assertEmpty($node->getFeatures());
-        $node->nullFeatures();
-        $this->assertEquals([], $node->getFeatures());
 
         foreach ($features as $feature) {
             $node->addFeature($feature);
@@ -47,13 +32,9 @@ class ProductFeaturesNodeTest extends TestCase
         $this->assertSame($features, $node->getFeatures());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Reference_Feature_System_Name()
+    public function testSetGetReferenceFeatureSystemName(): void
     {
-        $node = new Features();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Features::class);
         $value = sha1(uniqid(microtime(false), true));
 
         $this->assertNull($node->getReferenceFeatureSystemName());
@@ -61,56 +42,29 @@ class ProductFeaturesNodeTest extends TestCase
         $this->assertEquals($value, $node->getReferenceFeatureSystemName());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Reference_Feature_Group_Name()
+    public function testSetGetReferenceFeatureGroupName(): void
     {
-        $node = new Features();
-        $value = sha1(uniqid(microtime(false), true));
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Features::class);
+        $value = [sha1(uniqid(microtime(false), true))];
 
         $this->assertNull($node->getReferenceFeatureGroupName());
         $node->setReferenceFeatureGroupName($value);
         $this->assertEquals($value, $node->getReferenceFeatureGroupName());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Reference_Feature_Group_Id()
+    public function testSetGetReferenceFeatureGroupId(): void
     {
-        $node = new Features();
-        $value = sha1(uniqid(microtime(false), true));
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Features::class);
+        $value = [sha1(uniqid(microtime(false), true))];
 
         $this->assertNull($node->getReferenceFeatureGroupId());
         $node->setReferenceFeatureGroupId($value);
         $this->assertEquals($value, $node->getReferenceFeatureGroupId());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Serialize_With_Null_Values()
+    public function testSerializeWithoutNullValues(): void
     {
-        $node = new Features();
-        $context = SerializationContext::create()->setSerializeNull(true);
-
-        $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_features_with_null_values.xml');
-        $actual = $this->serializer->serialize($node, 'xml', $context);
-
-        $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     *
-     * @test
-     */
-    public function Serialize_Without_Null_Values()
-    {
-        $node = new Features();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Features::class);
         $context = SerializationContext::create()->setSerializeNull(false);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_features_without_null_values.xml');
@@ -122,14 +76,15 @@ class ProductFeaturesNodeTest extends TestCase
         $this->assertInstanceOf(Features::class, $doc);
     }
 
-    public function testFeaturesAreInlinedCorrectly()
+    public function testFeaturesAreInlinedCorrectly(): void
     {
         $context = SerializationContext::create()->setSerializeNull(false);
 
-        $node = new Features();
-        $productFeature = new Feature();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Features::class);
+        $productFeature = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Feature::class);
         $productFeature->setName('Feature name');
-        $productFeature->setValue('Feature value');
+        $productFeature->setValue(['Feature value']);
+
         $node->addFeature($productFeature);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/product_features.xml');

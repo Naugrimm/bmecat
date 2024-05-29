@@ -1,133 +1,87 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Nodes;
 
 use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
- *
- * @Serializer\XmlRoot("HEADER")
+ * @implements NodeInterface<self>
  */
+#[Serializer\XmlRoot('HEADER')]
 class Header implements Contracts\NodeInterface
 {
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("GENERATOR_INFO")
-     *
-     * @var string
-     */
-    protected $generatorInfo;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('GENERATOR_INFO')]
+    protected ?string $generatorInfo = null;
+
+    #[Serializer\Expose]
+    #[Serializer\Type(Catalog::class)]
+    #[Serializer\SerializedName('CATALOG')]
+    protected Catalog $catalog;
+
+    #[Serializer\Expose]
+    #[Serializer\Type(BuyerIdRef::class)]
+    #[Serializer\SerializedName('BUYER_IDREF')]
+    protected ?BuyerIdRef $buyerIdRef = null;
+
+    #[Serializer\Expose]
+    #[Serializer\Type(SupplierIdRef::class)]
+    #[Serializer\SerializedName('SUPPLIER_IDREF')]
+    protected ?SupplierIdRef $supplierIdRef = null;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Catalog")
-     * @Serializer\SerializedName("CATALOG")
-     *
-     * @var Catalog
-     */
-    protected $catalog;
-
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\BuyerIdRef")
-     * @Serializer\SerializedName("BUYER_IDREF")
-     *
-     * @var BuyerIdRef
-     */
-    protected $buyerIdRef;
-
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\SupplierIdRef")
-     * @Serializer\SerializedName("SUPPLIER_IDREF")
-     *
-     * @var SupplierIdRef
-     */
-    protected $supplierIdRef;
-
-    /**
-     *
-     * @Serializer\Expose
-     * @Serializer\SerializedName("PARTIES")
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\Party>")
-     * @Serializer\XmlList(entry = "PARTY")
-     *
      * @var Party[]
      */
-    protected $parties = [];
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('PARTIES')]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Party>')]
+    #[Serializer\XmlList(entry: 'PARTY')]
+    protected array $parties = [];
 
-    /**
-     * @return string|null
-     */
-    public function getGeneratorInfo()
+    public function getGeneratorInfo(): ?string
     {
         return $this->generatorInfo;
     }
 
-    /**
-     * @param string $generatorInfo
-     * @return Header
-     */
-    public function setGeneratorInfo(string $generatorInfo): Header
+    public function setGeneratorInfo(string $generatorInfo): self
     {
         $this->generatorInfo = $generatorInfo;
         return $this;
     }
 
-    /**
-     * @return Catalog
-     */
     public function getCatalog(): Catalog
     {
         return $this->catalog;
     }
 
-    /**
-     * @param Catalog $catalog
-     * @return Header
-     */
-    public function setCatalog(Catalog $catalog): Header
+    public function setCatalog(Catalog $catalog): self
     {
         $this->catalog = $catalog;
         return $this;
     }
 
-    /**
-     * @return BuyerIdRef
-     */
-    public function getBuyerIdRef()
+    public function getBuyerIdRef(): ?BuyerIdRef
     {
         return $this->buyerIdRef;
     }
 
-    /**
-     * @param BuyerIdRef $buyerIdRef
-     * @return Header
-     */
-    public function setBuyerIdRef(BuyerIdRef $buyerIdRef): Header
+    public function setBuyerIdRef(BuyerIdRef $buyerIdRef): self
     {
         $this->buyerIdRef = $buyerIdRef;
         return $this;
     }
 
-    /**
-     * @return SupplierIdRef
-     */
-    public function getSupplierIdRef()
+    public function getSupplierIdRef(): ?SupplierIdRef
     {
         return $this->supplierIdRef;
     }
 
-    /**
-     * @param SupplierIdRef $supplierIdRef
-     * @return Header
-     */
-    public function setSupplierIdRef(SupplierIdRef $supplierIdRef): Header
+    public function setSupplierIdRef(SupplierIdRef $supplierIdRef): self
     {
         $this->supplierIdRef = $supplierIdRef;
         return $this;
@@ -142,27 +96,27 @@ class Header implements Contracts\NodeInterface
     }
 
     /**
-     * @param Party[] $parties
-     * @return Header
+     * @param Party[]|array<string, mixed>[] $parties
      * @throws InvalidSetterException
      * @throws UnknownKeyException
      */
-    public function setParties(array $parties): Header
+    public function setParties(array $parties): self
     {
         foreach ($parties as $party) {
-            if (!$party instanceof Party) {
-                $party = NodeBuilder::fromArray($party, new Party());
+            if (! $party instanceof Party) {
+                $party = NodeBuilder::fromArray($party, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Party::class));
             }
+
             $this->addParty($party);
         }
+
         return $this;
     }
 
     /**
-     * @param Party $party
      * @return $this
      */
-    public function addParty(Party $party)
+    public function addParty(Party $party): static
     {
         $this->parties[] = $party;
         return $this;

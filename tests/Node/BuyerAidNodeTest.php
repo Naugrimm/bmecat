@@ -3,32 +3,26 @@
 namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
+use JMS\Serializer\Serializer;
 use Naugrim\BMEcat\DocumentBuilder;
-use Naugrim\BMEcat\Nodes\Document;
-use PHPUnit\Framework\TestCase;
 use Naugrim\BMEcat\Nodes\BuyerPid;
+use PHPUnit\Framework\TestCase;
 
 class BuyerAidNodeTest extends TestCase
 {
+    private Serializer $serializer;
 
-    /**
-     * @var \JMS\Serializer\SerializerInterface
-     */
-    private $serializer;
-
-    public function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
 
-    /**
-     * @test
-     */
-    public function Serialize_With_Null_Values()
+    public function testSerializeWithNullValues(): void
     {
-        $node = new BuyerPid();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], BuyerPid::class);
         $node->setType('');
         $node->setValue('');
+
         $context = SerializationContext::create()->setSerializeNull(true);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_buyer_pid_with_null_values.xml');
@@ -40,14 +34,12 @@ class BuyerAidNodeTest extends TestCase
         $this->assertInstanceOf(BuyerPid::class, $doc);
     }
 
-    /**
-     * @test
-     */
-    public function Serialize_Without_Null_Values()
+    public function testSerializeWithoutNullValues(): void
     {
-        $node = new BuyerPid();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], BuyerPid::class);
         $node->setType('');
         $node->setValue('');
+
         $context = SerializationContext::create()->setSerializeNull(false);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_buyer_pid_without_null_values.xml');

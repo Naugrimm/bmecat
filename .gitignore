@@ -3,8 +3,11 @@
 vendor
 composer.phar
 /.phpunit.result.cache
+/.phpunit.cache
 /tools/php-cs-fixer/vendor
 /.php-cs-fixer.cache
 /tools/phpcompatibility/vendor
 /tools/rector/vendor
 /composer.lock
+/.phpstan
+/phpstan.neon

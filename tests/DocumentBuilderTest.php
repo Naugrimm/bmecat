@@ -1,79 +1,65 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Tests;
 
+use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializerBuilder;
 use Naugrim\BMEcat\Builder\NodeBuilder;
-use PHPUnit\Framework\TestCase;
 use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Exception\MissingDocumentException;
 use Naugrim\BMEcat\Nodes\Document;
-
+use PHPUnit\Framework\TestCase;
 
 class DocumentBuilderTest extends TestCase
 {
-    /**
-     * @var \JMS\Serializer\SerializerInterface
-     */
-    private $serializer;
+    private Serializer $serializer;
 
-    public function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = SerializerBuilder::create()->build();
     }
 
-    public function testCanBeInstantiated()
+    public function testCanBeInstantiated(): void
     {
         $builder = new DocumentBuilder($this->serializer);
         $this->assertInstanceOf(DocumentBuilder::class, $builder);
     }
 
-    public function testSetsUpDefaultDependencies()
+    public function testSetsUpDefaultDependencies(): void
     {
         $builder = new DocumentBuilder();
-        $this->assertInstanceOf('\JMS\Serializer\Serializer', $builder->getSerializer());
+        $this->assertInstanceOf(Serializer::class, $builder->getSerializer());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Instantiate_Via_Static_Method()
+    public function testInstantiateViaStaticMethod(): void
     {
         $builder = DocumentBuilder::create($this->serializer);
-        $this->assertInstanceOf('\JMS\Serializer\Serializer', $builder->getSerializer());
+        $this->assertInstanceOf(Serializer::class, $builder->getSerializer());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function To_String_Returns_Default_Document_Without_Null_Values()
+    public function testToStringReturnsDefaultDocumentWithoutNullValues(): void
     {
-        $builder = new DocumentBuilder;
-        $document = NodeBuilder::fromArray([], new Document());
+        $builder = new DocumentBuilder();
+        $document = NodeBuilder::fromArray([], \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Document::class));
         $builder->setDocument($document);
 
         $expected = file_get_contents(__DIR__ . '/Fixtures/empty_document_without_null_values.xml');
         $this->assertEquals($expected, $builder->toString());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function To_String_Throws_Exception()
+    public function testToStringThrowsException(): void
     {
         $this->expectException(MissingDocumentException::class);
-        $builder = new DocumentBuilder;
+        $builder = new DocumentBuilder();
         $builder->toString();
     }
 
-    public function testFromStringWorksCorrectly()
+    public function testFromStringWorksCorrectly(): void
     {
         $builder = new DocumentBuilder();
-        $doc = $builder->fromString(file_get_contents(__DIR__ . '/Fixtures/2005.1/minimal_valid_document.xml'));
+        $doc = $builder->fromString(
+            (string) file_get_contents(__DIR__ . '/Fixtures/2005.1/minimal_valid_document.xml')
+        );
 
         $this->assertInstanceOf(Document::class, $doc);
     }

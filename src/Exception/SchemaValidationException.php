@@ -7,13 +7,21 @@ use LibXMLError;
 
 class SchemaValidationException extends Exception
 {
-    protected $context = 3;
+    protected int $context = 3;
 
-    protected $xml;
-    protected $schemaFile;
-    protected $errors;
+    protected string $xml;
 
-    public static function withErrors(string $xml, string $schemaFile, array $errors = [])
+    protected string $schemaFile;
+
+    /**
+     * @var LibXMLError[]
+     */
+    protected array $errors;
+
+    /**
+     * @param LibXMLError[] $errors
+     */
+    public static function withErrors(string $xml, string $schemaFile, array $errors = []): self
     {
         $instance = new self('The xml could not be validated against the given schema.');
         $instance->xml = $xml;
@@ -25,10 +33,10 @@ class SchemaValidationException extends Exception
     /**
      * @codeCoverageIgnore
      */
-    public function __toString()
+    public function __toString(): string
     {
-        $msg = get_class($this).': '.$this->getMessage()."\n";
-        $msg .= $this->getTraceAsString()."\n\n";
+        $msg = static::class . ': ' . $this->getMessage() . "\n";
+        $msg .= $this->getTraceAsString() . "\n\n";
 
         $lines = explode("\n", $this->xml);
 
@@ -42,14 +50,12 @@ class SchemaValidationException extends Exception
                 min(count($lines) - $error->line, 2 * $this->context)
             );
 
-            $xmlErrors[] = implode("\n", [
-                'Error #'.($idx+1).': '.$error->message,
-                implode("\n", $context)."\n",
-            ]);
+            $xmlErrors[] = implode(
+                "\n",
+                ['Error #' . ($idx + 1) . ': ' . $error->message, implode("\n", $context) . "\n"]
+            );
         }
 
-        $msg .= implode("\n", $xmlErrors);
-
-        return $msg;
+        return $msg . implode("\n", $xmlErrors);
     }
 }

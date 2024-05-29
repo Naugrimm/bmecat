@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Exception;
 
 use Exception;

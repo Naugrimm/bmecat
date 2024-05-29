@@ -3,28 +3,23 @@
 namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
+use JMS\Serializer\Serializer;
 use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Nodes\Product\Keyword;
 use PHPUnit\Framework\TestCase;
 
 class ProductKeywordNodeTest extends TestCase
 {
-    /**
-     * @var \JMS\Serializer\SerializerInterface
-     */
-    private $serializer;
+    private Serializer $serializer;
 
-    public function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Description_Value()
+    public function testSetGetDescriptionValue(): void
     {
-        $node = new Keyword();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Keyword::class);
         $value = '';
 
         $this->assertEquals('', $node->getValue());
@@ -32,12 +27,9 @@ class ProductKeywordNodeTest extends TestCase
         $this->assertEquals($value, $node->getValue());
     }
 
-    /**
-     * @test
-     */
-    public function Serialize_With_Null_Values()
+    public function testSerializeWithNullValues(): void
     {
-        $node = new Keyword();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Keyword::class);
         $context = SerializationContext::create()->setSerializeNull(true);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_keyword_with_null_values.xml');
@@ -49,12 +41,9 @@ class ProductKeywordNodeTest extends TestCase
         $this->assertInstanceOf(Keyword::class, $doc);
     }
 
-    /**
-     * @test
-     */
-    public function Serialize_Without_Null_Values()
+    public function testSerializeWithoutNullValues(): void
     {
-        $node = new Keyword();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Keyword::class);
         $context = SerializationContext::create()->setSerializeNull(false);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_keyword_without_null_values.xml');

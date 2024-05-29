@@ -3,35 +3,73 @@
 namespace Naugrim\BMEcat\Nodes\Product\Config;
 
 use JMS\Serializer\Annotation as Serializer;
-use Naugrim\BMEcat\Nodes\BuyerPid;
+use Naugrim\BMEcat\Builder\NodeBuilder;
+use Naugrim\BMEcat\Exception\InvalidSetterException;
+use Naugrim\BMEcat\Exception\UnknownKeyException;
 use Naugrim\BMEcat\Nodes\Contracts;
-use Naugrim\BMEcat\Nodes\Product\PriceDetails;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
- *
- * @Serializer\XmlRoot("CONFIG_PARTS")
+ * @implements NodeInterface<self>
  */
+#[Serializer\XmlRoot('CONFIG_PARTS')]
 class Parts implements Contracts\NodeInterface
 {
-
     /**
-     *
-     * @Serializer\Expose
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\Product\Config\PartAlternative>")
-     * @Serializer\XmlList(inline=true, entry="PART_ALTERNATIVE")
-     *
      * @var PartAlternative[]
      */
-    protected $alternatives;
+    #[Serializer\Expose]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Product\Config\PartAlternative>')]
+    #[Serializer\XmlList(entry: 'PART_ALTERNATIVE', inline: true)]
+    protected array $alternatives;
+
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('PART_SELECTION_TYPE')]
+    protected ?string $selection_type = null;
 
     /**
-     *
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("PART_SELECTION_TYPE")
-     *
-     * @var string
+     * @param PartAlternative[]|array<string, mixed>[] $alternatives
+     * @return $this
+     * @throws InvalidSetterException
+     * @throws UnknownKeyException
      */
-    protected $selection_type = null;
+    public function setAlternatives(array $alternatives): self
+    {
+        $this->alternatives = [];
+        foreach ($alternatives as $alternative) {
+            if (! $alternative instanceof PartAlternative) {
+                $alternative = NodeBuilder::fromArray($alternative, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], PartAlternative::class));
+            }
 
+            $this->addAlternative($alternative);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return PartAlternative[]
+     */
+    public function getAlternatives(): array
+    {
+        return $this->alternatives;
+    }
+
+    public function setSelectionType(?string $selection_type): self
+    {
+        $this->selection_type = $selection_type;
+        return $this;
+    }
+
+    public function getSelectionType(): ?string
+    {
+        return $this->selection_type;
+    }
+
+    private function addAlternative(PartAlternative $alternative): self
+    {
+        $this->alternatives[] = $alternative;
+        return $this;
+    }
 }
