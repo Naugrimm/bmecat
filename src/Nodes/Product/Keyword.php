@@ -12,18 +12,10 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 #[Serializer\XmlRoot('KEYWORD')]
 class Keyword implements Contracts\NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
+
     #[Serializer\Type('string')]
+    #[Serializer\Expose]
     #[Serializer\XmlValue]
     protected string $value = '';
-
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-
-    public function setValue(string $value): self
-    {
-        $this->value = $value;
-        return $this;
-    }
 }

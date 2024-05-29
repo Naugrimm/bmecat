@@ -6,6 +6,8 @@ use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
+use Naugrim\BMEcat\Nodes\Address;
+use Naugrim\BMEcat\Nodes\Contact\Details;
 use Naugrim\BMEcat\Nodes\Document;
 use Naugrim\BMEcat\Nodes\NewCatalog;
 use Naugrim\BMEcat\SchemaValidator;
@@ -27,7 +29,7 @@ class AddressTest extends TestCase
                     'language' => 'eng',
                     'id' => 'MY_CATALOG',
                     'version' => '0.99',
-                    'datetime' => [
+                    'dateTime' => [
                         'date' => '1979-01-01',
                         'time' => '10:59:54',
                         'timezone' => '-01:00',
@@ -47,6 +49,27 @@ class AddressTest extends TestCase
         $document->setNewCatalog($catalog);
 
         return $document;
+    }
+
+    public function testAddressSet() : void
+    {
+        $address = NodeBuilder::fromArray([], Address::class);
+
+        $address->setName('test123');
+
+        $this->assertEquals('test123', $address->getName());
+
+        $address->setContactDetails(
+            NodeBuilder::fromArray(['id' => 'id123'], Details::class),
+        );
+
+        $this->assertEquals('id123', $address->getContactDetails()->getId());
+
+        $address->setContactDetails([
+            'id' => 'id234'
+        ]);
+
+        $this->assertEquals('id234', $address->getContactDetails()->getId());
     }
 
     public function testWithCompleteAddress(): void

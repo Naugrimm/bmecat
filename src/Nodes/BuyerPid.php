@@ -13,6 +13,7 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 #[Serializer\XmlRoot('BUYER_PID')]
 class BuyerPid implements NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     /**
      * @use HasTypeAttribute<self>
      */

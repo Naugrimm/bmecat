@@ -19,6 +19,7 @@ use PHPStan\TrinaryLogic;
 use PHPStan\Type\ArrayType;
 use PHPStan\Type\Generic\TemplateTypeMap;
 use PHPStan\Type\MixedType;
+use PHPStan\Type\NullType;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\StringType;
 use PHPStan\Type\Type;
@@ -43,7 +44,7 @@ class NodeInterfaceMethodsClassReflectionExtension implements MethodsClassReflec
 
         $methodReflection = $this->findMethod($classReflection, $methodName);
 
-        if ($methodReflection !== null) {
+        if ($methodReflection instanceof \PHPStan\Reflection\MethodReflection) {
             $this->cache[$classReflection->getCacheKey() . '-' . $methodName] = $methodReflection;
 
             return true;
@@ -80,6 +81,7 @@ class NodeInterfaceMethodsClassReflectionExtension implements MethodsClassReflec
         if (! $classReflection->hasNativeProperty($propertyName)) {
             return null;
         }
+
         $property = $classReflection->getNativeProperty($propertyName);
 
         $propertyReflection = $property->getNativeReflection();
@@ -266,10 +268,23 @@ class NodeInterfaceMethodsClassReflectionExtension implements MethodsClassReflec
 
                                 public function getType(): Type
                                 {
-                                    return new UnionType([
-                                        $this->propertyReflection->getNativeType(),
-                                        new ArrayType(new StringType(), new MixedType()),
-                                    ]);
+                                    $types = [];
+
+                                    $nativeType = $this->propertyReflection->getNativeType();
+                                    if ($nativeType instanceof UnionType) {
+                                        foreach ($nativeType->getTypes() as $type) {
+                                            if ($type->isNull()->yes()) {
+                                                continue;
+                                            }
+                                            $types[] = $type;
+                                        }
+                                    } else {
+                                        $types[] = $nativeType;
+                                    }
+
+                                    $types[] = new ArrayType(new StringType(), new MixedType());
+
+                                    return new UnionType($types);
                                 }
 
                                 public function passedByReference(): PassedByReference

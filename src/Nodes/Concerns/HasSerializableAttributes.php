@@ -31,11 +31,12 @@ trait HasSerializableAttributes
                 'Invalid method called: ' . $name . '. We only support dynamically calling get* and set* methods here'
             );
         }
+
         $propertyName = lcfirst(substr($name, 3));
 
         $property = $this->getSerializableAttribute($propertyName);
         if ($property === null) {
-            throw new RuntimeException('There is no serializable attribute with the name: ' . $propertyName);
+            throw new UnknownKeyException('There is no serializable attribute with the name ' . $this::class.'::'.$propertyName);
         }
 
         if (str_starts_with($name, 'get') && property_exists($this, $propertyName)) {
@@ -44,11 +45,19 @@ trait HasSerializableAttributes
             $valueToSet = $arguments[0];
 
             if (is_scalar($valueToSet) || $valueToSet instanceof NodeInterface) {
+                /**
+                 * the value to set is either a scalar or already a NodeInterface
+                 * in both cases, we assign it directly to the property. PHP will complain
+                 * if the wrong type is assigned
+                 */
                 $this->{$propertyName} = $valueToSet; // @phpstan-ignore property.dynamicName
                 return $this;
             }
 
             $type = $this->getTypeAnnotationFromProperty($property);
+            if (str_starts_with($type, 'array') && is_array($valueToSet)) {
+                return $this->handleArraySetter($propertyName, $type, $valueToSet);
+            }
 
             if (! $this->typeAnnotationImplementsNodeInterface($type)) {
                 $this->{$propertyName} = $valueToSet; // @phpstan-ignore property.dynamicName
@@ -67,6 +76,52 @@ trait HasSerializableAttributes
         throw new RuntimeException(
             'Invalid method called: ' . $name . '. We only support dynamically calling get* and set* methods here'
         );
+    }
+
+    /**
+     * @param mixed[] $valueToSet
+     * @throws InvalidSetterException
+     * @throws UnknownKeyException
+     */
+    private function handleArraySetter(string $propertyName, string $type, array $valueToSet) : static
+    {
+        if (preg_match('/^array<(?<itemType>.*)>$/', $type, $matches) !== 1) {
+            /**
+             * no type was given in the array. set the value directly
+             */
+            $this->{$propertyName} = $valueToSet; // @phpstan-ignore property.dynamicName
+            return $this;
+        }
+
+        $newValues = [];
+
+        $itemType = $matches['itemType'];
+        if (str_contains($itemType, '\\') && !str_starts_with($itemType, '\\')) {
+            $itemType = '\\'.$itemType;
+        }
+
+        foreach ($valueToSet as $singleValueToSet) {
+            if (is_scalar($singleValueToSet) || $singleValueToSet instanceof NodeInterface) {
+                $newValues[] = $singleValueToSet;
+                continue;
+            }
+
+            if (! $this->typeAnnotationImplementsNodeInterface($itemType)) {
+                $newValues[] = $singleValueToSet;
+                continue;
+            }
+
+            if (! is_array($singleValueToSet)) {
+                $newValues[] = $singleValueToSet;
+                continue;
+            }
+
+            $newValues[] = NodeBuilder::fromArray($singleValueToSet, $itemType);
+        }
+
+        $this->{$propertyName} = $newValues; // @phpstan-ignore property.dynamicName
+
+        return $this;
     }
 
     private function getTypeAnnotationFromProperty(ReflectionProperty $property) : string
@@ -104,7 +159,7 @@ trait HasSerializableAttributes
 
         try {
             $property = $reflection->getProperty($name);
-        } catch (ReflectionException $e) {
+        } catch (ReflectionException) {
             return null;
         }
 

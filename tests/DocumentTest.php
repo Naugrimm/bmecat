@@ -30,7 +30,7 @@ class DocumentTest extends TestCase
                     'language' => 'eng',
                     'id' => 'MY_CATALOG',
                     'version' => '0.99',
-                    'datetime' => [
+                    'dateTime' => [
                         'date' => '1979-01-01',
                         'time' => '10:59:54',
                         'timezone' => '-01:00',

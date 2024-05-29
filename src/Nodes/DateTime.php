@@ -12,6 +12,7 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 #[Serializer\XmlRoot('DATETIME')]
 class DateTime implements Contracts\NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('type')]
@@ -39,38 +40,5 @@ class DateTime implements Contracts\NodeInterface
         $this->setTime($dateTime->format('H:i:s'));
         $this->setTimezone($dateTime->format('P'));
         return $this;
-    }
-
-    public function setDate(string $date): self
-    {
-        $this->date = $date;
-        return $this;
-    }
-
-    public function getDate(): string
-    {
-        return $this->date;
-    }
-
-    public function setTime(string $time): self
-    {
-        $this->time = $time;
-        return $this;
-    }
-
-    public function getTime(): string
-    {
-        return $this->time;
-    }
-
-    public function setTimezone(string $timezone): self
-    {
-        $this->timezone = $timezone;
-        return $this;
-    }
-
-    public function getTimezone(): string
-    {
-        return $this->timezone;
     }
 }

@@ -11,6 +11,7 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 #[Serializer\XmlRoot('SPECIAL_TREATMENT_CLASS')]
 class SpecialTreatmentClass implements Contracts\NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     #[Serializer\Type('string')]
     #[Serializer\XmlAttribute]
     private string $type = '';
@@ -18,26 +19,4 @@ class SpecialTreatmentClass implements Contracts\NodeInterface
     #[Serializer\Type('string')]
     #[Serializer\XmlValue]
     protected string $value = '';
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-        return $this;
-    }
-
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-
-    public function setValue(string $value): self
-    {
-        $this->value = $value;
-        return $this;
-    }
 }

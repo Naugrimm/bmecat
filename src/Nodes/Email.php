@@ -10,6 +10,7 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
  */
 class Email implements NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     /**
      * @use HasStringValue<self>
      */

@@ -15,6 +15,7 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 #[Serializer\XmlRoot('PRODUCT_FEATURES')]
 class Features implements Contracts\NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('REFERENCE_FEATURE_SYSTEM_NAME')]
@@ -48,34 +49,9 @@ class Features implements Contracts\NodeInterface
     #[Serializer\XmlList(entry: 'FEATURE', inline: true)]
     protected array $features = [];
 
-    /**
-     * @param Feature[]|array<string, mixed>[] $features
-     * @throws InvalidSetterException
-     * @throws UnknownKeyException
-     */
-    public function setFeatures(array $features): self
-    {
-        $this->features = [];
-        foreach ($features as $feature) {
-            if (! $feature instanceof Feature) {
-                $feature = NodeBuilder::fromArray($feature, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Feature::class));
-            }
-
-            $this->addFeature($feature);
-        }
-
-        return $this;
-    }
-
     public function addFeature(Feature $feature): self
     {
         $this->features[] = $feature;
-        return $this;
-    }
-
-    public function setReferenceFeatureSystemName(string $referenceFeatureSystemName): self
-    {
-        $this->referenceFeatureSystemName = $referenceFeatureSystemName;
         return $this;
     }
 
@@ -97,34 +73,5 @@ class Features implements Contracts\NodeInterface
         $this->referenceFeatureGroupName = [];
         $this->referenceFeatureGroupId = $referenceFeatureGroupId;
         return $this;
-    }
-
-    public function getReferenceFeatureSystemName(): ?string
-    {
-        return $this->referenceFeatureSystemName;
-    }
-
-    /**
-     * @return ?string[]
-     */
-    public function getReferenceFeatureGroupName(): ?array
-    {
-        return $this->referenceFeatureGroupName;
-    }
-
-    /**
-     * @return ?string[]
-     */
-    public function getReferenceFeatureGroupId(): ?array
-    {
-        return $this->referenceFeatureGroupId;
-    }
-
-    /**
-     * @return Feature[]
-     */
-    public function getFeatures(): array
-    {
-        return $this->features;
     }
 }
