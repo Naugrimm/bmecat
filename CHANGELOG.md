@@ -1,6 +1,6 @@
 # 2.x
 
-## Breaking Changes
+## BREAKING CHANGES
 
 This release drops support for PHP < 8.2.
 
@@ -15,3 +15,6 @@ This includes but is not limited to:
 
 Nearly all elements that are rendered as lists are not nullable anymore. They are type-hinted as `array` and initialized with an empty array.
 Change all your `NodeInterface->setXyz(null)` calls to `NodeInterface->setXyz([])` when you want to clear these lists.
+
+You are advised to always use the `NodeBuilder::fromArray(...)` to create new nodes instead of `new MyNodeClass`. Use the `\Utils\Rector\Rector\NodeInterfaceConstructorCallToNodeBuilderFromArrayRector:class` to automatically convert all these occurrences.
+
