@@ -20,11 +20,11 @@ class NewCatalog implements Contracts\NodeInterface
      */
     #[Serializer\Expose]
     #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Product>')]
-    #[Serializer\XmlList(inline: true, entry: 'PRODUCT')]
-    protected ?array $products = [];
+    #[Serializer\XmlList(entry: 'PRODUCT', inline: true)]
+    protected array $products = [];
 
     /**
-     * @param Product[]|mixed[] $products
+     * @param Product[]|array<string, mixed>[] $products
      * @throws InvalidSetterException
      * @throws UnknownKeyException
      */
@@ -47,21 +47,8 @@ class NewCatalog implements Contracts\NodeInterface
 
     public function addProduct(Product $product): self
     {
-        if ($this->products === null) {
-            $this->products = [];
-        }
-
         $this->products[] = $product;
         return $this;
-    }
-
-    #[Serializer\PreSerialize]
-    #[Serializer\PostSerialize]
-    public function nullProducts(): void
-    {
-        if ($this->products === []) {
-            $this->products = null;
-        }
     }
 
     /**
@@ -69,10 +56,6 @@ class NewCatalog implements Contracts\NodeInterface
      */
     public function getProducts(): array
     {
-        if ($this->products === null) {
-            return [];
-        }
-
         return $this->products;
     }
 }

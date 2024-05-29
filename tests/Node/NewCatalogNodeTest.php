@@ -23,8 +23,6 @@ class NewCatalogNodeTest extends TestCase
         $products = [new Product(), new Product(), new Product()];
 
         $node = new NewCatalog();
-        $this->assertEmpty($node->getProducts());
-        $node->nullProducts();
         $this->assertEquals([], $node->getProducts());
 
         foreach ($products as $product) {
@@ -32,17 +30,6 @@ class NewCatalogNodeTest extends TestCase
         }
 
         $this->assertSame($products, $node->getProducts());
-    }
-
-    public function testSerializeWithNullValues(): void
-    {
-        $node = new NewCatalog();
-        $context = SerializationContext::create()->setSerializeNull(true);
-
-        $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_new_catalog_with_null_values.xml');
-        $actual = $this->serializer->serialize($node, 'xml', $context);
-
-        $this->assertEquals($expected, $actual);
     }
 
     public function testSerializeWithoutNullValues(): void

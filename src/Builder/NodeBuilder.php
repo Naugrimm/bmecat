@@ -69,6 +69,11 @@ class NodeBuilder
 
             $paramType = $firstSetterParam->getType()
                 ->getName();
+
+            if ($paramType === 'self') {
+                $paramType = $instance::class;
+            }
+
             if ($firstSetterParam->getType()->isBuiltin() || ! class_exists($paramType)) {
                 $instance->{$setterName}($value); //@phpstan-ignore method.dynamicName
                 continue;
