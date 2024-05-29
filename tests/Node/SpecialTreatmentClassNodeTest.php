@@ -3,29 +3,23 @@
 namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
-use JMS\Serializer\SerializerBuilder;
+use JMS\Serializer\Serializer;
 use Naugrim\BMEcat\DocumentBuilder;
-use PHPUnit\Framework\TestCase;
 use Naugrim\BMEcat\Nodes\SpecialTreatmentClass;
+use PHPUnit\Framework\TestCase;
 
 class SpecialTreatmentClassNodeTest extends TestCase
 {
-    /**
-     * @var \JMS\Serializer\SerializerInterface
-     */
-    private $serializer;
+    private Serializer $serializer;
 
-    public function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
 
-    /**
-     * @test
-     */
-    public function Serialize_With_Null_Values()
+    public function testSerializeWithNullValues(): void
     {
-        $node = new SpecialTreatmentClass();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], SpecialTreatmentClass::class);
         $context = SerializationContext::create()->setSerializeNull(true);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_special_treatment_class_with_null_values.xml');
@@ -37,12 +31,9 @@ class SpecialTreatmentClassNodeTest extends TestCase
         $this->assertInstanceOf(SpecialTreatmentClass::class, $doc);
     }
 
-    /**
-     * @test
-     */
-    public function Serialize_Without_Null_Values()
+    public function testSerializeWithoutNullValues(): void
     {
-        $node = new SpecialTreatmentClass();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], SpecialTreatmentClass::class);
         $context = SerializationContext::create()->setSerializeNull(false);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_special_treatment_class_without_null_values.xml');

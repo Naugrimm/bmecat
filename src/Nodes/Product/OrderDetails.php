@@ -4,188 +4,111 @@ namespace Naugrim\BMEcat\Nodes\Product;
 
 use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
- *
- * @Serializer\XmlRoot("PRODUCT_ORDER_DETAILS")
+ * @implements NodeInterface<self>
  */
+#[Serializer\XmlRoot('PRODUCT_ORDER_DETAILS')]
 class OrderDetails implements Contracts\NodeInterface
 {
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("ORDER_UNIT")
-     * @Serializer\XmlElement(cdata=false)
-     *
-     * @var string
-     */
-    protected $orderUnit;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('ORDER_UNIT')]
+    #[Serializer\XmlElement(cdata: false)]
+    protected string $orderUnit;
 
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("CONTENT_UNIT")
-     * @Serializer\XmlElement(cdata=false)
-     *
-     * @var string
-     */
-    protected $contentUnit;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('CONTENT_UNIT')]
+    #[Serializer\XmlElement(cdata: false)]
+    protected string $contentUnit;
 
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("NO_CU_PER_OU")
-     * @Serializer\XmlElement(cdata=false)
-     *
-     * @var float
-     */
-    protected $noCuPerOu = 1;
+    #[Serializer\Expose]
+    #[Serializer\Type('float')]
+    #[Serializer\SerializedName('NO_CU_PER_OU')]
+    #[Serializer\XmlElement(cdata: false)]
+    protected ?float $noCuPerOu = null;
 
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("PRICE_QUANTITY")
-     * @Serializer\XmlElement(cdata=false)
-     *
-     * @var float
-     */
-    protected $priceQuantity = 1;
+    #[Serializer\Expose]
+    #[Serializer\Type('float')]
+    #[Serializer\SerializedName('PRICE_QUANTITY')]
+    #[Serializer\XmlElement(cdata: false)]
+    protected ?float $priceQuantity = null;
 
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("QUANTITY_MIN")
-     * @Serializer\XmlElement(cdata=false)
-     *
-     * @var int
-     */
-    protected $quantityMin = 1;
+    #[Serializer\Expose]
+    #[Serializer\Type('float')]
+    #[Serializer\SerializedName('QUANTITY_MIN')]
+    #[Serializer\XmlElement(cdata: false)]
+    protected ?float $quantityMin = null;
 
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("QUANTITY_INTERVAL")
-     * @Serializer\XmlElement(cdata=false)
-     *
-     * @var int
-     */
-    protected $quantityInterval = 1;
+    #[Serializer\Expose]
+    #[Serializer\Type('float')]
+    #[Serializer\SerializedName('QUANTITY_INTERVAL')]
+    #[Serializer\XmlElement(cdata: false)]
+    protected ?float $quantityInterval = null;
 
-    /**
-     * @return string
-     */
-    public function getOrderUnit()
+    public function getOrderUnit(): string
     {
         return $this->orderUnit;
     }
 
-    /**
-     * @param string $orderUnit
-     * @return OrderDetails
-     */
-    public function setOrderUnit($orderUnit) : OrderDetails
+    public function setOrderUnit(string $orderUnit): self
     {
         $this->orderUnit = $orderUnit;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getContentUnit()
+    public function getContentUnit(): string
     {
         return $this->contentUnit;
     }
 
-    /**
-     * @param string $contentUnit
-     * @return OrderDetails
-     */
-    public function setContentUnit($contentUnit) : OrderDetails
+    public function setContentUnit(string $contentUnit): self
     {
         $this->contentUnit = $contentUnit;
         return $this;
     }
 
-    /**
-     * @return float
-     */
-    public function getNoCuPerOu()
+    public function getNoCuPerOu(): ?float
     {
-        if ($this->noCuPerOu === null) {
-            return 1;
-        }
         return $this->noCuPerOu;
     }
 
-    /**
-     * @param float $noCuPerOu
-     * @return OrderDetails
-     */
-    public function setNoCuPerOu($noCuPerOu) : OrderDetails
+    public function setNoCuPerOu(float $noCuPerOu): self
     {
         $this->noCuPerOu = $noCuPerOu;
         return $this;
     }
 
-    /**
-     * @return float
-     */
-    public function getPriceQuantity()
+    public function getPriceQuantity(): ?float
     {
-        if ($this->priceQuantity === null) {
-            return 1;
-        }
         return $this->priceQuantity;
     }
 
-    /**
-     * @param float $priceQuantity
-     * @return OrderDetails
-     */
-    public function setPriceQuantity($priceQuantity) : OrderDetails
+    public function setPriceQuantity(float $priceQuantity): self
     {
         $this->priceQuantity = $priceQuantity;
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getQuantityMin()
+    public function getQuantityMin(): ?float
     {
-        if ($this->quantityMin === null) {
-            return 1;
-        }
         return $this->quantityMin;
     }
 
-    /**
-     * @param int $quantityMin
-     * @return OrderDetails
-     */
-    public function setQuantityMin($quantityMin) : OrderDetails
+    public function setQuantityMin(float $quantityMin): self
     {
         $this->quantityMin = $quantityMin;
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getQuantityInterval()
+    public function getQuantityInterval(): ?float
     {
-        if ($this->quantityInterval === null) {
-            return 1;
-        }
         return $this->quantityInterval;
     }
 
-    /**
-     * @param int $quantityInterval
-     * @return OrderDetails
-     */
-    public function setQuantityInterval($quantityInterval) : OrderDetails
+    public function setQuantityInterval(float $quantityInterval): self
     {
         $this->quantityInterval = $quantityInterval;
         return $this;

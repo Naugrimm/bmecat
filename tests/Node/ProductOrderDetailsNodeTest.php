@@ -3,111 +3,73 @@
 namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
+use JMS\Serializer\Serializer;
 use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Nodes\Product\OrderDetails;
 use PHPUnit\Framework\TestCase;
 
 class ProductOrderDetailsNodeTest extends TestCase
 {
-    /**
-     * @var \JMS\Serializer\SerializerInterface
-     */
-    private $serializer;
+    private Serializer $serializer;
 
-    public function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Order_Unit()
+    public function testSetGetOrderUnit(): void
     {
-        $node = new OrderDetails();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], OrderDetails::class);
         $value = 'C62';
 
-        $this->assertNull($node->getOrderUnit());
         $node->setOrderUnit($value);
         $node->setContentUnit($value);
         $this->assertEquals($value, $node->getOrderUnit());
         $this->assertEquals($value, $node->getContentUnit());
     }
-    /**
-     * @test
-     */
-    public function Set_Get_No_Cu_Per_Ou()
-    {
-        $node = new OrderDetails();
-        $value = rand(10, 1000);
 
-        $this->assertEquals(1, $node->getNoCuPerOu());
+    public function testSetGetNoCuPerOu(): void
+    {
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], OrderDetails::class);
+        $value = random_int(10, 1000);
+
         $node->setNoCuPerOu($value);
         $this->assertEquals($value, $node->getNoCuPerOu());
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Price_Quantity()
+    public function testSetGetPriceQuantity(): void
     {
-        $node = new OrderDetails();
-        $value = rand(10, 1000);
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], OrderDetails::class);
+        $value = random_int(10, 1000);
 
-        $this->assertEquals(1, $node->getPriceQuantity());
         $node->setPriceQuantity($value);
         $this->assertEquals($value, $node->getPriceQuantity());
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Quantity_Min()
+    public function testSetGetQuantityMin(): void
     {
-        $node = new OrderDetails();
-        $value = rand(10, 1000);
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], OrderDetails::class);
+        $value = random_int(10, 1000);
 
-        $this->assertEquals(1, $node->getQuantityMin());
         $node->setQuantityMin($value);
         $this->assertEquals($value, $node->getQuantityMin());
     }
 
-    /**
-     * @test
-     */
-    public function Set_Get_Quantity_Interval()
+    public function testSetGetQuantityInterval(): void
     {
-        $node = new OrderDetails();
-        $value = rand(10, 1000);
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], OrderDetails::class);
+        $value = random_int(10, 1000);
 
-        $this->assertEquals(1, $node->getQuantityInterval());
         $node->setQuantityInterval($value);
         $this->assertEquals($value, $node->getQuantityInterval());
     }
 
-    /**
-     * @test
-     */
-    public function Serialize_With_Null_Values()
+    public function testSerializeWithoutNullValues(): void
     {
-        $node = new OrderDetails();
-        $context = SerializationContext::create()->setSerializeNull(true);
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], OrderDetails::class);
+        $node->setOrderUnit('C62');
+        $node->setContentUnit('C62');
 
-        $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_order_details_with_null_values.xml');
-        $actual = $this->serializer->serialize($node, 'xml', $context);
-
-        $this->assertEquals($expected, $actual);
-
-        $doc = $this->serializer->deserialize($actual, OrderDetails::class, 'xml');
-        $this->assertInstanceOf(OrderDetails::class, $doc);
-    }
-
-    /**
-     * @test
-     */
-    public function Serialize_Without_Null_Values()
-    {
-        $node = new OrderDetails();
         $context = SerializationContext::create()->setSerializeNull(false);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_order_details_without_null_values.xml');

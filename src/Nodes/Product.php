@@ -1,12 +1,12 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Nodes;
 
 use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 use Naugrim\BMEcat\Nodes\Product\ConfigDetails;
 use Naugrim\BMEcat\Nodes\Product\Details;
 use Naugrim\BMEcat\Nodes\Product\Features;
@@ -15,345 +15,206 @@ use Naugrim\BMEcat\Nodes\Product\OrderDetails;
 use Naugrim\BMEcat\Nodes\Product\PriceDetails;
 
 /**
- *
- * @Serializer\XmlRoot("PRODUCT")
+ * @implements NodeInterface<self>
  */
+#[Serializer\XmlRoot('PRODUCT')]
 class Product implements Contracts\NodeInterface
 {
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("mode")
-     * @Serializer\XmlAttribute
-     *
-     * @var string
-     */
-    protected $mode = 'new';
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('mode')]
+    #[Serializer\XmlAttribute]
+    protected string $mode = 'new';
+
+    #[Serializer\Expose]
+    #[Serializer\Type(SupplierPid::class)]
+    #[Serializer\SerializedName('SUPPLIER_PID')]
+    protected ?SupplierPid $id = null;
+
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('PRODUCT_DETAILS')]
+    #[Serializer\Type(Details::class)]
+    protected Details $details;
 
     /**
-     *
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\SupplierPid")
-     * @Serializer\SerializedName("SUPPLIER_PID")
-     *
-     * @var SupplierPid
-     */
-    protected $id;
-
-    /**
-     *
-     * @Serializer\Expose
-     * @Serializer\SerializedName("PRODUCT_DETAILS")
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Product\Details")
-     *
-     * @var Details
-     */
-    protected $details;
-
-
-    /**
-     *
-     * @Serializer\Expose
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\Product\Features>")
-     * @Serializer\XmlList( inline=true, entry="PRODUCT_FEATURES")
-     *
      * @var Features[]
      */
-    protected $features = [];
+    #[Serializer\Expose]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Product\Features>')]
+    #[Serializer\XmlList(entry: 'PRODUCT_FEATURES', inline: true)]
+    protected array $features = [];
+
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('PRODUCT_ORDER_DETAILS')]
+    #[Serializer\Type(OrderDetails::class)]
+    protected OrderDetails $orderDetails;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\SerializedName("PRODUCT_ORDER_DETAILS")
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Product\OrderDetails")
-     *
-     * @var OrderDetails
-     */
-    protected $orderDetails;
-
-    /**
-     *
-     * @Serializer\Expose
-     * @Serializer\SerializedName("PRODUCT_PRICE_DETAILS")
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\Product\PriceDetails>")
-     * @Serializer\XmlList(inline = true, entry = "PRODUCT_PRICE_DETAILS")
-     *
      * @var PriceDetails[]
      */
-    protected $priceDetails = [];
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('PRODUCT_PRICE_DETAILS')]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Product\PriceDetails>')]
+    #[Serializer\XmlList(inline: true, entry: 'PRODUCT_PRICE_DETAILS')]
+    protected array $priceDetails = [];
 
     /**
-     *
-     * @Serializer\Expose
-     * @Serializer\SerializedName("MIME_INFO")
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\Mime>")
-     * @Serializer\XmlList( entry="MIME")
-     *
      * @var Mime[]
      */
-    protected $mimes = [];
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('MIME_INFO')]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Mime>')]
+    #[Serializer\XmlList(entry: 'MIME')]
+    protected array $mimes = [];
 
-    /**
-     * @Serializer\Expose
-     * @Serializer\SerializedName("PRODUCT_LOGISTIC_DETAILS")
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Product\LogisticDetails")
-     *
-     * @var LogisticDetails
-     */
-    protected $logisticDetails = null;
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('PRODUCT_LOGISTIC_DETAILS')]
+    #[Serializer\Type(LogisticDetails::class)]
+    protected LogisticDetails $logisticDetails;
 
-    /**
-     * @Serializer\Expose
-     * @Serializer\SerializedName("PRODUCT_CONFIG_DETAILS")
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Product\ConfigDetails")
-     *
-     * @var ConfigDetails
-     */
-    protected $configDetails = null;
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('PRODUCT_CONFIG_DETAILS')]
+    #[Serializer\Type(ConfigDetails::class)]
+    protected ConfigDetails $configDetails;
 
-    /**
-     * @return string
-     */
     public function getMode(): string
     {
         return $this->mode;
     }
 
-    /**
-     * @param string $mode
-     */
     public function setMode(string $mode): void
     {
         $this->mode = $mode;
     }
 
-
-    /**
-     *
-     * @param Details $details
-     * @return Product
-     */
-    public function setDetails(Details $details) : Product
+    public function setDetails(Details $details): self
     {
         $this->details = $details;
         return $this;
     }
 
-    /**
-     *
-     * @return Details
-     */
-    public function getDetails()
+    public function getDetails(): Details
     {
         return $this->details;
     }
 
     /**
-     *
-     * @param PriceDetails[] $priceDetails
-     * @return Product
+     * @param PriceDetails[]|array<string, mixed>[] $priceDetails
      * @throws InvalidSetterException
      * @throws UnknownKeyException
      */
-    public function setPriceDetails(array $priceDetails) : Product
+    public function setPriceDetails(array $priceDetails): self
     {
         $this->priceDetails = [];
         foreach ($priceDetails as $priceDetail) {
-            if (is_array($priceDetail)) {
-                $priceDetail = NodeBuilder::fromArray($priceDetail, new PriceDetails());
+            if (! $priceDetail instanceof PriceDetails) {
+                $priceDetail = NodeBuilder::fromArray($priceDetail, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], PriceDetails::class));
             }
+
             $this->addPriceDetail($priceDetail);
         }
+
         return $this;
     }
 
-    /**
-     *
-     * @param PriceDetails $price
-     * @return Product
-     */
-    public function addPriceDetail(PriceDetails $price) : Product
+    public function addPriceDetail(PriceDetails $price): self
     {
-        if ($this->priceDetails === null) {
-            $this->priceDetails = [];
-        }
         $this->priceDetails[] = $price;
         return $this;
     }
 
     /**
-     * @param Mime[] $mimes
-     * @return Product
+     * @param Mime[]|array<string, mixed>[] $mimes
      * @throws InvalidSetterException
      * @throws UnknownKeyException
      */
-    public function setMimes(array $mimes): Product
+    public function setMimes(array $mimes): self
     {
         $this->mimes = [];
         foreach ($mimes as $mime) {
-            if (is_array($mime)) {
-                $mime = NodeBuilder::fromArray($mime, new Mime());
+            if (! $mime instanceof Mime) {
+                $mime = NodeBuilder::fromArray($mime, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Mime::class));
             }
+
             $this->addMime($mime);
         }
+
         return $this;
     }
 
-    /**
-     * @param Mime $mime
-     * @return Product
-     */
-    public function addMime(Mime $mime) : Product
+    public function addMime(Mime $mime): self
     {
-        if ($this->mimes === null) {
-            $this->mimes = [];
-        }
         $this->mimes[] = $mime;
         return $this;
     }
 
-    /**
-     *
-     * @Serializer\PreSerialize
-     * @Serializer\PostSerialize
-     * @return Product
-     */
-    public function nullPriceDetails() : Product
-    {
-        if (empty($this->priceDetails) === true) {
-            $this->priceDetails = null;
-        }
-        return $this;
-    }
-
-    /**
-     *
-     * @Serializer\PreSerialize
-     * @Serializer\PostSerialize
-     * @return Product
-     */
-    public function nullMime() : Product
-    {
-        if (empty($this->mimes) === true) {
-            $this->mimes = null;
-        }
-        return $this;
-    }
-
-    /**
-     *
-     * @param SupplierPid $id
-     * @return Product
-     */
-    public function setId(SupplierPid $id) : Product
+    public function setId(SupplierPid $id): self
     {
         $this->id = $id;
         return $this;
     }
 
-    /**
-     * @return OrderDetails|null
-     */
-    public function getOrderDetails()
+    public function getOrderDetails(): OrderDetails
     {
         return $this->orderDetails;
     }
 
-    /**
-     * @param OrderDetails $orderDetails
-     * @return Product
-     */
-    public function setOrderDetails(OrderDetails $orderDetails) : Product
+    public function setOrderDetails(OrderDetails $orderDetails): self
     {
         $this->orderDetails = $orderDetails;
         return $this;
     }
 
-    /**
-     *
-     * @return SupplierPid
-     */
-    public function getId()
+    public function getId(): ?SupplierPid
     {
         return $this->id;
     }
 
     /**
-     *
-     * @Serializer\PreSerialize
-     * @Serializer\PostSerialize
-     * @return Product
-     */
-    public function nullFeatures() : Product
-    {
-        if (empty($this->features) === true) {
-            $this->features = null;
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Features[] $features
-     * @return Product
+     * @param Features[]|array<string, mixed>[] $features
      * @throws InvalidSetterException
      * @throws UnknownKeyException
      */
-    public function setFeatures(array $features): Product
+    public function setFeatures(array $features): self
     {
         $this->features = [];
         foreach ($features as $feature) {
-            if (is_array($feature)) {
-                $feature = NodeBuilder::fromArray($feature, new Features());
+            if (! $feature instanceof Features) {
+                $feature = NodeBuilder::fromArray($feature, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Features::class));
             }
+
             $this->addFeatures($feature);
         }
+
         return $this;
     }
 
-    /**
-     *
-     * @param Features $features
-     * @return Product
-     */
-    public function addFeatures(Features $features) : Product
+    public function addFeatures(Features $features): self
     {
-        if ($this->features === null) {
-            $this->features = [];
-        }
-        $this->features [] = $features;
+        $this->features[] = $features;
         return $this;
     }
 
     /**
-     *
      * @return Features[]
      */
-    public function getFeatures()
+    public function getFeatures(): array
     {
-        if ($this->features === null) {
-            return [];
-        }
-
         return $this->features;
     }
 
     /**
-     *
      * @return PriceDetails[]
      */
-    public function getPriceDetails()
+    public function getPriceDetails(): array
     {
-        if ($this->priceDetails === null) {
-            return [];
-        }
-
         return $this->priceDetails;
     }
 
     /**
-     * @return Mime[]|null
+     * @return Mime[]
      */
-    public function getMimes()
+    public function getMimes(): array
     {
         return $this->mimes;
     }

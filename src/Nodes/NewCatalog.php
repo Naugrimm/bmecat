@@ -1,85 +1,61 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Nodes;
 
 use JMS\Serializer\Annotation as Serializer;
-
 use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
+use Webmozart\Assert\Assert;
 
 /**
- *
- * @Serializer\XmlRoot("T_NEW_CATALOG")
+ * @implements NodeInterface<self>
  */
+#[Serializer\XmlRoot('T_NEW_CATALOG')]
 class NewCatalog implements Contracts\NodeInterface
 {
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\Product>")
-     * @Serializer\XmlList(inline = true, entry = "PRODUCT")
-     *
      * @var Product[]
      */
-    protected $products = [];
+    #[Serializer\Expose]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Product>')]
+    #[Serializer\XmlList(entry: 'PRODUCT', inline: true)]
+    protected array $products = [];
 
     /**
-     *
-     * @param Product[] $products
-     * @return NewCatalog
+     * @param Product[]|array<string, mixed>[] $products
      * @throws InvalidSetterException
      * @throws UnknownKeyException
      */
-    public function setProducts(array $products) : NewCatalog
+    public function setProducts(array $products): self
     {
         $this->products = [];
 
         foreach ($products as $product) {
             if (is_array($product)) {
-                $product = NodeBuilder::fromArray($product, new Product());
+                $product = NodeBuilder::fromArray($product, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class));
             }
+
+            Assert::isInstanceOf($product, Product::class);
+
             $this->addProduct($product);
         }
+
+        return $this;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        $this->products[] = $product;
         return $this;
     }
 
     /**
-     *
-     * @param Product $product
-     * @return NewCatalog
-     */
-    public function addProduct(Product $product) : NewCatalog
-    {
-        if ($this->products === null) {
-            $this->products = [];
-        }
-        $this->products []= $product;
-        return $this;
-    }
-
-    /**
-     *
-     * @Serializer\PreSerialize
-     * @Serializer\PostSerialize
-     */
-    public function nullProducts()
-    {
-        if (empty($this->products) === true) {
-            $this->products = null;
-        }
-    }
-
-    /**
-     *
      * @return Product[]
      */
-    public function getProducts()
+    public function getProducts(): array
     {
-        if ($this->products === null) {
-            return [];
-        }
-
         return $this->products;
     }
 }

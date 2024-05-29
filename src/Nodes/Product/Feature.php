@@ -1,205 +1,118 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Nodes\Product;
 
 use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
- *
- * @Serializer\XmlRoot("FEATURE")
+ * @implements NodeInterface<self>
  */
+#[Serializer\XmlRoot('FEATURE')]
 class Feature implements Contracts\NodeInterface
 {
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("FNAME")
-     *
-     * @var string
-     */
-    protected $name;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('FNAME')]
+    protected string $name;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("VARIANTS")
-     * @Serializer\SkipWhenEmpty
-     * @Serializer\Exclude(if="methodResultIsset(object, 'getValue')")
-     *
-     * @var string
+     * @var string[]
      */
-    protected $variants;
+    #[Serializer\Expose]
+    #[Serializer\Type('array<string>')]
+    #[Serializer\XmlList(entry: 'FVALUE', inline: true)]
+    protected array $value = [];
 
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("FVALUE")
-     * @Serializer\Exclude(if="methodResultIsset(object, 'getVariants')")
-     *
-     * @var string
-     */
-    protected $value;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('FUNIT')]
+    protected ?string $unit = null;
 
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("FUNIT")
-     *
-     * @var string
-     */
-    protected $unit;
+    #[Serializer\Expose]
+    #[Serializer\Type('int')]
+    #[Serializer\SerializedName('FORDER')]
+    protected ?int $order = null;
 
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("FORDER")
-     *
-     * @var string
-     */
-    protected $order;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('FDESCR')]
+    protected ?string $description = null;
 
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("FDESCR")
-     *
-     * @var string
-     */
-    protected $description;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('FVALUE_DETAILS')]
+    protected ?string $valueDetails = null;
 
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("FVALUE_DETAILS")
-     *
-     * @var string
-     */
-    protected $valueDetails;
-
-    /**
-     * @param mixed $name
-     * @return Feature
-     */
-    public function setName($name) : Feature
+    public function setName(string $name): self
     {
         $this->name = $name;
         return $this;
     }
 
     /**
-     * @param string $variants
-     * @return Feature
+     * @param string[] $value
      */
-    public function setVariants($variants) : Feature
-    {
-        $this->variants = $variants;
-        return $this;
-    }
-
-    /**
-     * @param string $value
-     * @return Feature
-     */
-    public function setValue($value) : Feature
+    public function setValue(array $value): self
     {
         $this->value = $value;
         return $this;
     }
 
-    /**
-     * @param string $unit
-     * @return Feature
-     */
-    public function setUnit($unit) : Feature
+    public function setUnit(string $unit): self
     {
         $this->unit = $unit;
         return $this;
     }
 
-    /**
-     * @param string $order
-     * @return Feature
-     */
-    public function setOrder($order) : Feature
+    public function setOrder(int $order): self
     {
         $this->order = $order;
         return $this;
     }
 
-    /**
-     * @param string $description
-     * @return Feature
-     */
-    public function setDescription($description) : Feature
+    public function setDescription(string $description): self
     {
         $this->description = $description;
         return $this;
     }
 
-    /**
-     * @param string $valueDetails
-     * @return Feature
-     */
-    public function setValueDetails($valueDetails) : Feature
+    public function setValueDetails(string $valueDetails): self
     {
         $this->valueDetails = $valueDetails;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @return string
+     * @return ?string[]
      */
-    public function getVariants()
-    {
-        return $this->variants;
-    }
-
-    /**
-     * @return string
-     */
-    public function getValue()
+    public function getValue(): ?array
     {
         return $this->value;
     }
 
-    /**
-     * @return string
-     */
-    public function getUnit()
+    public function getUnit(): ?string
     {
         return $this->unit;
     }
 
-    /**
-     * @return string
-     */
-    public function getOrder()
+    public function getOrder(): ?int
     {
         return $this->order;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @return string
-     */
-    public function getValueDetails()
+    public function getValueDetails(): ?string
     {
         return $this->valueDetails;
     }

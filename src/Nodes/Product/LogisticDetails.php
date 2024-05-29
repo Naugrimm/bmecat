@@ -4,65 +4,49 @@ namespace Naugrim\BMEcat\Nodes\Product;
 
 use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 use Naugrim\BMEcat\Nodes\DeliveryTimes;
 use Naugrim\BMEcat\Nodes\Product\Logistic\CustomsTariffNumber;
 use Naugrim\BMEcat\Nodes\Product\Logistic\Dimensions;
-use Naugrim\BMEcat\Nodes\TimeSpan;
 
 /**
- *
- * @Serializer\XmlRoot("PRODUCT_LOGISTIC_DETAILS")
+ * @implements NodeInterface<self>
  */
+#[Serializer\XmlRoot('PRODUCT_LOGISTIC_DETAILS')]
 class LogisticDetails implements Contracts\NodeInterface
 {
-
     /**
-     *
-     * @Serializer\Expose
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\Product\Logistic\CustomsTariffNumber>")
-     * @Serializer\XmlList( inline=true, entry="CUSTOMS_TARIFF_NUMBER")
-     *
      * @var CustomsTariffNumber[]
      */
-    protected $customs_tariff_numbers = [];
+    #[Serializer\Expose]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Product\Logistic\CustomsTariffNumber>')]
+    #[Serializer\XmlList(entry: 'CUSTOMS_TARIFF_NUMBER', inline: true)]
+    protected array $customs_tariff_numbers = [];
+
+    #[Serializer\Expose]
+    #[Serializer\Type('float')]
+    #[Serializer\SerializedName('STATISTICS_FACTOR')]
+    #[Serializer\XmlElement(cdata: false)]
+    protected ?float $statistics_factor = null;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("STATISTICS_FACTOR")
-     * @Serializer\XmlElement(cdata=false)
-     *
-     * @var float
-     */
-    protected $statistics_factor = null;
-
-    /**
-     *
-     * @Serializer\Expose
-     * @Serializer\Type("array<string>")
-     * @Serializer\XmlList(inline=true, entry="COUNTRY_OF_ORIGIN")
-     *
      * @var string[]
      */
-    protected $country_of_origin = [];
+    #[Serializer\Expose]
+    #[Serializer\Type('array<string>')]
+    #[Serializer\XmlList(entry: 'COUNTRY_OF_ORIGIN', inline: true)]
+    protected array $country_of_origin = [];
+
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('PRODUCT_DIMENSIONS')]
+    #[Serializer\Type(Dimensions::class)]
+    protected ?Dimensions $dimensions = null;
 
     /**
-     *
-     * @Serializer\Expose
-     * @Serializer\SerializedName("PRODUCT_DIMENSIONS")
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Product\Logistic\Dimensions")
-     *
-     * @var Dimensions
-     */
-    protected $dimensions = null;
-
-    /**
-     *
-     * @Serializer\Expose
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\DeliveryTimes>")
-     * @Serializer\XmlList(inline=true, entry="DELIVERY_TIMES")
-     *
      * @var DeliveryTimes[]
      */
-    protected $deliveryTimes = [];
+    #[Serializer\Expose]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\DeliveryTimes>')]
+    #[Serializer\XmlList(entry: 'DELIVERY_TIMES', inline: true)]
+    protected array $deliveryTimes = [];
 }

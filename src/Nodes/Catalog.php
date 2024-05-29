@@ -1,125 +1,76 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Nodes;
 
 use JMS\Serializer\Annotation as Serializer;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
- *
- * @Serializer\XmlRoot("CATALOG")
+ * @implements NodeInterface<self>
  */
+#[Serializer\XmlRoot('CATALOG')]
 class Catalog implements Contracts\NodeInterface
 {
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("LANGUAGE")
-     *
-     * @var string
-     */
-    protected $language;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('LANGUAGE')]
+    protected string $language;
 
-    /**
-      * @Serializer\Expose
-      * @Serializer\Type("string")
-      * @Serializer\SerializedName("CATALOG_ID")
-      *
-      * @var string
-      */
-    protected $id;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('CATALOG_ID')]
+    protected string $id;
 
-    /**
-      * @Serializer\Expose
-      * @Serializer\Type("string")
-      * @Serializer\SerializedName("CATALOG_VERSION")
-      *
-      * @var string
-      */
-    protected $version;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('CATALOG_VERSION')]
+    protected string $version;
 
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\DateTime")
-     * @Serializer\SerializedName("DATETIME")
-     *
-     * @var DateTime
-     */
-    protected $dateTime;
+    #[Serializer\Expose]
+    #[Serializer\Type(DateTime::class)]
+    #[Serializer\SerializedName('DATETIME')]
+    protected ?DateTime $dateTime = null;
 
-    /**
-     * @param string $language
-     * @return Catalog
-     */
-    public function setLanguage(string $language) : Catalog
+    public function setLanguage(string $language): self
     {
         $this->language = $language;
         return $this;
     }
 
-    /**
-     * @param string $id
-     * @return Catalog
-     */
-    public function setId(string $id) : Catalog
+    public function setId(string $id): self
     {
         $this->id = $id;
         return $this;
     }
 
-    /**
-     * @param string $version
-     * @return Catalog
-     */
-    public function setVersion(string $version) : Catalog
+    public function setVersion(string $version): self
     {
         $this->version = $version;
         return $this;
     }
 
-    /**
-     *
-     * @return string
-     */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     *
-     * @return string
-     */
-    public function getLanguage()
+    public function getLanguage(): string
     {
         return $this->language;
     }
 
-    /**
-     *
-     * @return string
-     */
-    public function getVersion()
+    public function getVersion(): string
     {
         return $this->version;
     }
 
-    /**
-     *
-     * @param DateTime $dateTime
-     * @return Catalog
-     */
-    public function setDateTime(DateTime $dateTime) : Catalog
+    public function setDateTime(DateTime $dateTime): self
     {
         $this->dateTime = $dateTime;
         return $this;
     }
 
-    /**
-     *
-     * @return DateTime
-     */
-    public function getDateTime()
+    public function getDateTime(): ?DateTime
     {
         return $this->dateTime;
     }

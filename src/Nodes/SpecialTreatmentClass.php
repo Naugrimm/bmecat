@@ -3,60 +3,39 @@
 namespace Naugrim\BMEcat\Nodes;
 
 use JMS\Serializer\Annotation as Serializer;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
- *
- * @Serializer\XmlRoot("SPECIAL_TREATMENT_CLASS")
+ * @implements NodeInterface<self>
  */
+#[Serializer\XmlRoot('SPECIAL_TREATMENT_CLASS')]
 class SpecialTreatmentClass implements Contracts\NodeInterface
 {
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\XmlAttribute
-     *
-     * @var string
-     */
-    private $type = '';
+    #[Serializer\Type('string')]
+    #[Serializer\XmlAttribute]
+    private string $type = '';
 
-    /**
-     * @Serializer\Type("string")
-     * @Serializer\XmlValue
-     *
-     * @var string
-     */
-    protected $value = '';
+    #[Serializer\Type('string')]
+    #[Serializer\XmlValue]
+    protected string $value = '';
 
-    /**
-     * @param string $type
-     * @return SpecialTreatmentClass
-     */
-    public function setType($type) : SpecialTreatmentClass
+    public function setType(string $type): self
     {
         $this->type = $type;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @return string
-     */
     public function getValue(): string
     {
         return $this->value;
     }
 
-    /**
-     * @param string $value
-     * @return SpecialTreatmentClass
-     */
-    public function setValue(string $value): SpecialTreatmentClass
+    public function setValue(string $value): self
     {
         $this->value = $value;
         return $this;

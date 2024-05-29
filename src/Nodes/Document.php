@@ -1,103 +1,66 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Nodes;
 
 use JMS\Serializer\Annotation as Serializer;
+use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
- *
- * @Serializer\XmlRoot("BMECAT")
- * @Serializer\ExclusionPolicy("all")
+ * @implements NodeInterface<self>
  */
+#[Serializer\XmlRoot('BMECAT')]
+#[Serializer\ExclusionPolicy('all')]
 class Document implements Contracts\NodeInterface
 {
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\XmlAttribute
-     * @Serializer\Type("string")
-     */
-    protected $version = '2005.1';
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\XmlAttribute]
+    protected string $version = '2005.1';
 
-    /**
-     * @Serializer\Expose
-     * @Serializer\SerializedName("xmlns")
-     * @Serializer\XmlAttribute
-     */
-    protected $namespace = 'http://www.bmecat.org/bmecat/2005.1';
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('xmlns')]
+    #[Serializer\XmlAttribute]
+    protected string $namespace = 'http://www.bmecat.org/bmecat/2005.1';
 
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Header")
-     * @Serializer\SerializedName("HEADER")
-     *
-     * @var Header
-     */
-    protected $header;
+    #[Serializer\Expose]
+    #[Serializer\Type(Header::class)]
+    #[Serializer\SerializedName('HEADER')]
+    protected Header $header;
 
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\NewCatalog")
-     * @Serializer\SerializedName("T_NEW_CATALOG")
-     *
-     * @var NewCatalog
-     */
-    protected $catalog;
+    #[Serializer\Expose]
+    #[Serializer\Type(NewCatalog::class)]
+    #[Serializer\SerializedName('T_NEW_CATALOG')]
+    protected NewCatalog $catalog;
 
-    /**
-     *
-     * @param string $version
-     * @return Document
-     */
-    public function setVersion($version) : Document
+    public function setVersion(string $version): self
     {
         $this->version = $version;
         return $this;
     }
 
-    /**
-     *
-     * @return string
-     */
-    public function getVersion()
+    public function getVersion(): string
     {
         return $this->version;
     }
 
-    /**
-     * @param Header $header
-     * @return Document
-     */
-    public function setHeader(Header $header) : Document
+    public function setHeader(Header $header): self
     {
         $this->header = $header;
         return $this;
     }
 
-    /**
-     *
-     * @return Header
-     */
-    public function getHeader()
+    public function getHeader(): Header
     {
         return $this->header;
     }
 
-    /**
-     * @param NewCatalog $catalog
-     * @return Document
-     */
-    public function setNewCatalog(NewCatalog $catalog) : Document
+    public function setNewCatalog(NewCatalog $catalog): self
     {
         $this->catalog = $catalog;
         return $this;
     }
 
-    /**
-     * @return NewCatalog
-     */
-    public function getNewCatalog()
+    public function getNewCatalog(): NewCatalog
     {
         return $this->catalog;
     }

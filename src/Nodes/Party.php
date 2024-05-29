@@ -8,95 +8,63 @@ use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
 use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
+/**
+ * @implements NodeInterface<self>
+ */
 class Party implements NodeInterface
 {
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("PARTY_ID")
-     *
-     * @var string
-     */
-    protected $id;
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('PARTY_ID')]
+    protected string $id;
+
+    #[Serializer\Expose]
+    #[Serializer\Type('string')]
+    #[Serializer\SerializedName('PARTY_ROLE')]
+    protected string $role;
+
+    #[Serializer\Expose]
+    #[Serializer\Type(Address::class)]
+    #[Serializer\SerializedName('ADDRESS')]
+    protected Address $address;
 
     /**
-     * @Serializer\Expose
-     * @Serializer\Type("string")
-     * @Serializer\SerializedName("PARTY_ROLE")
-     *
-     * @var string
-     */
-    protected $role;
-
-    /**
-     * @Serializer\Expose
-     * @Serializer\Type("Naugrim\BMEcat\Nodes\Address")
-     * @Serializer\SerializedName("ADDRESS")
-     *
-     * @var Address
-     */
-    protected $address;
-
-    /**
-     *
-     * @Serializer\Expose
-     * @Serializer\SerializedName("MIME_INFO")
-     * @Serializer\Type("array<Naugrim\BMEcat\Nodes\Mime>")
-     * @Serializer\XmlList( entry="MIME")
-     *
      * @var Mime[]
      */
-    protected $mimes = [];
+    #[Serializer\Expose]
+    #[Serializer\SerializedName('MIME_INFO')]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Mime>')]
+    #[Serializer\XmlList(entry: 'MIME')]
+    protected array $mimes = [];
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @param string $id
-     * @return Party
-     */
-    public function setId(string $id): Party
+    public function setId(string $id): self
     {
         $this->id = $id;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getRole(): string
     {
         return $this->role;
     }
 
-    /**
-     * @param string $role
-     * @return Party
-     */
-    public function setRole(string $role): Party
+    public function setRole(string $role): self
     {
         $this->role = $role;
         return $this;
     }
 
-    /**
-     * @return Address
-     */
     public function getAddress(): Address
     {
         return $this->address;
     }
 
-    /**
-     * @param Address $address
-     * @return Party
-     */
-    public function setAddress(Address $address): Party
+    public function setAddress(Address $address): self
     {
         $this->address = $address;
         return $this;
@@ -109,34 +77,28 @@ class Party implements NodeInterface
     {
         return $this->mimes;
     }
-    
+
     /**
-     * @param Mime[] $mimes
-     * @return Party
+     * @param Mime[]|array<string, mixed>[] $mimes
      * @throws InvalidSetterException
      * @throws UnknownKeyException
      */
-    public function setMimes(array $mimes): Party
+    public function setMimes(array $mimes): self
     {
         $this->mimes = [];
         foreach ($mimes as $mime) {
-            if (is_array($mime)) {
-                $mime = NodeBuilder::fromArray($mime, new Mime());
+            if (! $mime instanceof Mime) {
+                $mime = NodeBuilder::fromArray($mime, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Mime::class));
             }
+
             $this->addMime($mime);
         }
+
         return $this;
     }
 
-    /**
-     * @param Mime $mime
-     * @return Party
-     */
-    public function addMime(Mime $mime) : Party
+    public function addMime(Mime $mime): self
     {
-        if ($this->mimes === null) {
-            $this->mimes = [];
-        }
         $this->mimes[] = $mime;
         return $this;
     }

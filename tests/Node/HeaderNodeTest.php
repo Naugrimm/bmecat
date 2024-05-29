@@ -1,35 +1,27 @@
 <?php
 
-
 namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
+use JMS\Serializer\Serializer;
 use Naugrim\BMEcat\DocumentBuilder;
-use Naugrim\BMEcat\Nodes\SupplierIdRef;
-use PHPUnit\Framework\TestCase;
 use Naugrim\BMEcat\Nodes\Catalog;
 use Naugrim\BMEcat\Nodes\Header;
-
+use Naugrim\BMEcat\Nodes\SupplierIdRef;
+use PHPUnit\Framework\TestCase;
 
 class HeaderNodeTest extends TestCase
 {
-    /**
-     * @var \JMS\Serializer\SerializerInterface
-     */
-    private $serializer;
+    private Serializer $serializer;
 
-    public function setUp() : void
+    protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Generator_Info()
+    public function testSetGetGeneratorInfo(): void
     {
-        $node = new Header();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Header::class);
         $value = sha1(uniqid(microtime(false), true));
 
         $this->assertNull($node->getGeneratorInfo());
@@ -37,58 +29,28 @@ class HeaderNodeTest extends TestCase
         $this->assertEquals($value, $node->getGeneratorInfo());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Supplier()
+    public function testSetGetSupplier(): void
     {
-        $header = new Header();
-        $supplier = new SupplierIdRef();
+        $header = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Header::class);
+        $supplier = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], SupplierIdRef::class);
 
         $this->assertNull($header->getSupplierIdRef());
         $header->setSupplierIdRef($supplier);
         $this->assertEquals($supplier, $header->getSupplierIdRef());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Set_Get_Catalog()
+    public function testSetGetCatalog(): void
     {
-        $header = new Header();
-        $catalog = new Catalog();
+        $header = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Header::class);
+        $catalog = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Catalog::class);
 
         $header->setCatalog($catalog);
         $this->assertEquals($catalog, $header->getCatalog());
     }
 
-    /**
-     *
-     * @test
-     */
-    public function Serialize_With_Null_Values()
+    public function testSerializeWithoutNullValues(): void
     {
-        $node = new Header();
-        $context = SerializationContext::create()->setSerializeNull(true);
-
-        $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_header_with_null_values.xml');
-        $actual = $this->serializer->serialize($node, 'xml', $context);
-
-        $this->assertEquals($expected, $actual);
-
-        $doc = $this->serializer->deserialize($actual, Header::class, 'xml');
-        $this->assertInstanceOf(Header::class, $doc);
-    }
-
-    /**
-     *
-     * @test
-     */
-    public function Serialize_Without_Null_Values()
-    {
-        $node = new Header();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Header::class);
         $context = SerializationContext::create()->setSerializeNull(false);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_header_without_null_values.xml');

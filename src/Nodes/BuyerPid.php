@@ -8,9 +8,18 @@ use Naugrim\BMEcat\Nodes\Concerns\HasTypeAttribute;
 use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
- * @Serializer\XmlRoot("BUYER_PID")
+ * @implements NodeInterface<self>
  */
+#[Serializer\XmlRoot('BUYER_PID')]
 class BuyerPid implements NodeInterface
 {
-    use HasTypeAttribute, HasStringValue;
+    /**
+     * @use HasTypeAttribute<self>
+     */
+    use HasTypeAttribute;
+
+    /**
+     * @use HasStringValue<self>
+     */
+    use HasStringValue;
 }
