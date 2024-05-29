@@ -9,7 +9,7 @@ class SupplierNodeTest extends TestCase
 {
     public function testSetGetValue(): void
     {
-        $node = new SupplierIdRef();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], SupplierIdRef::class);
         $value = sha1(uniqid(microtime(false), true));
 
         $this->assertEquals('', $node->getValue());

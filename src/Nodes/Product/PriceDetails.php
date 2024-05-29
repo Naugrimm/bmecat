@@ -82,7 +82,7 @@ class PriceDetails implements Contracts\NodeInterface
         $this->prices = [];
         foreach ($prices as $price) {
             if (! $price instanceof Price) {
-                $price = NodeBuilder::fromArray($price, new Price());
+                $price = NodeBuilder::fromArray($price, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Price::class));
             }
 
             $this->addPrice($price);

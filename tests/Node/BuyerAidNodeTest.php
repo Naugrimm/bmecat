@@ -19,7 +19,7 @@ class BuyerAidNodeTest extends TestCase
 
     public function testSerializeWithNullValues(): void
     {
-        $node = new BuyerPid();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], BuyerPid::class);
         $node->setType('');
         $node->setValue('');
 
@@ -36,7 +36,7 @@ class BuyerAidNodeTest extends TestCase
 
     public function testSerializeWithoutNullValues(): void
     {
-        $node = new BuyerPid();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], BuyerPid::class);
         $node->setType('');
         $node->setValue('');
 

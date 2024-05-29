@@ -19,7 +19,7 @@ class ProductKeywordNodeTest extends TestCase
 
     public function testSetGetDescriptionValue(): void
     {
-        $node = new Keyword();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Keyword::class);
         $value = '';
 
         $this->assertEquals('', $node->getValue());
@@ -29,7 +29,7 @@ class ProductKeywordNodeTest extends TestCase
 
     public function testSerializeWithNullValues(): void
     {
-        $node = new Keyword();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Keyword::class);
         $context = SerializationContext::create()->setSerializeNull(true);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_keyword_with_null_values.xml');
@@ -43,7 +43,7 @@ class ProductKeywordNodeTest extends TestCase
 
     public function testSerializeWithoutNullValues(): void
     {
-        $node = new Keyword();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Keyword::class);
         $context = SerializationContext::create()->setSerializeNull(false);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_keyword_without_null_values.xml');

@@ -108,7 +108,7 @@ class Product implements Contracts\NodeInterface
         $this->priceDetails = [];
         foreach ($priceDetails as $priceDetail) {
             if (! $priceDetail instanceof PriceDetails) {
-                $priceDetail = NodeBuilder::fromArray($priceDetail, new PriceDetails());
+                $priceDetail = NodeBuilder::fromArray($priceDetail, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], PriceDetails::class));
             }
 
             $this->addPriceDetail($priceDetail);
@@ -133,7 +133,7 @@ class Product implements Contracts\NodeInterface
         $this->mimes = [];
         foreach ($mimes as $mime) {
             if (! $mime instanceof Mime) {
-                $mime = NodeBuilder::fromArray($mime, new Mime());
+                $mime = NodeBuilder::fromArray($mime, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Mime::class));
             }
 
             $this->addMime($mime);
@@ -180,7 +180,7 @@ class Product implements Contracts\NodeInterface
         $this->features = [];
         foreach ($features as $feature) {
             if (! $feature instanceof Features) {
-                $feature = NodeBuilder::fromArray($feature, new Features());
+                $feature = NodeBuilder::fromArray($feature, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Features::class));
             }
 
             $this->addFeatures($feature);

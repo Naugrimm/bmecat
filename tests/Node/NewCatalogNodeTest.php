@@ -20,9 +20,9 @@ class NewCatalogNodeTest extends TestCase
 
     public function testAddGetProductNode(): void
     {
-        $products = [new Product(), new Product(), new Product()];
+        $products = [\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class)];
 
-        $node = new NewCatalog();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], NewCatalog::class);
         $this->assertEquals([], $node->getProducts());
 
         foreach ($products as $product) {
@@ -34,7 +34,7 @@ class NewCatalogNodeTest extends TestCase
 
     public function testSerializeWithoutNullValues(): void
     {
-        $node = new NewCatalog();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], NewCatalog::class);
         $context = SerializationContext::create()->setSerializeNull(false);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_new_catalog_without_null_values.xml');

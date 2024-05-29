@@ -88,7 +88,7 @@ class Party implements NodeInterface
         $this->mimes = [];
         foreach ($mimes as $mime) {
             if (! $mime instanceof Mime) {
-                $mime = NodeBuilder::fromArray($mime, new Mime());
+                $mime = NodeBuilder::fromArray($mime, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Mime::class));
             }
 
             $this->addMime($mime);

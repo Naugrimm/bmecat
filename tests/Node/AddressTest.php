@@ -41,9 +41,9 @@ class AddressTest extends TestCase
 
         $data = array_merge_recursive($docData, $data);
 
-        $document = NodeBuilder::fromArray($data, new Document());
+        $document = NodeBuilder::fromArray($data, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Document::class));
 
-        $catalog = new NewCatalog();
+        $catalog = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], NewCatalog::class);
         $document->setNewCatalog($catalog);
 
         return $document;

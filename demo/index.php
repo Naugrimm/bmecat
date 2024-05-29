@@ -85,7 +85,7 @@ $document = NodeBuilder::fromArray([
             ]
         ]
     ]
-], new Document());
+], Document::class);
 
 $builder->setDocument($document);
 

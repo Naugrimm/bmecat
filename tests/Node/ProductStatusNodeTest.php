@@ -19,7 +19,7 @@ class ProductStatusNodeTest extends TestCase
 
     public function testSerializeWithNullValues(): void
     {
-        $node = new Status();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Status::class);
         $context = SerializationContext::create()->setSerializeNull(true);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_status_with_null_values.xml');
@@ -33,7 +33,7 @@ class ProductStatusNodeTest extends TestCase
 
     public function testSerializeWithoutNullValues(): void
     {
-        $node = new Status();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Status::class);
         $context = SerializationContext::create()->setSerializeNull(false);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_status_without_null_values.xml');

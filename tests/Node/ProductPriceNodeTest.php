@@ -19,7 +19,7 @@ class ProductPriceNodeTest extends TestCase
 
     public function testSetGetPrice(): void
     {
-        $node = new Price();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Price::class);
         $value = random_int(10, 1000);
 
         $node->setPrice($value);
@@ -28,7 +28,7 @@ class ProductPriceNodeTest extends TestCase
 
     public function testSetGetCurrency(): void
     {
-        $node = new Price();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Price::class);
         $value = substr(sha1(uniqid(microtime(false), true)), 0, 3);
 
         $this->assertEquals('EUR', $node->getCurrency());
@@ -38,7 +38,7 @@ class ProductPriceNodeTest extends TestCase
 
     public function testSerializeWithoutNullValues(): void
     {
-        $node = new Price();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Price::class);
         $context = SerializationContext::create()->setSerializeNull(false);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_price_without_null_values.xml');

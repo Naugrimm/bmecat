@@ -40,7 +40,7 @@ class DocumentBuilderTest extends TestCase
     public function testToStringReturnsDefaultDocumentWithoutNullValues(): void
     {
         $builder = new DocumentBuilder();
-        $document = NodeBuilder::fromArray([], new Document());
+        $document = NodeBuilder::fromArray([], \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Document::class));
         $builder->setDocument($document);
 
         $expected = file_get_contents(__DIR__ . '/Fixtures/empty_document_without_null_values.xml');

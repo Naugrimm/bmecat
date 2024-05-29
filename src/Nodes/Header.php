@@ -104,7 +104,7 @@ class Header implements Contracts\NodeInterface
     {
         foreach ($parties as $party) {
             if (! $party instanceof Party) {
-                $party = NodeBuilder::fromArray($party, new Party());
+                $party = NodeBuilder::fromArray($party, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Party::class));
             }
 
             $this->addParty($party);

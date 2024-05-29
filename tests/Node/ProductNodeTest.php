@@ -26,22 +26,22 @@ class ProductNodeTest extends TestCase
 
     public function testSetGetId(): void
     {
-        $node = new Product();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class);
         $value = sha1(uniqid(microtime(false), true));
 
         $this->assertNull($node->getId());
-        $supplierPid = new SupplierPid();
+        $supplierPid = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], SupplierPid::class);
         $supplierPid->setValue($value);
 
-        $node = new Product();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class);
         $node->setId($supplierPid);
         $this->assertEquals($value, $node->getId()?->getValue());
     }
 
     public function testSetGetDetails(): void
     {
-        $node = new Product();
-        $details = new Details();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class);
+        $details = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
 
         $node->setDetails($details);
         $this->assertEquals($details, $node->getDetails());
@@ -49,9 +49,9 @@ class ProductNodeTest extends TestCase
 
     public function testAddGetFeatures(): void
     {
-        $features = [new Features(), new Features(), new Features()];
+        $features = [\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Features::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Features::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Features::class)];
 
-        $node = new Product();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class);
         $this->assertEmpty($node->getFeatures());
 
         foreach ($features as $featureBlock) {
@@ -64,12 +64,12 @@ class ProductNodeTest extends TestCase
     public function testAddGetPrices(): void
     {
         $priceDetails = [
-            (new PriceDetails())->addPrice(new Price()),
-            (new PriceDetails())->addPrice(new Price()),
-            (new PriceDetails())->addPrice(new Price()),
+            (\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], PriceDetails::class))->addPrice(\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Price::class)),
+            (\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], PriceDetails::class))->addPrice(\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Price::class)),
+            (\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], PriceDetails::class))->addPrice(\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Price::class)),
         ];
 
-        $node = new Product();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class);
         $this->assertEmpty($node->getPriceDetails());
 
         foreach ($priceDetails as $priceDetail) {
@@ -81,8 +81,8 @@ class ProductNodeTest extends TestCase
 
     public function testAddGetProductOrderDetails(): void
     {
-        $node = new Product();
-        $value = new OrderDetails();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class);
+        $value = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], OrderDetails::class);
 
         $node->setOrderDetails($value);
         $this->assertSame($value, $node->getOrderDetails());
@@ -90,9 +90,9 @@ class ProductNodeTest extends TestCase
 
     public function testAddGetMimeInfo(): void
     {
-        $mimes = [new Mime(), new Mime(), new Mime()];
+        $mimes = [\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Mime::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Mime::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Mime::class)];
 
-        $node = new Product();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class);
         $this->assertEmpty($node->getMimes());
 
         foreach ($mimes as $mime) {
@@ -104,7 +104,7 @@ class ProductNodeTest extends TestCase
 
     public function testSerializeWithoutNullValues(): void
     {
-        $node = new Product();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class);
         $context = SerializationContext::create()->setSerializeNull(false);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_product_without_null_values.xml');

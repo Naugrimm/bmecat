@@ -57,7 +57,7 @@ class Emails implements NodeInterface
         $this->publicKeys = [];
         foreach ($publicKeys as $publicKey) {
             if (! $publicKey instanceof PublicKey) {
-                $publicKey = NodeBuilder::fromArray($publicKey, new PublicKey());
+                $publicKey = NodeBuilder::fromArray($publicKey, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], PublicKey::class));
             }
 
             $this->addPublicKey($publicKey);

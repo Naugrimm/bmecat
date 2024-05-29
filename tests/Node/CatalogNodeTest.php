@@ -20,7 +20,7 @@ class CatalogNodeTest extends TestCase
 
     public function testSetGetId(): void
     {
-        $node = new Catalog();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Catalog::class);
         $value = sha1(uniqid(microtime(false), true));
         $node->setId($value);
         $this->assertEquals($value, $node->getId());
@@ -28,7 +28,7 @@ class CatalogNodeTest extends TestCase
 
     public function testSetGetVersion(): void
     {
-        $node = new Catalog();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Catalog::class);
         $value = sha1(uniqid(microtime(false), true));
         $node->setVersion($value);
         $this->assertEquals($value, $node->getVersion());
@@ -36,7 +36,7 @@ class CatalogNodeTest extends TestCase
 
     public function testSetGetLanguage(): void
     {
-        $node = new Catalog();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Catalog::class);
         $value = sha1(uniqid(microtime(false), true));
 
         $node->setLanguage($value);
@@ -45,8 +45,8 @@ class CatalogNodeTest extends TestCase
 
     public function testSetGetDateTime(): void
     {
-        $node = new Catalog();
-        $dateTime = new DateTime();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Catalog::class);
+        $dateTime = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], DateTime::class);
 
         $this->assertNull($node->getDateTime());
         $node->setDateTime($dateTime);
@@ -55,7 +55,7 @@ class CatalogNodeTest extends TestCase
 
     public function testSerializeWithoutNullValues(): void
     {
-        $node = new Catalog();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Catalog::class);
         $context = SerializationContext::create()->setSerializeNull(false);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_catalog_without_null_values.xml');

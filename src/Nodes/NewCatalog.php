@@ -34,7 +34,7 @@ class NewCatalog implements Contracts\NodeInterface
 
         foreach ($products as $product) {
             if (is_array($product)) {
-                $product = NodeBuilder::fromArray($product, new Product());
+                $product = NodeBuilder::fromArray($product, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class));
             }
 
             Assert::isInstanceOf($product, Product::class);

@@ -21,7 +21,7 @@ class DocumentNodeTest extends TestCase
 
     public function testSetGetVersion(): void
     {
-        $document = new Document();
+        $document = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Document::class);
 
         $this->assertEquals('2005.1', $document->getVersion());
         $document->setVersion('1.9');
@@ -30,8 +30,8 @@ class DocumentNodeTest extends TestCase
 
     public function testSetGetNewCatalog(): void
     {
-        $document = new Document();
-        $catalog = new NewCatalog();
+        $document = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Document::class);
+        $catalog = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], NewCatalog::class);
 
         $document->setNewCatalog($catalog);
         $this->assertSame($catalog, $document->getNewCatalog());
@@ -39,8 +39,8 @@ class DocumentNodeTest extends TestCase
 
     public function testSetGetNewHeader(): void
     {
-        $document = new Document();
-        $header = new Header();
+        $document = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Document::class);
+        $header = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Header::class);
 
         $document->setHeader($header);
         $this->assertSame($header, $document->getHeader());
@@ -48,7 +48,7 @@ class DocumentNodeTest extends TestCase
 
     public function testSerializeWithoutNullValues(): void
     {
-        $node = new Document();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Document::class);
         $context = SerializationContext::create()->setSerializeNull(false);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_document_nochildren_without_null_values.xml');

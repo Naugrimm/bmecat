@@ -19,7 +19,7 @@ class ProductOrderDetailsNodeTest extends TestCase
 
     public function testSetGetOrderUnit(): void
     {
-        $node = new OrderDetails();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], OrderDetails::class);
         $value = 'C62';
 
         $node->setOrderUnit($value);
@@ -30,7 +30,7 @@ class ProductOrderDetailsNodeTest extends TestCase
 
     public function testSetGetNoCuPerOu(): void
     {
-        $node = new OrderDetails();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], OrderDetails::class);
         $value = random_int(10, 1000);
 
         $node->setNoCuPerOu($value);
@@ -39,7 +39,7 @@ class ProductOrderDetailsNodeTest extends TestCase
 
     public function testSetGetPriceQuantity(): void
     {
-        $node = new OrderDetails();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], OrderDetails::class);
         $value = random_int(10, 1000);
 
         $node->setPriceQuantity($value);
@@ -48,7 +48,7 @@ class ProductOrderDetailsNodeTest extends TestCase
 
     public function testSetGetQuantityMin(): void
     {
-        $node = new OrderDetails();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], OrderDetails::class);
         $value = random_int(10, 1000);
 
         $node->setQuantityMin($value);
@@ -57,7 +57,7 @@ class ProductOrderDetailsNodeTest extends TestCase
 
     public function testSetGetQuantityInterval(): void
     {
-        $node = new OrderDetails();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], OrderDetails::class);
         $value = random_int(10, 1000);
 
         $node->setQuantityInterval($value);
@@ -66,7 +66,7 @@ class ProductOrderDetailsNodeTest extends TestCase
 
     public function testSerializeWithoutNullValues(): void
     {
-        $node = new OrderDetails();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], OrderDetails::class);
         $node->setOrderUnit('C62');
         $node->setContentUnit('C62');
 

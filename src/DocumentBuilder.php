@@ -65,6 +65,7 @@ final class DocumentBuilder
             if (is_scalar($result)) {
                 return true;
             }
+
             return is_countable($result) && count($result) > 0;
         });
 

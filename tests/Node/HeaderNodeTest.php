@@ -21,7 +21,7 @@ class HeaderNodeTest extends TestCase
 
     public function testSetGetGeneratorInfo(): void
     {
-        $node = new Header();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Header::class);
         $value = sha1(uniqid(microtime(false), true));
 
         $this->assertNull($node->getGeneratorInfo());
@@ -31,8 +31,8 @@ class HeaderNodeTest extends TestCase
 
     public function testSetGetSupplier(): void
     {
-        $header = new Header();
-        $supplier = new SupplierIdRef();
+        $header = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Header::class);
+        $supplier = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], SupplierIdRef::class);
 
         $this->assertNull($header->getSupplierIdRef());
         $header->setSupplierIdRef($supplier);
@@ -41,8 +41,8 @@ class HeaderNodeTest extends TestCase
 
     public function testSetGetCatalog(): void
     {
-        $header = new Header();
-        $catalog = new Catalog();
+        $header = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Header::class);
+        $catalog = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Catalog::class);
 
         $header->setCatalog($catalog);
         $this->assertEquals($catalog, $header->getCatalog());
@@ -50,7 +50,7 @@ class HeaderNodeTest extends TestCase
 
     public function testSerializeWithoutNullValues(): void
     {
-        $node = new Header();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Header::class);
         $context = SerializationContext::create()->setSerializeNull(false);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_header_without_null_values.xml');

@@ -23,9 +23,9 @@ class ProductDetailsNodeTest extends TestCase
 
     public function testAddGetBuyerPides(): void
     {
-        $buyerPids = [new BuyerPid(), new BuyerPid(), new BuyerPid()];
+        $buyerPids = [\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], BuyerPid::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], BuyerPid::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], BuyerPid::class)];
 
-        $node = new Details();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
         $this->assertEmpty($node->getBuyerPids());
         $node->nullBuyerPids();
         $this->assertEquals([], $node->getBuyerPids());
@@ -40,12 +40,12 @@ class ProductDetailsNodeTest extends TestCase
     public function testAddGetSpecialTreatmentClasses(): void
     {
         $specialTreatmentClasses = [
-            new SpecialTreatmentClass(),
-            new SpecialTreatmentClass(),
-            new SpecialTreatmentClass(),
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], SpecialTreatmentClass::class),
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], SpecialTreatmentClass::class),
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], SpecialTreatmentClass::class),
         ];
 
-        $node = new Details();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
         $this->assertEmpty($node->getSpecialTreatmentClasses());
         $node->nullSpecialTreatmentClasses();
         $this->assertEquals([], $node->getSpecialTreatmentClasses());
@@ -59,9 +59,9 @@ class ProductDetailsNodeTest extends TestCase
 
     public function testAddGetKeywords(): void
     {
-        $keywords = [new Keyword(), new Keyword(), new Keyword()];
+        $keywords = [\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Keyword::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Keyword::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Keyword::class)];
 
-        $node = new Details();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
         $this->assertEmpty($node->getKeywords());
         $node->nullKeywords();
         $this->assertEquals([], $node->getKeywords());
@@ -75,9 +75,9 @@ class ProductDetailsNodeTest extends TestCase
 
     public function testAddGetProductStatus(): void
     {
-        $productStatus = [new Status(), new Status(), new Status()];
+        $productStatus = [\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Status::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Status::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Status::class)];
 
-        $node = new Details();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
         $this->assertEmpty($node->getProductStatus());
         $node->nullProductStatus();
         $this->assertEquals([], $node->getProductStatus());
@@ -91,7 +91,7 @@ class ProductDetailsNodeTest extends TestCase
 
     public function testSetGetDescriptionLong(): void
     {
-        $node = new Details();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
         $value = sha1(uniqid(microtime(false), true));
 
         $this->assertNull($node->getDescriptionLong());
@@ -101,7 +101,7 @@ class ProductDetailsNodeTest extends TestCase
 
     public function testSetGetDescriptionShort(): void
     {
-        $node = new Details();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
         $value = sha1(uniqid(microtime(false), true));
 
         $node->setDescriptionShort($value);
@@ -110,7 +110,7 @@ class ProductDetailsNodeTest extends TestCase
 
     public function testSetGetEan(): void
     {
-        $node = new Details();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
         $value = sha1(uniqid(microtime(false), true));
 
         $this->assertNull($node->getEan());
@@ -120,7 +120,7 @@ class ProductDetailsNodeTest extends TestCase
 
     public function testSetGetSupplierAltPid(): void
     {
-        $node = new Details();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
         $value = sha1(uniqid(microtime(false), true));
 
         $this->assertNull($node->getSupplierAltPid());
@@ -130,7 +130,7 @@ class ProductDetailsNodeTest extends TestCase
 
     public function testSetGetManufacturerName(): void
     {
-        $node = new Details();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
         $value = sha1(uniqid(microtime(false), true));
 
         $this->assertNull($node->getManufacturerName());
@@ -140,7 +140,7 @@ class ProductDetailsNodeTest extends TestCase
 
     public function testSetGetManufacturerTypeDescription(): void
     {
-        $node = new Details();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
         $value = sha1(uniqid(microtime(false), true));
 
         $this->assertNull($node->getManufacturerTypeDescription());
@@ -150,7 +150,7 @@ class ProductDetailsNodeTest extends TestCase
 
     public function testSetGetErpGroupBuyer(): void
     {
-        $node = new Details();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
         $value = sha1(uniqid(microtime(false), true));
 
         $this->assertNull($node->getErpGroupBuyer());
@@ -160,7 +160,7 @@ class ProductDetailsNodeTest extends TestCase
 
     public function testSetGetErpGroupSupplier(): void
     {
-        $node = new Details();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
         $value = sha1(uniqid(microtime(false), true));
 
         $this->assertNull($node->getErpGroupSupplier());
@@ -170,7 +170,7 @@ class ProductDetailsNodeTest extends TestCase
 
     public function testSetGetDeliveryTime(): void
     {
-        $node = new Details();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
         $value = random_int(10, 1000);
 
         $this->assertNull($node->getDeliveryTime());
@@ -180,7 +180,7 @@ class ProductDetailsNodeTest extends TestCase
 
     public function testSetGetRemarks(): void
     {
-        $node = new Details();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
         $value = sha1(uniqid(microtime(false), true));
 
         $this->assertNull($node->getRemarks());
@@ -190,7 +190,7 @@ class ProductDetailsNodeTest extends TestCase
 
     public function testSetGetProductOrder(): void
     {
-        $node = new Details();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
         $value = random_int(10, 1000);
 
         $this->assertNull($node->getProductOrder());
@@ -200,7 +200,7 @@ class ProductDetailsNodeTest extends TestCase
 
     public function testSetGetDescriptionSegment(): void
     {
-        $node = new Details();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
         $value = sha1(uniqid(microtime(false), true));
 
         $this->assertNull($node->getSegment());
@@ -210,7 +210,7 @@ class ProductDetailsNodeTest extends TestCase
 
     public function testSerializeWithoutNullValues(): void
     {
-        $node = new Details();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
         $node->setDescriptionShort('test');
 
         $context = SerializationContext::create()->setSerializeNull(false);

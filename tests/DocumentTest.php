@@ -40,32 +40,32 @@ class DocumentTest extends TestCase
                     'value' => 'BMECAT_TEST',
                 ],
             ],
-        ], new Document());
+        ], \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Document::class));
 
         $builder = new DocumentBuilder();
         $builder->setDocument($document);
 
-        $catalog = new NewCatalog();
+        $catalog = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], NewCatalog::class);
         $document->setNewCatalog($catalog);
 
         foreach (['1', '2', '3'] as $index) {
-            $product = new Product();
-            $supplierPid = new SupplierPid();
+            $product = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class);
+            $supplierPid = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], SupplierPid::class);
             $supplierPid->setValue($index);
             $product->setId($supplierPid);
-            $productDetails = new Details();
+            $productDetails = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
             $productDetails->setDescriptionShort('description');
             $product->setDetails($productDetails);
 
             foreach ([['EUR', 10.50], ['GBP', 7.30]] as $value) {
                 [$currency, $amount] = $value;
 
-                $price = new Price();
+                $price = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Price::class);
 
                 $price->setPrice($amount);
                 $price->setCurrency($currency);
 
-                $priceDetail = new PriceDetails();
+                $priceDetail = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], PriceDetails::class);
                 $priceDetail->addPrice($price);
 
                 $product->addPriceDetail($priceDetail);
@@ -74,7 +74,7 @@ class DocumentTest extends TestCase
             foreach ([['A', 'B', 'C', 1, 2, 'D', 'E'], ['F', 'G', 'H', 3, 4, 'I', 'J']] as $value) {
                 [$systemName, $groupName, $groupId, $serialNumber, $tarifNumber, $countryOfOrigin, $tariftext] = $value;
 
-                $features = new Features();
+                $features = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Features::class);
 
                 $features->setReferenceFeatureSystemName($systemName);
                 $features->setReferenceFeatureGroupName([$groupName]);
@@ -87,7 +87,7 @@ class DocumentTest extends TestCase
             ] as $value) {
                 [$type, $source, $purpose] = $value;
 
-                $mime = new Mime();
+                $mime = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Mime::class);
 
                 $mime->setType($type);
                 $mime->setSource($source);
@@ -96,7 +96,7 @@ class DocumentTest extends TestCase
                 $product->addMime($mime);
             }
 
-            $orderDetails = new OrderDetails();
+            $orderDetails = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], OrderDetails::class);
             $orderDetails->setOrderUnit('C62');
             $orderDetails->setContentUnit('C62');
             $orderDetails->setNoCuPerOu(1);

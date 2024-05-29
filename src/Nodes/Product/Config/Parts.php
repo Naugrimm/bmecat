@@ -39,7 +39,7 @@ class Parts implements Contracts\NodeInterface
         $this->alternatives = [];
         foreach ($alternatives as $alternative) {
             if (! $alternative instanceof PartAlternative) {
-                $alternative = NodeBuilder::fromArray($alternative, new PartAlternative());
+                $alternative = NodeBuilder::fromArray($alternative, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], PartAlternative::class));
             }
 
             $this->addAlternative($alternative);

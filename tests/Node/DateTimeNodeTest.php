@@ -19,7 +19,7 @@ class DateTimeNodeTest extends TestCase
 
     public function testSetGetDate(): void
     {
-        $node = new DateTime();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], DateTime::class);
         $value = '1979-01-10';
 
         $node->setDate($value);
@@ -28,7 +28,7 @@ class DateTimeNodeTest extends TestCase
 
     public function testSetGetTime(): void
     {
-        $node = new DateTime();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], DateTime::class);
         $value = '10:59:54';
 
         $node->setTime($value);
@@ -37,7 +37,7 @@ class DateTimeNodeTest extends TestCase
 
     public function testSetGetTimeZone(): void
     {
-        $node = new DateTime();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], DateTime::class);
         $value = '-01:00';
 
         $node->setTimezone($value);
@@ -46,7 +46,7 @@ class DateTimeNodeTest extends TestCase
 
     public function testSerializeWithoutNullValues(): void
     {
-        $node = new DateTime();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], DateTime::class);
         $context = SerializationContext::create()->setSerializeNull(false);
 
         $expected = file_get_contents(__DIR__ . '/../Fixtures/empty_datetime_without_null_values.xml');

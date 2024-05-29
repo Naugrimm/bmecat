@@ -19,7 +19,7 @@ class ProductFeatureNodeTest extends TestCase
 
     public function testSetGetName(): void
     {
-        $node = new Feature();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Feature::class);
         $value = sha1(uniqid(microtime(false), true));
 
         $node->setName($value);
@@ -28,7 +28,7 @@ class ProductFeatureNodeTest extends TestCase
 
     public function testSetGetValue(): void
     {
-        $node = new Feature();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Feature::class);
         $value = [sha1(uniqid(microtime(false), true))];
 
         $node->setValue($value);
@@ -37,7 +37,7 @@ class ProductFeatureNodeTest extends TestCase
 
     public function testSerializeWithoutNullValues(): void
     {
-        $node = new Feature();
+        $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Feature::class);
         $node->setName('test');
         $node->setValue(['test']);
 

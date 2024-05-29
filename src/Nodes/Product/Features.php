@@ -58,7 +58,7 @@ class Features implements Contracts\NodeInterface
         $this->features = [];
         foreach ($features as $feature) {
             if (! $feature instanceof Feature) {
-                $feature = NodeBuilder::fromArray($feature, new Feature());
+                $feature = NodeBuilder::fromArray($feature, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Feature::class));
             }
 
             $this->addFeature($feature);
