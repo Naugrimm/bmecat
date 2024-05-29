@@ -34,3 +34,9 @@ parameters:
       reportUnmatched: false
     - identifier: staticMethod.dynamicCall
       path: tests/*
+
+services:
+  -
+    class: Naugrim\BMEcat\PHPStan\NodeInterfaceMethodsClassReflectionExtension
+    tags:
+      - phpstan.broker.methodsClassReflectionExtension
