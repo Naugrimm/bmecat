@@ -9,7 +9,7 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 use Naugrim\BMEcat\Nodes\Crypto\PublicKey;
 
 /**
- * @implements NodeInterface<self>
+ * @implements \Naugrim\BMEcat\Nodes\Contracts\NodeInterface<Address>
  */
 class Address implements NodeInterface
 {

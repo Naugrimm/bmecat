@@ -276,6 +276,7 @@ class NodeInterfaceMethodsClassReflectionExtension implements MethodsClassReflec
                                             if ($type->isNull()->yes()) {
                                                 continue;
                                             }
+
                                             $types[] = $type;
                                         }
                                     } else {
