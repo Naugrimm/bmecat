@@ -10,6 +10,14 @@ Use the rector rule `\Utils\Rector\Rector\NodeInterfaceAddHasSerializableAttribu
 
 Afterward, you can apply the rector rules `\Utils\Rector\Rector\NodeInterfaceRemoveSimpleGettersRector` and `\Utils\Rector\Rector\NodeInterfaceRemoveSimpleSettersRector` to get rid of the now superfluous methods. This in turn will make PHPStan very unhappy. To counter this, you can register a custom PHPStan extension that uses Reflection to ensure you are using the correct types. Add to your `phpstan.neon`:
 
+```neon
+services:
+  -
+    class: Naugrim\BMEcat\PHPStan\NodeInterfaceMethodsClassReflectionExtension
+    tags:
+      - phpstan.broker.methodsClassReflectionExtension
+```
+
 Then you need to manually search for `public function set\w+\(array` to find setters for array children. If they only iterate the given value to ensure every array item is implementing `NodeInterface`, you can remove them too. But ensure you have type-hinted the elements of the array correctly:
 
 ```php
@@ -18,6 +26,7 @@ class Product {
      * @var Features[]
      */
     #[Serializer\Expose]
+    // note the FQCN specifying the type of the array items
     #[Serializer\Type('array<\Naugrim\BMEcat\Nodes\Product\Features>')]
     #[Serializer\XmlList(entry: 'PRODUCT_FEATURES', inline: true)]
     protected array $features = [];
@@ -37,14 +46,6 @@ class Product {
         return $this;
     }
 }
-```
-
-```neon
-services:
-  -
-    class: Naugrim\BMEcat\PHPStan\NodeInterfaceMethodsClassReflectionExtension
-    tags:
-      - phpstan.broker.methodsClassReflectionExtension
 ```
 
 # 2.x
