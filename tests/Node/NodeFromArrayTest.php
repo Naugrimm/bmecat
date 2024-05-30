@@ -2,6 +2,9 @@
 
 namespace Naugrim\BMEcat\Tests\Node;
 
+use DateTime;
+use DateTimeInterface;
+use Exception;
 use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
@@ -70,5 +73,53 @@ class NodeFromArrayTest extends TestCase
         $this->assertInstanceOf(Node::class, $node);
         $this->assertInstanceOf(Node::class, $node->anotherNode);
         $this->assertSame($array['someArray'], $node->anotherNode->anotherNode->someArray);
+    }
+
+    public function testSetDateTimeInterfaceFromStringWithoutFormat(): void
+    {
+        $node = NodeBuilder::fromArray([
+            'dateTimeInterfaceWithoutFormat' => '2024-05-30 12:02:00'
+        ], Node::class);
+        $this->assertInstanceOf(DateTimeInterface::class, $node->dateTimeInterfaceWithoutFormat);
+    }
+
+    public function testSetDateTimeInterfaceFromObjectWithoutFormat(): void
+    {
+        $node = NodeBuilder::fromArray([
+            'dateTimeInterfaceWithoutFormat' => new DateTime(),
+        ], Node::class);
+        $this->assertInstanceOf(DateTimeInterface::class, $node->dateTimeInterfaceWithoutFormat);
+    }
+
+    public function testSetDateTimeInterfaceFromStringWithInvalidFormat(): void
+    {
+        $this->expectException(TypeError::class);
+        NodeBuilder::fromArray([
+            'dateTimeInterfaceWithFormat' => '2024-05-30 12:02:00'
+        ], Node::class);
+    }
+
+    public function testSetDateTimeInterfaceFromObjectWithInvalidFormat(): void
+    {
+        $node = NodeBuilder::fromArray([
+            'dateTimeInterfaceWithFormat' => new DateTime(),
+        ], Node::class);
+        $this->assertInstanceOf(DateTimeInterface::class, $node->dateTimeInterfaceWithFormat);
+    }
+
+    public function testSetDateTimeInterfaceFromStringWithFormat(): void
+    {
+        $node = NodeBuilder::fromArray([
+            'dateTimeInterfaceWithFormat' => '2024-05'
+        ], Node::class);
+        $this->assertInstanceOf(DateTimeInterface::class, $node->dateTimeInterfaceWithFormat);
+    }
+
+    public function testSetDateTimeInterfaceFromObjectWithFormat(): void
+    {
+        $node = NodeBuilder::fromArray([
+            'dateTimeInterfaceWithFormat' => new DateTime(),
+        ], Node::class);
+        $this->assertInstanceOf(DateTimeInterface::class, $node->dateTimeInterfaceWithFormat);
     }
 }

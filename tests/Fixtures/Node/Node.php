@@ -2,6 +2,7 @@
 
 namespace Naugrim\BMEcat\Tests\Fixtures\Node;
 
+use DateTimeInterface;
 use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
@@ -30,4 +31,12 @@ class Node implements NodeInterface
     #[Serializer\Expose]
     #[Serializer\Type('array<float>')]
     public float $someFloat;
+
+    #[Serializer\Expose]
+    #[Serializer\Type('\DateTimeInterface')]
+    public DateTimeInterface $dateTimeInterfaceWithoutFormat;
+
+    #[Serializer\Expose]
+    #[Serializer\Type("\\DateTimeInterface<'Y-m'>")]
+    public DateTimeInterface $dateTimeInterfaceWithFormat;
 }

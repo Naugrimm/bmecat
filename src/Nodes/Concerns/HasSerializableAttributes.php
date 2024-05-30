@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Naugrim\BMEcat\Nodes\Concerns;
 
+use DateTime;
+use DateTimeInterface;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Type;
 use Naugrim\BMEcat\Builder\NodeBuilder;
@@ -44,6 +46,11 @@ trait HasSerializableAttributes
         } elseif (str_starts_with($name, 'set')) {
             $valueToSet = $arguments[0];
 
+            $type = $this->getTypeAnnotationFromProperty($property);
+            if (str_starts_with($type, 'DateTimeInterface') || str_starts_with($type, '\DateTimeInterface')) {
+                return $this->handleDateTimeInterfaceSetter($propertyName, $type, $valueToSet);
+            }
+
             if (is_scalar($valueToSet) || $valueToSet instanceof NodeInterface) {
                 /**
                  * the value to set is either a scalar or already a NodeInterface
@@ -54,7 +61,6 @@ trait HasSerializableAttributes
                 return $this;
             }
 
-            $type = $this->getTypeAnnotationFromProperty($property);
             if (str_starts_with($type, 'array') && is_array($valueToSet)) {
                 return $this->handleArraySetter($propertyName, $type, $valueToSet);
             }
@@ -121,6 +127,25 @@ trait HasSerializableAttributes
 
         $this->{$propertyName} = $newValues; // @phpstan-ignore property.dynamicName
 
+        return $this;
+    }
+
+    private function handleDateTimeInterfaceSetter(string $propertyName, string $type, string|DateTimeInterface $valueToSet) : static
+    {
+        if ($valueToSet instanceof DateTimeInterface) {
+            $this->{$propertyName} = DateTime::createFromInterface($valueToSet); // @phpstan-ignore property.dynamicName
+            return $this;
+        }
+
+        if (preg_match("/^\\\\?DateTimeInterface<'(?<format>.+)'>$/", $type, $matches) !== 1) {
+            /**
+             * no format was given, try to set the date directly
+             */
+            $this->{$propertyName} = new DateTime($valueToSet); // @phpstan-ignore property.dynamicName
+            return $this;
+        }
+
+        $this->{$propertyName} = DateTime::createFromFormat($matches['format'], $valueToSet); // @phpstan-ignore property.dynamicName
         return $this;
     }
 
