@@ -40,7 +40,7 @@ class Parts implements Contracts\NodeInterface
         return $this->selection_type;
     }
 
-    private function addAlternative(PartAlternative $alternative): self
+    public function addAlternative(PartAlternative $alternative): self
     {
         $this->alternatives[] = $alternative;
         return $this;

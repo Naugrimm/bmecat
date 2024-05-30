@@ -47,7 +47,9 @@ trait HasSerializableAttributes
             $valueToSet = $arguments[0];
 
             $type = $this->getTypeAnnotationFromProperty($property);
-            if (str_starts_with($type, 'DateTimeInterface') || str_starts_with($type, '\DateTimeInterface')) {
+            if ((str_starts_with($type, 'DateTimeInterface') || str_starts_with($type, '\DateTimeInterface'))
+                && (is_string($valueToSet) || $valueToSet instanceof DateTimeInterface)
+            ){
                 return $this->handleDateTimeInterfaceSetter($propertyName, $type, $valueToSet);
             }
 
