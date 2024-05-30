@@ -4,6 +4,7 @@ namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
+use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Nodes\Mime;
 use Naugrim\BMEcat\Nodes\Product;
@@ -114,5 +115,18 @@ class ProductNodeTest extends TestCase
 
         $doc = $this->serializer->deserialize($actual, Product::class, 'xml');
         $this->assertInstanceOf(Product::class, $doc);
+    }
+
+    public function testSetFeatures() : void
+    {
+        $node = NodeBuilder::fromArray([
+            'features' => [
+                [],
+            ],
+        ], Product::class);
+
+        $this->assertInstanceOf(Product::class, $node);
+        $this->assertCount(1, $features = $node->getFeatures());
+        $this->assertInstanceOf(Features::class, $features[0]);
     }
 }

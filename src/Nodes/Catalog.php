@@ -11,6 +11,7 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 #[Serializer\XmlRoot('CATALOG')]
 class Catalog implements Contracts\NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('LANGUAGE')]
@@ -30,48 +31,4 @@ class Catalog implements Contracts\NodeInterface
     #[Serializer\Type(DateTime::class)]
     #[Serializer\SerializedName('DATETIME')]
     protected ?DateTime $dateTime = null;
-
-    public function setLanguage(string $language): self
-    {
-        $this->language = $language;
-        return $this;
-    }
-
-    public function setId(string $id): self
-    {
-        $this->id = $id;
-        return $this;
-    }
-
-    public function setVersion(string $version): self
-    {
-        $this->version = $version;
-        return $this;
-    }
-
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    public function getLanguage(): string
-    {
-        return $this->language;
-    }
-
-    public function getVersion(): string
-    {
-        return $this->version;
-    }
-
-    public function setDateTime(DateTime $dateTime): self
-    {
-        $this->dateTime = $dateTime;
-        return $this;
-    }
-
-    public function getDateTime(): ?DateTime
-    {
-        return $this->dateTime;
-    }
 }

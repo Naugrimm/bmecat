@@ -13,6 +13,7 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
  */
 class Party implements NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('PARTY_ID')]
@@ -36,66 +37,6 @@ class Party implements NodeInterface
     #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Mime>')]
     #[Serializer\XmlList(entry: 'MIME')]
     protected array $mimes = [];
-
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    public function setId(string $id): self
-    {
-        $this->id = $id;
-        return $this;
-    }
-
-    public function getRole(): string
-    {
-        return $this->role;
-    }
-
-    public function setRole(string $role): self
-    {
-        $this->role = $role;
-        return $this;
-    }
-
-    public function getAddress(): Address
-    {
-        return $this->address;
-    }
-
-    public function setAddress(Address $address): self
-    {
-        $this->address = $address;
-        return $this;
-    }
-
-    /**
-     * @return Mime[]
-     */
-    public function getMimes(): array
-    {
-        return $this->mimes;
-    }
-
-    /**
-     * @param Mime[]|array<string, mixed>[] $mimes
-     * @throws InvalidSetterException
-     * @throws UnknownKeyException
-     */
-    public function setMimes(array $mimes): self
-    {
-        $this->mimes = [];
-        foreach ($mimes as $mime) {
-            if (! $mime instanceof Mime) {
-                $mime = NodeBuilder::fromArray($mime, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Mime::class));
-            }
-
-            $this->addMime($mime);
-        }
-
-        return $this;
-    }
 
     public function addMime(Mime $mime): self
     {

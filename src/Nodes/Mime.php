@@ -11,6 +11,7 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 #[Serializer\XmlRoot('MIME')]
 class Mime implements Contracts\NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('MIME_TYPE')]
@@ -42,59 +43,4 @@ class Mime implements Contracts\NodeInterface
     #[Serializer\SerializedName('MIME_ORDER')]
     #[Serializer\XmlElement(cdata: false)]
     protected int $order;
-
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-        return $this;
-    }
-
-    public function getSource(): string
-    {
-        return $this->source;
-    }
-
-    public function setSource(string $source): self
-    {
-        $this->source = $source;
-        return $this;
-    }
-
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
-        return $this;
-    }
-
-    public function getAlt(): string
-    {
-        return $this->alt;
-    }
-
-    public function setAlt(string $alt): self
-    {
-        $this->alt = $alt;
-        return $this;
-    }
-
-    public function getPurpose(): string
-    {
-        return $this->purpose;
-    }
-
-    public function setPurpose(string $purpose): self
-    {
-        $this->purpose = $purpose;
-        return $this;
-    }
 }

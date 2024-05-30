@@ -12,6 +12,7 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 #[Serializer\XmlRoot('PRODUCT_ORDER_DETAILS')]
 class OrderDetails implements Contracts\NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('ORDER_UNIT')]
@@ -47,70 +48,4 @@ class OrderDetails implements Contracts\NodeInterface
     #[Serializer\SerializedName('QUANTITY_INTERVAL')]
     #[Serializer\XmlElement(cdata: false)]
     protected ?float $quantityInterval = null;
-
-    public function getOrderUnit(): string
-    {
-        return $this->orderUnit;
-    }
-
-    public function setOrderUnit(string $orderUnit): self
-    {
-        $this->orderUnit = $orderUnit;
-        return $this;
-    }
-
-    public function getContentUnit(): string
-    {
-        return $this->contentUnit;
-    }
-
-    public function setContentUnit(string $contentUnit): self
-    {
-        $this->contentUnit = $contentUnit;
-        return $this;
-    }
-
-    public function getNoCuPerOu(): ?float
-    {
-        return $this->noCuPerOu;
-    }
-
-    public function setNoCuPerOu(float $noCuPerOu): self
-    {
-        $this->noCuPerOu = $noCuPerOu;
-        return $this;
-    }
-
-    public function getPriceQuantity(): ?float
-    {
-        return $this->priceQuantity;
-    }
-
-    public function setPriceQuantity(float $priceQuantity): self
-    {
-        $this->priceQuantity = $priceQuantity;
-        return $this;
-    }
-
-    public function getQuantityMin(): ?float
-    {
-        return $this->quantityMin;
-    }
-
-    public function setQuantityMin(float $quantityMin): self
-    {
-        $this->quantityMin = $quantityMin;
-        return $this;
-    }
-
-    public function getQuantityInterval(): ?float
-    {
-        return $this->quantityInterval;
-    }
-
-    public function setQuantityInterval(float $quantityInterval): self
-    {
-        $this->quantityInterval = $quantityInterval;
-        return $this;
-    }
 }

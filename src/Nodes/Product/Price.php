@@ -12,6 +12,7 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 #[Serializer\XmlRoot('PRODUCT_PRICE')]
 class Price implements Contracts\NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('price_type')]
@@ -45,59 +46,4 @@ class Price implements Contracts\NodeInterface
     #[Serializer\Type('float')]
     #[Serializer\SerializedName('LOWER_BOUND')]
     protected ?float $lowerBound = null;
-
-    public function setCurrency(string $currency): self
-    {
-        $this->currency = $currency;
-        return $this;
-    }
-
-    public function getCurrency(): string
-    {
-        return $this->currency;
-    }
-
-    public function setPrice(float $price): self
-    {
-        $this->price = $price;
-        return $this;
-    }
-
-    public function getPrice(): float
-    {
-        return $this->price;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-        return $this;
-    }
-
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    public function setPriceFactor(float $priceFactor): self
-    {
-        $this->priceFactor = $priceFactor;
-        return $this;
-    }
-
-    public function getPriceFactor(): ?float
-    {
-        return $this->priceFactor;
-    }
-
-    public function setLowerBound(float $lowerBound): self
-    {
-        $this->lowerBound = $lowerBound;
-        return $this;
-    }
-
-    public function getLowerBound(): ?float
-    {
-        return $this->lowerBound;
-    }
 }

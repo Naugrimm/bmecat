@@ -13,6 +13,7 @@ use Naugrim\BMEcat\Nodes\Product\Config\Step;
 #[Serializer\XmlRoot('PRODUCT_CONFIG_DETAILS')]
 class ConfigDetails implements Contracts\NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     /**
      * @var Step[]
      */

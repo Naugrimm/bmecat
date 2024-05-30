@@ -15,6 +15,7 @@ use Webmozart\Assert\Assert;
 #[Serializer\XmlRoot('T_NEW_CATALOG')]
 class NewCatalog implements Contracts\NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     /**
      * @var Product[]
      */
@@ -23,39 +24,9 @@ class NewCatalog implements Contracts\NodeInterface
     #[Serializer\XmlList(entry: 'PRODUCT', inline: true)]
     protected array $products = [];
 
-    /**
-     * @param Product[]|array<string, mixed>[] $products
-     * @throws InvalidSetterException
-     * @throws UnknownKeyException
-     */
-    public function setProducts(array $products): self
-    {
-        $this->products = [];
-
-        foreach ($products as $product) {
-            if (is_array($product)) {
-                $product = NodeBuilder::fromArray($product, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class));
-            }
-
-            Assert::isInstanceOf($product, Product::class);
-
-            $this->addProduct($product);
-        }
-
-        return $this;
-    }
-
     public function addProduct(Product $product): self
     {
         $this->products[] = $product;
         return $this;
-    }
-
-    /**
-     * @return Product[]
-     */
-    public function getProducts(): array
-    {
-        return $this->products;
     }
 }

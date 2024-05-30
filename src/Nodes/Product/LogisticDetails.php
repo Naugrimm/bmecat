@@ -15,6 +15,7 @@ use Naugrim\BMEcat\Nodes\Product\Logistic\Dimensions;
 #[Serializer\XmlRoot('PRODUCT_LOGISTIC_DETAILS')]
 class LogisticDetails implements Contracts\NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     /**
      * @var CustomsTariffNumber[]
      */

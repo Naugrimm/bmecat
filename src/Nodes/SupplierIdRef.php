@@ -11,6 +11,7 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
  */
 class SupplierIdRef implements NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     /**
      * @use HasTypeAttribute<self>
      */

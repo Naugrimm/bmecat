@@ -12,6 +12,7 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 #[Serializer\XmlRoot('FEATURE')]
 class Feature implements Contracts\NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('FNAME')]
@@ -44,76 +45,4 @@ class Feature implements Contracts\NodeInterface
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('FVALUE_DETAILS')]
     protected ?string $valueDetails = null;
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-        return $this;
-    }
-
-    /**
-     * @param string[] $value
-     */
-    public function setValue(array $value): self
-    {
-        $this->value = $value;
-        return $this;
-    }
-
-    public function setUnit(string $unit): self
-    {
-        $this->unit = $unit;
-        return $this;
-    }
-
-    public function setOrder(int $order): self
-    {
-        $this->order = $order;
-        return $this;
-    }
-
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
-        return $this;
-    }
-
-    public function setValueDetails(string $valueDetails): self
-    {
-        $this->valueDetails = $valueDetails;
-        return $this;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return ?string[]
-     */
-    public function getValue(): ?array
-    {
-        return $this->value;
-    }
-
-    public function getUnit(): ?string
-    {
-        return $this->unit;
-    }
-
-    public function getOrder(): ?int
-    {
-        return $this->order;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function getValueDetails(): ?string
-    {
-        return $this->valueDetails;
-    }
 }
