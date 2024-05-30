@@ -14,6 +14,7 @@ use Naugrim\BMEcat\Nodes\Crypto\PublicKey;
  */
 class Emails implements NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('EMAIL')]
@@ -27,44 +28,6 @@ class Emails implements NodeInterface
     #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Crypto\PublicKey>')]
     #[Serializer\XmlList(inline: true)]
     protected array $publicKeys = [];
-
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-        return $this;
-    }
-
-    /**
-     * @return PublicKey[]
-     */
-    public function getPublicKeys(): array
-    {
-        return $this->publicKeys;
-    }
-
-    /**
-     * @param PublicKey[]|array{type: string, value: string}[] $publicKeys
-     * @throws InvalidSetterException
-     * @throws UnknownKeyException
-     */
-    public function setPublicKeys(array $publicKeys): self
-    {
-        $this->publicKeys = [];
-        foreach ($publicKeys as $publicKey) {
-            if (! $publicKey instanceof PublicKey) {
-                $publicKey = NodeBuilder::fromArray($publicKey, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], PublicKey::class));
-            }
-
-            $this->addPublicKey($publicKey);
-        }
-
-        return $this;
-    }
 
     public function addPublicKey(PublicKey $publicKey): self
     {

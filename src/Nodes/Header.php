@@ -14,6 +14,7 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 #[Serializer\XmlRoot('HEADER')]
 class Header implements Contracts\NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('GENERATOR_INFO')]
@@ -42,76 +43,6 @@ class Header implements Contracts\NodeInterface
     #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Party>')]
     #[Serializer\XmlList(entry: 'PARTY')]
     protected array $parties = [];
-
-    public function getGeneratorInfo(): ?string
-    {
-        return $this->generatorInfo;
-    }
-
-    public function setGeneratorInfo(string $generatorInfo): self
-    {
-        $this->generatorInfo = $generatorInfo;
-        return $this;
-    }
-
-    public function getCatalog(): Catalog
-    {
-        return $this->catalog;
-    }
-
-    public function setCatalog(Catalog $catalog): self
-    {
-        $this->catalog = $catalog;
-        return $this;
-    }
-
-    public function getBuyerIdRef(): ?BuyerIdRef
-    {
-        return $this->buyerIdRef;
-    }
-
-    public function setBuyerIdRef(BuyerIdRef $buyerIdRef): self
-    {
-        $this->buyerIdRef = $buyerIdRef;
-        return $this;
-    }
-
-    public function getSupplierIdRef(): ?SupplierIdRef
-    {
-        return $this->supplierIdRef;
-    }
-
-    public function setSupplierIdRef(SupplierIdRef $supplierIdRef): self
-    {
-        $this->supplierIdRef = $supplierIdRef;
-        return $this;
-    }
-
-    /**
-     * @return Party[]
-     */
-    public function getParties(): array
-    {
-        return $this->parties;
-    }
-
-    /**
-     * @param Party[]|array<string, mixed>[] $parties
-     * @throws InvalidSetterException
-     * @throws UnknownKeyException
-     */
-    public function setParties(array $parties): self
-    {
-        foreach ($parties as $party) {
-            if (! $party instanceof Party) {
-                $party = NodeBuilder::fromArray($party, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Party::class));
-            }
-
-            $this->addParty($party);
-        }
-
-        return $this;
-    }
 
     /**
      * @return $this

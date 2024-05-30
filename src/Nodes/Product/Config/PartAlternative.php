@@ -13,6 +13,7 @@ use Naugrim\BMEcat\Nodes\Product\PriceDetails;
 #[Serializer\XmlRoot('PART_ALTERNATIVE')]
 class PartAlternative implements Contracts\NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('SUPPLIER_PIDREF')]
@@ -66,17 +67,6 @@ class PartAlternative implements Contracts\NodeInterface
         return $this->supplier_id_ref;
     }
 
-    public function setOrder(int $order): self
-    {
-        $this->order = $order;
-        return $this;
-    }
-
-    public function getOrder(): int
-    {
-        return $this->order;
-    }
-
     public function setDefaultFlag(?bool $default_flag): self
     {
         $this->default_flag = $default_flag;
@@ -86,27 +76,5 @@ class PartAlternative implements Contracts\NodeInterface
     public function getDefaultFlag(): ?bool
     {
         return $this->default_flag;
-    }
-
-    public function setCode(?string $code): self
-    {
-        $this->code = $code;
-        return $this;
-    }
-
-    public function getCode(): ?string
-    {
-        return $this->code;
-    }
-
-    public function setPriceDetails(?PriceDetails $priceDetails): self
-    {
-        $this->priceDetails = $priceDetails;
-        return $this;
-    }
-
-    public function getPriceDetails(): ?PriceDetails
-    {
-        return $this->priceDetails;
     }
 }

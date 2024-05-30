@@ -55,71 +55,20 @@ class NodeFromArrayTest extends TestCase
         $this->assertSame($catalog, $document->getNewCatalog());
     }
 
-    public function testInvalidSetterNoArguments(): void
-    {
-        $this->expectException(InvalidSetterException::class);
-        NodeBuilder::fromArray([
-            'noArguments' => [],
-        ], \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Node::class));
-    }
-
-    public function testInvalidSetterNoTypeHint(): void
-    {
-        $this->expectException(InvalidSetterException::class);
-        NodeBuilder::fromArray([
-            'noTypeHint' => [],
-        ], \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Node::class));
-    }
-
-    public function testInvalidSetterScalarTypeHint(): void
-    {
-        $this->expectException(TypeError::class);
-        NodeBuilder::fromArray([
-            'scalarTypeHint' => [],
-        ], \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Node::class));
-    }
-
-    public function testSetterMatchingTypeHintFloat(): void
-    {
-        $float = 1.23456;
-        $node = NodeBuilder::fromArray([
-            'matchingTypeHintFloat' => $float,
-        ], \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Node::class));
-        $this->assertEquals($float, $node->someFloat);
-    }
-
-    public function testSetterMatchingTypeHintArray(): void
-    {
-        $array = [];
-        $node = NodeBuilder::fromArray([
-            'matchingTypeHintArray' => $array,
-        ], \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Node::class));
-        $this->assertSame($array, $node->someArray);
-    }
-
-    public function testSetterMatchingTypeHintNode(): void
-    {
-        $anotherNode = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Node::class);
-        $node = NodeBuilder::fromArray([
-            'matchingTypeHintNode' => $anotherNode,
-        ], \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Node::class));
-        $this->assertSame($anotherNode, $node->anotherNode);
-    }
-
     public function testRecursiveFromArrayWithArrays(): void
     {
         $array = [
-            'test' => '123',
+            'someArray' => ['123'],
         ];
 
         $node = NodeBuilder::fromArray([
-            'matchingTypeHintNode' => [
-                'matchingTypeHintArray' => $array,
+            'anotherNode' => [
+                'anotherNode' => $array,
             ],
-        ], \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Node::class));
+        ], Node::class);
 
         $this->assertInstanceOf(Node::class, $node);
         $this->assertInstanceOf(Node::class, $node->anotherNode);
-        $this->assertSame($array, $node->anotherNode->someArray);
+        $this->assertSame($array['someArray'], $node->anotherNode->anotherNode->someArray);
     }
 }

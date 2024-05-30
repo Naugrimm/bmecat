@@ -20,6 +20,7 @@ use Naugrim\BMEcat\Nodes\Product\PriceDetails;
 #[Serializer\XmlRoot('PRODUCT')]
 class Product implements Contracts\NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('mode')]
@@ -77,68 +78,14 @@ class Product implements Contracts\NodeInterface
     #[Serializer\Type(ConfigDetails::class)]
     protected ConfigDetails $configDetails;
 
-    public function getMode(): string
-    {
-        return $this->mode;
-    }
-
     public function setMode(string $mode): void
     {
         $this->mode = $mode;
     }
 
-    public function setDetails(Details $details): self
-    {
-        $this->details = $details;
-        return $this;
-    }
-
-    public function getDetails(): Details
-    {
-        return $this->details;
-    }
-
-    /**
-     * @param PriceDetails[]|array<string, mixed>[] $priceDetails
-     * @throws InvalidSetterException
-     * @throws UnknownKeyException
-     */
-    public function setPriceDetails(array $priceDetails): self
-    {
-        $this->priceDetails = [];
-        foreach ($priceDetails as $priceDetail) {
-            if (! $priceDetail instanceof PriceDetails) {
-                $priceDetail = NodeBuilder::fromArray($priceDetail, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], PriceDetails::class));
-            }
-
-            $this->addPriceDetail($priceDetail);
-        }
-
-        return $this;
-    }
-
     public function addPriceDetail(PriceDetails $price): self
     {
         $this->priceDetails[] = $price;
-        return $this;
-    }
-
-    /**
-     * @param Mime[]|array<string, mixed>[] $mimes
-     * @throws InvalidSetterException
-     * @throws UnknownKeyException
-     */
-    public function setMimes(array $mimes): self
-    {
-        $this->mimes = [];
-        foreach ($mimes as $mime) {
-            if (! $mime instanceof Mime) {
-                $mime = NodeBuilder::fromArray($mime, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Mime::class));
-            }
-
-            $this->addMime($mime);
-        }
-
         return $this;
     }
 
@@ -148,74 +95,9 @@ class Product implements Contracts\NodeInterface
         return $this;
     }
 
-    public function setId(SupplierPid $id): self
-    {
-        $this->id = $id;
-        return $this;
-    }
-
-    public function getOrderDetails(): OrderDetails
-    {
-        return $this->orderDetails;
-    }
-
-    public function setOrderDetails(OrderDetails $orderDetails): self
-    {
-        $this->orderDetails = $orderDetails;
-        return $this;
-    }
-
-    public function getId(): ?SupplierPid
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param Features[]|array<string, mixed>[] $features
-     * @throws InvalidSetterException
-     * @throws UnknownKeyException
-     */
-    public function setFeatures(array $features): self
-    {
-        $this->features = [];
-        foreach ($features as $feature) {
-            if (! $feature instanceof Features) {
-                $feature = NodeBuilder::fromArray($feature, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Features::class));
-            }
-
-            $this->addFeatures($feature);
-        }
-
-        return $this;
-    }
-
     public function addFeatures(Features $features): self
     {
         $this->features[] = $features;
         return $this;
-    }
-
-    /**
-     * @return Features[]
-     */
-    public function getFeatures(): array
-    {
-        return $this->features;
-    }
-
-    /**
-     * @return PriceDetails[]
-     */
-    public function getPriceDetails(): array
-    {
-        return $this->priceDetails;
-    }
-
-    /**
-     * @return Mime[]
-     */
-    public function getMimes(): array
-    {
-        return $this->mimes;
     }
 }

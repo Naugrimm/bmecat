@@ -15,6 +15,7 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 #[Serializer\XmlRoot('CONFIG_PARTS')]
 class Parts implements Contracts\NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     /**
      * @var PartAlternative[]
      */
@@ -27,34 +28,6 @@ class Parts implements Contracts\NodeInterface
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('PART_SELECTION_TYPE')]
     protected ?string $selection_type = null;
-
-    /**
-     * @param PartAlternative[]|array<string, mixed>[] $alternatives
-     * @return $this
-     * @throws InvalidSetterException
-     * @throws UnknownKeyException
-     */
-    public function setAlternatives(array $alternatives): self
-    {
-        $this->alternatives = [];
-        foreach ($alternatives as $alternative) {
-            if (! $alternative instanceof PartAlternative) {
-                $alternative = NodeBuilder::fromArray($alternative, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], PartAlternative::class));
-            }
-
-            $this->addAlternative($alternative);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return PartAlternative[]
-     */
-    public function getAlternatives(): array
-    {
-        return $this->alternatives;
-    }
 
     public function setSelectionType(?string $selection_type): self
     {

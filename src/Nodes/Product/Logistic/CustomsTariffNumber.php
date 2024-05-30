@@ -11,6 +11,7 @@ use Naugrim\BMEcat\Nodes\Contracts;
 #[Serializer\XmlRoot('CUSTOMS_TARIFF_NUMBER')]
 class CustomsTariffNumber implements Contracts\NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('CUSTOMS_NUMBER')]
@@ -24,33 +25,4 @@ class CustomsTariffNumber implements Contracts\NodeInterface
     #[Serializer\Type('array<string>')]
     #[Serializer\XmlList(entry: 'TERRITORY', inline: true)]
     protected array $territories = [];
-
-    public function setNumber(string $number): self
-    {
-        $this->number = $number;
-        return $this;
-    }
-
-    public function getNumber(): string
-    {
-        return $this->number;
-    }
-
-    /**
-     * @param string[] $territories
-     * @return $this
-     */
-    public function setTerritories(array $territories): self
-    {
-        $this->territories = $territories;
-        return $this;
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getTerritories(): array
-    {
-        return $this->territories;
-    }
 }

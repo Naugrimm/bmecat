@@ -11,6 +11,7 @@ use Naugrim\BMEcat\Nodes\Contracts;
 #[Serializer\XmlRoot('PRODUCT_DIMENSIONS')]
 class Dimensions implements Contracts\NodeInterface
 {
+    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
     #[Serializer\Expose]
     #[Serializer\Type('float')]
     #[Serializer\SerializedName('VOLUME')]
