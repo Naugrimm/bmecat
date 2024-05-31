@@ -3,6 +3,7 @@
 namespace Naugrim\BMEcat\Nodes;
 
 use JMS\Serializer\Annotation as Serializer;
+use Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
 use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
@@ -11,11 +12,15 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 #[Serializer\XmlRoot('CATALOG')]
 class Catalog implements Contracts\NodeInterface
 {
-    use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
+    use HasSerializableAttributes;
+
+    /**
+     * @var Language[]
+     */
     #[Serializer\Expose]
-    #[Serializer\Type('string')]
-    #[Serializer\SerializedName('LANGUAGE')]
-    protected string $language;
+    #[Serializer\Type('array<'.Language::class.'>')]
+    #[Serializer\XmlList(entry: 'LANGUAGE', inline: true)]
+    protected array $language = [];
 
     #[Serializer\Expose]
     #[Serializer\Type('string')]

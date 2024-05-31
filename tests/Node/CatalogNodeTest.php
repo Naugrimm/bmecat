@@ -37,10 +37,13 @@ class CatalogNodeTest extends TestCase
     public function testSetGetLanguage(): void
     {
         $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Catalog::class);
-        $value = sha1(uniqid(microtime(false), true));
+        $value = [
+            ['value' => $langValue = sha1(uniqid(microtime(false), true))]
+        ];
 
         $node->setLanguage($value);
-        $this->assertEquals($value, $node->getLanguage());
+        $this->assertCount(1, $lang = $node->getLanguage());
+        $this->assertEquals($langValue, $lang[0]->getValue());
     }
 
     public function testSetGetDateTime(): void

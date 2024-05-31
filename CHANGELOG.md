@@ -1,3 +1,9 @@
+# 4.x
+
+## BREAKING CHANGES
+
+`\Naugrim\BMEcat\Nodes\Catalog::$language` now correctly is an Element of type `array<\Naugrim\BMEcat\Nodes\Language>` instead of a simple string.
+
 # 3.x
 
 ## BREAKING CHANGES
