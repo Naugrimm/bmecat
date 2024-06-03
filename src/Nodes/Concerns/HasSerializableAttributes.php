@@ -20,7 +20,6 @@ use RuntimeException;
 trait HasSerializableAttributes
 {
     /**
-     * @param string $name
      * @param mixed[] $arguments
      * @return ($arguments is empty ? mixed : self)
      * @throws InvalidSetterException
@@ -38,7 +37,9 @@ trait HasSerializableAttributes
 
         $property = $this->getSerializableAttribute($propertyName);
         if ($property === null) {
-            throw new UnknownKeyException('There is no serializable attribute with the name ' . $this::class.'::'.$propertyName);
+            throw new UnknownKeyException(
+                'There is no serializable attribute with the name ' . $this::class . '::' . $propertyName
+            );
         }
 
         if (str_starts_with($name, 'get') && property_exists($this, $propertyName)) {
@@ -46,10 +47,15 @@ trait HasSerializableAttributes
         } elseif (str_starts_with($name, 'set')) {
             $valueToSet = $arguments[0];
 
+            if ($valueToSet === null && $property->getType()?->allowsNull() === true) {
+                $this->{$propertyName} = $valueToSet; // @phpstan-ignore property.dynamicName
+                return $this;
+            }
+
             $type = $this->getTypeAnnotationFromProperty($property);
             if ((str_starts_with($type, 'DateTimeInterface') || str_starts_with($type, '\DateTimeInterface'))
                 && (is_string($valueToSet) || $valueToSet instanceof DateTimeInterface)
-            ){
+            ) {
                 return $this->handleDateTimeInterfaceSetter($propertyName, $type, $valueToSet);
             }
 
@@ -72,7 +78,7 @@ trait HasSerializableAttributes
                 return $this;
             }
 
-            if (!is_array($valueToSet)) {
+            if (! is_array($valueToSet)) {
                 $this->{$propertyName} = $valueToSet; // @phpstan-ignore property.dynamicName
                 return $this;
             }
@@ -91,7 +97,7 @@ trait HasSerializableAttributes
      * @throws InvalidSetterException
      * @throws UnknownKeyException
      */
-    private function handleArraySetter(string $propertyName, string $type, array $valueToSet) : static
+    private function handleArraySetter(string $propertyName, string $type, array $valueToSet): static
     {
         if (preg_match('/^array<(?<itemType>.*)>$/', $type, $matches) !== 1) {
             /**
@@ -104,8 +110,8 @@ trait HasSerializableAttributes
         $newValues = [];
 
         $itemType = $matches['itemType'];
-        if (str_contains($itemType, '\\') && !str_starts_with($itemType, '\\')) {
-            $itemType = '\\'.$itemType;
+        if (str_contains($itemType, '\\') && ! str_starts_with($itemType, '\\')) {
+            $itemType = '\\' . $itemType;
         }
 
         foreach ($valueToSet as $singleValueToSet) {
@@ -132,8 +138,11 @@ trait HasSerializableAttributes
         return $this;
     }
 
-    private function handleDateTimeInterfaceSetter(string $propertyName, string $type, string|DateTimeInterface $valueToSet) : static
-    {
+    private function handleDateTimeInterfaceSetter(
+        string $propertyName,
+        string $type,
+        string|DateTimeInterface $valueToSet
+    ): static {
         if ($valueToSet instanceof DateTimeInterface) {
             $this->{$propertyName} = DateTime::createFromInterface($valueToSet); // @phpstan-ignore property.dynamicName
             return $this;
@@ -147,16 +156,20 @@ trait HasSerializableAttributes
             return $this;
         }
 
-        $this->{$propertyName} = DateTime::createFromFormat($matches['format'], $valueToSet); // @phpstan-ignore property.dynamicName
+        $this->{$propertyName} = DateTime::createFromFormat(
+            $matches['format'],
+            $valueToSet
+        ); // @phpstan-ignore property.dynamicName
         return $this;
     }
 
-    private function getTypeAnnotationFromProperty(ReflectionProperty $property) : string
+    private function getTypeAnnotationFromProperty(ReflectionProperty $property): string
     {
         $typeAttribute = $property->getAttributes(Type::class)[0];
-        $typeName = $typeAttribute->newInstance()->name;
+        $typeName = $typeAttribute->newInstance()
+->name;
         if ($typeName === null) {
-            throw new RuntimeException('Could not get the type '.Type::class.' for the property '.$property->name);
+            throw new RuntimeException('Could not get the type ' . Type::class . ' for the property ' . $property->name);
         }
 
         return $typeName;
@@ -166,18 +179,14 @@ trait HasSerializableAttributes
      * @template T
      * @return ($type is class-string<NodeInterface<T>> ? true : false)
      */
-    private function typeAnnotationImplementsNodeInterface(string $type) : bool
+    private function typeAnnotationImplementsNodeInterface(string $type): bool
     {
         $implements = class_implements($type);
         if ($implements === false) {
             return false;
         }
 
-        return in_array(
-            NodeInterface::class,
-            $implements,
-            true
-        );
+        return in_array(NodeInterface::class, $implements, true);
     }
 
     private function getSerializableAttribute(string $name): ?ReflectionProperty

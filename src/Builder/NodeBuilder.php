@@ -5,11 +5,6 @@ namespace Naugrim\BMEcat\Builder;
 use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
 use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
-use Naugrim\BMEcat\Tests\Fixtures\Node\Node;
-use ReflectionClass;
-use ReflectionException;
-use ReflectionMethod;
-use ReflectionNamedType;
 
 class NodeBuilder
 {
@@ -24,7 +19,7 @@ class NodeBuilder
     public static function fromArray(array $data, NodeInterface|string $instance): NodeInterface
     {
         if (is_string($instance)) {
-            $instance = new $instance;
+            $instance = new $instance();
         }
 
         foreach ($data as $name => $value) {

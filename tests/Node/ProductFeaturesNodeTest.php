@@ -20,7 +20,11 @@ class ProductFeaturesNodeTest extends TestCase
 
     public function testAddGetFeature(): void
     {
-        $features = [\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Feature::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Feature::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Feature::class)];
+        $features = [
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Feature::class),
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Feature::class),
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Feature::class),
+        ];
 
         $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Features::class);
         $this->assertEmpty($node->getFeatures());

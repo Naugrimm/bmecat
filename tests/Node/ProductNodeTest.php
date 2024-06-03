@@ -50,7 +50,11 @@ class ProductNodeTest extends TestCase
 
     public function testAddGetFeatures(): void
     {
-        $features = [\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Features::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Features::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Features::class)];
+        $features = [
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Features::class),
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Features::class),
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Features::class),
+        ];
 
         $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class);
         $this->assertEmpty($node->getFeatures());
@@ -65,9 +69,15 @@ class ProductNodeTest extends TestCase
     public function testAddGetPrices(): void
     {
         $priceDetails = [
-            (\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], PriceDetails::class))->addPrice(\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Price::class)),
-            (\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], PriceDetails::class))->addPrice(\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Price::class)),
-            (\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], PriceDetails::class))->addPrice(\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Price::class)),
+            (\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], PriceDetails::class))->addPrice(
+                \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Price::class)
+            ),
+            (\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], PriceDetails::class))->addPrice(
+                \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Price::class)
+            ),
+            (\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], PriceDetails::class))->addPrice(
+                \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Price::class)
+            ),
         ];
 
         $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class);
@@ -91,7 +101,11 @@ class ProductNodeTest extends TestCase
 
     public function testAddGetMimeInfo(): void
     {
-        $mimes = [\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Mime::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Mime::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Mime::class)];
+        $mimes = [
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Mime::class),
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Mime::class),
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Mime::class),
+        ];
 
         $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class);
         $this->assertEmpty($node->getMimes());
@@ -117,12 +131,10 @@ class ProductNodeTest extends TestCase
         $this->assertInstanceOf(Product::class, $doc);
     }
 
-    public function testSetFeatures() : void
+    public function testSetFeatures(): void
     {
         $node = NodeBuilder::fromArray([
-            'features' => [
-                [],
-            ],
+            'features' => [[]],
         ], Product::class);
 
         $this->assertInstanceOf(Product::class, $node);

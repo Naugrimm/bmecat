@@ -28,7 +28,9 @@ class DocumentTest extends TestCase
                 'generatorInfo' => 'DocumentTest Document',
                 'catalog' => [
                     'language' => [
-                        ['value' => 'eng',]
+                        [
+                            'value' => 'eng',
+                        ],
                     ],
                     'id' => 'MY_CATALOG',
                     'version' => '0.99',

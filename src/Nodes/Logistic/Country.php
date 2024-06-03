@@ -2,12 +2,9 @@
 
 namespace Naugrim\BMEcat\Nodes\Logistic;
 
-use JMS\Serializer\Annotation as Serializer;
 use Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
 use Naugrim\BMEcat\Nodes\Concerns\HasStringValue;
-use Naugrim\BMEcat\Nodes\Contact\Details;
 use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
-use Naugrim\BMEcat\Nodes\Crypto\PublicKey;
 
 /**
  * @implements NodeInterface<Country>

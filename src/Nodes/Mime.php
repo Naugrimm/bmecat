@@ -15,7 +15,7 @@ class Mime implements Contracts\NodeInterface
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('MIME_TYPE')]
-    protected string $type;
+    protected ?string $type = null;
 
     #[Serializer\Expose]
     #[Serializer\Type('string')]
@@ -25,22 +25,22 @@ class Mime implements Contracts\NodeInterface
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('MIME_DESCR')]
-    protected string $description;
+    protected ?string $description = null;
 
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('MIME_ALT')]
-    protected string $alt;
+    protected ?string $alt = null;
 
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('MIME_PURPOSE')]
     #[Serializer\XmlElement(cdata: false)]
-    protected string $purpose;
+    protected ?string $purpose = null;
 
     #[Serializer\Expose]
     #[Serializer\Type('int')]
     #[Serializer\SerializedName('MIME_ORDER')]
     #[Serializer\XmlElement(cdata: false)]
-    protected int $order;
+    protected ?int $order = null;
 }

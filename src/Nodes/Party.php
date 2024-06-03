@@ -3,9 +3,6 @@
 namespace Naugrim\BMEcat\Nodes;
 
 use JMS\Serializer\Annotation as Serializer;
-use Naugrim\BMEcat\Builder\NodeBuilder;
-use Naugrim\BMEcat\Exception\InvalidSetterException;
-use Naugrim\BMEcat\Exception\UnknownKeyException;
 use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
@@ -19,15 +16,21 @@ class Party implements NodeInterface
     #[Serializer\SerializedName('PARTY_ID')]
     protected string $id;
 
+    /**
+     * @var string[]
+     */
     #[Serializer\Expose]
-    #[Serializer\Type('string')]
-    #[Serializer\SerializedName('PARTY_ROLE')]
-    protected string $role;
+    #[Serializer\Type('array<string>')]
+    #[Serializer\XmlList(entry: 'PARTY_ROLE', inline: true)]
+    protected array $role = [];
 
+    /**
+     * @var Address[]
+     */
     #[Serializer\Expose]
-    #[Serializer\Type(Address::class)]
-    #[Serializer\SerializedName('ADDRESS')]
-    protected Address $address;
+    #[Serializer\Type('array<' . Address::class . '>')]
+    #[Serializer\XmlList(entry: 'ADDRESS', inline: true)]
+    protected array $address = [];
 
     /**
      * @var Mime[]

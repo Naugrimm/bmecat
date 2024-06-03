@@ -27,7 +27,9 @@ class AddressTest extends TestCase
                 'generatorInfo' => 'DocumentTest Document',
                 'catalog' => [
                     'language' => [
-                        ['value' => 'eng',]
+                        [
+                            'value' => 'eng',
+                        ],
                     ],
                     'id' => 'MY_CATALOG',
                     'version' => '0.99',
@@ -53,7 +55,7 @@ class AddressTest extends TestCase
         return $document;
     }
 
-    public function testAddressSet() : void
+    public function testAddressSet(): void
     {
         $address = NodeBuilder::fromArray([], Address::class);
 
@@ -61,17 +63,26 @@ class AddressTest extends TestCase
 
         $this->assertEquals('test123', $address->getName());
 
-        $address->setContactDetails(
-            NodeBuilder::fromArray(['id' => 'id123'], Details::class),
-        );
+        $address->setContactDetails([NodeBuilder::fromArray([
+                'id' => 'id123',
+            ], Details::class)],);
 
-        $this->assertEquals('id123', $address->getContactDetails()->getId());
+        $this->assertEquals('id123', $address->getContactDetails()[0]->getId());
 
-        $address->setContactDetails([
-            'id' => 'id234'
-        ]);
+        $address->setContactDetails([[
+            'id' => 'id234',
+        ]]);
 
-        $this->assertEquals('id234', $address->getContactDetails()->getId());
+        $this->assertEquals('id234', $address->getContactDetails()[0]->getId());
+    }
+
+    public function testNoExceptionIsThrownWhenTryingToNullANullableProperty(): void
+    {
+        $address = NodeBuilder::fromArray([], Address::class);
+
+        $address->setName(null);
+
+        $this->assertNull($address->getName());
     }
 
     public function testWithCompleteAddress(): void
@@ -112,7 +123,7 @@ class AddressTest extends TestCase
                 'parties' => [
                     [
                         'id' => 'party-id',
-                        'address' => $addressData,
+                        'address' => [$addressData],
                     ],
                 ],
             ],

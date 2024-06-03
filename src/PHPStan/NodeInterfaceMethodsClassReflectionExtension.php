@@ -273,10 +273,6 @@ class NodeInterfaceMethodsClassReflectionExtension implements MethodsClassReflec
                                     $nativeType = $this->propertyReflection->getNativeType();
                                     if ($nativeType instanceof UnionType) {
                                         foreach ($nativeType->getTypes() as $type) {
-                                            if ($type->isNull()->yes()) {
-                                                continue;
-                                            }
-
                                             $types[] = $type;
                                         }
                                     } else {
@@ -284,6 +280,10 @@ class NodeInterfaceMethodsClassReflectionExtension implements MethodsClassReflec
                                     }
 
                                     $types[] = new ArrayType(new StringType(), new MixedType());
+
+                                    if ($nativeType->isNull()->yes()) {
+                                        $types[] = new NullType();
+                                    }
 
                                     return new UnionType($types);
                                 }

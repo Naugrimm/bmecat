@@ -4,9 +4,11 @@ namespace Naugrim\BMEcat\Tests\Node;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
+use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\DocumentBuilder;
 use Naugrim\BMEcat\Nodes\Mime;
 use PHPUnit\Framework\TestCase;
+use TypeError;
 
 class MimeNodeTest extends TestCase
 {
@@ -56,5 +58,14 @@ class MimeNodeTest extends TestCase
 
         $doc = $this->serializer->deserialize($actual, Mime::class, 'xml');
         $this->assertInstanceOf(Mime::class, $doc);
+    }
+
+    public function testExceptionIsThrownWhenTryingToNullANotNullableProperty(): void
+    {
+        $this->expectException(TypeError::class);
+
+        $address = NodeBuilder::fromArray([], Mime::class);
+
+        $address->setSource(null); //@phpstan-ignore argument.type
     }
 }
