@@ -4,9 +4,7 @@ namespace Naugrim\BMEcat\Tests\Node;
 
 use DateTime;
 use DateTimeInterface;
-use Exception;
 use Naugrim\BMEcat\Builder\NodeBuilder;
-use Naugrim\BMEcat\Exception\InvalidSetterException;
 use Naugrim\BMEcat\Exception\UnknownKeyException;
 use Naugrim\BMEcat\Nodes\Document;
 use Naugrim\BMEcat\Nodes\NewCatalog;
@@ -78,7 +76,7 @@ class NodeFromArrayTest extends TestCase
     public function testSetDateTimeInterfaceFromStringWithoutFormat(): void
     {
         $node = NodeBuilder::fromArray([
-            'dateTimeInterfaceWithoutFormat' => '2024-05-30 12:02:00'
+            'dateTimeInterfaceWithoutFormat' => '2024-05-30 12:02:00',
         ], Node::class);
         $this->assertInstanceOf(DateTimeInterface::class, $node->dateTimeInterfaceWithoutFormat);
     }
@@ -95,7 +93,7 @@ class NodeFromArrayTest extends TestCase
     {
         $this->expectException(TypeError::class);
         NodeBuilder::fromArray([
-            'dateTimeInterfaceWithFormat' => '2024-05-30 12:02:00'
+            'dateTimeInterfaceWithFormat' => '2024-05-30 12:02:00',
         ], Node::class);
     }
 
@@ -110,7 +108,7 @@ class NodeFromArrayTest extends TestCase
     public function testSetDateTimeInterfaceFromStringWithFormat(): void
     {
         $node = NodeBuilder::fromArray([
-            'dateTimeInterfaceWithFormat' => '2024-05'
+            'dateTimeInterfaceWithFormat' => '2024-05',
         ], Node::class);
         $this->assertInstanceOf(DateTimeInterface::class, $node->dateTimeInterfaceWithFormat);
     }

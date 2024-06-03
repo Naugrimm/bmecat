@@ -23,7 +23,11 @@ class ProductDetailsNodeTest extends TestCase
 
     public function testAddGetBuyerPides(): void
     {
-        $buyerPids = [\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], BuyerPid::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], BuyerPid::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], BuyerPid::class)];
+        $buyerPids = [
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], BuyerPid::class),
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], BuyerPid::class),
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], BuyerPid::class),
+        ];
 
         $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
         $this->assertEmpty($node->getBuyerPids());
@@ -59,7 +63,11 @@ class ProductDetailsNodeTest extends TestCase
 
     public function testAddGetKeywords(): void
     {
-        $keywords = [\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Keyword::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Keyword::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Keyword::class)];
+        $keywords = [
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Keyword::class),
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Keyword::class),
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Keyword::class),
+        ];
 
         $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
         $this->assertEmpty($node->getKeywords());
@@ -75,7 +83,11 @@ class ProductDetailsNodeTest extends TestCase
 
     public function testAddGetProductStatus(): void
     {
-        $productStatus = [\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Status::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Status::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Status::class)];
+        $productStatus = [
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Status::class),
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Status::class),
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Status::class),
+        ];
 
         $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Details::class);
         $this->assertEmpty($node->getProductStatus());

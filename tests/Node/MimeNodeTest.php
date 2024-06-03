@@ -6,7 +6,6 @@ use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
 use Naugrim\BMEcat\Builder\NodeBuilder;
 use Naugrim\BMEcat\DocumentBuilder;
-use Naugrim\BMEcat\Nodes\Address;
 use Naugrim\BMEcat\Nodes\Mime;
 use PHPUnit\Framework\TestCase;
 use TypeError;
@@ -61,8 +60,7 @@ class MimeNodeTest extends TestCase
         $this->assertInstanceOf(Mime::class, $doc);
     }
 
-
-    public function testExceptionIsThrownWhenTryingToNullANotNullableProperty() : void
+    public function testExceptionIsThrownWhenTryingToNullANotNullableProperty(): void
     {
         $this->expectException(TypeError::class);
 

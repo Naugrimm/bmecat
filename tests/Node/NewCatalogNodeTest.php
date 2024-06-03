@@ -20,7 +20,11 @@ class NewCatalogNodeTest extends TestCase
 
     public function testAddGetProductNode(): void
     {
-        $products = [\Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class), \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class)];
+        $products = [
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class),
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class),
+            \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Product::class),
+        ];
 
         $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], NewCatalog::class);
         $this->assertEquals([], $node->getProducts());
