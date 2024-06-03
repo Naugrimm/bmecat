@@ -39,7 +39,7 @@ class Address implements NodeInterface
      * @var Details[]
      */
     #[Serializer\Expose]
-    #[Serializer\Type('array<'.Details::class.'>')]
+    #[Serializer\Type('array<' . Details::class . '>')]
     #[Serializer\XmlList(entry: 'CONTACT_DETAILS', inline: true)]
     protected array $contactDetails;
 

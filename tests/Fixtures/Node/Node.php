@@ -25,7 +25,7 @@ class Node implements NodeInterface
     public array $someArray;
 
     #[Serializer\Expose]
-    #[Serializer\Type(Node::class)]
+    #[Serializer\Type(self::class)]
     public Node $anotherNode;
 
     #[Serializer\Expose]

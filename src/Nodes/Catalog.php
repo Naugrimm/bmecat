@@ -18,7 +18,7 @@ class Catalog implements Contracts\NodeInterface
      * @var Language[]
      */
     #[Serializer\Expose]
-    #[Serializer\Type('array<'.Language::class.'>')]
+    #[Serializer\Type('array<' . Language::class . '>')]
     #[Serializer\XmlList(entry: 'LANGUAGE', inline: true)]
     protected array $language = [];
 

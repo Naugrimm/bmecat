@@ -38,7 +38,9 @@ class CatalogNodeTest extends TestCase
     {
         $node = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Catalog::class);
         $value = [
-            ['value' => $langValue = sha1(uniqid(microtime(false), true))]
+            [
+                'value' => $langValue = sha1(uniqid(microtime(false), true)),
+            ],
         ];
 
         $node->setLanguage($value);
