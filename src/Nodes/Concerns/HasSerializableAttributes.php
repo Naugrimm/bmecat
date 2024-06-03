@@ -46,6 +46,11 @@ trait HasSerializableAttributes
         } elseif (str_starts_with($name, 'set')) {
             $valueToSet = $arguments[0];
 
+            if ($valueToSet === null && $property->getType()?->allowsNull() === true) {
+                $this->{$propertyName} = $valueToSet; // @phpstan-ignore property.dynamicName
+                return $this;
+            }
+
             $type = $this->getTypeAnnotationFromProperty($property);
             if ((str_starts_with($type, 'DateTimeInterface') || str_starts_with($type, '\DateTimeInterface'))
                 && (is_string($valueToSet) || $valueToSet instanceof DateTimeInterface)

@@ -12,6 +12,7 @@ use Naugrim\BMEcat\Nodes\Document;
 use Naugrim\BMEcat\Nodes\NewCatalog;
 use Naugrim\BMEcat\SchemaValidator;
 use PHPUnit\Framework\TestCase;
+use TypeError;
 
 class AddressTest extends TestCase
 {
@@ -62,16 +63,25 @@ class AddressTest extends TestCase
         $this->assertEquals('test123', $address->getName());
 
         $address->setContactDetails(
-            NodeBuilder::fromArray(['id' => 'id123'], Details::class),
+            [NodeBuilder::fromArray(['id' => 'id123'], Details::class)],
         );
 
-        $this->assertEquals('id123', $address->getContactDetails()->getId());
+        $this->assertEquals('id123', $address->getContactDetails()[0]->getId());
 
-        $address->setContactDetails([
+        $address->setContactDetails([[
             'id' => 'id234'
-        ]);
+        ]]);
 
-        $this->assertEquals('id234', $address->getContactDetails()->getId());
+        $this->assertEquals('id234', $address->getContactDetails()[0]->getId());
+    }
+
+    public function testNoExceptionIsThrownWhenTryingToNullANullableProperty() : void
+    {
+        $address = NodeBuilder::fromArray([], Address::class);
+
+        $address->setName(null);
+
+        $this->assertNull($address->getName());
     }
 
     public function testWithCompleteAddress(): void
@@ -112,7 +122,7 @@ class AddressTest extends TestCase
                 'parties' => [
                     [
                         'id' => 'party-id',
-                        'address' => $addressData,
+                        'address' => [$addressData],
                     ],
                 ],
             ],

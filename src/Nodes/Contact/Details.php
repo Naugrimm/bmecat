@@ -17,7 +17,7 @@ class Details implements NodeInterface
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('CONTACT_ID')]
-    protected string $id;
+    protected ?string $id = null;
 
     #[Serializer\Expose]
     #[Serializer\Type('string')]
@@ -27,17 +27,17 @@ class Details implements NodeInterface
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('FIRST_NAME')]
-    protected string $firstName;
+    protected ?string $firstName = null;
 
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('TITLE')]
-    protected string $title;
+    protected ?string $title = null;
 
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('ACADEMIC_TITLE')]
-    protected string $academicTitle;
+    protected ?string $academicTitle = null;
 
     #[Serializer\Expose]
     #[Serializer\Type(Role::class)]
@@ -47,7 +47,7 @@ class Details implements NodeInterface
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('CONTACT_DESCRIPTION')]
-    protected string $description;
+    protected ?string $description = null;
 
     #[Serializer\Expose]
     #[Serializer\Type(Phone::class)]
@@ -62,7 +62,7 @@ class Details implements NodeInterface
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('URL')]
-    protected string $url;
+    protected ?string $url = null;
 
     #[Serializer\Expose]
     #[Serializer\Type(Emails::class)]
