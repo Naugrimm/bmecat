@@ -47,7 +47,7 @@ class AddressTest extends TestCase
 
         $data = array_merge_recursive($docData, $data);
 
-        $document = NodeBuilder::fromArray($data, \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], Document::class));
+        $document = NodeBuilder::fromArray($data, Document::class);
 
         $catalog = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], NewCatalog::class);
         $document->setNewCatalog($catalog);
@@ -64,8 +64,8 @@ class AddressTest extends TestCase
         $this->assertEquals('test123', $address->getName());
 
         $address->setContactDetails([NodeBuilder::fromArray([
-                'id' => 'id123',
-            ], Details::class)],);
+            'id' => 'id123',
+        ], Details::class)],);
 
         $this->assertEquals('id123', $address->getContactDetails()[0]->getId());
 

@@ -7,6 +7,14 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
  * @implements NodeInterface<self>
+ * @method self setVersion(string $version)
+ * @method string getVersion()
+ * @method self setNamespace(string $namespace)
+ * @method string getNamespace()
+ * @method self setHeader(array|\Naugrim\BMEcat\Nodes\Header $header)
+ * @method \Naugrim\BMEcat\Nodes\Header getHeader()
+ * @method self setNewCatalog(array|\Naugrim\BMEcat\Nodes\NewCatalog $newCatalog)
+ * @method \Naugrim\BMEcat\Nodes\NewCatalog getNewCatalog()
  */
 #[Serializer\XmlRoot('BMECAT')]
 #[Serializer\ExclusionPolicy('all')]

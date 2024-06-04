@@ -11,6 +11,16 @@ use Naugrim\BMEcat\Nodes\Product\Logistic\Dimensions;
 
 /**
  * @implements NodeInterface<self>
+ * @method self setCustomsTariffNumbers(\Naugrim\BMEcat\Nodes\Product\Logistic\CustomsTariffNumber[]|array $customsTariffNumbers)
+ * @method \Naugrim\BMEcat\Nodes\Product\Logistic\CustomsTariffNumber[]|array getCustomsTariffNumbers()
+ * @method self setStatisticsFactor(float|null $statisticsFactor)
+ * @method float|null getStatisticsFactor()
+ * @method self setCountryOfOrigin(string $countryOfOrigin)
+ * @method string getCountryOfOrigin()
+ * @method self setDimensions(null|array|\Naugrim\BMEcat\Nodes\Product\Logistic\Dimensions $dimensions)
+ * @method \Naugrim\BMEcat\Nodes\Product\Logistic\Dimensions|null getDimensions()
+ * @method self setDeliveryTimes(\Naugrim\BMEcat\Nodes\DeliveryTimes[]|array $deliveryTimes)
+ * @method \Naugrim\BMEcat\Nodes\DeliveryTimes[]|array getDeliveryTimes()
  */
 #[Serializer\XmlRoot('PRODUCT_LOGISTIC_DETAILS')]
 class LogisticDetails implements Contracts\NodeInterface
@@ -22,13 +32,13 @@ class LogisticDetails implements Contracts\NodeInterface
     #[Serializer\Expose]
     #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Product\Logistic\CustomsTariffNumber>')]
     #[Serializer\XmlList(entry: 'CUSTOMS_TARIFF_NUMBER', inline: true)]
-    protected array $customs_tariff_numbers = [];
+    protected array $customsTariffNumbers = [];
 
     #[Serializer\Expose]
     #[Serializer\Type('float')]
     #[Serializer\SerializedName('STATISTICS_FACTOR')]
     #[Serializer\XmlElement(cdata: false)]
-    protected ?float $statistics_factor = null;
+    protected ?float $statisticsFactor = null;
 
     /**
      * @var string[]
@@ -36,7 +46,7 @@ class LogisticDetails implements Contracts\NodeInterface
     #[Serializer\Expose]
     #[Serializer\Type('array<string>')]
     #[Serializer\XmlList(entry: 'COUNTRY_OF_ORIGIN', inline: true)]
-    protected array $country_of_origin = [];
+    protected array $countryOfOrigin = [];
 
     #[Serializer\Expose]
     #[Serializer\SerializedName('PRODUCT_DIMENSIONS')]

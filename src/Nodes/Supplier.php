@@ -8,6 +8,10 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 /**
  * @implements NodeInterface<self>
  * @deprecated
+ * @method self setId(string $id)
+ * @method string getId()
+ * @method self setName(string $name)
+ * @method string getName()
  */
 #[Serializer\XmlRoot('SUPPLIER')]
 class Supplier implements Contracts\NodeInterface

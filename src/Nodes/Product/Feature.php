@@ -8,6 +8,18 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
  * @implements NodeInterface<self>
+ * @method self setName(string $name)
+ * @method string getName()
+ * @method self setValue(string $value)
+ * @method string getValue()
+ * @method self setUnit(string|null $unit)
+ * @method string|null getUnit()
+ * @method self setOrder(int|null $order)
+ * @method int|null getOrder()
+ * @method self setDescription(string|null $description)
+ * @method string|null getDescription()
+ * @method self setValueDetails(string|null $valueDetails)
+ * @method string|null getValueDetails()
  */
 #[Serializer\XmlRoot('FEATURE')]
 class Feature implements Contracts\NodeInterface

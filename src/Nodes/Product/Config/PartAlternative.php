@@ -9,20 +9,33 @@ use Naugrim\BMEcat\Nodes\Product\PriceDetails;
 
 /**
  * @implements NodeInterface<self>
+ * @method self setSupplierPidRef(string $supplierPidRef)
+ * @method string getSupplierPidRef()
+ * @method self setSupplierIdRef(string|null $supplierIdRef)
+ * @method string|null getSupplierIdRef()
+ * @method self setOrder(int $order)
+ * @method int getOrder()
+ * @method self setDefaultFlag(bool|null $defaultFlag)
+ * @method bool|null getDefaultFlag()
+ * @method self setCode(string|null $code)
+ * @method string|null getCode()
+ * @method self setPriceDetails(null|array|\Naugrim\BMEcat\Nodes\Product\PriceDetails $priceDetails)
+ * @method \Naugrim\BMEcat\Nodes\Product\PriceDetails|null getPriceDetails()
  */
 #[Serializer\XmlRoot('PART_ALTERNATIVE')]
 class PartAlternative implements Contracts\NodeInterface
 {
     use \Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
+
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('SUPPLIER_PIDREF')]
-    protected string $supplier_pid_ref;
+    protected string $supplierPidRef;
 
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('SUPPLIER_IDREF')]
-    protected ?string $supplier_id_ref = null;
+    protected ?string $supplierIdRef = null;
 
     #[Serializer\Expose]
     #[Serializer\Type('int')]
@@ -33,7 +46,7 @@ class PartAlternative implements Contracts\NodeInterface
     #[Serializer\Expose]
     #[Serializer\Type('bool')]
     #[Serializer\SerializedName('DEFAULT_FLAG')]
-    protected ?bool $default_flag = null;
+    protected ?bool $defaultFlag = null;
 
     #[Serializer\Expose]
     #[Serializer\Type('string')]
@@ -44,37 +57,4 @@ class PartAlternative implements Contracts\NodeInterface
     #[Serializer\SerializedName('PRODUCT_PRICE_DETAILS')]
     #[Serializer\Type(PriceDetails::class)]
     protected ?PriceDetails $priceDetails = null;
-
-    public function setSupplierPidRef(string $supplier_pid_ref): self
-    {
-        $this->supplier_pid_ref = $supplier_pid_ref;
-        return $this;
-    }
-
-    public function getSupplierPidRef(): string
-    {
-        return $this->supplier_pid_ref;
-    }
-
-    public function setSupplierIdRef(?string $supplier_id_ref): self
-    {
-        $this->supplier_id_ref = $supplier_id_ref;
-        return $this;
-    }
-
-    public function getSupplierIdRef(): ?string
-    {
-        return $this->supplier_id_ref;
-    }
-
-    public function setDefaultFlag(?bool $default_flag): self
-    {
-        $this->default_flag = $default_flag;
-        return $this;
-    }
-
-    public function getDefaultFlag(): ?bool
-    {
-        return $this->default_flag;
-    }
 }

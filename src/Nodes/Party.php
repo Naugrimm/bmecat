@@ -7,6 +7,14 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
  * @implements NodeInterface<self>
+ * @method self setId(string $id)
+ * @method string getId()
+ * @method self setRole(string $role)
+ * @method string getRole()
+ * @method self setAddress(\Naugrim\BMEcat\Nodes\Address[]|array $address)
+ * @method \Naugrim\BMEcat\Nodes\Address[]|array getAddress()
+ * @method self setMimes(\Naugrim\BMEcat\Nodes\Mime[]|array $mimes)
+ * @method \Naugrim\BMEcat\Nodes\Mime[]|array getMimes()
  */
 class Party implements NodeInterface
 {

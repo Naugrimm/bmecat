@@ -10,6 +10,28 @@ use Naugrim\BMEcat\Nodes\Phone;
 
 /**
  * @implements NodeInterface<self>
+ * @method self setId(string|null $id)
+ * @method string|null getId()
+ * @method self setName(string $name)
+ * @method string getName()
+ * @method self setFirstName(string|null $firstName)
+ * @method string|null getFirstName()
+ * @method self setTitle(string|null $title)
+ * @method string|null getTitle()
+ * @method self setAcademicTitle(string|null $academicTitle)
+ * @method string|null getAcademicTitle()
+ * @method self setRole(array|\Naugrim\BMEcat\Nodes\Contact\Role $role)
+ * @method \Naugrim\BMEcat\Nodes\Contact\Role getRole()
+ * @method self setDescription(string|null $description)
+ * @method string|null getDescription()
+ * @method self setPhone(array|\Naugrim\BMEcat\Nodes\Phone $phone)
+ * @method \Naugrim\BMEcat\Nodes\Phone getPhone()
+ * @method self setFax(array|\Naugrim\BMEcat\Nodes\Fax $fax)
+ * @method \Naugrim\BMEcat\Nodes\Fax getFax()
+ * @method self setUrl(string|null $url)
+ * @method string|null getUrl()
+ * @method self setEmails(array|\Naugrim\BMEcat\Nodes\Emails $emails)
+ * @method \Naugrim\BMEcat\Nodes\Emails getEmails()
  */
 class Details implements NodeInterface
 {

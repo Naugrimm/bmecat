@@ -8,6 +8,10 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
  * @implements NodeInterface<self>
+ * @method self setAlternatives(\Naugrim\BMEcat\Nodes\Product\Config\PartAlternative[]|array $alternatives)
+ * @method \Naugrim\BMEcat\Nodes\Product\Config\PartAlternative[]|array getAlternatives()
+ * @method self setSelectionType(string|null $selectionType)
+ * @method string|null getSelectionType()
  */
 #[Serializer\XmlRoot('CONFIG_PARTS')]
 class Parts implements Contracts\NodeInterface
@@ -24,18 +28,7 @@ class Parts implements Contracts\NodeInterface
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('PART_SELECTION_TYPE')]
-    protected ?string $selection_type = null;
-
-    public function setSelectionType(?string $selection_type): self
-    {
-        $this->selection_type = $selection_type;
-        return $this;
-    }
-
-    public function getSelectionType(): ?string
-    {
-        return $this->selection_type;
-    }
+    protected ?string $selectionType = null;
 
     public function addAlternative(PartAlternative $alternative): self
     {

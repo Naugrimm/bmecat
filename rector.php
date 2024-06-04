@@ -6,6 +6,7 @@ use Rector\Config\RectorConfig;
 use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
 use Rector\Set\ValueObject\SetList;
 use Rector\Symfony\Set\JMSSetList;
+use Utils\Rector\Rector\AddDocBlockWithMethodHintsToNodeInterfaceClassesRector;
 use Utils\Rector\Rector\NodeInterfaceAddGenericImplementsAttributeRector;
 use Utils\Rector\Rector\NodeInterfaceAddHasSerializableAttributesTraitRector;
 use Utils\Rector\Rector\NodeInterfaceConstructorCallToNodeBuilderFromArrayRector;
@@ -33,6 +34,7 @@ return RectorConfig::configure()
         NodeInterfaceRemoveSimpleGettersRector::class,
         NodeInterfaceRemoveSimpleSettersRector::class,
         NodeInterfaceAddGenericImplementsAttributeRector::class,
+        AddDocBlockWithMethodHintsToNodeInterfaceClassesRector::class,
     ])
     ->withSkip([
         NullToStrictStringFuncCallArgRector::class,
