@@ -126,11 +126,10 @@ CODE_SAMPLE
                                 $value = $attr->args[0]->value;
                                 if ($value instanceof Node\Scalar\String_) {
                                     if (preg_match('/^array<(?<inner>.*)>/', $value->value, $match) === 1) {
-                                        $propertyType = $match['inner'];
-                                        if (str_contains($propertyType, "\\")) {
-                                            $propertyType = "\\".$propertyType."[]|array";
+                                        if (str_contains($match['inner'], "\\")) {
+                                            $propertyType = "\\".$match['inner']."|array";
                                         }
-                                        $getterReturnType = $propertyType;
+                                        $getterReturnType = $match['inner']."[]";
                                         break 2;
                                     }
                                 } elseif ($value instanceof Node\Expr\BinaryOp\Concat && $value->left->left->value === 'array<' && $value->left->right instanceof  Node\Expr\ClassConstFetch) {

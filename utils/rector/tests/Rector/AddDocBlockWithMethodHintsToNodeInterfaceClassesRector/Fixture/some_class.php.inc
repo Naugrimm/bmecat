@@ -34,6 +34,14 @@ class Address implements NodeInterface
     #[Serializer\Type(PublicKey::class)]
     #[Serializer\SerializedName('NON_NULLABLE')]
     protected PublicKey $nonNullableTest;
+
+    /**
+     * @var string[]
+     */
+    #[Serializer\Expose]
+    #[Serializer\Type('array<string>')]
+    #[Serializer\SerializedName('SOME_STRING_ARRAY')]
+    protected array $someStringArray = [];
 }
 ?>
 -----
@@ -56,6 +64,8 @@ use Naugrim\BMEcat\Nodes\Crypto\PublicKey;
  * @method \Naugrim\BMEcat\Nodes\Crypto\PublicKey|null getPublicKey()
  * @method self setNonNullableTest(array|\Naugrim\BMEcat\Nodes\Crypto\PublicKey $nonNullableTest)
  * @method \Naugrim\BMEcat\Nodes\Crypto\PublicKey getNonNullableTest()
+ * @method self setSomeStringArray(array $someStringArray)
+ * @method string[] getSomeStringArray()
  */
 class Address implements NodeInterface
 {
@@ -83,5 +93,13 @@ class Address implements NodeInterface
     #[Serializer\Type(PublicKey::class)]
     #[Serializer\SerializedName('NON_NULLABLE')]
     protected PublicKey $nonNullableTest;
+
+    /**
+     * @var string[]
+     */
+    #[Serializer\Expose]
+    #[Serializer\Type('array<string>')]
+    #[Serializer\SerializedName('SOME_STRING_ARRAY')]
+    protected array $someStringArray = [];
 }
 ?>
