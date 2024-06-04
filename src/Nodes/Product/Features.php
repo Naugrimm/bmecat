@@ -14,8 +14,8 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
  * @method array|null getReferenceFeatureGroupId()
  * @method self setReferenceFeatureGroupName(array|null $referenceFeatureGroupName)
  * @method array|null getReferenceFeatureGroupName()
- * @method self setFeatures(\Naugrim\BMEcat\Nodes\Product\Feature[]|array $features)
- * @method \Naugrim\BMEcat\Nodes\Product\Feature[]|array getFeatures()
+ * @method self setFeatures(\Naugrim\BMEcat\Nodes\Product\Feature|array $features)
+ * @method Naugrim\BMEcat\Nodes\Product\Feature[] getFeatures()
  */
 #[Serializer\XmlRoot('PRODUCT_FEATURES')]
 class Features implements Contracts\NodeInterface
