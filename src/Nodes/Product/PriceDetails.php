@@ -14,8 +14,8 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
  * @method string getValidEndDate()
  * @method self setDailyPrice(bool $dailyPrice)
  * @method bool getDailyPrice()
- * @method self setPrices(\Naugrim\BMEcat\Nodes\Product\Price[]|array $prices)
- * @method \Naugrim\BMEcat\Nodes\Product\Price[]|array getPrices()
+ * @method self setPrices(\Naugrim\BMEcat\Nodes\Product\Price|array $prices)
+ * @method Naugrim\BMEcat\Nodes\Product\Price[] getPrices()
  */
 #[Serializer\XmlRoot('PRODUCT_PRICE_DETAILS')]
 class PriceDetails implements Contracts\NodeInterface

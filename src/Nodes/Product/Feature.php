@@ -10,8 +10,8 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
  * @implements NodeInterface<self>
  * @method self setName(string $name)
  * @method string getName()
- * @method self setValue(string $value)
- * @method string getValue()
+ * @method self setValue(array $value)
+ * @method string[] getValue()
  * @method self setUnit(string|null $unit)
  * @method string|null getUnit()
  * @method self setOrder(int|null $order)

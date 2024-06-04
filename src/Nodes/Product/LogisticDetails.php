@@ -11,16 +11,16 @@ use Naugrim\BMEcat\Nodes\Product\Logistic\Dimensions;
 
 /**
  * @implements NodeInterface<self>
- * @method self setCustomsTariffNumbers(\Naugrim\BMEcat\Nodes\Product\Logistic\CustomsTariffNumber[]|array $customsTariffNumbers)
- * @method \Naugrim\BMEcat\Nodes\Product\Logistic\CustomsTariffNumber[]|array getCustomsTariffNumbers()
+ * @method self setCustomsTariffNumbers(\Naugrim\BMEcat\Nodes\Product\Logistic\CustomsTariffNumber|array $customsTariffNumbers)
+ * @method Naugrim\BMEcat\Nodes\Product\Logistic\CustomsTariffNumber[] getCustomsTariffNumbers()
  * @method self setStatisticsFactor(float|null $statisticsFactor)
  * @method float|null getStatisticsFactor()
- * @method self setCountryOfOrigin(string $countryOfOrigin)
- * @method string getCountryOfOrigin()
+ * @method self setCountryOfOrigin(array $countryOfOrigin)
+ * @method string[] getCountryOfOrigin()
  * @method self setDimensions(null|array|\Naugrim\BMEcat\Nodes\Product\Logistic\Dimensions $dimensions)
  * @method \Naugrim\BMEcat\Nodes\Product\Logistic\Dimensions|null getDimensions()
- * @method self setDeliveryTimes(\Naugrim\BMEcat\Nodes\DeliveryTimes[]|array $deliveryTimes)
- * @method \Naugrim\BMEcat\Nodes\DeliveryTimes[]|array getDeliveryTimes()
+ * @method self setDeliveryTimes(\Naugrim\BMEcat\Nodes\DeliveryTimes|array $deliveryTimes)
+ * @method Naugrim\BMEcat\Nodes\DeliveryTimes[] getDeliveryTimes()
  */
 #[Serializer\XmlRoot('PRODUCT_LOGISTIC_DETAILS')]
 class LogisticDetails implements Contracts\NodeInterface

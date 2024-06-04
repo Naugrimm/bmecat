@@ -15,8 +15,8 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
  * @method \Naugrim\BMEcat\Nodes\BuyerIdRef|null getBuyerIdRef()
  * @method self setSupplierIdRef(null|array|\Naugrim\BMEcat\Nodes\SupplierIdRef $supplierIdRef)
  * @method \Naugrim\BMEcat\Nodes\SupplierIdRef|null getSupplierIdRef()
- * @method self setParties(\Naugrim\BMEcat\Nodes\Party[]|array $parties)
- * @method \Naugrim\BMEcat\Nodes\Party[]|array getParties()
+ * @method self setParties(\Naugrim\BMEcat\Nodes\Party|array $parties)
+ * @method Naugrim\BMEcat\Nodes\Party[] getParties()
  */
 #[Serializer\XmlRoot('HEADER')]
 class Header implements Contracts\NodeInterface
