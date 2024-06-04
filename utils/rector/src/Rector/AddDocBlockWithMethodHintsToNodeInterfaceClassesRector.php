@@ -150,6 +150,13 @@ CODE_SAMPLE
                 } else {
                     $propertyType = $getterReturnType = $this->getName($property->type->type)."|null";
                 }
+            } elseif ($property->type instanceof Node\Name\FullyQualified) {
+                $propertyType = "array|\\" . $this->getName($property->type);
+                $getterReturnType = "\\" . $this->getName($property->type);
+            }
+
+            if ($propertyType === null) {
+                throw new \Exception("No propertyType for ".$propertyName." in class ".$this->getName($node));
             }
 
             $setterLine = sprintf('@method self set%s(%s $%s)', ucfirst($propertyName), $propertyType, $propertyName);

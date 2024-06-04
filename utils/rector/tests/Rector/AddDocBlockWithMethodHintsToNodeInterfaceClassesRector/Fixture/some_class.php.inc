@@ -29,6 +29,11 @@ class Address implements NodeInterface
     #[Serializer\Type(PublicKey::class)]
     #[Serializer\SerializedName('PUBLIC_KEY')]
     protected ?PublicKey $publicKey = null;
+
+    #[Serializer\Expose]
+    #[Serializer\Type(PublicKey::class)]
+    #[Serializer\SerializedName('NON_NULLABLE')]
+    protected PublicKey $nonNullableTest;
 }
 ?>
 -----
@@ -49,6 +54,8 @@ use Naugrim\BMEcat\Nodes\Crypto\PublicKey;
  * @method \Naugrim\BMEcat\Nodes\Contact\Details[]|array getContactDetails()
  * @method self setPublicKey(null|array|\Naugrim\BMEcat\Nodes\Crypto\PublicKey $publicKey)
  * @method \Naugrim\BMEcat\Nodes\Crypto\PublicKey|null getPublicKey()
+ * @method self setNonNullableTest(array|\Naugrim\BMEcat\Nodes\Crypto\PublicKey $nonNullableTest)
+ * @method \Naugrim\BMEcat\Nodes\Crypto\PublicKey getNonNullableTest()
  */
 class Address implements NodeInterface
 {
@@ -71,5 +78,10 @@ class Address implements NodeInterface
     #[Serializer\Type(PublicKey::class)]
     #[Serializer\SerializedName('PUBLIC_KEY')]
     protected ?PublicKey $publicKey = null;
+
+    #[Serializer\Expose]
+    #[Serializer\Type(PublicKey::class)]
+    #[Serializer\SerializedName('NON_NULLABLE')]
+    protected PublicKey $nonNullableTest;
 }
 ?>
