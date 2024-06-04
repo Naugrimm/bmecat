@@ -8,6 +8,14 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
  * @implements NodeInterface<self>
+ * @method self setType(string $type)
+ * @method string getType()
+ * @method self setDate(string $date)
+ * @method string getDate()
+ * @method self setTime(string $time)
+ * @method string getTime()
+ * @method self setTimezone(string $timezone)
+ * @method string getTimezone()
  */
 #[Serializer\XmlRoot('DATETIME')]
 class DateTime implements Contracts\NodeInterface

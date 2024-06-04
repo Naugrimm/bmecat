@@ -8,6 +8,18 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
  * @implements NodeInterface<self>
+ * @method self setOrderUnit(string $orderUnit)
+ * @method string getOrderUnit()
+ * @method self setContentUnit(string $contentUnit)
+ * @method string getContentUnit()
+ * @method self setNoCuPerOu(float|null $noCuPerOu)
+ * @method float|null getNoCuPerOu()
+ * @method self setPriceQuantity(float|null $priceQuantity)
+ * @method float|null getPriceQuantity()
+ * @method self setQuantityMin(float|null $quantityMin)
+ * @method float|null getQuantityMin()
+ * @method self setQuantityInterval(float|null $quantityInterval)
+ * @method float|null getQuantityInterval()
  */
 #[Serializer\XmlRoot('PRODUCT_ORDER_DETAILS')]
 class OrderDetails implements Contracts\NodeInterface

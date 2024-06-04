@@ -13,6 +13,24 @@ use Naugrim\BMEcat\Nodes\Product\PriceDetails;
 
 /**
  * @implements NodeInterface<self>
+ * @method self setMode(string $mode)
+ * @method string getMode()
+ * @method self setId(null|array|\Naugrim\BMEcat\Nodes\SupplierPid $id)
+ * @method \Naugrim\BMEcat\Nodes\SupplierPid|null getId()
+ * @method self setDetails(array|\Naugrim\BMEcat\Nodes\Product\Details $details)
+ * @method \Naugrim\BMEcat\Nodes\Product\Details getDetails()
+ * @method self setFeatures(\Naugrim\BMEcat\Nodes\Product\Features[]|array $features)
+ * @method \Naugrim\BMEcat\Nodes\Product\Features[]|array getFeatures()
+ * @method self setOrderDetails(array|\Naugrim\BMEcat\Nodes\Product\OrderDetails $orderDetails)
+ * @method \Naugrim\BMEcat\Nodes\Product\OrderDetails getOrderDetails()
+ * @method self setPriceDetails(\Naugrim\BMEcat\Nodes\Product\PriceDetails[]|array $priceDetails)
+ * @method \Naugrim\BMEcat\Nodes\Product\PriceDetails[]|array getPriceDetails()
+ * @method self setMimes(\Naugrim\BMEcat\Nodes\Mime[]|array $mimes)
+ * @method \Naugrim\BMEcat\Nodes\Mime[]|array getMimes()
+ * @method self setLogisticDetails(array|\Naugrim\BMEcat\Nodes\Product\LogisticDetails $logisticDetails)
+ * @method \Naugrim\BMEcat\Nodes\Product\LogisticDetails getLogisticDetails()
+ * @method self setConfigDetails(array|\Naugrim\BMEcat\Nodes\Product\ConfigDetails $configDetails)
+ * @method \Naugrim\BMEcat\Nodes\Product\ConfigDetails getConfigDetails()
  */
 #[Serializer\XmlRoot('PRODUCT')]
 class Product implements Contracts\NodeInterface

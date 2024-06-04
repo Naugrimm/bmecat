@@ -7,6 +7,18 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
  * @implements NodeInterface<self>
+ * @method self setBase(string $base)
+ * @method string getBase()
+ * @method self setValueDuration(string|null $valueDuration)
+ * @method string|null getValueDuration()
+ * @method self setValueInterval(string|null $valueInterval)
+ * @method string|null getValueInterval()
+ * @method self setValueStart(string|null $valueStart)
+ * @method string|null getValueStart()
+ * @method self setValueEnd(string|null $valueEnd)
+ * @method string|null getValueEnd()
+ * @method self setSubTimeSpans(\Naugrim\BMEcat\Nodes\TimeSpan[]|array $subTimeSpans)
+ * @method \Naugrim\BMEcat\Nodes\TimeSpan[]|array getSubTimeSpans()
  */
 #[Serializer\XmlRoot('TimeSpan')]
 class TimeSpan implements Contracts\NodeInterface

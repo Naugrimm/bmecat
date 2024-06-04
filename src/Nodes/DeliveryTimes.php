@@ -7,6 +7,12 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
  * @implements NodeInterface<self>
+ * @method self setTerritories(string $territories)
+ * @method string getTerritories()
+ * @method self setTimeSpans(\Naugrim\BMEcat\Nodes\TimeSpan[]|array $timeSpans)
+ * @method \Naugrim\BMEcat\Nodes\TimeSpan[]|array getTimeSpans()
+ * @method self setLeadTime(float|null $leadTime)
+ * @method float|null getLeadTime()
  */
 #[Serializer\XmlRoot('DELIVERY_TIMES')]
 class DeliveryTimes implements Contracts\NodeInterface

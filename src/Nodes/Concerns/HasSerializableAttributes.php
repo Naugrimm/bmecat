@@ -156,10 +156,8 @@ trait HasSerializableAttributes
             return $this;
         }
 
-        $this->{$propertyName} = DateTime::createFromFormat(
-            $matches['format'],
-            $valueToSet
-        ); // @phpstan-ignore property.dynamicName
+        // @phpstan-ignore property.dynamicName
+        $this->{$propertyName} = DateTime::createFromFormat($matches['format'], $valueToSet);
         return $this;
     }
 
@@ -169,7 +167,9 @@ trait HasSerializableAttributes
         $typeName = $typeAttribute->newInstance()
 ->name;
         if ($typeName === null) {
-            throw new RuntimeException('Could not get the type ' . Type::class . ' for the property ' . $property->name);
+            throw new RuntimeException(
+                'Could not get the type ' . Type::class . ' for the property ' . $property->name
+            );
         }
 
         return $typeName;

@@ -8,6 +8,18 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
  * @implements NodeInterface<self>
+ * @method self setType(string $type)
+ * @method string getType()
+ * @method self setPrice(float $price)
+ * @method float getPrice()
+ * @method self setCurrency(string $currency)
+ * @method string getCurrency()
+ * @method self setTax(float|null $tax)
+ * @method float|null getTax()
+ * @method self setPriceFactor(float|null $priceFactor)
+ * @method float|null getPriceFactor()
+ * @method self setLowerBound(float|null $lowerBound)
+ * @method float|null getLowerBound()
  */
 #[Serializer\XmlRoot('PRODUCT_PRICE')]
 class Price implements Contracts\NodeInterface

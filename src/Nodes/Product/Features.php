@@ -8,6 +8,14 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
  * @implements NodeInterface<self>
+ * @method self setReferenceFeatureSystemName(string|null $referenceFeatureSystemName)
+ * @method string|null getReferenceFeatureSystemName()
+ * @method self setReferenceFeatureGroupId(array|null $referenceFeatureGroupId)
+ * @method array|null getReferenceFeatureGroupId()
+ * @method self setReferenceFeatureGroupName(array|null $referenceFeatureGroupName)
+ * @method array|null getReferenceFeatureGroupName()
+ * @method self setFeatures(\Naugrim\BMEcat\Nodes\Product\Feature[]|array $features)
+ * @method \Naugrim\BMEcat\Nodes\Product\Feature[]|array getFeatures()
  */
 #[Serializer\XmlRoot('PRODUCT_FEATURES')]
 class Features implements Contracts\NodeInterface

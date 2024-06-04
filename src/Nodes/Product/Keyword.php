@@ -8,6 +8,8 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
  * @implements NodeInterface<self>
+ * @method self setValue(string $value)
+ * @method string getValue()
  */
 #[Serializer\XmlRoot('KEYWORD')]
 class Keyword implements Contracts\NodeInterface

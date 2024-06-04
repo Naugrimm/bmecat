@@ -8,6 +8,8 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
  * @implements NodeInterface<self>
+ * @method self setType(bool|null $type)
+ * @method bool|null getType()
  */
 class Language implements NodeInterface
 {

@@ -9,6 +9,10 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
  * @implements NodeInterface<self>
+ * @method self setId(string|null $id)
+ * @method string|null getId()
+ * @method self setName(string|null $name)
+ * @method string|null getName()
  */
 final class MeansOfTransport implements NodeInterface
 {

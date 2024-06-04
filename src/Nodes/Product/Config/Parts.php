@@ -8,6 +8,10 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
  * @implements NodeInterface<self>
+ * @method self setAlternatives(\Naugrim\BMEcat\Nodes\Product\Config\PartAlternative[]|array $alternatives)
+ * @method \Naugrim\BMEcat\Nodes\Product\Config\PartAlternative[]|array getAlternatives()
+ * @method self setSelectionType(string|null $selectionType)
+ * @method string|null getSelectionType()
  */
 #[Serializer\XmlRoot('CONFIG_PARTS')]
 class Parts implements Contracts\NodeInterface
