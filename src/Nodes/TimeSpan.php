@@ -22,25 +22,25 @@ class TimeSpan implements Contracts\NodeInterface
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('TIME_VALUE_DURATION')]
     #[Serializer\SkipWhenEmpty]
-    protected ?string $value_duration = null;
+    protected ?string $valueDuration = null;
 
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('TIME_VALUE_INTERVAL')]
     #[Serializer\SkipWhenEmpty]
-    protected ?string $value_interval = null;
+    protected ?string $valueInterval = null;
 
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('TIME_VALUE_START')]
     #[Serializer\SkipWhenEmpty]
-    protected ?string $value_start = null;
+    protected ?string $valueStart = null;
 
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('TIME_VALUE_END')]
     #[Serializer\SkipWhenEmpty]
-    protected ?string $value_end = null;
+    protected ?string $valueEnd = null;
 
     /**
      * @var TimeSpan[]

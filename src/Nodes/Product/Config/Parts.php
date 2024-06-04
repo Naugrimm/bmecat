@@ -24,7 +24,6 @@ class Parts implements Contracts\NodeInterface
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('PART_SELECTION_TYPE')]
-    protected ?string $selection_type = null;
 
     public function setSelectionType(?string $selection_type): self
     {
@@ -36,6 +35,7 @@ class Parts implements Contracts\NodeInterface
     {
         return $this->selection_type;
     }
+    protected ?string $selectionType = null;
 
     public function addAlternative(PartAlternative $alternative): self
     {

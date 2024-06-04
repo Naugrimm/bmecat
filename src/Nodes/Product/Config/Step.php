@@ -60,11 +60,11 @@ class Step implements Contracts\NodeInterface
     #[Serializer\Type('int')]
     #[Serializer\SerializedName('MIN_OCCURANCE')]
     #[Serializer\XmlElement(cdata: false)]
-    protected int $min_occurrence;
+    protected int $minOccurrence;
 
     #[Serializer\Expose]
     #[Serializer\Type('int')]
     #[Serializer\SerializedName('MAX_OCCURANCE')]
     #[Serializer\XmlElement(cdata: false)]
-    protected int $max_occurrence;
+    protected int $maxOccurrence;
 }

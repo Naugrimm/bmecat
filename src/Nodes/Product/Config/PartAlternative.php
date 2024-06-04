@@ -17,12 +17,12 @@ class PartAlternative implements Contracts\NodeInterface
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('SUPPLIER_PIDREF')]
-    protected string $supplier_pid_ref;
+    protected string $supplierPidRef;
 
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('SUPPLIER_IDREF')]
-    protected ?string $supplier_id_ref = null;
+    protected ?string $supplierIdRef = null;
 
     #[Serializer\Expose]
     #[Serializer\Type('int')]
@@ -33,7 +33,7 @@ class PartAlternative implements Contracts\NodeInterface
     #[Serializer\Expose]
     #[Serializer\Type('bool')]
     #[Serializer\SerializedName('DEFAULT_FLAG')]
-    protected ?bool $default_flag = null;
+    protected ?bool $defaultFlag = null;
 
     #[Serializer\Expose]
     #[Serializer\Type('string')]

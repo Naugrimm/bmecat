@@ -22,13 +22,13 @@ class LogisticDetails implements Contracts\NodeInterface
     #[Serializer\Expose]
     #[Serializer\Type('array<Naugrim\BMEcat\Nodes\Product\Logistic\CustomsTariffNumber>')]
     #[Serializer\XmlList(entry: 'CUSTOMS_TARIFF_NUMBER', inline: true)]
-    protected array $customs_tariff_numbers = [];
+    protected array $customsTariffNumbers = [];
 
     #[Serializer\Expose]
     #[Serializer\Type('float')]
     #[Serializer\SerializedName('STATISTICS_FACTOR')]
     #[Serializer\XmlElement(cdata: false)]
-    protected ?float $statistics_factor = null;
+    protected ?float $statisticsFactor = null;
 
     /**
      * @var string[]
@@ -36,7 +36,7 @@ class LogisticDetails implements Contracts\NodeInterface
     #[Serializer\Expose]
     #[Serializer\Type('array<string>')]
     #[Serializer\XmlList(entry: 'COUNTRY_OF_ORIGIN', inline: true)]
-    protected array $country_of_origin = [];
+    protected array $countryOfOrigin = [];
 
     #[Serializer\Expose]
     #[Serializer\SerializedName('PRODUCT_DIMENSIONS')]
