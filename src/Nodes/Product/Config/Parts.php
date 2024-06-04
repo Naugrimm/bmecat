@@ -24,17 +24,6 @@ class Parts implements Contracts\NodeInterface
     #[Serializer\Expose]
     #[Serializer\Type('string')]
     #[Serializer\SerializedName('PART_SELECTION_TYPE')]
-
-    public function setSelectionType(?string $selection_type): self
-    {
-        $this->selection_type = $selection_type;
-        return $this;
-    }
-
-    public function getSelectionType(): ?string
-    {
-        return $this->selection_type;
-    }
     protected ?string $selectionType = null;
 
     public function addAlternative(PartAlternative $alternative): self

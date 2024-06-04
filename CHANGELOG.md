@@ -4,6 +4,10 @@
 
 Attribute names have been changed to camelCase. See commit 1ef916816b2fe07eaea3c0f64f9b0577e911d011.
 
+## Development
+
+To provide code completion in the IDEs, a new Rector has been added, that adds getter/setter method annotations for all serializable attributes: `\Utils\Rector\Rector\AddDocBlockWithMethodHintsToNodeInterfaceClassesRector`
+
 # 4.x
 
 ## BREAKING CHANGES
