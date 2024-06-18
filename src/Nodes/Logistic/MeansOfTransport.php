@@ -9,6 +9,8 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
  * @implements NodeInterface<self>
+ * @method self setType(string $type)
+ * @method string getType()
  * @method self setId(string|null $id)
  * @method string|null getId()
  * @method self setName(string|null $name)

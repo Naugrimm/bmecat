@@ -7,6 +7,8 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
  * @implements NodeInterface<self>
+ * @method self setValue(string $value)
+ * @method string getValue()
  */
 class Email implements NodeInterface
 {
