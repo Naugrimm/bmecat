@@ -8,6 +8,8 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
  * @implements NodeInterface<Country>
+ * @method self setValue(string $value)
+ * @method string getValue()
  */
 class Country implements NodeInterface
 {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Utils\Rector\Rector;
 
+use Exception;
 use Naugrim\BMEcat\Nodes\Concerns\HasSerializableAttributes;
 use Naugrim\BMEcat\Nodes\Contact\Details;
 use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
@@ -11,6 +12,7 @@ use Naugrim\BMEcat\Nodes\Crypto\PublicKey;
 use PhpParser\Comment\Doc;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
+use Rector\PhpParser\AstResolver;
 use Rector\Rector\AbstractRector;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
@@ -85,6 +87,10 @@ CODE_SAMPLE
         ]);
     }
 
+    public function __construct(private AstResolver $astResolver)
+    {
+    }
+
     /**
      * @return array<class-string<Node>>
      */
@@ -95,6 +101,7 @@ CODE_SAMPLE
 
     /**
      * @param Class_ $node
+     * @throws Exception
      */
     public function refactor(Node $node): ?Node
     {
@@ -104,65 +111,21 @@ CODE_SAMPLE
 
         $existingLines = $this->getDocCommentLinesWithoutHeaderAndTrailer($node);
 
+
+        foreach ($node->getTraitUses() as $traitUse) {
+            if ($traitUse->traits[0]->toString() === HasSerializableAttributes::class) {
+                continue;
+            }
+
+            $trait = $this->astResolver->resolveClassFromName($traitUse->traits[0]->toString());
+
+            foreach ($trait->getProperties() as $property) {
+                $this->handleProperty($node, $property, $existingLines);
+            }
+        }
+
         foreach ($node->getProperties() as $property) {
-            if ($property->type === null) {
-                continue;
-            }
-
-            if ($property->isPublic()) {
-                continue;
-            }
-
-            $propertyName = $property->props[0]->name->toString();
-            $propertyType = null;
-            $getterReturnType = null;
-
-            if ($property->type instanceof Node\Identifier) {
-                $propertyType = $getterReturnType = $this->getName($property->type);
-                if ($propertyType === 'array') {
-                    foreach ($property->attrGroups as $attrGroup) {
-                        foreach ($attrGroup->attrs as $attr) {
-                            if ($attr->name->toCodeString() === "\\".\JMS\Serializer\Annotation\Type::class) {
-                                $value = $attr->args[0]->value;
-                                if ($value instanceof Node\Scalar\String_) {
-                                    if (preg_match('/^array<(?<inner>.*)>/', $value->value, $match) === 1) {
-                                        if (str_contains($match['inner'], "\\")) {
-                                            $propertyType = "\\".$match['inner']."|array";
-                                        }
-                                        $getterReturnType = $match['inner']."[]";
-                                        break 2;
-                                    }
-                                } elseif ($value instanceof Node\Expr\BinaryOp\Concat && $value->left->left->value === 'array<' && $value->left->right instanceof  Node\Expr\ClassConstFetch) {
-                                    $propertyType = "\\".$this->getName($value->left->right->class)."[]|array";
-                                    $getterReturnType = $propertyType;
-                                    break 2;
-                                }
-                            }
-                        }
-                    }
-                }
-            } elseif ($property->type instanceof Node\NullableType) {
-                $innerType = $property->type->type;
-                if ($innerType instanceof Node\Name\FullyQualified) {
-                    $propertyType = "null|array|\\".$this->getName($innerType);
-                    $getterReturnType = "\\".$this->getName($innerType)."|null";
-                } else {
-                    $propertyType = $getterReturnType = $this->getName($property->type->type)."|null";
-                }
-            } elseif ($property->type instanceof Node\Name\FullyQualified) {
-                $propertyType = "array|\\" . $this->getName($property->type);
-                $getterReturnType = "\\" . $this->getName($property->type);
-            }
-
-            if ($propertyType === null) {
-                throw new \Exception("No propertyType for ".$propertyName." in class ".$this->getName($node));
-            }
-
-            $setterLine = sprintf('@method self set%s(%s $%s)', ucfirst($propertyName), $propertyType, $propertyName);
-            $getterLine = sprintf('@method %s get%s()', $getterReturnType, ucfirst($propertyName));
-
-            $existingLines[] = $setterLine;
-            $existingLines[] = $getterLine;
+            $this->handleProperty($node, $property, $existingLines);
         }
 
         $newDocComment = $this->createDocCommentFromExistingLines($existingLines);
@@ -215,5 +178,67 @@ CODE_SAMPLE
         }
 
         return new Doc(implode(PHP_EOL, $docCommentLines));
+    }
+
+    private function handleProperty(Node $node, Node\Stmt\Property $property, array &$existingLines)
+    {
+        if ($property->type === null) {
+            return;
+        }
+
+        if ($property->isPublic()) {
+            return;
+        }
+
+        $propertyName = $property->props[0]->name->toString();
+        $propertyType = null;
+        $getterReturnType = null;
+
+        if ($property->type instanceof Node\Identifier) {
+            $propertyType = $getterReturnType = $this->getName($property->type);
+            if ($propertyType === 'array') {
+                foreach ($property->attrGroups as $attrGroup) {
+                    foreach ($attrGroup->attrs as $attr) {
+                        if ($attr->name->toCodeString() === "\\".\JMS\Serializer\Annotation\Type::class) {
+                            $value = $attr->args[0]->value;
+                            if ($value instanceof Node\Scalar\String_) {
+                                if (preg_match('/^array<(?<inner>.*)>/', $value->value, $match) === 1) {
+                                    if (str_contains($match['inner'], "\\")) {
+                                        $propertyType = "\\".$match['inner']."|array";
+                                    }
+                                    $getterReturnType = $match['inner']."[]";
+                                    break 2;
+                                }
+                            } elseif ($value instanceof Node\Expr\BinaryOp\Concat && $value->left->left->value === 'array<' && $value->left->right instanceof  Node\Expr\ClassConstFetch) {
+                                $propertyType = "\\".$this->getName($value->left->right->class)."[]|array";
+                                $getterReturnType = $propertyType;
+                                break 2;
+                            }
+                        }
+                    }
+                }
+            }
+        } elseif ($property->type instanceof Node\NullableType) {
+            $innerType = $property->type->type;
+            if ($innerType instanceof Node\Name\FullyQualified) {
+                $propertyType = "null|array|\\".$this->getName($innerType);
+                $getterReturnType = "\\".$this->getName($innerType)."|null";
+            } else {
+                $propertyType = $getterReturnType = $this->getName($property->type->type)."|null";
+            }
+        } elseif ($property->type instanceof Node\Name\FullyQualified) {
+            $propertyType = "array|\\" . $this->getName($property->type);
+            $getterReturnType = "\\" . $this->getName($property->type);
+        }
+
+        if ($propertyType === null) {
+            throw new \Exception("No propertyType for ".$propertyName." in class ".$this->getName($node));
+        }
+
+        $setterLine = sprintf('@method self set%s(%s $%s)', ucfirst($propertyName), $propertyType, $propertyName);
+        $getterLine = sprintf('@method %s get%s()', $getterReturnType, ucfirst($propertyName));
+
+        $existingLines[] = $setterLine;
+        $existingLines[] = $getterLine;
     }
 }
