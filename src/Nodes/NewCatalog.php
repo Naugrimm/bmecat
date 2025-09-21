@@ -7,8 +7,8 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
  * @implements NodeInterface<self>
- * @method self setProducts(\Naugrim\BMEcat\Nodes\Product|array $products)
- * @method Naugrim\BMEcat\Nodes\Product[] getProducts()
+ * @method self setProducts(\Naugrim\BMEcat\Nodes\Product[]|array<string, mixed> $products)
+ * @method \Naugrim\BMEcat\Nodes\Product[] getProducts()
  */
 #[Serializer\XmlRoot('T_NEW_CATALOG')]
 class NewCatalog implements Contracts\NodeInterface

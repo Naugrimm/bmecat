@@ -19,7 +19,7 @@ use Naugrim\BMEcat\Nodes\Product\PriceDetails;
  * @method bool|null getDefaultFlag()
  * @method self setCode(string|null $code)
  * @method string|null getCode()
- * @method self setPriceDetails(null|array|\Naugrim\BMEcat\Nodes\Product\PriceDetails $priceDetails)
+ * @method self setPriceDetails(null|array<string, mixed>|\Naugrim\BMEcat\Nodes\Product\PriceDetails $priceDetails)
  * @method \Naugrim\BMEcat\Nodes\Product\PriceDetails|null getPriceDetails()
  */
 #[Serializer\XmlRoot('PART_ALTERNATIVE')]

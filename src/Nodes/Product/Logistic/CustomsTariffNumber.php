@@ -9,7 +9,7 @@ use Naugrim\BMEcat\Nodes\Contracts;
  * @implements Contracts\NodeInterface<self>
  * @method self setNumber(string $number)
  * @method string getNumber()
- * @method self setTerritories(array $territories)
+ * @method self setTerritories(string[] $territories)
  * @method string[] getTerritories()
  */
 #[Serializer\XmlRoot('CUSTOMS_TARIFF_NUMBER')]
