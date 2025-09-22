@@ -165,7 +165,7 @@ trait HasSerializableAttributes
     {
         $typeAttribute = $property->getAttributes(Type::class)[0];
         $typeName = $typeAttribute->newInstance()
-->name;
+            ->name;
         if ($typeName === null) {
             throw new RuntimeException(
                 'Could not get the type ' . Type::class . ' for the property ' . $property->name

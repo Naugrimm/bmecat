@@ -26,7 +26,7 @@ class SchemaValidator
      * @throws SchemaValidationException
      * @throws UnsupportedVersionException
      */
-    public static function isValid(string $xml, string $version = '2005.1', string $type = null): bool
+    public static function isValid(string $xml, string $version = '2005.1', ?string $type = null): bool
     {
         libxml_use_internal_errors(true);
 
@@ -47,7 +47,7 @@ class SchemaValidator
     /**
      * @throws UnsupportedVersionException
      */
-    protected static function getSchemaForVersion(string $version, string $type = null): string
+    protected static function getSchemaForVersion(string $version, ?string $type = null): string
     {
         $schema = self::$SCHEMA_MAP[$version] ?? null;
 
