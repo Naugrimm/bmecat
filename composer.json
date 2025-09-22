@@ -43,7 +43,7 @@
             "test -f ./tools/php-cs-fixer/vendor/bin/php-cs-fixer || composer --working-dir=tools/php-cs-fixer install && ./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix -- "
         ],
         "rector": [
-            "test -f ./tools/rector/vendor/bin/rector || composer --working-dir=tools/rector install && ./tools/rector/vendor/bin/rector --autoload-file=vendor/autoload.php "
+            "@php vendor/bin/rector "
         ],
         "phpunit": [
             "@php -dzend_extension=xdebug.so -dxdebug.mode=coverage vendor/bin/phpunit"
