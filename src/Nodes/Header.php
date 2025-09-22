@@ -9,14 +9,14 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
  * @implements NodeInterface<self>
  * @method self setGeneratorInfo(string|null $generatorInfo)
  * @method string|null getGeneratorInfo()
- * @method self setCatalog(array|\Naugrim\BMEcat\Nodes\Catalog $catalog)
+ * @method self setCatalog(array<string, mixed>|\Naugrim\BMEcat\Nodes\Catalog $catalog)
  * @method \Naugrim\BMEcat\Nodes\Catalog getCatalog()
- * @method self setBuyerIdRef(null|array|\Naugrim\BMEcat\Nodes\BuyerIdRef $buyerIdRef)
+ * @method self setBuyerIdRef(null|array<string, mixed>|\Naugrim\BMEcat\Nodes\BuyerIdRef $buyerIdRef)
  * @method \Naugrim\BMEcat\Nodes\BuyerIdRef|null getBuyerIdRef()
- * @method self setSupplierIdRef(null|array|\Naugrim\BMEcat\Nodes\SupplierIdRef $supplierIdRef)
+ * @method self setSupplierIdRef(null|array<string, mixed>|\Naugrim\BMEcat\Nodes\SupplierIdRef $supplierIdRef)
  * @method \Naugrim\BMEcat\Nodes\SupplierIdRef|null getSupplierIdRef()
- * @method self setParties(\Naugrim\BMEcat\Nodes\Party|array $parties)
- * @method Naugrim\BMEcat\Nodes\Party[] getParties()
+ * @method self setParties(\Naugrim\BMEcat\Nodes\Party[]|array<string, mixed> $parties)
+ * @method \Naugrim\BMEcat\Nodes\Party[] getParties()
  */
 #[Serializer\XmlRoot('HEADER')]
 class Header implements Contracts\NodeInterface

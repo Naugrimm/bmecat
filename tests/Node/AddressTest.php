@@ -47,6 +47,11 @@ class AddressTest extends TestCase
 
         $data = array_merge_recursive($docData, $data);
 
+        \Webmozart\Assert\Assert::isArray($data, 'Expected merged data to be an array, got %s');
+        \Webmozart\Assert\Assert::isMap(
+            $data,
+            'Expected merged data to be an associative array with string keys, got indexed array'
+        );
         $document = NodeBuilder::fromArray($data, Document::class);
 
         $catalog = \Naugrim\BMEcat\Builder\NodeBuilder::fromArray([], NewCatalog::class);
@@ -67,13 +72,27 @@ class AddressTest extends TestCase
             'id' => 'id123',
         ], Details::class)],);
 
-        $this->assertEquals('id123', $address->getContactDetails()[0]->getId());
+        $contactDetails = $address->getContactDetails();
+        \Webmozart\Assert\Assert::notEmpty($contactDetails, 'Contact details should not be empty');
+        \Webmozart\Assert\Assert::isInstanceOf(
+            $contactDetails[0],
+            \Naugrim\BMEcat\Nodes\Contact\Details::class,
+            'First contact detail must be an instance of Details'
+        );
+        $this->assertEquals('id123', $contactDetails[0]->getId());
 
         $address->setContactDetails([[
             'id' => 'id234',
         ]]);
 
-        $this->assertEquals('id234', $address->getContactDetails()[0]->getId());
+        $contactDetails = $address->getContactDetails();
+        \Webmozart\Assert\Assert::notEmpty($contactDetails, 'Contact details should not be empty');
+        \Webmozart\Assert\Assert::isInstanceOf(
+            $contactDetails[0],
+            \Naugrim\BMEcat\Nodes\Contact\Details::class,
+            'First contact detail must be an instance of Details'
+        );
+        $this->assertEquals('id234', $contactDetails[0]->getId());
     }
 
     public function testNoExceptionIsThrownWhenTryingToNullANullableProperty(): void

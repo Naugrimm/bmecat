@@ -17,8 +17,8 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
  * @method string|null getValueStart()
  * @method self setValueEnd(string|null $valueEnd)
  * @method string|null getValueEnd()
- * @method self setSubTimeSpans(\Naugrim\BMEcat\Nodes\TimeSpan|array $subTimeSpans)
- * @method Naugrim\BMEcat\Nodes\TimeSpan[] getSubTimeSpans()
+ * @method self setSubTimeSpans(\Naugrim\BMEcat\Nodes\TimeSpan[]|array<string, mixed> $subTimeSpans)
+ * @method \Naugrim\BMEcat\Nodes\TimeSpan[] getSubTimeSpans()
  */
 #[Serializer\XmlRoot('TimeSpan')]
 class TimeSpan implements Contracts\NodeInterface

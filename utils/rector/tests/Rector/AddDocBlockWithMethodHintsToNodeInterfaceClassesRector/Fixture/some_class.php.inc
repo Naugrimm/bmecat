@@ -58,13 +58,13 @@ use Naugrim\BMEcat\Nodes\Crypto\PublicKey;
 /**
  * @method self setName(string|null $name)
  * @method string|null getName()
- * @method self setContactDetails(\Naugrim\BMEcat\Nodes\Contact\Details[]|array $contactDetails)
- * @method \Naugrim\BMEcat\Nodes\Contact\Details[]|array getContactDetails()
- * @method self setPublicKey(null|array|\Naugrim\BMEcat\Nodes\Crypto\PublicKey $publicKey)
+ * @method self setContactDetails(\Naugrim\BMEcat\Nodes\Contact\Details[]|array<string, mixed> $contactDetails)
+ * @method \Naugrim\BMEcat\Nodes\Contact\Details[] getContactDetails()
+ * @method self setPublicKey(null|array<string, mixed>|\Naugrim\BMEcat\Nodes\Crypto\PublicKey $publicKey)
  * @method \Naugrim\BMEcat\Nodes\Crypto\PublicKey|null getPublicKey()
- * @method self setNonNullableTest(array|\Naugrim\BMEcat\Nodes\Crypto\PublicKey $nonNullableTest)
+ * @method self setNonNullableTest(array<string, mixed>|\Naugrim\BMEcat\Nodes\Crypto\PublicKey $nonNullableTest)
  * @method \Naugrim\BMEcat\Nodes\Crypto\PublicKey getNonNullableTest()
- * @method self setSomeStringArray(array $someStringArray)
+ * @method self setSomeStringArray(string[] $someStringArray)
  * @method string[] getSomeStringArray()
  */
 class Address implements NodeInterface

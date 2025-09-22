@@ -21,6 +21,7 @@ class DocumentTest extends TestCase
 {
     private DocumentBuilder $builder;
 
+    #[\Override]
     protected function setUp(): void
     {
         $document = NodeBuilder::fromArray([

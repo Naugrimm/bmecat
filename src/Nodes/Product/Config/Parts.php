@@ -8,8 +8,8 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
  * @implements NodeInterface<self>
- * @method self setAlternatives(\Naugrim\BMEcat\Nodes\Product\Config\PartAlternative|array $alternatives)
- * @method Naugrim\BMEcat\Nodes\Product\Config\PartAlternative[] getAlternatives()
+ * @method self setAlternatives(\Naugrim\BMEcat\Nodes\Product\Config\PartAlternative[]|array<string, mixed> $alternatives)
+ * @method \Naugrim\BMEcat\Nodes\Product\Config\PartAlternative[] getAlternatives()
  * @method self setSelectionType(string|null $selectionType)
  * @method string|null getSelectionType()
  */

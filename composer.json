@@ -12,7 +12,7 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.4",
         "ext-dom": "*",
         "ext-libxml": "*",
         "jms/serializer": "^3.30",
@@ -29,35 +29,40 @@
         "psr-4": {
             "Utils\\Rector\\": "utils/rector/src",
             "Utils\\Rector\\Tests\\": "utils/rector/tests"
-        }
+        },
+        "files": [
+          "vendor/rector/rector/preload.php"
+        ]
     },
     "scripts": {
-        "phpcs": "test -f ./tools/phpcompatibility/vendor/bin/phpcs || composer --working-dir=tools/phpcompatibility install && php -dmemory_limit=2G ./tools/phpcompatibility/vendor/bin/phpcs --runtime-set testVersion 7.4- --standard=./tools/phpcompatibility/vendor/phpcompatibility/php-compatibility/PHPCompatibility --ignore=\"vendor/*,node_modules/*,tools/*,css/*,js/*,public/*,resources/views/*\"",
-        "fix-dry": [
-            "test -f ./tools/php-cs-fixer/vendor/bin/php-cs-fixer || composer --working-dir=tools/php-cs-fixer install && ./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --dry-run -- "
+        "ecs": [
+            "@php vendor/bin/ecs"
         ],
-        "fix": [
-            "test -f ./tools/php-cs-fixer/vendor/bin/php-cs-fixer || composer --working-dir=tools/php-cs-fixer install && ./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix -- "
+        "ecs-fix": [
+            "@php vendor/bin/ecs --fix "
+        ],
+        "stan": [
+          "@php vendor/bin/phpstan"
         ],
         "rector": [
-            "test -f ./tools/rector/vendor/bin/rector || composer --working-dir=tools/rector install && ./tools/rector/vendor/bin/rector --autoload-file=vendor/autoload.php "
+            "@php vendor/bin/rector "
         ],
         "phpunit": [
-            "@php -dxdebug.mode=coverage vendor/bin/phpunit"
+            "@php -dzend_extension=xdebug.so -dxdebug.mode=coverage vendor/bin/phpunit"
         ],
         "post-autoload-dump": [
             "git config gitflow.path.hooks .githooks && git config core.hooksPath .githooks"
         ]
     },
     "require-dev": {
-        "phpunit/phpunit": "^10",
-        "rector/rector": "^1.1",
-        "phpstan/phpstan": "^1.11",
+        "phpunit/phpunit": "^12.0",
+        "rector/rector": "^2.0",
+        "phpstan/phpstan": "^2.0",
         "phpstan/extension-installer": "^1.3",
-        "phpstan/phpstan-strict-rules": "^1.6",
-        "phpstan/phpstan-deprecation-rules": "^1.2",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "phpstan/phpstan-deprecation-rules": "^2.0",
         "symplify/easy-coding-standard": "^12.2",
-        "tomasvotruba/type-coverage": "^0.3.0",
+        "tomasvotruba/type-coverage": "^2.0",
         "goetas/jms-serializer-phpstan-extension": "^1.0"
     },
     "config": {

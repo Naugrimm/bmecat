@@ -83,6 +83,11 @@ trait HasSerializableAttributes
                 return $this;
             }
 
+            \Webmozart\Assert\Assert::isArray($valueToSet, 'Expected array for property "%s", got %s');
+            \Webmozart\Assert\Assert::isMap(
+                $valueToSet,
+                'Expected associative array with string keys for property "%s", got indexed array'
+            );
             $this->{$propertyName} = NodeBuilder::fromArray($valueToSet, $type); // @phpstan-ignore property.dynamicName
             return $this;
         }
@@ -130,6 +135,11 @@ trait HasSerializableAttributes
                 continue;
             }
 
+            \Webmozart\Assert\Assert::isArray($singleValueToSet, 'Expected array for collection item, got %s');
+            \Webmozart\Assert\Assert::isMap(
+                $singleValueToSet,
+                'Expected associative array with string keys for collection item, got indexed array'
+            );
             $newValues[] = NodeBuilder::fromArray($singleValueToSet, $itemType);
         }
 
@@ -165,7 +175,7 @@ trait HasSerializableAttributes
     {
         $typeAttribute = $property->getAttributes(Type::class)[0];
         $typeName = $typeAttribute->newInstance()
-->name;
+            ->name;
         if ($typeName === null) {
             throw new RuntimeException(
                 'Could not get the type ' . Type::class . ' for the property ' . $property->name
@@ -209,7 +219,7 @@ trait HasSerializableAttributes
         /**
          * the attribute must have a type hint to handle it here
          */
-        if ($property->getType() === null) {
+        if (! $property->getType() instanceof \ReflectionType) {
             return null;
         }
 

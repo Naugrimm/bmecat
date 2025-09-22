@@ -9,8 +9,8 @@ use Naugrim\BMEcat\Nodes\Product\Config\Step;
 
 /**
  * @implements NodeInterface<self>
- * @method self setSteps(\Naugrim\BMEcat\Nodes\Product\Config\Step|array $steps)
- * @method Naugrim\BMEcat\Nodes\Product\Config\Step[] getSteps()
+ * @method self setSteps(\Naugrim\BMEcat\Nodes\Product\Config\Step[]|array<string, mixed> $steps)
+ * @method \Naugrim\BMEcat\Nodes\Product\Config\Step[] getSteps()
  */
 #[Serializer\XmlRoot('PRODUCT_CONFIG_DETAILS')]
 class ConfigDetails implements Contracts\NodeInterface

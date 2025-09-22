@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection TransitiveDependenciesUsageInspection */
 
 declare(strict_types=1);
 
@@ -55,9 +55,9 @@ CODE_SAMPLE
 /**
  * @method self setName(string|null $name)
  * @method string|null getName()
- * @method self setContactDetails(\Naugrim\BMEcat\Nodes\Contact\Details[]|array $contactDetails)
- * @method \Naugrim\BMEcat\Nodes\Contact\Details[]|array getContactDetails()
- * @method self setPublicKey(null|array|\Naugrim\BMEcat\Nodes\Crypto\PublicKey $publicKey)
+ * @method self setContactDetails(\Naugrim\BMEcat\Nodes\Contact\Details[]|array<string, mixed> $contactDetails)
+ * @method \Naugrim\BMEcat\Nodes\Contact\Details[]|array<string, mixed> getContactDetails()
+ * @method self setPublicKey(null|array<string, mixed>|\Naugrim\BMEcat\Nodes\Crypto\PublicKey $publicKey)
  * @method \Naugrim\BMEcat\Nodes\Crypto\PublicKey|null getPublicKey()
  */
 class Address implements NodeInterface
@@ -204,14 +204,18 @@ CODE_SAMPLE
                             if ($value instanceof Node\Scalar\String_) {
                                 if (preg_match('/^array<(?<inner>.*)>/', $value->value, $match) === 1) {
                                     if (str_contains($match['inner'], "\\")) {
-                                        $propertyType = "\\".$match['inner']."|array";
+                                        $propertyType = "\\".$match['inner']."[]|array<string, mixed>";
+                                        $getterReturnType = "\\".$match['inner']."[]";
+                                    } else {
+                                        $propertyType = $match['inner']."[]";
+                                        $getterReturnType = $match['inner']."[]";
                                     }
-                                    $getterReturnType = $match['inner']."[]";
                                     break 2;
                                 }
-                            } elseif ($value instanceof Node\Expr\BinaryOp\Concat && $value->left->left->value === 'array<' && $value->left->right instanceof  Node\Expr\ClassConstFetch) {
-                                $propertyType = "\\".$this->getName($value->left->right->class)."[]|array";
-                                $getterReturnType = $propertyType;
+                            } elseif ($value instanceof Node\Expr\BinaryOp\Concat && str_starts_with($value->left->left->value, 'array<') && $value->left->right instanceof  Node\Expr\ClassConstFetch) {
+                                $arrayKeyType = rtrim(substr($value->left->left->value, 6) ?: 'string', ',');
+                                $propertyType = "\\".$this->getName($value->left->right->class)."[]|array<$arrayKeyType, mixed>";
+                                $getterReturnType = "\\".$this->getName($value->left->right->class)."[]";
                                 break 2;
                             }
                         }
@@ -221,13 +225,17 @@ CODE_SAMPLE
         } elseif ($property->type instanceof Node\NullableType) {
             $innerType = $property->type->type;
             if ($innerType instanceof Node\Name\FullyQualified) {
-                $propertyType = "null|array|\\".$this->getName($innerType);
+                if (str_starts_with($this->getName($innerType), 'Naugrim\BMEcat\Nodes') || str_starts_with($this->getName($innerType), 'Naugrim\OpenTrans\Nodes')) {
+                    $propertyType = "null|array<string, mixed>|\\".$this->getName($innerType);
+                } else {
+                    $propertyType = "null|\\".$this->getName($innerType);
+                }
                 $getterReturnType = "\\".$this->getName($innerType)."|null";
             } else {
                 $propertyType = $getterReturnType = $this->getName($property->type->type)."|null";
             }
         } elseif ($property->type instanceof Node\Name\FullyQualified) {
-            $propertyType = "array|\\" . $this->getName($property->type);
+            $propertyType = "array<string, mixed>|\\" . $this->getName($property->type);
             $getterReturnType = "\\" . $this->getName($property->type);
         }
 
@@ -235,10 +243,16 @@ CODE_SAMPLE
             throw new \Exception("No propertyType for ".$propertyName." in class ".$this->getName($node));
         }
 
-        $setterLine = sprintf('@method self set%s(%s $%s)', ucfirst($propertyName), $propertyType, $propertyName);
-        $getterLine = sprintf('@method %s get%s()', $getterReturnType, ucfirst($propertyName));
+        $setterMethodName = sprintf('set%s', ucfirst($propertyName));
+        if (!$node->getMethod($setterMethodName)) {
+            $setterLine = sprintf('@method self set%s(%s $%s)', ucfirst($propertyName), $propertyType, $propertyName);
+            $existingLines[] = $setterLine;
+        }
 
-        $existingLines[] = $setterLine;
-        $existingLines[] = $getterLine;
+        $getterMethodName = sprintf('set%s', ucfirst($propertyName));
+        if (!$node->getMethod($getterMethodName)) {
+            $getterLine = sprintf('@method %s get%s()', $getterReturnType, ucfirst($propertyName));
+            $existingLines[] = $getterLine;
+        }
     }
 }

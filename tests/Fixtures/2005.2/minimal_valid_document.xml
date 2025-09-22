@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BMECAT xmlns="http://www.bmecat.org/bmecat/2005.2" version="2005.2">
+    <HEADER>
+        <CATALOG>
+            <LANGUAGE><![CDATA[deu]]></LANGUAGE>
+            <CATALOG_ID><![CDATA[MY_CATALOG]]></CATALOG_ID>
+            <CATALOG_VERSION><![CDATA[00.01]]></CATALOG_VERSION>
+        </CATALOG>
+        <SUPPLIER>
+            <SUPPLIER_NAME><![CDATA[TestSupplier]]></SUPPLIER_NAME>
+        </SUPPLIER>
+    </HEADER>
+    <T_NEW_CATALOG/>
+</BMECAT>

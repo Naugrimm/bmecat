@@ -8,13 +8,13 @@ use Naugrim\BMEcat\Nodes\Contracts\NodeInterface;
 
 /**
  * @implements NodeInterface<self>
- * @method self setLanguage(\Naugrim\BMEcat\Nodes\Language[]|array $language)
- * @method \Naugrim\BMEcat\Nodes\Language[]|array getLanguage()
+ * @method self setLanguage(\Naugrim\BMEcat\Nodes\Language[]|array<string, mixed> $language)
+ * @method \Naugrim\BMEcat\Nodes\Language[] getLanguage()
  * @method self setId(string $id)
  * @method string getId()
  * @method self setVersion(string $version)
  * @method string getVersion()
- * @method self setDateTime(null|array|\Naugrim\BMEcat\Nodes\DateTime $dateTime)
+ * @method self setDateTime(null|array<string, mixed>|\Naugrim\BMEcat\Nodes\DateTime $dateTime)
  * @method \Naugrim\BMEcat\Nodes\DateTime|null getDateTime()
  */
 #[Serializer\XmlRoot('CATALOG')]

@@ -1,16 +1,15 @@
-<?php
+<?php /** @noinspection DevelopmentDependenciesUsageInspection */
 
 declare(strict_types=1);
 
 namespace Utils\Rector\Tests\Rector\NodeInterfaceAddHasSerializableAttributesTraitRector;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Rector\Testing\PHPUnit\AbstractRectorTestCase;
 
 final class NodeInterfaceAddHasSerializableAttributesTraitRectorTest extends AbstractRectorTestCase
 {
-    /**
-     * @dataProvider provideData()
-     */
+    #[DataProvider('provideData')]
     public function test(string $filePath): void
     {
         $this->doTestFile($filePath);

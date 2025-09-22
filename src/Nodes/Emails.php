@@ -10,8 +10,8 @@ use Naugrim\BMEcat\Nodes\Crypto\PublicKey;
  * @implements NodeInterface<self>
  * @method self setEmail(string $email)
  * @method string getEmail()
- * @method self setPublicKeys(\Naugrim\BMEcat\Nodes\Crypto\PublicKey|array $publicKeys)
- * @method Naugrim\BMEcat\Nodes\Crypto\PublicKey[] getPublicKeys()
+ * @method self setPublicKeys(\Naugrim\BMEcat\Nodes\Crypto\PublicKey[]|array<string, mixed> $publicKeys)
+ * @method \Naugrim\BMEcat\Nodes\Crypto\PublicKey[] getPublicKeys()
  */
 class Emails implements NodeInterface
 {

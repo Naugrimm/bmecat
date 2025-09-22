@@ -33,6 +33,7 @@ class SchemaValidationException extends Exception
     /**
      * @codeCoverageIgnore
      */
+    #[\Override]
     public function __toString(): string
     {
         $msg = static::class . ': ' . $this->getMessage() . "\n";
