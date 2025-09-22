@@ -18,6 +18,7 @@ class SchemaValidator
             'update_prices' => __DIR__ . '/Assets/bmecat_update_prices_1_2.xsd',
         ],
         '2005.1' => __DIR__ . '/Assets/bmecat_2005_1.xsd',
+        '2005.2' => __DIR__ . '/Assets/bmecat_2005_2.xsd',
     ];
 
     /**
