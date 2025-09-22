@@ -35,12 +35,14 @@
         ]
     },
     "scripts": {
-        "phpcs": "test -f ./tools/phpcompatibility/vendor/bin/phpcs || composer --working-dir=tools/phpcompatibility install && php -dmemory_limit=2G ./tools/phpcompatibility/vendor/bin/phpcs --runtime-set testVersion 7.4- --standard=./tools/phpcompatibility/vendor/phpcompatibility/php-compatibility/PHPCompatibility --ignore=\"vendor/*,node_modules/*,tools/*,css/*,js/*,public/*,resources/views/*\"",
-        "fix-dry": [
-            "test -f ./tools/php-cs-fixer/vendor/bin/php-cs-fixer || composer --working-dir=tools/php-cs-fixer install && ./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --dry-run -- "
+        "ecs": [
+            "@php vendor/bin/ecs"
         ],
-        "fix": [
-            "test -f ./tools/php-cs-fixer/vendor/bin/php-cs-fixer || composer --working-dir=tools/php-cs-fixer install && ./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix -- "
+        "ecs-fix": [
+            "@php vendor/bin/ecs --fix "
+        ],
+        "stan": [
+          "@php vendor/bin/phpstan"
         ],
         "rector": [
             "@php vendor/bin/rector "
