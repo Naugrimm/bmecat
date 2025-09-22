@@ -12,6 +12,7 @@ class BuyerAidNodeTest extends TestCase
 {
     private Serializer $serializer;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->serializer = (new DocumentBuilder())->getSerializer();

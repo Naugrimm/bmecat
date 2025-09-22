@@ -36,6 +36,7 @@ class NodeInterfaceMethodsClassReflectionExtension implements MethodsClassReflec
      * @throws MissingMethodFromReflectionException
      * @throws MissingPropertyFromReflectionException
      */
+    #[\Override]
     public function hasMethod(ClassReflection $classReflection, string $methodName): bool
     {
         if (array_key_exists($classReflection->getCacheKey() . '-' . $methodName, $this->cache)) {
@@ -53,6 +54,7 @@ class NodeInterfaceMethodsClassReflectionExtension implements MethodsClassReflec
         return false;
     }
 
+    #[\Override]
     public function getMethod(ClassReflection $classReflection, string $methodName): MethodReflection
     {
         return $this->cache[$classReflection->getCacheKey() . '-' . $methodName];

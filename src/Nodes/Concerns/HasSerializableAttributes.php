@@ -209,7 +209,7 @@ trait HasSerializableAttributes
         /**
          * the attribute must have a type hint to handle it here
          */
-        if ($property->getType() === null) {
+        if (! $property->getType() instanceof \ReflectionType) {
             return null;
         }
 

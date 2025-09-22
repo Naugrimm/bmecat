@@ -16,6 +16,7 @@ class NodeFromArrayTest extends TestCase
 {
     protected string $minimalValidDocument;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
