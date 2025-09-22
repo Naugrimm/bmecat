@@ -15,7 +15,8 @@ class DateTimeNodeTest extends TestCase
     #[\Override]
     protected function setUp(): void
     {
-        $this->serializer = (new DocumentBuilder())->getSerializer();
+        $this->serializer = new DocumentBuilder()
+            ->getSerializer();
     }
 
     public function testSetGetDate(): void

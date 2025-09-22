@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 class SchemaValidatorTest extends TestCase
 {
     protected string $minimalValidDocument;
+
     protected string $minimalValidDocument20052;
 
     #[\Override]

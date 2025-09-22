@@ -108,11 +108,11 @@ class NodeInterfaceMethodsClassReflectionExtension implements MethodsClassReflec
         string $methodName,
         PhpPropertyReflection $propertyReflection
     ): MethodReflection {
-        return new class($classReflection, $methodName, $propertyReflection) implements MethodReflection {
+        return new readonly class($classReflection, $methodName, $propertyReflection) implements MethodReflection {
             public function __construct(
-                private readonly ClassReflection $classReflection,
-                private readonly string $methodName,
-                private readonly PhpPropertyReflection $propertyReflection
+                private ClassReflection $classReflection,
+                private string $methodName,
+                private PhpPropertyReflection $propertyReflection
             ) {
             }
 
@@ -201,11 +201,11 @@ class NodeInterfaceMethodsClassReflectionExtension implements MethodsClassReflec
         string $methodName,
         PhpPropertyReflection $propertyReflection
     ): MethodReflection {
-        return new class($classReflection, $methodName, $propertyReflection) implements MethodReflection {
+        return new readonly class($classReflection, $methodName, $propertyReflection) implements MethodReflection {
             public function __construct(
-                private readonly ClassReflection $classReflection,
-                private readonly string $methodName,
-                private readonly PhpPropertyReflection $propertyReflection
+                private ClassReflection $classReflection,
+                private string $methodName,
+                private PhpPropertyReflection $propertyReflection
             ) {
             }
 
@@ -251,10 +251,13 @@ class NodeInterfaceMethodsClassReflectionExtension implements MethodsClassReflec
                         TemplateTypeMap::createEmpty(),
                         null,
                         [
-                            new class($this->methodName, $this->propertyReflection) implements ParameterReflection {
+                            new readonly class(
+                                $this->methodName,
+                                $this->propertyReflection
+                            ) implements ParameterReflection {
                                 public function __construct(
-                                    private readonly string $methodName,
-                                    private readonly PhpPropertyReflection $propertyReflection
+                                    private string $methodName,
+                                    private PhpPropertyReflection $propertyReflection
                                 ) {
                                 }
 
