@@ -18,8 +18,8 @@ use Naugrim\BMEcat\Nodes\SpecialTreatmentClass;
  * @method string|null getEan()
  * @method self setSupplierAltPid(string|null $supplierAltPid)
  * @method string|null getSupplierAltPid()
- * @method self setBuyerPids(\Naugrim\BMEcat\Nodes\BuyerPidNode[]|array<string, mixed> $buyerPids)
- * @method \Naugrim\BMEcat\Nodes\BuyerPidNode[] getBuyerPids()
+ * @method self setBuyerPids(\Naugrim\BMEcat\Nodes\BuyerPid[]|array<string, mixed> $buyerPids)
+ * @method \Naugrim\BMEcat\Nodes\BuyerPid[] getBuyerPids()
  * @method self setManufacturerPid(string|null $manufacturerPid)
  * @method string|null getManufacturerPid()
  * @method self setManufacturerIDRef(string|null $manufacturerIDRef)
@@ -77,7 +77,7 @@ class Details implements Contracts\NodeInterface
      * @var BuyerPid[]
      */
     #[Serializer\Expose]
-    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\BuyerPidNode>')]
+    #[Serializer\Type('array<Naugrim\BMEcat\Nodes\BuyerPid>')]
     #[Serializer\XmlList(entry: 'BUYER_PID', inline: true)]
     protected array $buyerPids = [];
 

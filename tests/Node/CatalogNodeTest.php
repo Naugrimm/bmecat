@@ -45,7 +45,14 @@ class CatalogNodeTest extends TestCase
         ];
 
         $node->setLanguage($value);
-        $this->assertCount(1, $lang = $node->getLanguage());
+        $lang = $node->getLanguage();
+        $this->assertCount(1, $lang);
+        \Webmozart\Assert\Assert::notEmpty($lang, 'Language array should not be empty');
+        \Webmozart\Assert\Assert::isInstanceOf(
+            $lang[0],
+            \Naugrim\BMEcat\Nodes\Language::class,
+            'First language must be an instance of Language'
+        );
         $this->assertEquals($langValue, $lang[0]->getValue());
     }
 
