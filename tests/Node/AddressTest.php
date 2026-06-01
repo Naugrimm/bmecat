@@ -47,7 +47,6 @@ class AddressTest extends TestCase
 
         $data = array_merge_recursive($docData, $data);
 
-        \Webmozart\Assert\Assert::isArray($data, 'Expected merged data to be an array, got %s');
         \Webmozart\Assert\Assert::isMap(
             $data,
             'Expected merged data to be an associative array with string keys, got indexed array'
