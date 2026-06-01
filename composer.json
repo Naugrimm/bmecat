@@ -58,7 +58,7 @@
         "phpstan/extension-installer": "^1.3",
         "phpstan/phpstan-strict-rules": "^2.0",
         "phpstan/phpstan-deprecation-rules": "^2.0",
-        "symplify/easy-coding-standard": "^12.2",
+        "symplify/easy-coding-standard": "^13",
         "tomasvotruba/type-coverage": "^2.0",
         "goetas/jms-serializer-phpstan-extension": "^1.0"
     },
