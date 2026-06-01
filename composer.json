@@ -52,7 +52,7 @@
         ]
     },
     "require-dev": {
-        "phpunit/phpunit": "^12.0",
+        "phpunit/phpunit": "^13",
         "rector/rector": "^2.0",
         "phpstan/phpstan": "^2.0",
         "phpstan/extension-installer": "^1.3",
