@@ -83,7 +83,6 @@ trait HasSerializableAttributes
                 return $this;
             }
 
-            \Webmozart\Assert\Assert::isArray($valueToSet, 'Expected array for property "%s", got %s');
             \Webmozart\Assert\Assert::isMap(
                 $valueToSet,
                 'Expected associative array with string keys for property "%s", got indexed array'
@@ -135,7 +134,6 @@ trait HasSerializableAttributes
                 continue;
             }
 
-            \Webmozart\Assert\Assert::isArray($singleValueToSet, 'Expected array for collection item, got %s');
             \Webmozart\Assert\Assert::isMap(
                 $singleValueToSet,
                 'Expected associative array with string keys for collection item, got indexed array'
